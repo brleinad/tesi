@@ -1,0 +1,6 @@
+This is a simple implementation of a 4-bit decomposed CLA adder divided into a linear and a non-linear part. 
+The linear part is entirely made up of XORs.
+The non-linear part is entirely made up of ANDs.
+
+This version hasn't been synthesized yet.
+

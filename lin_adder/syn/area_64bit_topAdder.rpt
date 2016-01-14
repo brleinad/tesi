@@ -1,0 +1,40 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : area
+Design : top_adder
+Version: B-2008.09-SP4
+Date   : Thu Nov  5 10:13:24 2015
+****************************************
+
+Library(s) Used:
+
+    tcbn65gpluswc (File: /cadtools/tsmc/digital/Front_End/timing_power_noise/NLDM/tcbn65gplus_121b/tcbn65gpluswc.db)
+
+Number of ports:              193
+Number of nets:               441
+Number of cells:                2
+Number of references:           2
+
+Combinational area:       1307.519992
+Noncombinational area:       0.000000
+Net Interconnect area:      undefined  (Wire load has zero net area)
+
+Total cell area:          1307.519992
+Total area:                 undefined
+
+Hierarchical area distribution
+------------------------------
+
+                                  Global cell area          Local cell area
+                                  ------------------  ---------------------------- 
+Hierarchical cell                 Absolute   Percent  Combi-     Noncombi-  Black
+                                  Total      Total    national   national   boxes   Design
+--------------------------------  ---------  -------  ---------  ---------  ------  ------------
+top_adder                         1307.5210    100.0     0.0000     0.0000  0.0000  top_adder
+L_part                             903.5980     69.1   903.5980     0.0000  0.0000  lin_adder
+NL_part                            403.9206     30.9   403.9206     0.0000  0.0000  non_lin_part
+--------------------------------  ---------  -------  ---------  ---------  ------  ------------
+Total                                                 1307.5186     0.0000  0.0000
+
+1

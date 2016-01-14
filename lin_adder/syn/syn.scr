@@ -1,0 +1,13 @@
+N=32
+
+read_verilog ../source/lin_adder.v
+compile -incremental_mapping
+
+read_verilog ../source/non_lin_part.v
+compile -incremental_mapping
+
+read_verilog ../source/top_adder.v
+compile -incremental_mapping
+
+
+report_area -hierarchy > area_($N)bit_topAdder.rpt

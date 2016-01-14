@@ -1,0 +1,52 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : area
+Design : lin_adder
+Version: B-2008.09-SP4
+Date   : Tue Oct 20 10:45:57 2015
+****************************************
+
+Library(s) Used:
+
+    tcbn65gpluswc (File: /cadtools/tsmc/digital/Front_End/timing_power_noise/NLDM/tcbn65gplus_121b/tcbn65gpluswc.db)
+
+Number of ports:               49
+Number of nets:                49
+Number of cells:               14
+Number of references:           2
+
+Combinational area:         83.159998
+Noncombinational area:       0.000000
+Net Interconnect area:      undefined  (Wire load has zero net area)
+
+Total cell area:            83.159998
+Total area:                 undefined
+1
+
+Now these are the results doing incremental mapping the circuit to mantain the netlist 
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : area
+Design : lin_adder
+Version: B-2008.09-SP4
+Date   : Tue Oct 20 15:58:29 2015
+****************************************
+
+Library(s) Used:
+
+    tcbn65gpluswc (File: /cadtools/tsmc/digital/Front_End/timing_power_noise/NLDM/tcbn65gplus_121b/tcbn65gpluswc.db)
+
+Number of ports:               49
+Number of nets:                62
+Number of cells:               27
+Number of references:           1
+
+Combinational area:         97.199997
+Noncombinational area:       0.000000
+Net Interconnect area:      undefined  (Wire load has zero net area)
+
+Total cell area:            97.199997
+Total area:                 undefined
+1

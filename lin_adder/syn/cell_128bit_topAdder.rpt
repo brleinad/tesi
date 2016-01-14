@@ -1,0 +1,25 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : cell
+Design : top_adder
+Version: B-2008.09-SP4
+Date   : Thu Nov  5 10:39:19 2015
+****************************************
+
+Attributes:
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+L_part                    lin_adder                       1825.199952
+                                                                    h
+NL_part                   non_lin_part                    818.640033
+                                                                    h
+--------------------------------------------------------------------------------
+Total 2 cells                                             2643.839984
+1

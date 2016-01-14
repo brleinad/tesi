@@ -1,0 +1,13 @@
+module xor_boh_tb  ; 
+ 
+  reg    a   ; 
+  reg    b   ; 
+  wire    s   ; 
+  xor_boh  
+   DUT  ( 
+       .a (a ) ,
+      .b (b ) ,
+      .s (s ) ); 
+
+endmodule
+

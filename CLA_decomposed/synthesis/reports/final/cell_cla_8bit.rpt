@@ -1,0 +1,26 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : cell
+Design : cla_8bit
+Version: B-2008.09-SP4
+Date   : Tue Dec  8 14:37:59 2015
+****************************************
+
+Attributes:
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+LSBS                      cla_decomposed_0                287.280003
+                                                                    h
+MSBS                      cla_decomposed_1                287.280003
+                                                                    h
+U2                        TIEL            tcbn65gpluswc   1.080000  
+--------------------------------------------------------------------------------
+Total 3 cells                                             575.640006
+1

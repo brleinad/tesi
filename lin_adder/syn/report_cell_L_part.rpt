@@ -1,0 +1,31 @@
+ 
+****************************************
+Report : cell
+Design : top_adder/L_part (lin_adder)
+Version: G-2012.06-SP2
+Date   : Mon Oct 19 17:22:01 2015
+****************************************
+
+Attributes:
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+U1                        XOR2D0          tcbn65gpluswc   3.600000  
+U2                        XOR2D0          tcbn65gpluswc   3.600000  
+U3                        XOR2D0          tcbn65gpluswc   3.600000  
+U4                        XOR2D0          tcbn65gpluswc   3.600000  
+U5                        XOR2D0          tcbn65gpluswc   3.600000  
+U6                        XOR2D0          tcbn65gpluswc   3.600000  
+U7                        XOR2D0          tcbn65gpluswc   3.600000  
+U8                        XOR2D0          tcbn65gpluswc   3.600000  
+U9                        XOR2D0          tcbn65gpluswc   3.600000  
+U10                       XOR2D0          tcbn65gpluswc   3.600000  
+U11                       XOR2D0          tcbn65gpluswc   3.600000  
+--------------------------------------------------------------------------------
+Total 11 cells                                            39.599999
+1

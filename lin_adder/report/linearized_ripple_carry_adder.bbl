@@ -1,0 +1,13 @@
+\begin{thebibliography}{1}
+
+\bibitem{steinbach_xboole}
+B.~Steinbach.
+\newblock Fast boolean calculations using {XBOOLE}.
+
+\bibitem{steinbach_bidecomposition}
+B.~Steinbach.
+\newblock Vectorial bi-decomposition of logic functions.
+\newblock {\em Reed-Muller Workshop, At University of Waterloo, Waterloo,
+  Canada}, 1, 2015.
+
+\end{thebibliography}

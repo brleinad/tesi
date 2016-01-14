@@ -1,0 +1,23 @@
+Information: Updating graph... (UID-83)
+ 
+****************************************
+Report : cell
+Design : top_adder
+Version: G-2012.06-SP2
+Date   : Mon Oct 19 17:20:48 2015
+****************************************
+
+Attributes:
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+L_part                    lin_adder                       39.599999 h
+NL_part                   non_lin_part                    13.320001 h
+--------------------------------------------------------------------------------
+Total 2 cells                                             52.919999
+1

@@ -1,0 +1,8 @@
+
+read_verilog ../source/linear_part.v
+read_verilog ../source/nonlinear_part.v
+read_verilog ../source/cla_decomposed.v
+read_verilog ../source/cla_8bit.v
+compile 
+report_cell > reports/cell_cla_8bit.rpt
+report_area -hierarchy > reports/area_cla_8bit.rpt

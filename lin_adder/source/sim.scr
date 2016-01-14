@@ -1,0 +1,15 @@
+#Create the working directory for compilations and simulations
+vlib work
+
+#vlod command compiles verilog source files
+        #vlog xor_boh.v 
+        #vlog xor_boh_tb.v
+vlog lin_adder.v
+vlog non_lin_part.v
+vlog top_adder.v
+vlog top_adder_tb.v
+
+#simulate
+vsim work.top_adder_tb
+add wave *
+run 50 ns
