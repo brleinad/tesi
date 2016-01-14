@@ -1,0 +1,9 @@
+                 A Brief Description of the codes from professor Bane's lab
+First, in the first line, the first parameter (m) is the number of variable nodes in the parity check matrix,
+and the second (n) is the number of the check nodes in the parity check matrix.
+
+Second, in the following m lines, the first parameter is the number of the check nodes connected to this variable node,
+and the remainings are the positions of the check nodes.
+
+Third, for the remaining lines, the first parameter is the number of the variable nodes connected to this check node,
+and the remainings are the positions of the variable nodes.
