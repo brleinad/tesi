@@ -36,13 +36,18 @@ assign channel_codeword = codeword ^ errors;
 
 initial
 begin
-        $monitor("input:%b\t error_vector:%b\t syndrome:%b\t error:%b",data_in, errors, syndrome, error_flag);
+        $monitor("input:%b\t error:%b\t codeword:%b\t syndrome:%b\t",data_in, errors, codeword, syndrome);
+        //&$monitor("input:%b\t codeword:%b\t ",data_in, codeword);
         data_in = 0;
         errors = 0;
         #10
         data_in = 5;
         #10
-        errors = 23;
+        errors = 3;
+        #10
+        data_in = 69;
+        #10
+        errors = 33;
 end
 
 endmodule

@@ -81,7 +81,7 @@ H=[ 1   0   0   0   0   0   0   0   1   1   0   1   0   0   0;
   %Generate the 15-bit codeword
 code=mod(i*G_lin,2);
   %Injject the errors to the codeword
-code=code+error_vec;
+code=mod(code+error_vec,2);
   %corrector circuit: it's left for you to implement :-)
   %....
   
