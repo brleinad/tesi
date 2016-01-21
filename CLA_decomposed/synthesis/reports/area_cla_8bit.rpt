@@ -1,0 +1,43 @@
+ 
+****************************************
+Report : area
+Design : cla_8bit
+Version: B-2008.09-SP4
+Date   : Thu Jan 21 10:10:36 2016
+****************************************
+
+Library(s) Used:
+
+    tcbn65gpluswc (File: /cadtools/tsmc/digital/Front_End/timing_power_noise/NLDM/tcbn65gplus_121b/tcbn65gpluswc.db)
+
+Number of ports:               25
+Number of nets:                27
+Number of cells:                3
+Number of references:           3
+
+Combinational area:        575.640006
+Noncombinational area:       0.000000
+Net Interconnect area:      undefined  (Wire load has zero net area)
+
+Total cell area:           575.640006
+Total area:                 undefined
+
+Hierarchical area distribution
+------------------------------
+
+                                  Global cell area          Local cell area
+                                  ------------------  --------------------------- 
+Hierarchical cell                 Absolute   Percent  Combi-    Noncombi-  Black
+                                  Total      Total    national  national   boxes   Design
+--------------------------------  ---------  -------  --------  ---------  ------  ----------------
+cla_8bit                           575.6403    100.0    1.0800     0.0000  0.0000  cla_8bit
+LSBS                               287.2802     49.9    0.0000     0.0000  0.0000  cla_decomposed_0
+LSBS/LIN                           181.0800     31.5  181.0800     0.0000  0.0000  linear_part_0
+LSBS/NLIN                          106.2001     18.4  106.2001     0.0000  0.0000  nonlinear_part_0
+MSBS                               287.2802     49.9    0.0000     0.0000  0.0000  cla_decomposed_1
+MSBS/LIN                           181.0800     31.5  181.0800     0.0000  0.0000  linear_part_1
+MSBS/NLIN                          106.2001     18.4  106.2001     0.0000  0.0000  nonlinear_part_1
+--------------------------------  ---------  -------  --------  ---------  ------  ----------------
+Total                                                 575.6401     0.0000  0.0000
+
+1

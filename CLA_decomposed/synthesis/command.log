@@ -1,7 +1,7 @@
 #@ # 
 #@ # Running dc_shell Version B-2008.09-SP4 for linux -- Feb 27, 2009
-#@ # Date:   Tue Dec  8 14:06:10 2015
-#@ # Run by: danielrb@uews042.ue.ucc.ie
+#@ # Date:   Thu Jan 21 10:09:34 2016
+#@ # Run by: danielrb@uews040.ue.ucc.ie
 #@ 
 
 source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
@@ -3551,49 +3551,16 @@ source syn
 #@ read_verilog ../source/linear_part.v
 #@ read_verilog ../source/nonlinear_part.v
 #@ read_verilog ../source/cla_decomposed.v
-#@ compile
-#@ report_cell > reports/cell_cla.rpt
-#@ # -- End source syn
-
-change_selection [get_s cla_decomposed]
-::cmenus::create_schematic
-change_selection [get_s U2]
-change_selection [get_s U2]
-change_selection [get_s NLIN]
-change_selection [get_s LIN]
-source syn
-#@ 
-#@ read_verilog ../source/linear_part.v
-#@ read_verilog ../source/nonlinear_part.v
-#@ read_verilog ../source/cla_decomposed.v
-#@ read_verilog ../source/cla_8bit.v
-#@ compile
-#@ report_cell > reports/cell_cla_8bit.rpt
-#@ # -- End source syn
-
-source syn
-#@ 
-#@ read_verilog ../source/linear_part.v
-#@ read_verilog ../source/nonlinear_part.v
-#@ read_verilog ../source/cla_decomposed.v
-#@ read_verilog ../source/cla_8bit.v
-#@ compile
-#@ report_cell > reports/cell_cla_8bit.rpt
-#@ # -- End source syn
-
-change_selection [get_s cla_8bit]
-::cmenus::create_schematic
-change_selection [get_s LSBS]
-change_selection [get_s LSBS/LIN]
-report_area -hierarchy
-source syn
-#@ 
-#@ read_verilog ../source/linear_part.v
-#@ read_verilog ../source/nonlinear_part.v
-#@ read_verilog ../source/cla_decomposed.v
 #@ read_verilog ../source/cla_8bit.v
 #@ compile 
 #@ report_cell > reports/cell_cla_8bit.rpt
 #@ report_area -hierarchy > reports/area_cla_8bit.rpt
 #@ # -- End source syn
 
+change_selection [get_s cla_8bit]
+::cmenus::create_schematic
+change_selection [get_s LSBS]
+change_selection [get_s LSBS]
+change_selection [get_s LSBS/NLIN]
+change_selection [get_s LSBS/LIN]
+change_selection 
