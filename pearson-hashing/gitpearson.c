@@ -44,7 +44,10 @@ unsigned char phash_wikipedia(const char *key) {
     size_t len = strlen(key);
 
     for (size_t i = 0; i < len; i++)
+    {
             hash = T[hash ^ key[i]];
+            //printf("%c",key[i]);
+    }
 
     return hash;
 }
@@ -64,9 +67,14 @@ unsigned short phash16(const char *key) {
 int main() {
     //const char key[4] = {'h','e','l','l','o'};
     unsigned char h = phash_wikipedia("hello");
-    unsigned short h3 = phash16("from");
+    unsigned char h1 = phash_wikipedia("a");
+    unsigned char h2 = phash_wikipedia("from");
+    unsigned char h3 = phash_wikipedia("hellohel");
     printf("hello is %d-%d-%d-%d-%d in ascii ==> %d in decimal | %X in hexadecimal\n ",'h','e','l','l','o', h, h);
+    //printf("from is %d-%d-%d-%d in ascii ==> %d in decimal | %X in hexadecimal\n ",'f','r','o','m', h2, h2);
+    printf("a is %d in ascii ==> %d in decimal | %X in hexadecimal\n ",'a', h1, h1);
     //printf("phash16(from) == %d <==> (%d << 8) + %d == %d\n", h3, h1, h2, (h1 << 8) + h2);
+    printf("hellohel==> %d in decimal | %X in hexadecimal\n ", h3, h3);
     
     return 0;
 }
