@@ -40,10 +40,10 @@ void Pearson16(const unsigned char *x, size_t len, char *hex, size_t hexlen) {
 
 int main()
 {
-	unsigned char x;
-	size_t len = :;
+	size_t len = 8;
+	unsigned char x[len] = {'c','a','e','e','f','y','e','q'};
+	size_t hexlen = 16;
 	char hex;
-	size_t hexlen;
 	
 	Pearson16(x, len, hex, hexlen);
 

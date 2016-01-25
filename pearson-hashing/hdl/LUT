@@ -1,10 +1,4 @@
-module pearson16( key_byte, hash);
-
-input [7:0] key_byte;
-output [7:0] hash;
-
-parameter  T  =
-{
+reg [7:0] T [255:0] = {
 // 256 values 0-255 in any (random) order suffices
     251, 175, 119, 215, 81, 14, 79, 191, 103, 49, 181, 143, 186, 157,  0,
     232, 31, 32, 55, 60, 152, 58, 17, 237, 174, 70, 160, 144, 220, 90, 57,
@@ -24,11 +18,3 @@ parameter  T  =
     132, 156, 38, 47, 1, 7, 254, 24, 4, 216, 131, 89, 21, 28, 133, 37, 153,
     149, 80, 170, 68, 6, 169, 234, 151
 };
-
-wire [7:0] hash = 0;
-
-always @(key_byte)
-begin
-        hash = T[hash ^ key]
-end
-endmodule
