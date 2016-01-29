@@ -1,0 +1,10 @@
+*~
+*.swp
+ldpc/*.swp
+ldpc/*.un~
+*/*.swo
+*/a.out
+CPE_test/
+papers/
+steinbach/
+

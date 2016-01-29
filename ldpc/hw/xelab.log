@@ -1,0 +1,5 @@
+Vivado Simulator 2015.4
+Copyright 1986-1999, 2001-2015 Xilinx, Inc. All Rights Reserved.
+Running: /home/Xilinx/Vivado/2015.4/bin/unwrapped/lnx64.o/xelab tb_generator_detector.v 
+Multi-threading is on. Using 2 slave threads.
+ERROR: [XSIM 43-3225] Cannot find design unit tb_generator_detector.v in library work located at xsim.dir/work.

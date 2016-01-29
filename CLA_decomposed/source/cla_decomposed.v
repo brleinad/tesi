@@ -10,7 +10,8 @@ output           c_out;
 
 wire [NNL-1:0]   n;
 
-nonlinear_part
+gen_nonlinear_part
+//nonlinear_part
 NLIN(
         .a (a),
         .b (b),

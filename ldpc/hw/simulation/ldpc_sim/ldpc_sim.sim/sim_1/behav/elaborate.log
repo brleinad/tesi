@@ -1,0 +1,18 @@
+Vivado Simulator 2015.4
+Copyright 1986-1999, 2001-2015 Xilinx, Inc. All Rights Reserved.
+Running: /home/Xilinx/Vivado/2015.4/bin/unwrapped/lnx64.o/xelab -wto 28f4df5272714fceb5fdb28d3f58c699 --debug typical --relax --mt 8 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_generator_corrector_behav xil_defaultlib.tb_generator_corrector xil_defaultlib.glbl -log elaborate.log 
+Using 8 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+WARNING: [XSIM 43-4099] "/home/danielrb/Dropbox/tesi/ldpc/hw/simulation/ldpc_sim/ldpc_sim.srcs/sources_1/imports/hw/generator.v" Line 1. Module generator doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/danielrb/Dropbox/tesi/ldpc/hw/simulation/ldpc_sim/ldpc_sim.srcs/sources_1/imports/hw/detector.v" Line 1. Module detector doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/danielrb/Dropbox/tesi/ldpc/hw/simulation/ldpc_sim/ldpc_sim.srcs/sources_1/imports/hw/generator.v" Line 1. Module generator doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/danielrb/Dropbox/tesi/ldpc/hw/simulation/ldpc_sim/ldpc_sim.srcs/sources_1/imports/hw/detector.v" Line 1. Module detector doesn't have a timescale but at least one module in design has a timescale.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.generator
+Compiling module xil_defaultlib.detector
+Compiling module xil_defaultlib.tb_generator_corrector
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tb_generator_corrector_behav

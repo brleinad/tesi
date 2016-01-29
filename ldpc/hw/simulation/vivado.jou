@@ -1,0 +1,22 @@
+#-----------------------------------------------------------
+# Vivado v2015.4 (64-bit)
+# SW Build 1412921 on Wed Nov 18 09:44:32 MST 2015
+# IP Build 1412160 on Tue Nov 17 13:47:24 MST 2015
+# Start of session at: Thu Jan 28 17:54:17 2016
+# Process ID: 8541
+# Current directory: /home/danielrb/Dropbox/tesi/ldpc/hw/simulation
+# Command line: vivado
+# Log file: /home/danielrb/Dropbox/tesi/ldpc/hw/simulation/vivado.log
+# Journal file: /home/danielrb/Dropbox/tesi/ldpc/hw/simulation/vivado.jou
+#-----------------------------------------------------------
+start_gui
+create_project ldpc_sim /home/danielrb/Dropbox/tesi/ldpc/hw/simulation/ldpc_sim -part xc7z010clg400-1
+set_property board_part digilentinc.com:zybo:part0:1.0 [current_project]
+set_property simulator_language Verilog [current_project]
+add_files -norecurse {/home/danielrb/Dropbox/tesi/ldpc/hw/generator.v /home/danielrb/Dropbox/tesi/ldpc/hw/detector.v /home/danielrb/Dropbox/tesi/ldpc/hw/tb_generator_detector.v}
+import_files -force -norecurse
+update_compile_order -fileset sources_1
+update_compile_order -fileset sim_1
+launch_simulation
+source tb_generator_corrector.tcl
+close_sim

@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# Webtalk v2015.4 (64-bit)
+# SW Build 1412921 on Wed Nov 18 09:44:32 MST 2015
+# IP Build 1412160 on Tue Nov 17 13:47:24 MST 2015
+# Start of session at: Thu Jan 28 17:57:41 2016
+# Process ID: 8824
+# Current directory: /home/danielrb/Dropbox/tesi/ldpc/hw/simulation/ldpc_sim/ldpc_sim.sim/sim_1/behav
+# Command line: wbtcv -mode batch -source /home/danielrb/Dropbox/tesi/ldpc/hw/simulation/ldpc_sim/ldpc_sim.sim/sim_1/behav/xsim.dir/tb_generator_corrector_behav/webtalk/xsim_webtalk.tcl -notrace
+# Log file: /home/danielrb/Dropbox/tesi/ldpc/hw/simulation/ldpc_sim/ldpc_sim.sim/sim_1/behav/webtalk.log
+# Journal file: /home/danielrb/Dropbox/tesi/ldpc/hw/simulation/ldpc_sim/ldpc_sim.sim/sim_1/behav/webtalk.jou
+#-----------------------------------------------------------
+source /home/danielrb/Dropbox/tesi/ldpc/hw/simulation/ldpc_sim/ldpc_sim.sim/sim_1/behav/xsim.dir/tb_generator_corrector_behav/webtalk/xsim_webtalk.tcl -notrace
+INFO: [Common 17-206] Exiting Webtalk at Thu Jan 28 17:57:41 2016...
