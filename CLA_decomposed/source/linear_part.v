@@ -12,6 +12,7 @@ output            c_out;
 
 assign s[0] = (a[0] ^ b[0]) ^ c_in;
 
+parameter NNL=2**(NBIT+2)-NBIT-4; //Number of bits of the non-linear outputs
 assign s[1] = (a[1] ^ b[1]) ^ (n[0]  ^ (n[1]  ^ n[2]));
 
 assign s[2] = (a[2] ^ b[2]) ^ (n[3]  ^ n[4]  ^ n[5]  ^ n[6]  ^ n[7]  ^ n[8]  ^ n[9]);

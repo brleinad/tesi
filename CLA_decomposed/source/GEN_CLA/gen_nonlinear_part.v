@@ -1,7 +1,8 @@
 module gen_nonlinear_part(a,b,c,n);
 
-parameter NBIT = 4; // number of bits of the adder
-parameter NNL=56; //Number of bits of the non-linear outputs
+parameter NBIT = 7; // number of bits of the adder
+//parameter NNL=56; //Number of bits of the non-linear outputs
+parameter NNL=2**(NBIT+2)-NBIT-4; //Number of bits of the non-linear outputs
 
 input [NBIT-1:0] a, b; //adder inputs
 input c; // carry in
@@ -9,7 +10,6 @@ input c; // carry in
 output [NNL-1:0] n; // non-linear outputs
 
 reg [NNL:0] g ;//= 0; //non-linear intermediate values
-//reg [NNL-1:0] n ;
 integer i,j, ii,inter;
 
 always @(a or b or c)
@@ -34,7 +34,6 @@ begin
                 j = j + 1; //go to next input bit
                 inter = inter + 2**j; // interval increases exponentially 
         end
-        //n = g[NNL:1]; //assign outputs
 end
 assign n = g[NNL:1];//assign outputs
 
