@@ -4,7 +4,7 @@ input [6:0] i; // information vector
 output [14:0] c; // codeword
 /*
 * The Generator matrix is 
-G=[1  0  0  0  0  0  0  1  0  0  0  1  0  1  1;
+G=    [1  0  0  0  0  0  0  1  0  0  0  1  0  1  1;
        0  1  0  0  0  0  0  1  1  0  0  1  1  1  0;
        0  0  1  0  0  0  0  0  1  1  0  0  1  1  1;
        0  0  0  1  0  0  0  1  0  1  1  1  0  0  0;
