@@ -8,7 +8,7 @@ input [NBIT-1:0] a,b; //Adder inputs
 output [NCODE-1:0] code; //CPE codeword output
 
 wire [NBIT:0] sum; //Adder output, CPE input
-output [NNL-1:0] nonlin; // non-linear outputs
+wire [NNL-1:0] nonlin; // non-linear outputs
 
 gen_nonlinear_part
 NONLIN_ADDER (
