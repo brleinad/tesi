@@ -1,6 +1,6 @@
 #@ # 
 #@ # Running dc_shell Version B-2008.09-SP4 for linux -- Feb 27, 2009
-#@ # Date:   Tue Feb  9 12:07:43 2016
+#@ # Date:   Tue Feb  9 12:20:10 2016
 #@ # Run by: danielrb@uews040.ue.ucc.ie
 #@ 
 
@@ -3513,10 +3513,10 @@ source /user/erasmus/danielrb/Dropbox/Tesi/adder_and_cpe/synthesis/.synopsys_dc.
 #@ 
 #@ set alib_library_analysis_path ./cache/
 #@ 
-#@ set RTL_SOURCE_FILES "../source/linear_part.vhd"
-#@ set RTL_SOURCE_FILES "../source/nonlinear_part.vhd"
-#@ set RTL_SOURCE_FILES "../source/generator.vhd"
-#@ set RTL_SOURCE_FILES "../source/adder_cpe.vhd"
+#@ set RTL_SOURCE_FILES "../source/gen_linear_part.v"
+#@ set RTL_SOURCE_FILES "../source/gen_nonlinear_part.v"
+#@ set RTL_SOURCE_FILES "../source/generator.v"
+#@ set RTL_SOURCE_FILES "../source/adder_cpe.v"
 #@ 
 #@ set REPORTS_DIR [join [list $LIBSEL "_reports"] ""]
 #@ set RESULTS_DIR [join [list $LIBSEL "_results"] ""]
@@ -3551,50 +3551,6 @@ source synth.sh
 #@ #!/bin/bash
 #@ 
 #@ 
-#@ read_verilog  ../source/linear_part.vhd
-#@ read_verilog  ../source/nonlinear_part.vhd
-#@ read_verilog  ../source/generator.vhd
-#@ read_verilog  ../source/adder_cpe.vhd
-#@ 
-#@ compile
-#@ # -- End source synth.sh
-
-source synth.sh
-#@ #!/bin/bash
-#@ 
-#@ 
-#@ read_verilog  ../source/gen_linear_part.vhd
-#@ read_verilog  ../source/gen_nonlinear_part.vhd
-#@ read_verilog  ../source/generator.vhd
-#@ read_verilog  ../source/adder_cpe.vhd
-#@ 
-#@ compile
-#@ # -- End source synth.sh
-
-source synth.sh
-#@ #!/bin/bash
-#@ 
-#@ 
-#@ read_verilog  ../source/gen_linear_part.v
-#@ read_verilog  ../source/gen_nonlinear_part.v
-#@ read_verilog  ../source/generator.v
-#@ read_verilog  ../source/adder_cpe.v
-#@ 
-#@ #adder_cpe.v
-#@ #corrector.v
-#@ #detector.v
-#@ #gen_cla_decomposed.v
-#@ #gen_linear_part.v
-#@ #gen_nonlinear_part.v
-#@ #generator.v
-#@ #tb_gen_cla_decomposed.v
-#@ #tb_generator_detector.v
-#@ # -- End source synth.sh
-
-source synth.sh
-#@ #!/bin/bash
-#@ 
-#@ 
 #@ read_verilog  ../source/gen_linear_part.v
 #@ read_verilog  ../source/gen_nonlinear_part.v
 #@ read_verilog  ../source/generator.v
@@ -3613,4 +3569,13 @@ source synth.sh
 
 change_selection [get_s adder_cpe]
 ::cmenus::create_schematic
+change_selection [get_s CPE]
 change_selection [get_s NONLIN_ADDER]
+change_selection 
+change_selection [get_s LIN_ADDER]
+change_selection [get_s LIN_ADDER]
+change_selection [get_s LIN_ADDER]
+report_area > area_adderCPE.rpt
+report_cell > cell_adderCPE.rpt
+write -format verilog -output syn_adder.v
+write -format verilog -hierarchy -output syn_adder.v
