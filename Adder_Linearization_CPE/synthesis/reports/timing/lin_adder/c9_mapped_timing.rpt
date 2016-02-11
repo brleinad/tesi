@@ -1,0 +1,81 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -nets
+        -max_paths 1
+        -transition_time
+Design : c9
+Version: G-2012.06-SP2
+Date   : Sun Nov 15 22:15:42 2015
+****************************************
+
+Operating Conditions: NC0D9COM   Library: tcbn40lpbwptc0d9
+Wire Load Model Mode: segmented
+
+  Startpoint: A__0 (input port)
+  Endpoint: S__8 (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  c9                 ZeroWireload          tcbn40lpbwptc0d9
+
+Attributes:
+    d - dont_touch
+    u - dont_use
+   mo - map_only
+   so - size_only
+    i - ideal_net or ideal_network
+
+  Point                        Fanout     Trans      Incr       Path      Attributes
+  ---------------------------------------------------------------------------------------
+  input external delay                               0.00       0.00 r
+  A__0 (in)                                0.00      0.00       0.00 r
+  A__0 (net)                     1                   0.00       0.00 r
+  U60/ZN (ND2D0BWP)                        0.06      0.04       0.04 f
+  n58 (net)                      2                   0.00       0.04 f
+  U57/ZN (NR2D0BWP)                        0.07      0.07       0.11 r
+  n57 (net)                      1                   0.00       0.11 r
+  U56/Z (OR2D0BWP)                         0.03      0.08       0.20 r
+  n56 (net)                      1                   0.00       0.20 r
+  U55/ZN (ND2D0BWP)                        0.06      0.06       0.26 f
+  n53 (net)                      2                   0.00       0.26 f
+  U52/ZN (NR2D0BWP)                        0.07      0.07       0.33 r
+  n52 (net)                      1                   0.00       0.33 r
+  U51/Z (OR2D0BWP)                         0.03      0.08       0.41 r
+  n51 (net)                      1                   0.00       0.41 r
+  U50/ZN (ND2D0BWP)                        0.06      0.06       0.47 f
+  n48 (net)                      2                   0.00       0.47 f
+  U47/ZN (NR2D0BWP)                        0.07      0.07       0.55 r
+  n47 (net)                      1                   0.00       0.55 r
+  U46/Z (OR2D0BWP)                         0.03      0.08       0.63 r
+  n46 (net)                      1                   0.00       0.63 r
+  U45/ZN (ND2D0BWP)                        0.06      0.06       0.69 f
+  n43 (net)                      2                   0.00       0.69 f
+  U42/ZN (NR2D0BWP)                        0.07      0.07       0.76 r
+  n42 (net)                      1                   0.00       0.76 r
+  U41/Z (OR2D0BWP)                         0.03      0.08       0.85 r
+  n41 (net)                      1                   0.00       0.85 r
+  U40/ZN (ND2D0BWP)                        0.06      0.06       0.91 f
+  n39 (net)                      2                   0.00       0.91 f
+  U39/Z (OR2D0BWP)                         0.04      0.13       1.04 f
+  n35 (net)                      1                   0.00       1.04 f
+  U36/ZN (ND2D0BWP)                        0.05      0.05       1.09 r
+  n34 (net)                      2                   0.00       1.09 r
+  U34/Z (OR2D0BWP)                         0.03      0.07       1.16 r
+  n33 (net)                      1                   0.00       1.16 r
+  U33/ZN (ND2D0BWP)                        0.04      0.05       1.21 f
+  n32 (net)                      1                   0.00       1.21 f
+  U32/ZN (ND2D0BWP)                        0.03      0.03       1.24 r
+  S__8 (net)                     1                   0.00       1.24 r
+  S__8 (out)                               0.03      0.00       1.24 r
+  data arrival time                                             1.24
+  ---------------------------------------------------------------------------------------
+  (Path is unconstrained)
+
+
+1

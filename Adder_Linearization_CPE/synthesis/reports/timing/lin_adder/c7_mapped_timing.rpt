@@ -1,0 +1,77 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -nets
+        -max_paths 1
+        -transition_time
+Design : c7
+Version: G-2012.06-SP2
+Date   : Sun Nov 15 22:15:43 2015
+****************************************
+
+Operating Conditions: NC0D9COM   Library: tcbn40lpbwptc0d9
+Wire Load Model Mode: segmented
+
+  Startpoint: A__0 (input port)
+  Endpoint: S__6 (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  c7                 ZeroWireload          tcbn40lpbwptc0d9
+
+Attributes:
+    d - dont_touch
+    u - dont_use
+   mo - map_only
+   so - size_only
+    i - ideal_net or ideal_network
+
+  Point                        Fanout     Trans      Incr       Path      Attributes
+  ---------------------------------------------------------------------------------------
+  input external delay                               0.00       0.00 r
+  A__0 (in)                                0.00      0.00       0.00 r
+  A__0 (net)                     1                   0.00       0.00 r
+  U52/ZN (ND2D0BWP)                        0.06      0.04       0.04 f
+  n51 (net)                      2                   0.00       0.04 f
+  U49/ZN (NR2D0BWP)                        0.07      0.07       0.11 r
+  n50 (net)                      1                   0.00       0.11 r
+  U48/Z (OR2D0BWP)                         0.03      0.08       0.20 r
+  n49 (net)                      1                   0.00       0.20 r
+  U47/ZN (ND2D0BWP)                        0.06      0.06       0.26 f
+  n46 (net)                      2                   0.00       0.26 f
+  U44/ZN (NR2D0BWP)                        0.07      0.07       0.33 r
+  n45 (net)                      1                   0.00       0.33 r
+  U43/Z (OR2D0BWP)                         0.03      0.08       0.41 r
+  n44 (net)                      1                   0.00       0.41 r
+  U42/ZN (ND2D0BWP)                        0.06      0.06       0.47 f
+  n41 (net)                      2                   0.00       0.47 f
+  U39/ZN (NR2D0BWP)                        0.07      0.07       0.55 r
+  n40 (net)                      1                   0.00       0.55 r
+  U38/Z (OR2D0BWP)                         0.03      0.08       0.63 r
+  n39 (net)                      1                   0.00       0.63 r
+  U37/ZN (ND2D0BWP)                        0.06      0.06       0.69 f
+  n37 (net)                      2                   0.00       0.69 f
+  U36/Z (OR2D0BWP)                         0.04      0.13       0.82 f
+  n33 (net)                      1                   0.00       0.82 f
+  U33/ZN (ND2D0BWP)                        0.05      0.05       0.87 r
+  n32 (net)                      2                   0.00       0.87 r
+  U31/Z (OR2D0BWP)                         0.03      0.07       0.94 r
+  n31 (net)                      1                   0.00       0.94 r
+  U30/ZN (ND2D0BWP)                        0.04      0.05       0.99 f
+  n30 (net)                      1                   0.00       0.99 f
+  U29/ZN (ND2D0BWP)                        0.04      0.04       1.03 r
+  n28 (net)                      1                   0.00       1.03 r
+  U28/Z (XOR2D0BWP)                        0.03      0.15       1.18 f
+  S__6 (net)                     1                   0.00       1.18 f
+  S__6 (out)                               0.03      0.00       1.18 f
+  data arrival time                                             1.18
+  ---------------------------------------------------------------------------------------
+  (Path is unconstrained)
+
+
+1

@@ -1,0 +1,2 @@
+touch tmp.log
+/bin/rm -Rf *.log *.svf *.mr *.syn *.pvl tcb*results tcb*reports WORK clog*

@@ -1,0 +1,23 @@
+ 
+****************************************
+Report : cell
+Design : top_adder
+Version: G-2012.06-SP2
+Date   : Tue Nov  3 12:50:34 2015
+****************************************
+
+Attributes:
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+L_part                    lin_adder                       219.240009
+                                                                    h
+NL_part                   non_lin_part                    41.040002 h
+--------------------------------------------------------------------------------
+Total 2 cells                                             260.280010
+1
