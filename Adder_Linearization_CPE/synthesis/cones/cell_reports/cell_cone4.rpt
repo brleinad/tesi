@@ -1,0 +1,21 @@
+ 
+****************************************
+Report : cell
+Design : c4
+Version: B-2008.09-SP4
+Date   : Fri Feb 12 11:52:03 2016
+****************************************
+
+Attributes:
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+U2                        AN2D0           tcbn65gpluswc   2.160000  
+--------------------------------------------------------------------------------
+Total 1 cells                                             2.160000
+1

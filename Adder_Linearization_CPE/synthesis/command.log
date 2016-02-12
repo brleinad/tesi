@@ -1,12 +1,10 @@
 #@ # 
-#@ # Running dc_shell Version G-2012.06-SP2 for amd64 -- Aug 31, 2012
-#@ # Date:   Wed Feb 10 14:15:05 2016
-#@ # Run by: by1e11@by1e11-Cent-TP
+#@ # Running dc_shell Version B-2008.09-SP4 for linux -- Feb 27, 2009
+#@ # Date:   Fri Feb 12 15:29:49 2016
+#@ # Run by: danielrb@uews040.ue.ucc.ie
 #@ 
 
-source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_dc.setup
-#@ # -- Starting source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_dc.setup
-
+source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ #
 #@ #		".synopsys_dc.setup" Initialization File for
 #@ #
@@ -41,37 +39,15 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ update_app_var -default true sh_enable_page_mode
 #@ set sh_source_uses_search_path   "true"
 #@ update_app_var -default true sh_source_uses_search_path
-#@ if {$synopsys_program_name == "dc_shell"} {
-#@ set sh_new_variable_message	 "false"
-#@ update_app_var -default false sh_new_variable_message
-#@ } else {
 #@ set sh_new_variable_message	 "true"
 #@ update_app_var -default true sh_new_variable_message
-#@ }
-#@ 
-#@ if {$synopsys_program_name == "dc_shell"} {
-#@ set html_log_enable	     "false"
-#@ set html_log_filename	 "default.html"
-#@ }
-#@ 
-#@ if {$synopsys_program_name == "de_shell"} {
-#@ set de_log_html_filename	 "default.html"
-#@ }
-#@ 
 #@ if { [string compare $dc_shell_mode "tcl"] == 0 } {
 #@  set sh_enable_line_editing       "true"
 #@  set sh_line_editing_mode         "emacs"
 #@ }
 #@ 
 #@ if {$synopsys_program_name == "icc_shell"} {
-#@  if {"$sh_output_log_file" == ""} {
-#@   set sh_output_log_file "icc_output.txt"
-#@  }
-#@ 
-#@ ## the variable sh_redirect_progress_messages only makes it possible 
-#@ ## for some commands to redirect progress messages to the log file,thereby
-#@ ## bypassing the console and reducing the volume of messages on the console.
-#@  set sh_redirect_progress_messages true
+#@  set sh_output_log_file "icc_output.txt"
 #@  }
 #@ 
 #@ 
@@ -92,8 +68,6 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@   source $synopsys_root/auxx/syn/.dc_procs.tcl
 #@   alias list_commands help
 #@ }
-#@ # -- Starting source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/auxx/syn/.dc_common_procs.tcl
-
 #@ ##############################################################################
 #@ #
 #@ #
@@ -290,9 +264,7 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ }
 #@ define_proc_attributes _Variable_Groups_Get_Variables_Of_Group -hidden
 #@ 
-#@ # -- End source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/auxx/syn/.dc_common_procs.tcl
-
-#@ # -- Starting source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/auxx/syn/.dc_procs.tcl
+#@ # -- End source /cadtools/synopsys/2009/synthesis/auxx/syn/.dc_common_procs.tcl
 
 #@ ##############################################################################
 #@ #
@@ -424,7 +396,7 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@   return [uplevel #0 $cmd]
 #@ }
 #@ 
-#@ define_proc_attributes read_db     -info " Read one or more db files"     -permanent    -define_args {
+#@ define_proc_attributes read_db     -info " Read one or more db files"     -permanent     -define_args {
 #@       {file_names "Files to read" file_names list required}
 #@       {-netlist_only "Do not read any attributes from db (ignored)" "" boolean {hidden optional}}
 #@       {-library "File is a library DB (ignored)" "" boolean {hidden optional}}
@@ -492,9 +464,9 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ define_proc_attributes read_ddc     -info "Read one or more ddc files"     -permanent     -define_args {
 #@       {file_names "Files to read" file_names list required}
 #@       {-scenarios "list of scenarios to be read from ddc file"
-#@ 	  scenario_list list optional}
+#@ 	scenario_list list optional}
 #@       {-active_scenarios "list of scenarios to be made active"
-#@ 	  active_scenario_list list optional}}
+#@ 	active_scenario_list list optional}}
 #@ 
 #@ 
 #@ 
@@ -687,11 +659,9 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ #
 #@ #  ABSTRACT:    wrapper around update_mw_lib
 #@ #
-#@ #  HISTORY :    2009/6/21, yunz, support ALF reader in ICC
-#@ #
 #@ ##############################################################################
 #@ if { [string match -nocase {*icc_shell*} $synopsys_program_name] || 
-#@     ([string match -nocase {*d[ce]_shell*} $synopsys_program_name] && [shell_is_mwlib_enabled]) }  {
+#@     ([string match -nocase {*dc_shell*} $synopsys_program_name] && [shell_is_mwlib_enabled]) }  {
 #@ 
 #@ proc set_mw_technology_file args {
 #@ 
@@ -701,16 +671,9 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@   set lib_name ""
 #@   set pdb_file "tech.pdb"
 #@   set log_file "log_file"
-#@   set alf_file ""
 #@ 
 #@   if {[info exists ra(-technology)] && [info exists ra(-plib)]} {
 #@       echo "Error: the $ra(-technology) and $ra(-plib) options are mutually exclusive."
-#@       return [uplevel #0 $cmd]
-#@   } elseif {[info exists ra(-technology)] && [info exists ra(-alf)]} {
-#@       echo "Error: the $ra(-technology) and $ra(-alf) options are mutually exclusive."
-#@       return [uplevel #0 $cmd]
-#@   } elseif {[info exists ra(-plib)] && [info exists ra(-alf)]} {
-#@       echo "Error: the $ra(-plib) and $ra(-alf) options are mutually exclusive."
 #@       return [uplevel #0 $cmd]
 #@   }
 #@ 
@@ -768,17 +731,11 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@       }
 #@     }
 #@   }
-#@   if {[info exists ra(-alf)]} {
-#@ 
-#@     set cmd [format {update_mw_lib %s} 		     $ra() ]
-#@ 
-#@     set cmd [concat [concat $cmd " -alf " ] " $ra(-alf) "]
-#@   }
 #@ 
 #@   return [uplevel #0 $cmd]
 #@ }
 #@ 
-#@ define_proc_attributes set_mw_technology_file -hide_body     -info " Set technology file for the library "     -define_args       {{-technology "Technology file name" "tech_file" string {optional}}       {-plib "Plib file name" "file_name" string  {optional}}      {-alf "alf file name" "file_name" string  {optional}}      {"" "Library name" "libName" string {required}}}
+#@ define_proc_attributes set_mw_technology_file -hide_body     -info " Set technology file for the library "     -define_args       {{-technology "Technology file name" "tech_file" string {optional}}       {-plib "Plib file name" "file_name" string  {optional}}      {"" "Library name" "libName" string {required}}}
 #@ 
 #@ ##############################################################################
 #@ #
@@ -927,7 +884,7 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@   return [uplevel #0 $cmd]
 #@ }
 #@ 
-#@ define_proc_attributes create_mw_lib -hide_body     -info " Create a milkyway library "     -define_args       {{-technology "Technology file name" "file_name" string {optional}}           {-ignore_tf_error "Ignore the error in technology file" "" boolean {hidden optional}} 	  {-plib "Plib file name" "file_name" string  {optional}}       {-hier_separator "Hierarchical separator, default is backslash / " "separator" string {hidden optional}}       {-bus_naming_style "Bus naming style" "bus_naming_style" string {optional}}       {-ignore_case "Make case insensitive" "" boolean {hidden optional}}       {-case_sensitive "Make case sensitive" "" boolean {hidden optional}}       {-mw_reference_library "List of reference libraries" "lib_list" list {optional}}       {-reference_control_file "Reference control file" "file_name" string {optional}}       {-open "Open the library after creation" "" boolean {optional}}       {"" "Library name to create" "libName" string {required}}}
+#@ define_proc_attributes create_mw_lib -hide_body     -info " Create a milkyway library "     -define_args       {{-technology "Technology file name" "file_name" string {optional}}           {-ignore_tf_error "Ignore the error in technology file" "" boolean {hidden optional}} 	  {-plib "Plib file name" "file_name" string  {optional}}       {-hier_separator "Hierarchical separator, default is backslash / " "separator" string {optional}}       {-bus_naming_style "Bus naming style" "bus_naming_style" string {optional}}       {-ignore_case "Make case insensitive" "" boolean {hidden optional}}       {-case_sensitive "Make case sensitive" "" boolean {hidden optional}}       {-mw_reference_library "List of reference libraries" "lib_list" list {optional}}       {-reference_control_file "Reference control file" "file_name" string {optional}}       {-open "Open the library after creation" "" boolean {optional}}       {"" "Library name to create" "libName" string {required}}}
 #@ 
 #@ #
 #@ ##############################################################################
@@ -1030,7 +987,6 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ #  PROCEDURE:   write_mw_lib_files
 #@ #
 #@ #  ABSTRACT:    Write technology or reference control file
-#@ #  History: Yun Zhang 2011/12/5. add new hidden option -stream_layer_map_file
 #@ #
 #@ ##############################################################################
 #@ proc write_mw_lib_files args {
@@ -1040,54 +996,22 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@   set cmd ""
 #@ 
 #@   if {[info exists ra(-reference_control_file)]} {
-#@    #Option -reference_contrl_file, -plib and -technology are exclusive.
-#@    # If both of them are set at the same time, error reported.
-#@    # 9000273455, by xqsun, 2009/2/4
-#@      if {[info exists ra(-technology)]} {
-#@        echo "Error: Cannot specify '-reference_control_file' with '-technology'.(CMD-001)"
-#@        return 0
-#@      } elseif {[info exists ra(-plib)]} {
-#@        echo "Error: Cannot specify '-reference_control_file' with '-plib'.(CMD-001)"
-#@        return 0
-#@      } elseif {[info exists ra(-stream_layer_map_file)]} {
-#@        echo "Error: Cannot specify '-reference_control_file' with '-stream_layer_map_file'.(CMD-001)"
-#@        return 0
-#@      } else {
-#@        set cmd [format {report_mw_lib_ref_ctrl_file -output %s %s}                            $ra(-output)                            $ra() ]
-#@        return [uplevel #0 $cmd]
-#@      }
+#@     set cmd [format {report_mw_lib_ref_ctrl_file -output %s %s}                         $ra(-output)                         $ra() ]
+#@     return [uplevel #0 $cmd]
 #@   }
 #@ 
 #@   if {[info exists ra(-technology)]} {
-#@      if {[info exists ra(-plib)]} {
-#@        echo "Error: Cannot specify '-technology' with '-plib'.(CMD-001)"
-#@        return 0
-#@      } elseif {[info exists ra(-stream_layer_map_file)]} {
-#@        echo "Error: Cannot specify '-technology' with '-stream_layer_map_file'.(CMD-001)"
-#@        return 0
-#@      } else {
-#@        set cmd [format {org_report_mw_lib -output %s %s}                            $ra(-output)                            $ra() ]
-#@        return [uplevel #0 $cmd]
-#@      }
+#@     set cmd [format {org_report_mw_lib -output %s %s}                         $ra(-output)                         $ra() ]
+#@     return [uplevel #0 $cmd]
 #@   }
 #@ 
 #@   if {[info exists ra(-plib)]} {
-#@     if {[info exists ra(-layer_map_file)]} {
-#@        echo "Error: Cannot specify '-technology' with '-stream_layer_map_file'.(CMD-001)"
-#@        return 0
-#@     } else {
-#@ 	set cmd [format {write_plib -lib_name %s %s} 	$ra() 	$ra(-output) ]
-#@ 	return [uplevel #0 $cmd]
-#@     }
+#@     set cmd [format {write_plib -lib_name %s %s}                         $ra()                         $ra(-output) ]
+#@     return [uplevel #0 $cmd]
 #@   }
-#@     if {[info exists ra(-stream_layer_map_file)]} {
-#@        set cmd [format {org_report_mw_lib -stream_layer_map_file %s -output %s %s} 			$ra(-stream_layer_map_file)                         $ra(-output)                         $ra() ]
-#@        return [uplevel #0 $cmd]
-#@     }
-#@   
 #@ }
 #@ 
-#@ define_proc_attributes write_mw_lib_files -hide_body     -info " Write technology or reference control file "     -define_args       {{-technology "Dump technology file" "" boolean {optional}} 	  {-plib "Dump plib file" "" boolean {optional}}       {-reference_control_file "Dump reference control file" "" boolean {optional}}       {-stream_layer_map_file "Dump layer map file during stream in/out" "" string {optional hidden}}       {-output "Output file" "file_name" string {required}}       {"" "Library to be reported" "libName" string {required}}}
+#@ define_proc_attributes write_mw_lib_files -hide_body     -info " Write technology or reference control file "     -define_args       {{-technology "Dump technology file" "" boolean {optional}} 	  {-plib "Dump plib file" "" boolean {optional}}       {-reference_control_file "Dump reference control file" "" boolean {optional}}       {-output "Output file" "file_name" string {required}}       {"" "Library to be reported" "libName" string {required}}}
 #@ }
 #@ ##############################################################################
 #@ #
@@ -1118,12 +1042,8 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@   }
 #@   if {[info exists ra(-save)]} {
 #@       set cmd_close [format {%s -save} $cmd_close]
-#@   } 
-#@   if {[info exists ra(-verbose)]} {
-#@       set cmd_close [format {%s -verbose} $cmd_close]
-#@   }
-#@   if {[info exists ra(-hierarchy)]} {
-#@       set cmd_close [format {%s -hierarchy} $cmd_close]
+#@   } else {
+#@       set cmd_close [format {%s -discard} $cmd_close]
 #@   }
 #@ 
 #@   ui_util_clean_saved_lib_attr $args
@@ -1157,7 +1077,7 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@   }
 #@ }
 #@ 
-#@ define_proc_attributes close_mw_cel -hide_body     -info " Closes the design "     -define_args       {{-save "Save the design" "" boolean {optional}}       {-discard "Discard any changes" "" boolean {optional hidden}}       {-verbose "Print out debugging messages" "" boolean {optional hidden}}       {-hierarchy "Close top design and its child designs" "" boolean {optional}}       {-all_views "Close all views of the design" "" boolean {optional}}       {-all_versions "Close all versions of the design" "" boolean {optional}}       {"" "designs to be closed" "design list" list {optional}}}
+#@ define_proc_attributes close_mw_cel -hide_body     -info " Closes the design "     -define_args       {{-save "Save the cel" "" boolean {optional}}       {-discard "Discard any changes" "" boolean {optional hidden}}       {-all_views "Close all views of the cel" "" boolean {optional}}       {-all_versions "Close all versions of the cel" "" boolean {optional}}       {"" "cels to be closed" "design list" list {optional}}}
 #@ 
 #@ ##############################################################################
 #@ #
@@ -1278,6 +1198,20 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ }
 #@ 
 #@ define_proc_attributes dc_read_def -hide_body     -info " Read a def file "     -define_args       {{-design "name of design for which clusters are to be read" "" string {optional}}        {-quiet "do not print out any warnings" "" boolean {optional}}        {-verbose "print out more warnings" "" boolean {optional}}        {-allow_physical_cells "allow physical cells" "" boolean {optional}}        {-allow_physical_ports "allow physical ports" "" boolean {optional}}        {-allow_physical_nets "allow physical nets" "" boolean {optional}}        {-skip_signal_nets "skip signal nets" "" boolean {optional}}        {-incremental "incremental" "" boolean {optional}}        {-enforce_scaling "enforce_scaling" "" boolean {optional}}        {-move_bounds "move bounds" "" boolean {optional}}        {"" "input def file names" "input_def_file_name" string {required}}}
+#@ 
+#@ ##############################################################################
+#@ #  PROCEDURE:   read_pdef
+#@ #  ABSTRACT:    Wrapper around read_pdef to handle incremental update properly
+#@ ##############################################################################
+#@ rename -force read_pdef org_read_pdef
+#@ icc_hide_cmd org_read_pdef
+#@ proc read_pdef args {
+#@   parse_proc_arguments -args $args ra
+#@   return [eval execute_command_and_create_cel_from_scratch "org_read_pdef" $args]
+#@ }
+#@ 
+#@ define_proc_attributes read_pdef -hide_body     -info " Read a pdef file "     -define_args       {{-design "name of design for which clusters are to be read" "" string {optional}}        {-quiet "do not print out any warnings" "" boolean {optional}}        {-verbose "print out more warnings" "" boolean {optional}}        {-dont_update_core_area "do not overwrite the core area" "" boolean {optional}}        {-allow_physical_cells "allow physical cells" "" boolean {optional}}        {-allow_physical_ports "allow physical ports" "" boolean {optional}}        {-skip_signal_nets "skip signal nets" "" boolean {optional}}        {"" "input pdef file names" "file_name" string {required}}}
+#@ 
 #@ 
 #@ 
 #@ ##############################################################################
@@ -1434,22 +1368,6 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@     source $synopsys_root/auxx/syn/psyn/check_physical_design_ui.tbc
 #@     source $synopsys_root/auxx/syn/psyn/create_qor_snapshot.tbc
 #@     source $synopsys_root/auxx/syn/psyn/report_qor_snapshot.tbc
-#@     source $synopsys_root/auxx/syn/psyn/msgParser.tbc
-#@     source $synopsys_root/auxx/syn/psyn/displacement_gui.tbc
-#@     source $synopsys_root/auxx/syn/psyn/categorize_timing_gui.tbc
-#@     source $synopsys_root/auxx/syn/psyn/mcmm_utils.tcl.e
-#@     source $synopsys_root/auxx/syn/psyn/propagate_all_clocks.tcl.e
-#@ }
-#@ 
-#@ if { [string match -nocase {*dc_shell*} $synopsys_program_name] && [shell_is_in_topographical_mode] }  {
-#@    source $synopsys_root/auxx/syn/psyn/create_qor_snapshot.tbc
-#@    source $synopsys_root/auxx/syn/psyn/report_qor_snapshot.tbc
-#@    source $synopsys_root/auxx/syn/psyn/mcmm_utils.tcl.e
-#@ }
-#@ 
-#@ if { [string match -nocase {*de_shell*} $synopsys_program_name] && [shell_is_in_topographical_mode] }  {
-#@    source $synopsys_root/auxx/syn/psyn/create_qor_snapshot.tbc
-#@    source $synopsys_root/auxx/syn/psyn/report_qor_snapshot.tbc
 #@ }
 #@ 
 #@ ##############################################################################
@@ -1457,8 +1375,8 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ ##############################################################################
 #@ 
 #@ if { [string match -nocase {*icc_shell*} $synopsys_program_name] } {
-#@ #set  save_mw_cel_lib_setup  TRUE
-#@ #set  auto_restore_mw_cel_lib_setup FALSE
+#@ set  save_mw_cel_lib_setup  TRUE
+#@ set  auto_restore_mw_cel_lib_setup FALSE
 #@ 
 #@ alias create_wiring_keepout create_wiring_keepouts
 #@ alias get_wiring_keepout get_wiring_keepouts
@@ -1467,6 +1385,8 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ 
 #@ icc_hide_cmd execute_command_and_create_cel_from_scratch
 #@ icc_hide_cmd dc_read_def
+#@ icc_hide_cmd read_pdef
+#@ icc_hide_cmd write_pdef
 #@ icc_hide_cmd read_edif
 #@ icc_hide_cmd read_sverilog
 #@ icc_hide_cmd read_vhdl
@@ -1477,67 +1397,7 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ }
 #@ 
 #@ 
-#@ ##############################################################################
-#@ # Tcl Command: get_dont_touch_nets
-#@ # Description: wrapper of "get_nets -filter dont_touch_reason==mv"
-#@ ##############################################################################
-#@ if { [string match -nocase {*icc_shell*} $synopsys_program_name] } {
-#@ 
-#@ proc get_dont_touch_nets args {
-#@ 
-#@   parse_proc_arguments -args $args ra
-#@ 
-#@   set cmd [format {get_nets}]
-#@ 
-#@   if {[info exists ra()]} {
-#@       set cmd [format {%s {%s}} $cmd $ra()]
-#@   }
-#@   if {[info exists ra(-type)]} {
-#@       set cmd [format {%s -filter dont_touch_reasons=~*%s*} $cmd $ra(-type)]
-#@   }
-#@   if {[info exists ra(-hierarchical)]} {
-#@       set cmd [format {%s -hierarchical} $cmd]
-#@   }
-#@   if {[info exists ra(-quiet)]} {
-#@       set cmd [format {%s -quiet} $cmd]
-#@   }
-#@   if {[info exists ra(-regexp)]} {
-#@       set cmd [format {%s -regexp} $cmd]
-#@   } 
-#@   if {[info exists ra(-nocase)]} {
-#@       set cmd [format {%s -nocase} $cmd]
-#@   }
-#@   if {[info exists ra(-exact)]} {
-#@       set cmd [format {%s -exact} $cmd]
-#@   }
-#@ 
-#@   return [uplevel #0 $cmd]
-#@ }
-#@ 
-#@ define_proc_attributes get_dont_touch_nets   -info " Get dont_touch nets "   -permanent   -define_args {     {"" "Match net names against patterns" "patterns" list {optional}}     {-type "Match net dont_touch reasons" "reasons" list {required}}     {-hierarchical "Search level-by-level in current instance" "" boolean {optional}}     {-quiet "Suppress all messages" "" boolean {optional hidden}}     {-regexp "Patterns are full regular expressions" "" boolean {optional hidden}}     {-nocase "With -regexp, matches are case-insensitive" "" boolean {optional hidden}}     {-exact "Wildcards are considered as plain characters" "" boolean {optional hidden}}   }
-#@ 
-#@ alias get_dont_touch_net get_dont_touch_nets
-#@ }
-#@ 
-#@ 
-#@ ##############################################################################
-#@ # return the first {index value} pair in Tcl array ary.
-#@ ##############################################################################
-#@ proc _snps_array_peek { level ary } {
-#@     upvar #$level $ary loc_ary
-#@     set ret [list]
-#@     set token [array startsearch loc_ary]
-#@     while {[array anymore loc_ary $token]} {
-#@         set k [array nextelement loc_ary $token]
-#@         set v $loc_ary($k)
-#@         set ret [list $k $v]
-#@             break
-#@         }
-#@     array donesearch loc_ary $token
-#@     return $ret;
-#@ }
-#@ define_proc_attributes _snps_array_peek -hidden
-#@ # -- End source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/auxx/syn/.dc_procs.tcl
+#@ # -- End source /cadtools/synopsys/2009/synthesis/auxx/syn/.dc_procs.tcl
 
 #@ 
 #@ # Temporary fix for the LMC_HOME variable- set it to an empty string 
@@ -1558,9 +1418,11 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ #
 #@ 
 #@ # from the System Variable Group 
+#@ set link_force_case  "check_reference"
 #@ set link_library  { * your_library.db }
+#@ set physical_library ""
 #@ 
-#@ set search_path [list . ${synopsys_root}/libraries/syn ${synopsys_root}/minpower/syn ${synopsys_root}/dw/syn_ver ${synopsys_root}/dw/sim_ver]
+#@ set search_path [list . ${synopsys_root}/libraries/syn ${synopsys_root}/dw/syn_ver ${synopsys_root}/dw/sim_ver]
 #@ set target_library  your_library.db
 #@ set synthetic_library  ""
 #@ set command_log_file  "./command.log"
@@ -1571,7 +1433,7 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ set symbol_library  your_library.sdb 
 #@ 
 #@ # Turn on Formality SVF recording
-#@ if { $synopsys_program_name == "dc_shell"      ||      $synopsys_program_name == "de_shell"      ||      $synopsys_program_name == "design_vision" } { 
+#@ if { $synopsys_program_name == "dc_shell"      ||      $synopsys_program_name == "design_vision" } { 
 #@   set_svf -default default.svf
 #@ }
 #@ 
@@ -1622,6 +1484,7 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ set compile_instance_name_suffix   ""
 #@ set compile_negative_logic_methodology   "false"
 #@ set compile_disable_hierarchical_inverter_opt   "false"
+#@ set compile_use_fast_delay_mode   "true"
 #@ set compile_use_low_timing_effort   "false"
 #@ set compile_fix_cell_degradation   "false"
 #@ set compile_preserve_subdesign_interfaces   "false"
@@ -1638,10 +1501,22 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ set compile_hold_reduce_cell_count "false"
 #@ set compile_retime_license_behavior "wait"
 #@ set dont_touch_nets_with_size_only_cells "false"
+#@ set suppress_errors  {PWR-18 OPT-932 OPT-317}
 #@ if { $synopsys_program_name == "dc_shell" && [shell_is_in_topographical_mode] } {
 #@    set dct_prioritize_area_correlation "false"
-#@    set compile_error_on_missing_physical_cells "false"
 #@ }
+#@ 
+#@ #
+#@ # Variable(s) to control the behavior of the optimize_registers command
+#@ #
+#@ set optimize_reg_always_insert_sequential false 
+#@ set optimize_reg_max_time_borrow -1048576.0
+#@ set optimize_reg_retime_clock_gating_latches false
+#@ 
+#@ group_variable retiming optimize_reg_always_insert_sequential
+#@ group_variable retiming optimize_reg_max_time_borrow
+#@ group_variable retiming optimize_reg_retime_clock_gating_latches
+#@ 
 #@ 
 #@ set ldd_return_val 0
 #@ if { [string compare $dc_shell_mode "default"] == 0 } {
@@ -1651,10 +1526,7 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ }
 #@ if { [string compare $dc_shell_mode "tcl"] == 0 } {
 #@   source ${synopsys_root}/auxx/syn/scripts/list_duplicate_designs.tcl
-#@   source ${synopsys_root}/auxx/syn/scripts/analyze_datapath.tbc
 #@ }
-#@ # -- Starting source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/auxx/syn/scripts/list_duplicate_designs.tcl
-
 #@ ####################################################################### 
 #@ #
 #@ #  list_duplicate_designs.tcl		21 Sept. 2006
@@ -1665,10 +1537,11 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ #
 #@ #######################################################################
 #@ 
-#@ proc list_duplicate_designs { args } {
-#@     parse_proc_arguments -args $args ra
+#@ 
+#@ proc list_duplicate_designs {} {
 #@ 
 #@     # Get the list of duplicate designs
+#@ 
 #@     set the_pid [pid]
 #@     set rand_1 [expr int(rand() * 100000)]
 #@     set temp_file_1 [format "/tmp/ldd_design_%s_%s" $the_pid $rand_1]
@@ -1677,6 +1550,7 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@         echo [get_object_name $ldd_design]
 #@     } }
 #@ 
+#@ 
 #@     set rand_2 [expr int(rand() * 100000)]
 #@     set temp_file_2 [format "/tmp/ldd_design_%s_%s" $the_pid $rand_2]
 #@ 
@@ -1684,6 +1558,7 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@     file delete $temp_file_1 
 #@ 
 #@     # Report duplicates
+#@ 
 #@     if { ! [file size $temp_file_2] } {
 #@         echo [concat {No duplicate designs found.}]
 #@         set ldd_return_val 0
@@ -1701,1218 +1576,12 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@     }
 #@ 
 #@     # Clean up
+#@ 
 #@     file delete $temp_file_2
 #@ 
 #@     set list_duplicate_designs1 $ldd_return_val
 #@ }
-#@ 
-#@ define_proc_attributes list_duplicate_designs     -info " List designs of same names"     -permanent     -define_args {
-#@     }
-#@ # -- End source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/auxx/syn/scripts/list_duplicate_designs.tcl
-
-#@ # -- Starting source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/auxx/syn/scripts/analyze_datapath.tbc
-
-#@ #!/bin/csh -f
-#@ # the next line restarts using tclshexec tclsh "$0" "$*"
-#@ # Script to analyze potential of minPower.
-#@ # Source the file in the DC setup, before compiling the design.
-#@ #
-#@ # Alternatively the script can be used standalone with the report_files
-#@ # then it has to be invoked:
-#@ # analyze_datapath.tcl report_resources.txt report_area.txt
-#@ # 
-#@ # 
-#@ # TclPro::Compiler::Include
-#@ 
-#@ if {[catch {package require tbcload 1.4} err] == 1} {
-#@     return -code error "[info script]: The TclPro ByteCode Loader is not available or does not support the correct version -- $err"
-#@ }
-#@ tbcload::bceval {
-#@ TclPro ByteCode 2 0 1.4 8.4
-#@ 10 0 100 27 0 0 104 0 5 10 10 -1 -1
-#@ 100
-#@ w0E<!(H&s!/TA9v.EW<!CQr<!75bpvCpB?)3,>6#62o9v@t(?!:uS=!;fAs!KIRK%B:3-&/H
-#@ W<!N>,>!MvqqvCpB?)L!f`'BVo9v&-<<!&9N<!.NW<!Rhk>!EQN!!
-#@ 10
-#@ ;.mOwM=xOw.'!
-#@ 10
-#@ N4xOwM=xOw;9!
-#@ 27
-#@ x
-#@ 2
-#@ FVw
-#@ x
-#@ 4
-#@ wm<eD
-#@ x
-#@ 6
-#@ 1lo(F^(%
-#@ x
-#@ 21
-#@ Ai0fDGhV*F(fTfDtH..Dh<..D1v
-#@ x
-#@ 203
-#@ 6dV<+1=,D+GGGQB!Zb@Gu,aaEegpgCcdkSA&k54BJ`xQHb.JTA<;GQB!Zb@Gu,aaEegpgCcd
-#@ kSA&k54BnWg:@p9v>wvMfCF'LFY?!(wx?*XxlBagbSAq2K(FmF5SA(|B,EHRM`F&#V<+T@PF
-#@ +!xMTA%#um#91VE+u'7ID)HfwGja0;@_%+Y?0ot)Fo1#D+s85)Fb1WsE9R,!FgjtSA%vQ<@k
-#@ tWU@jjp-DwL6<@lT/CF0&ufArZMTA6dV<+s,+v
-#@ x
-#@ 4
-#@ ,CHr@
-#@ x
-#@ 12
-#@ n*Z8Afwwx?6>;EF
-#@ x
-#@ 16
-#@ 'NB,E(^mID8oATA=;2EF
-#@ p
-#@ 7 0 50 9 0 0 28 0 5 7 7 -1 -1
-#@ 50
-#@ ,|&v!+|Js!8BW<!(?W<!;PC3w>@rH&4,#t!%Bo7-/HW!!X8>6#4u&v!8rn9vz
-#@ 7
-#@ ;tcf%-0!!
-#@ 7
-#@ ^fUC(9)'v
-#@ 9
-#@ x
-#@ 13
-#@ u;J9>`mow?Ed@sHA!
-#@ x
-#@ 10
-#@ #lsU>|S4:G2/#
-#@ x
-#@ 6
-#@ pR5SA_tw
-#@ x
-#@ 4
-#@ 3N!iC
-#@ x
-#@ 2
-#@ &Tv
-#@ i
-#@ 0
-#@ i
-#@ -1
-#@ x
-#@ 6
-#@ ,Qs/DL+%
-#@ x
-#@ 26
-#@ ^M;L/n=KE+dCKE+94:JD.XIID*mACF@Pw
-#@ 0
-#@ 0
-#@ 2 4
-#@ 9
-#@ 'NB,E(^mID@v
-#@ 0 0 257
-#@ 6
-#@ .9BfD|+%
-#@ 1 0 257
-#@ 6
-#@ pR5SA_tw
-#@ 2 0 9
-#@ 6
-#@ 7,V`FW+%
-#@ 3 0 9
-#@ x
-#@ 7
-#@ n*Z8Ays_-
-#@ p
-#@ 56 0 494 28 3 3 252 1 9 56 60 -1 -1
-#@ 494
-#@ w0E<!-BW<!9&0s!9Vbt!8tVH&+B`W!;KW<!5G^3w.)Ppv8Gtpv'Ho7-PZw4w02PUv?D|s!8S
-#@ UNw4#|Tv=&B=!F7@S#G^8I&ph-(!e2xi6zNEaZ!<131%NeL3wn^_E0hRig%ysm<v<_L3wlO;
-#@ *0hRig%xpm<v<_L3w6,f=!I(x4wCJCm#yu.p+hxO7,rTwZqBt2-&uAv!!Q;|Q#5#tl#A%%8#
-#@ 0iA=!:uS=!Anp3w?F&I&>YUR#3lxN6v*<<!e!!!!XLqC*1;L3w>,f=!I(x4wBJCm#NeL3wn^
-#@ _E0hRig%ysm<v<_L3wlO;*0hRig%xpm<v<_L3w6,f=!I(x4wCJCm#yu.p+yR4q+Tmr<!Iq-C
-#@ D>>'v!=>Ks!=QW<!8oJ=!=G^3w9&#pvCJfs!VBPe&g@#!!gk6(!I/=3-1(fI&R@_Z!>Cig%0
-#@ Q58-S3#J&LSa<!JCig%.H,8-S3#J&KSa<!@>YUv@.mf%Idig%EUAI&aji`^U9n<v<_L3wE,f
-#@ =!I(x4w6JCm#StL3wSqPH/mdJE':Ce`'K&X<!YD/p+Jfi<!GyY>!Hbb>!Ihk>!@#fTvY`Lb'
-#@ ?nt>!`I.rvMC2u!Wf^Z)7oyX!<5>:vMnk6#z
-#@ 56
-#@ 2,,Uv=yC7#N!5J&:VUm#T#/6,N!5J&<kp7#:lr!!Z1EH&B2Y6#:lr!!Qkp7#0TW!!Dc/v!
-#@ 60
-#@ 7&,Uv1E3<!En,Zw=FTAvJON-&LUmOwH3cBvRvu:vQR`1%Dj@(:>yt:vQR`1%p,1>vVu-c'U0
-#@ o.&
-#@ 28
-#@ x
-#@ 6
-#@ q'-W@Dhw
-#@ x
-#@ 10
-#@ )FV5B,QffDX(%
-#@ i
-#@ 0
-#@ i
-#@ 10000000
-#@ x
-#@ 6
-#@ ?r5DFByw
-#@ x
-#@ 2
-#@ &Tv
-#@ x
-#@ 175
-#@ %?!%=%TsiC.<TKDNwf*F(c|N@q^>r@Q'P>+K3Xj6eJt_F+-0CF>wf*F(c|N@q^>r@Q'P>+>#
-#@ V<+R/v%=P%o-DBFVE+?NfCFvg,<@&8>D+PwO@w%WTW?#*oCFC!xQH91VE+pQIID@@^E1')um
-#@ #9mMaEw<,DFC!xQH91VE+pQIID@@^E1')um#|(j:@BFVE+PT)!F(c|N@q^>r@P!G>+>N<:+,
-#@ CEw
-#@ i
-#@ 3
-#@ x
-#@ 14
-#@ u;J9>`mow?|6cT>h-v
-#@ x
-#@ 54
-#@ 4|pm7YpL'FEEIF+XOBw?;6-8Ac6;p-6qy4.#lsU>ki;P.:?e?G4%2mBJqS_45mDq.j,v
-#@ x
-#@ 6
-#@ pR5SA_tw
-#@ x
-#@ 7
-#@ =r3iC^%g+
-#@ x
-#@ 4
-#@ 3N!iC
-#@ x
-#@ 0
-#@ 
-#@ x
-#@ 1
-#@ A!
-#@ x
-#@ 1
-#@ L!
-#@ i
-#@ 2
-#@ i
-#@ 1
-#@ x
-#@ 13
-#@ u;J9>`mow?Ed@sHA!
-#@ x
-#@ 24
-#@ 4|pm7YpL'FEEIF+0*|CFKaVU>OgS=+
-#@ i
-#@ -1
-#@ x
-#@ 3
-#@ Z#-&
-#@ x
-#@ 1
-#@ K!
-#@ x
-#@ 3
-#@ x#-&
-#@ x
-#@ 1
-#@ P!
-#@ x
-#@ 6
-#@ ,Qs/DL+%
-#@ x
-#@ 5
-#@ .7Pe02v
-#@ x
-#@ 27
-#@ ^M;L/n=KE+dCKE+c05#Fe7Oa1JeV<+Dv:-
-#@ 3
-#@ L 1 90 56 149 83 -1
-#@ L 1 211 67 281 204 -1
-#@ L 1 337 56 396 330 -1
-#@ 3
-#@ F
-#@ 1 9 10
-#@ 4
-#@ 11 12 13 14
-#@ F
-#@ 1 16 17
-#@ 4
-#@ 11 12 13 14
-#@ F
-#@ 1 18 19
-#@ 3
-#@ 11 12 13
-#@ 2 22
-#@ 9
-#@ 'NB,E(^mID@v
-#@ 0 0 257
-#@ 6
-#@ .9BfD|+%
-#@ 1 0 257
-#@ 5
-#@ -lTKD@v
-#@ 2 0 9
-#@ 3
-#@ fLc,
-#@ 3 0 9
-#@ 3
-#@ hph-
-#@ 4 0 9
-#@ 9
-#@ 0*|CF'oU`F9v
-#@ 5 0 9
-#@ 6
-#@ pQIIDByw
-#@ 6 0 8
-#@ 6
-#@ pR5SA_tw
-#@ 7 0 9
-#@ 6
-#@ 7,V`FW+%
-#@ 8 0 9
-#@ 0
-#@ 
-#@ 9 0 521
-#@ 0
-#@ 
-#@ 10 0 521
-#@ 4
-#@ u3uSA
-#@ 11 0 9
-#@ 1
-#@ -v
-#@ 12 0 9
-#@ 1
-#@ .v
-#@ 13 0 9
-#@ 1
-#@ /v
-#@ 14 0 9
-#@ 5
-#@ 0*|CF4v
-#@ 15 0 9
-#@ 0
-#@ 
-#@ 16 0 521
-#@ 0
-#@ 
-#@ 17 0 521
-#@ 0
-#@ 
-#@ 18 0 521
-#@ 0
-#@ 
-#@ 19 0 521
-#@ 10
-#@ )FV5B,QffDX(%
-#@ 20 0 9
-#@ 3
-#@ ^=g+
-#@ 21 0 9
-#@ x
-#@ 17
-#@ lj|Z?.30bE_%vY?0*|CF4v
-#@ x
-#@ 16
-#@ mxoRA:ovlB5ZB3@6`t!H
-#@ p
-#@ 30 0 247 26 3 2 148 2 7 30 34 -1 -1
-#@ 247
-#@ -fA=!,cSs!/)13w,f+pv55>:v7HrP&+K&s!3TA9v0|yTv59Ks!0#>6#4;tl#;,5Uv;KW<!E>
-#@ Ts!H+%8#g@#!!ee6(!G#+3-AB,:=AAFHo9VL3wGb5t!d!!!!fC#!!Id.%!x-IK!NnGt!9i&v
-#@ !<k60%FUNL%/:I^:Zo.p+|,f=!E/B=!CGL3wsj><!>`8s!Pl&s!9i&v!<k60%FUNL%/:I^:9
-#@ EW<!D@*5wjlbT4sBA3w4,f=!JPG>!WXN5wH1%Wv2rnTvB@Irv6YQK%JjJE'N-,'(MjFB(2iS
-#@ s!Bd'w)P#J6,>1ZrE,?!!
-#@ 30
-#@ 3rr!!7JHK%5&TTvU:_Vv6JGY!8lE!!Fvc:v:-!
-#@ 34
-#@ @DGUvQOWg%O0gZ)%w*!!.!Y*'6R60'S*#/&|N,N%GK!
-#@ 26
-#@ x
-#@ 5
-#@ 4UQ<@>v
-#@ x
-#@ 14
-#@ .9BfDs++:@t-%lB^+%
-#@ x
-#@ 9
-#@ uRKZ?sB-<@Ev
-#@ x
-#@ 5
-#@ 0a%lB@v
-#@ x
-#@ 1
-#@ Hv
-#@ i
-#@ 5
-#@ x
-#@ 6
-#@ pR5SA_tw
-#@ x
-#@ 4
-#@ 3N!iC
-#@ x
-#@ 7
-#@ =r3iC^%g+
-#@ x
-#@ 14
-#@ 0uPL8hJ%.<6mDq.j,v
-#@ x
-#@ 0
-#@ 
-#@ i
-#@ 1
-#@ x
-#@ 1
-#@ A!
-#@ x
-#@ 1
-#@ N!
-#@ x
-#@ 2
-#@ FVw
-#@ x
-#@ 2
-#@ h-v
-#@ x
-#@ 2
-#@ kJv
-#@ x
-#@ 55
-#@ x-WsE<m(sF`%+:@6`t!HEnN<@8AG9>t*Z8A%0J9>0a%lBF-:aC)G#D+O(wa1yB/:+,CEw
-#@ x
-#@ 6
-#@ ;oRJ0uE%
-#@ x
-#@ 1
-#@ B!
-#@ x
-#@ 4
-#@ wm<eD
-#@ x
-#@ 6
-#@ 1lo(F^(%
-#@ x
-#@ 10
-#@ uRKZ?sB-<@mEv
-#@ x
-#@ 1
-#@ J!
-#@ x
-#@ 351
-#@ tsU<+O!r<+--vNC4P5cE6,aaE=a2_F+1?SA2u'eDoQtm#LdV<+91VE+,/;EFdUfRA0Crm#Ld
-#@ V<+91VE+u3uSAruwlB'E(yG=%BTA=;2EF_XTZ?4/;EF%)(yGH,qT,mxoRAZRe=+1/o(Fs^>r
-#@ @Kq-=w5dV<+5|VkB9mZQHuuCTA,rP-Eu|cTH,'R4IO-:aCfnIv?Dn<@wXP_nA/Y:EF(FV5B/
-#@ #BCF/Q:s+|_'RH>b&<IX9i<+4o<JDw+-C+crgm#LdV<+91VE+uRKZ?sB-<@|JJsF>>V=+ko<
-#@ JD.I%F+vHFiCC2qT,u3uSA;@0C+prsm#e(um#eu>r@,?/kB.XIIDR6tm#vMfCF0o<JDn#/gC
-#@ mxoRAPc2xE.o5cEtE&(FtGo(F!:pQAGFDE+,*Z8AJ(0j.3J/kB.XIIDO#V!?tsU<+>wO@w5d
-#@ V<+Tur!
-#@ x
-#@ 30
-#@ tsU<+:tJTA8cN<@q<`aEA6|!.:,aaEY-Js+4<!
-#@ 3
-#@ L 1 77 4 84 70 -1
-#@ L 1 107 131 244 97 -1
-#@ L 2 133 41 186 175 -1
-#@ 2
-#@ F
-#@ 1 7 8
-#@ 3
-#@ 9 10 11
-#@ F
-#@ 1 12 13
-#@ 1
-#@ 10
-#@ 3 15
-#@ 5
-#@ mxoRADv
-#@ 0 0 257
-#@ 4
-#@ 4/;EF
-#@ 1 0 257
-#@ 5
-#@ sB-<@Ev
-#@ 2 0 257
-#@ 4
-#@ u3uSA
-#@ 3 0 9
-#@ 14
-#@ .9BfDs++:@t-%lB^+%
-#@ 4 0 8
-#@ 8
-#@ .30bEs/B(F
-#@ 5 0 9
-#@ 9
-#@ 4/;EFu,aaE?v
-#@ 6 0 9
-#@ 0
-#@ 
-#@ 7 0 521
-#@ 0
-#@ 
-#@ 8 0 521
-#@ 1
-#@ Dv
-#@ 9 0 9
-#@ 3
-#@ kL2-
-#@ 10 0 9
-#@ 1
-#@ Ev
-#@ 11 0 9
-#@ 0
-#@ 
-#@ 12 0 521
-#@ 0
-#@ 
-#@ 13 0 521
-#@ 8
-#@ ,/;EFdUfRA
-#@ 14 0 9
-#@ x
-#@ 13
-#@ n*Z8ApQ2TA.EffD>v
-#@ x
-#@ 24
-#@ j?VTA9hd#H1Q2TA.EffD6oATA=;2EF
-#@ p
-#@ 34 0 274 29 1 1 168 1 9 34 34 -1 -1
-#@ 274
-#@ 6Mbt!7nMH&)0*!!;KW<!;>Ts!/lA=!-cJs!=QW<!2TN<!@4`H&3fvpv2/YQ#D_:7#F=xn#/c
-#@ 8=!3H<<!8fAs!OR!5wg@#!!ee6(!G#+3-ttw4wFDu1%/c8=!3H<<!9fAs!H_YUv4t%4wgPAp
-#@ +525t!GV>:v3t%4wfJ8p+525t!l?vjw2ZW<!0(KL&O6Th%6hDH&7YQK%f#k5w82o=!B2o=!C
-#@ 2o=!M.d4w;bgm#EiW<!>|/=!URE5w0uS=!G#|s!>SYQ#N3GB(K4mf%Eqk6#>hk>!Y%MqvGtP
-#@ t!UZC?)Zuw!*D;Ts!Zuw!*7iSs!Zuw!*8lSs!Zuw!*9oSs!Gyk6#z
-#@ 34
-#@ 0&,Uv<PLNwL*TI&;eC7#Ft^7#0NN!!xefv!8,tQ#19!
-#@ 34
-#@ 5&,UvNOWg%4C>Y#Eqt:vgoKYvUr-c'V4_R#-hDR#19!
-#@ 29
-#@ i
-#@ 0
-#@ i
-#@ 10000000
-#@ x
-#@ 19
-#@ 1opp/DEIF+i>sU>C1AsHcq_'
-#@ x
-#@ 6
-#@ jy'X>l9v
-#@ x
-#@ 5
-#@ 0a%lB@v
-#@ x
-#@ 1
-#@ +!
-#@ x
-#@ 7
-#@ rLa:@_k,,
-#@ x
-#@ 7
-#@ 8*Z4Bo0!-
-#@ x
-#@ 4
-#@ 3N!iC
-#@ x
-#@ 6
-#@ ?r5DFByw
-#@ x
-#@ 499
-#@ Oc57A#oU`F)n<@w5dV<+;d?3@)+G<F,qeZE1fsiC:/ufA/TB3@()V`FJ^S=+DLG<F,qeZE1f
-#@ siCq`tm#LdV<+91VE+pR5SAP9xQH1opp/DEIF+i>sU>C1AsHo4Z6@()V`F6tsg/clAsH+)um
-#@ #LdV<+rLa:@*8>D+8*Z4B:R2E+3N!iC=%BTA=;2EF_XTZ?4/;EF=%BTA,rP-EtsU<+:tJTA8
-#@ oATA@)QDFs':p@n1O:@Lc2xE1fsiC/!J9>rLa:@*8>D+8*Z4B:R2E+3N!iC=%BTA=;2EF_XT
-#@ Z?4/;EF=%BTA,rP-EDssm#%2WsE#6oCF%#um#LdV<+*T67A-APQB)oATA@)QDF5,:eD:;GQB
-#@ 8'0!.N*dfD.0?SA0o<JDb`tm#LdV<+91VE+pR5SAP9xQH1opp/DEIF+i>sU>C1AsH,-DwF#6
-#@ oCFS,<P.|i`^,'C/:+Cij`C#O`aE:_eK/pR5SAWvfK/&kbD+8&O+E,=^Z?l6VgC=xVE+/*Z4
-#@ Bw61?w5dV<+9MfCF7AK(F@5)*FouudDsZACF=%BTA@)QDF'w/gC#O`aE:_eK/pR5SAWvfK/&
-#@ kbD+8&O+E,=^Z?l6VgC=xVE+/*Z4Bv%Y#?F#qm#(I8:+,CEw
-#@ x
-#@ 2128
-#@ tsU<+'T67A#oU`F)n<@w!1q<+c9!eDDLVE+4CDE+d|v>+u@oC+vqbnAy^S=+.30bE%<XeDk`
-#@ tm#i)Z4B:R2E+)!CsHR-AsHR-AsHR-AsH*N^6AE.L'FM8#v.T-_U>_MPF+4o<JDgmRt416-8
-#@ A.ZYKA7aDTA69XeDmeqm#)V4mB,8>D+8*Z4B:R2E+jZnT,78?cE,?elBE3xQH|>/:+RFXQHF
-#@ 2Op.:DeT>jxPF+crgm#vMfCFk*T7A!si'FFRVE+f*Z4B:R2E+3N!iCf/#>+AGbT>^:GF+I3L
-#@ 3.HC&LA7aDTA69XeDUssm#a.JTA3osdDDLVE+uqP-E;1Ej@>5cDFxTnT,x=oRA1oU`Fma.=w
-#@ Z-WsE=!D9G!dRQB,o90D%)(yGH,qT,0*|CF'oU`FORe=+56-8AHDiN.+`67Ag^KZ?DAuDFF#
-#@ qm#5dV<+')um#5dV<+-g97A&acW@CYPF+crgm#eu>r@1osdD.0U?wZ-WsE=!D9G!dRQB,o90
-#@ D%)(yGH,qT,0*|CF'oU`FORe=+56-8Ae=.=w|>/:+TX93Ie2g0ItsU<+>wO@w5dV<+;SsiC;
-#@ n<@wXP_nAt;<JD'oYKA@/;EF7cN<@/&0C+crgm#LdV<+3aMTA8cN<@o`tm#e(um#k(fCFpQ2
-#@ TArgY8Ap6-8ABcpT,7,V`F?IfZE.o5cEtE&(FtGo(F8cN<@o`tm#vMfCF(pTZ?/G#D+s85)F
-#@ Mrgm#w^DTAn7>D+.30bEu@oC+mSPcE54OBDs2K(F6,aaE8UZQH|>/:+@NncBGYU^,4|k)FM!
-#@ R,EsQIIDa1lW4-j)5I@2NTA=bl(FnEuSAHRM`Fl)um#e(um#o<,D+Hnl(FnEuSADn<@wssU<
-#@ +IA-^D/Vi|Dup,<@(rpcBx!G>++p/bEwQ5cEvK&5B,^DTA|>/:+:mui@26nlBt?v>w&POF+!
-#@ xMTA%#um#5dV<+'!?r@1osdDDLVE+|>/:+IJcZE!N(yG6f*@?R*?P.Bn3m-6qy4.#lsU>5:S
-#@ :5^Ky=+79S:5F2a3I;%#lBBVeK/`x1mBlN=>wssU<+:tJTAAy1mBlOFY?B7lD+uqP-EO;e9G
-#@ !dRQB,o90DxTnT,0*|CFOssm#e(um#LdV<+'C/:+JS)!FfIBq@;n<@w`(ATA,rP-EvbDx>R@
-#@ hU>B_UU>61_U>C1AsH61Kp-R*s?+79S:5F2a3I;%#lBBVeK/`x1mBlN=>w`C9JD%f#j@>5cD
-#@ Fx-WsE=!D9G!dRQB,o90D%)(yGH,qT,0*|CF'oU`FORe=+56-8Ae=.=wFtpm#LdV<+'C/:+J
-#@ S)!F#6oCF%#um#wd?3@vc1`F52ufAal4s4M`O?4ufY8A1QVkBM:B4.x-WsE/Fur@ID/yE!N(
-#@ yGa)/M/;%#lB;mZQH|>/:+RFXQH1opp/DEIF+i>sU>C1AsH61Kp-3th?+6aO?4m.<P.|i`^,
-#@ Dn<@wP(GaBl|2jB0k(E+1lo(FJj(sFpwt#?%#um#ssU<+E'RKD91VE+4|k)FFngm#ergm#k(
-#@ fCFpQ2TArgY8Ap6-8ABcpT,7,V`F?IfZE.o5cEtE&(FtGo(F8cN<@o`tm#XP_nAw(y9@6`t!
-#@ HCF.>H)cN<@/&0C+BV&d0Z_xQHFngm#LdV<+7nsdD.R?<@BR,!F#6oCFFngm#LdV<+,#cDF)
-#@ m_TAFngm#;`4hC@mZQHFngm#LdV<+pR5SAP9xQH1opp/DEIF+5mDq.Ervs.R*?P.<72s4q:G
-#@ F+8`L3.jy'X>_MPF+4o<JDgmRt416-8Af?tm#ssU<+94:JD%f#j@>5cDF|qgm#5dV<+9MfCF
-#@ 16-8A&Ui'F*dI9>78?cEFg1mBlOFY?B7lD+|:e9G!dRQBErgm#e(um#5dV<+')um#5dV<+vb
-#@ Dx>R@hU>)7^6AGrvs.R*?P.PQVkB+kUs-jy'X>_MPF+crgm#5dV<++*Z4B:R2E+)!CsHR-As
-#@ H*N^6AE.L'FSnpp/fBHQBlRa|>69S:5F2a3I;%#lBBVeK/`x1mBlN=>wy>/:+@NncB0tCE+-
-#@ lTKDseqm#ssU<+:tJTAAy1mBlOFY?B7lD+uqP-EO;e9G!dRQB,o90DxTnT,0*|CFP':4wssU
-#@ <+>wO@we2g0IGv.4w5dV<+')um#LdV<+4oW/D60veDnCBRA+IhgCEm<@wXP_nAt;<JD'oYKA
-#@ @/;EF7cN<@/&0C+crgm#LdV<+3aMTA8cN<@o`tm#e(um#k(fCFpQ2TArgY8Ap6-8ABcpT,7,
-#@ V`F?IfZE.o5cEtE&(FtGo(F8cN<@o`tm#vMfCF,oW/Dj@T;@IT<8wa.JTA3osdD!7q-DJ@(d
-#@ 071GJ0f.=8w^:9eDhqrp@4kQ,EsQIIDbjX9@6`t!H)<..D;j(sFpwt#?%#um#5dV<+1=,D+C
-#@ oN<@S_dU,.30bE)=d:.n8oT,'NB,ErGYxGXwf*F)l#j@#k9Z?3=%F+:,aaEP`6^Dup,<@E|8
-#@ 4I|>/:+@NncBGYU^,4|k)FM!R,EsQIID`(Q<48%tdD!7q-DA-SF+?NfCF,oW/Dr3.lBJ2JsF
-#@ ;E'!.5Q2TArgY8A0)um#e(um#vMfCF16-8ABcpT,'NB,ErGYxGQ(GaB0tCE+-lTKDyrgm#91
-#@ VE+0*|CF'oU`Fo9pQAGFDE+56-8A&Ui'FOy/j.Fg1mBj=ev?^A/:+TX93ItsU<+tdqm#
-#@ x
-#@ 0
-#@ 
-#@ x
-#@ 3
-#@ Z#-&
-#@ i
-#@ -1
-#@ x
-#@ 1
-#@ A!
-#@ x
-#@ 1
-#@ K!
-#@ x
-#@ 3
-#@ x#-&
-#@ x
-#@ 1
-#@ P!
-#@ x
-#@ 6
-#@ )'|(FNJw
-#@ x
-#@ 2
-#@ &Tv
-#@ x
-#@ 17
-#@ |dT^>|bM!?I6imH*uR^>Hv
-#@ x
-#@ 14
-#@ 1-=JD**T,Ew3BCFX%%
-#@ x
-#@ 6
-#@ I(+41uE%
-#@ x
-#@ 6
-#@ ,Qs/DL+%
-#@ x
-#@ 5
-#@ .7Pe02v
-#@ x
-#@ 27
-#@ ^M;L/n=KE+dCKE+c05#Fe7Oa1JeV<+Dv:-
-#@ x
-#@ 6
-#@ :<ylBLYw
-#@ x
-#@ 4
-#@ 4wv/D
-#@ 1
-#@ L 1 85 50 138 78 -1
-#@ 1
-#@ F
-#@ 1 10 11
-#@ 1
-#@ 12
-#@ 3 17
-#@ 8
-#@ j?VTA9hd#H
-#@ 0 0 257
-#@ 8
-#@ .30bE.&6cE
-#@ 1 0 257
-#@ 6
-#@ .9BfD|+%
-#@ 2 0 257
-#@ 5
-#@ -lTKD@v
-#@ 3 0 9
-#@ 3
-#@ fLc,
-#@ 4 0 9
-#@ 3
-#@ hph-
-#@ 5 0 9
-#@ 9
-#@ 0*|CF'oU`F9v
-#@ 6 0 9
-#@ 6
-#@ pR5SA_tw
-#@ 7 0 9
-#@ 14
-#@ .9BfDs++:@t-%lB^+%
-#@ 8 0 9
-#@ 7
-#@ 7,V`Fu6<-
-#@ 9 0 9
-#@ 0
-#@ 
-#@ 10 0 521
-#@ 0
-#@ 
-#@ 11 0 521
-#@ 6
-#@ 7,V`FW+%
-#@ 12 0 9
-#@ 4
-#@ u3uSA
-#@ 13 0 9
-#@ 5
-#@ 0*|CF4v
-#@ 14 0 8
-#@ 3
-#@ ^=g+
-#@ 15 0 9
-#@ 14
-#@ 1-=JD**T,Ew3BCFX%%
-#@ 16 0 8
-#@ x
-#@ 18
-#@ lj|Z?-EnlBt?VTAc<`aE=Gw
-#@ x
-#@ 6
-#@ .9BfD|+%
-#@ p
-#@ 24 0 156 24 1 0 116 1 8 24 24 -1 -1
-#@ 156
-#@ 4;,>!7nMH&(9E<!9EW<!92Bs!9bCVv7nMH&-B`W!/B&s!B%%8#3AU3w4#Gpv@Jfs!MlAs!B@
-#@ xn#?np3w2W&=!;Sp3w=JCm#:W#t!/tul#@J:3w:_piw>vRK%?e1R#68#>!H5K=!@fAs!K|&s
-#@ !DeUR#2/YQ#<npm#/:I^:@ZW<!JPG>!PytpvG&)a^<)X<!UG9v!
-#@ 24
-#@ 0&,Uv0NN!!;2G:v9qVH&EkG:vDsn.&
-#@ 24
-#@ 5&,Uv>e^R#=)#UvCvwh7UR/d&LS>:v
-#@ 24
-#@ i
-#@ 0
-#@ x
-#@ 3
-#@ Z#-&
-#@ x
-#@ 5
-#@ 0a%lB@v
-#@ x
-#@ 1
-#@ +!
-#@ x
-#@ 7
-#@ rLa:@_k,,
-#@ x
-#@ 43
-#@ bDnlBt?VTAw)^aEvJi|D6(RKD5;2`F&&oC+FAcDFvpmlB!?m;@&7<-
-#@ i
-#@ 1
-#@ x
-#@ 1
-#@ A!
-#@ x
-#@ 1
-#@ L!
-#@ x
-#@ 4
-#@ rwIID
-#@ x
-#@ 16
-#@ T77p,>@i0ABo)D+L.dp,
-#@ x
-#@ 6
-#@ bD#_FHSw
-#@ x
-#@ 4
-#@ _5FiC
-#@ x
-#@ 5
-#@ bkTKD@v
-#@ x
-#@ 4
-#@ FIa:@
-#@ x
-#@ 7
-#@ W-cr@i*E-
-#@ x
-#@ 6
-#@ ?r5DFByw
-#@ x
-#@ 5
-#@ <&seD.v
-#@ x
-#@ 176
-#@ tsU<+KEcd:*OjV?Fm<@w`C9JD&o>0An-!eDDLVE+mV0`Flctm#vMfCFuN9Z?fIa:@%)(yGH,
-#@ qT,at*:@%iSC+'RRp5b;%v?x-WsE*u>0Aq!2TAu<mID!:pQAGFDE+wO9Z?v.cr@4LVE+6/@a
-#@ :lafRAka.=w5dV<+')um#LdV<+sZce0U+T7A@2NTA7CQC+<)um#LdV<+yG^=+?NfCFHdaH0f
-#@ #qm#
-#@ x
-#@ 6
-#@ pR5SA_tw
-#@ x
-#@ 2
-#@ &Tv
-#@ x
-#@ 6
-#@ +oRJ0uE%
-#@ x
-#@ 0
-#@ 
-#@ i
-#@ 5
-#@ 1
-#@ L 1 82 52 148 135 -1
-#@ 0
-#@ 1 13
-#@ 6
-#@ .9BfD|+%
-#@ 0 0 257
-#@ 8
-#@ c1ap@>5cDF
-#@ 1 0 9
-#@ 7
-#@ at*:@ZGB+
-#@ 2 0 9
-#@ 10
-#@ pQm*ElafRAY+%
-#@ 3 0 9
-#@ 8
-#@ jFap@>5cDF
-#@ 4 0 9
-#@ 7
-#@ h4+:@ZGB+
-#@ 5 0 9
-#@ 10
-#@ vgm*ElafRAY+%
-#@ 6 0 9
-#@ 14
-#@ .9BfDs++:@t-%lB^+%
-#@ 7 0 9
-#@ 5
-#@ mxoRADv
-#@ 8 0 9
-#@ 8
-#@ ,/;EFdUfRA
-#@ 9 0 9
-#@ 4
-#@ u3uSA
-#@ 10 0 9
-#@ 6
-#@ bD#_FHSw
-#@ 11 0 8
-#@ 1
-#@ -v
-#@ 12 0 9
-#@ x
-#@ 16
-#@ i3hgC/P+Y?gp><@%xRQB
-#@ x
-#@ 4
-#@ %N|(F
-#@ p
-#@ 98 0 766 61 6 5 448 2 8 98 106 -1 -1
-#@ 766
-#@ w0E<!-BW<!*f+pv'0*!!-`8X!:+iH&*TA9v8BW<!.Qr<!2l4pv.|/=!;Atpv/|yTvf!!!!7+
-#@ iH&2>UNw:HW<!E8Ks!D4_qv4G^3w6uS=!>S:qv.TA9v>TW<!@2o=!D>,>!MytpvDPos!Px<P
-#@ wg@#!!ee6(!G#+3-H#0=!JPG>!Qk(VvH@@S#1d1U!>YQK%B:3-&Ime`'ADPpvEiW<!I%Zt!y
-#@ N5J&g@#!!fh6(!H)43-PS#>!JPG>!Qk(VvP3o.&1d1U!5|yTvG=RK%MR74wTQ(w)3`/X!EYT
-#@ s!+Ki<!G,f=!Q/B=!yXmrv.EN<!J`8s!Sd/*'T-0*'JV,UvQ7ut!G@/*'T-0*'EG,UvTI;u!
-#@ A73-&Srur*Ne5UvM,X<!nxVu!d!!!!gC#!!hwq!+h_xx)LSTs!x7M3w9<:g/uru!*Ovn<vR2
-#@ /p+d.,t!sL'>*g@#!!hn6(!J5F3-oW#7wdxIrvTmqu!jYro+2t%4wf!;p+4,,t!.*|NwxG@L
-#@ &1i-(!iJ*j6%E89v:853-#Jop+Myo9vx7M3w9<:g/uru!*P%n<vR2/p+b.,t!Y^upvS.Us!<
-#@ NW<!Xfi<!c4`H&Q;ON-XGji-?_(;vOwy@!VZ/s!v(hf.-BW<!yG(qvPM00.'CIH/(Ldc/IJT
-#@ s!EDo9v-BW<!#7vA!)7vA!r=qqvJO7rv0Z/s!WxVNw-BW<!#7vA!*7vA!sC%rv<Pbpv0Z/s!
-#@ WxVNw-BW<!---uvPM00.5#9X!Owy@!^Z/s!WxVNw-BW<!yG(qvPM00.|F:X!Owy@!`Z/s!,-
-#@ #w2-BW<!2KZuvPM00.8f8X!Owy@!bZ/s!YR?:v-BW<!yG(qvPM00.aR:X!Owy@!`Z/s!/Htu
-#@ 2-BW<!2KZuvPM00.9i8X!Owy@!7Z/s!(^``0-BW<!(JNH&,TA9vM'!P&`U!S7edUs!a;UB!.
-#@ Z/s!_7G<!-BW<!Jo;!##!!
-#@ 98
-#@ 6Jt6#>+WH&-NN!!+?N!!8fN!!Xgy`'HarH&MwK*'H@*-&@.df%DMC7#KbLNwGyfv!C5Kv!7c
-#@ /v!AJt6#8D5Y!=5BX!Bbt6#=Jt6#=Jt6#=Jt6#=Jt6#L'b'(/6!
-#@ 106
-#@ ;8>UvA80sr0OQfx#6WW!3b/X!/W/X!Rj8M%t6fI&iGhj%h)VC(Z0K.&%Rna0Gbk:vtOWg%oc
-#@ S4wGb^R#Gn^R#KsFa'^H>/&UE>/&>Jt6#=Jt6#=Jt6#=Jt6#=Jt6#:8Y6#.3!
-#@ 61
-#@ x
-#@ 6
-#@ q'-W@Dhw
-#@ x
-#@ 10
-#@ )FV5B,QffDX(%
-#@ x
-#@ 21
-#@ i3hgC/P+Y?gp><@%xRQBm&sJD1v
-#@ x
-#@ 21
-#@ Ai0fDGhV*F(fTfDtH..Dh<..D1v
-#@ i
-#@ 0
-#@ x
-#@ 2
-#@ FVw
-#@ x
-#@ 4
-#@ wm<eD
-#@ x
-#@ 6
-#@ 1lo(F^(%
-#@ x
-#@ 28
-#@ 6dV<+JS)!F9R,!FtgY8Av?sJD6T<8wLdV<+
-#@ x
-#@ 4
-#@ !xMTA
-#@ x
-#@ 28
-#@ 6dV<+JS)!F9R,!FtgY8Av?sJD7ZE8wLdV<+
-#@ x
-#@ 0
-#@ 
-#@ x
-#@ 967
-#@ ^A/:+@NncBGYU^,i!_aEI6nW4-j)5I%#um#vMfCFNII>+lQ2TAvw/gCmxoRAmh>x3AE%6BEC
-#@ dq>pZ.=wa.JTABn-0D*Z'aElnnC+:qoq>x-WsE'ZB3@!XNaE.o5cE/!J9>pR5SAWvfK/wx%l
-#@ BBVeK/&kbD+5*Z8AqiJ(Ff/#>+*!jU>.uiU>.uiU>.uiU>.uiU>.uiU>.uiU>.uiU>.uiU>.
-#@ uiU>.uiU>.uiU>.uiU>.uiU>.uiU>.uiU>.uiU>.uiU>.uiU>.uiU>h_oJ;.o5cEeWC?+G,,
-#@ X.aLqT,&YX#?KGNg@+dMTARxMk0x-WsE4%OBD!M|RAswDoAs&O+E@G)*F%)(yG*sI9>#XmID
-#@ 0k>D+*N!iCs&O+E@G)*F='vr>x-WsE)l#j@>5cDF/@rm#rO5cE^IbOB?,ETA=;2EFt)O+Ew3
-#@ BCF@CfZE.o5cEWMqT,eOjY?.9BfDFXME+crgm#LdV<+w!saE4b1`F.GX6wssU<+:tJTA8oAT
-#@ A=;2EF/Y:EF(FV5B.QIID.6Y<+ByB,EruwlB'E(yG=%BTA=;2EFDZ-C+ko<JD.I%F+8&O+EB
-#@ XVE+lp-=wssU<+1A`nAVFqT,-lTKD0psZ4IH&`Fs|/bE`44Y?.9BfDNL0<I%#um#a.JTA4rj
-#@ IDwrjIDLrgm#LdV<+;`4hC@mZQHFngm#91VE+wAoC+ko<JD.I%F+*N!iCs&O+E@G)*F%)(yG
-#@ H,qT,-lTKDOm!r>.>,=wssU<+>wO@wssU<+Ll4BGu-cOB=%BTA=;2EF%#um#y7|aE.aZQH9M
-#@ fCF4&O+E,=^Z?fIa:@/Y:EF(FV5B.QIID2ZpT,>12E+ko<JD.I%F+8&O+E,=^Z?%42TA.Eff
-#@ DACdq>9(kIDj2Q@wYw<XE4>2`F%jJ(FPf,!F8IfZE.o5cEv.DTAA;lcE(+ME+,AccE+S5D+u
-#@ -V5B?uh<F%mI9>t*Z8AC>qT,.9BfD0wj'Fw30bE.&6cEDZ-C+(sY8Ad)um#5dV<+')um#f1;
-#@ 4w5dV<+DCZKA1V#D+crgm#91VE+4YG9>*dmIDruwlB'E(yG/Ny|3(iY%GDZ-C+Yssm#vMfCF
-#@ OOR>+lQ2TAvw/gCmxoRAmh>x3AE%6BFImq>pZ.=wa.JTA8oATA=;2EF!BK(F1^cr@uuI9>i%
-#@ 97ARxMk0Ergm#91VE+.9BfDs++:@%iSC+`Ia:@0LAgAnrsm#LdV<+y!s!
-#@ x
-#@ 1039
-#@ tsU<+1A`nAaLN:@,8>D+6p`aEt0m*EpvnX?'`>_F,ZbDFCU`4@91ME++E%6B7oATA@)QDFBU
-#@ ZQH82_`FS@(d0'C/:+@NncBl|2jB0k(E+1lo(FFFfZE1fsiCQE>hA0=m:.wn<@wa.JTAMPMk
-#@ 0'rS,E9upT,7,V`FW^YL/m'cSA:&h#?x-WsE:xG<F%mI9>i%97ARxMk0Ergm#)lP)F1LAgAn
-#@ qgm#91VE+eOjY?.9BfDFXME+f*Z4B:R2E+=r3iC)G#D+3N!iCFx:JDbFfRAd)/M/C<7U..H4
-#@ U..H4U..H4U..H4U..H4U..H4U..H4U..H4U..H4U..H4U..H4U..H4U..H4U..H4U..H4U.
-#@ .H4U..H4U..H4U..H4U.rYnHDc8BfDbNrZ3=Oc?GgxPF+ByB,EErgm#91VE+*7pV@rNRdDi-
-#@ DTA=;2EFu9pQAGFDE+e0cSA)mRQB3SegCo-DTA=;2EFSpu+1Ergm#91VE+-lTKDET<8w^:9e
-#@ Dhqrp@BpJdE.o5cE#4MTAup,<@BCDE+.9BfDP?SF+*N!iCs&O+E@G)*F%#um#5dV<+'!?r@1
-#@ osdDDLVE+|>/:+JS)!F8IfZE.o5cE/cB'F5-=JD'K*<@'2#D+Gw.0Dww/gCmxoRAPc2xE.o5
-#@ cECCdq>ruwlB'E(yG=%BTA=;2EF-0T!?|>/:+@NncBC5>F+8b1`FainW4f>pBD!M|RAswDoA
-#@ s&O+E@G)*FDn<@wZ-WsE+)ZKAwNYKAy3tm#5dV<+DCZKA1V#D+crgm#vMfCFwsY8AruwlB'E
-#@ (yG3SegCo-DTA=;2EFu9pQAGFDE+8b1`F`BI+1,Cdq>|>/:+TX93I|>/:+JS)!F/Fur@@c2x
-#@ E.o5cE;n<@wH5m0@%iSC+@uJTA8oATA=;2EFd3DTAqbB'F5-=JD'K*<@'2#D+ByB,EruwlB'
-#@ E(yG=%BTA=;2EFt)O+Ew3BCFSCbH0(C&LAwBg9IFngm#1K|fD'bfRAP5>F+91VE+.9BfD/pN
-#@ aE4>2`F%jJ(F/Y:EF(FV5B.QIID2ZpT,>12E+ko<JD.I%F+8&O+E,=^Z?%42TA.EffDACdq>
-#@ 9(kIDj2Q@wssU<+>wO@we3N@wtsU<+T@PF+!xMTA&,;4w`(ATAqKDTAF.fK/*XxlBagbSA4&
-#@ O+E,=^Z?1K|fD'bfRAMpJdE.o5cEv.DTAA;lcE(+ME+0gGSAOulCD6HFiC1#R@w`(ATAqKDT
-#@ AF.fK/*XxlBagbSA4&O+E,=^Z?fIa:@?,ETA=;2EFd3DTA4py1AuE)5B00aaEl)um#LdV<+y
-#@ !s!
-#@ x
-#@ 6
-#@ pR5SA_tw
-#@ x
-#@ 7
-#@ =r3iC^%g+
-#@ x
-#@ 4
-#@ 3N!iC
-#@ x
-#@ 2
-#@ &Tv
-#@ x
-#@ 14
-#@ eE?<@BbL'F5N^6AuGv
-#@ x
-#@ 1
-#@ A!
-#@ x
-#@ 1
-#@ L!
-#@ x
-#@ 23
-#@ dp?L:ZD0|F18lDF0yQW>D+VU>/FB%
-#@ x
-#@ 1
-#@ B!
-#@ x
-#@ 49
-#@ eE?<@E*k#H'1?SA-,fC+mZ!iC%3DTA7bL'Fh=`6A4cXp.D@Bn-D)%y>Vxy4.F!
-#@ x
-#@ 2
-#@ 72#
-#@ x
-#@ 6
-#@ .4^Z?Ktw
-#@ x
-#@ 12
-#@ 91VE+.4^Z?F=bH0
-#@ x
-#@ 63
-#@ kAKCF(FhgC7O,D+gp><@%xRQB:^cd:'4nY>3icRA&BB3@?Tla3vcX:>lpMm/w5L'F,U&x>mA
-#@ Tq>E'sw
-#@ x
-#@ 6
-#@ (O^Z?Ktw
-#@ x
-#@ 12
-#@ 91VE+(O^Z?F=bH0
-#@ x
-#@ 1
-#@ N!
-#@ x
-#@ 28
-#@ <!57@sXo;@pXTB;.o5cE6,:eDHFcd:*OjV?
-#@ x
-#@ 164
-#@ sZce0U+T7AbXUN0EnU`F?0v%=KSWjBWu,m696OS?nteC+*;`p@cG-m696OS??)q21bXUN0@J
-#@ t_FfS-m6eJt_F,6K^FgP-m6eJt_F+-0CF@0v%=C`(:@a/-m696OS?*h>D+37UgC*#)*FE0v%
-#@ =nB)5B/9JQBR/v%=l!L;@<WTW?3;TC+<WTW?&UIQB<WTW?!XIQB<WTW?'XIQB
-#@ x
-#@ 7
-#@ n*Z8Ays_-
-#@ i
-#@ -1
-#@ x
-#@ 380
-#@ sZce0bQ/(F0JbD+sZce0U+T7A7J|C+sZce0hTIQBbXUN02K/(FE0v%=Er^p@Zo,m6hSYcE>0
-#@ v%=KSWjBg:oRA@0v%=P%o-DJu,m6:<XS?:)QDF0yg'FnF5SAbXUN0@Jt_F?6GL1tQ?<@R&-m
-#@ 6:<XS?:)QDF2bg'FnF5SAbXUN0@Jt_FAH(.2tQ?<@R&-m6:<XS?:)QDF4hg'FnF5SAbXUN0@
-#@ Jt_F=F2E+tc),1(fTfD#oU`FJ0v%=S@k*Eq(vY?S&;l0bXUN0FnU`FJ0v%=Wd-CF),#D++D&
-#@ 7AeY-m6PR1kB&FIlBx&-m6QCfV@a/-m6eJt_F'^m*E+M#D+7xl*Eo^|7A|4sp@<WTW?-Lc8A
-#@ ,o90Du8s+EB0v%=r)'(FE0v%=s/0(FE0v%=pQVkB)?0bE<WTW?-)TC+:!i'FDXVE+:!i'F.=
-#@ ^Z?&@2TA<WTW?2RH<@|&-m6gJ>HE%4DTAM0v%=rE-<@
-#@ x
-#@ 12
-#@ n*Z8Afwwx?6>;EF
-#@ x
-#@ 123
-#@ Uy!Y?7J|C+AGbT>^:GF+I3L3.L7r_FHExQHE)4U.|xPF+!qbSA?ExQHZ<o?5|xPF+vqbnAY(
-#@ m!.3th?+6aO?4|xPF+'NB,EvuC`F5-xQH9osZ4T.uW+%:64I,oW/DU(m!.oNtlH0h_?+qog?
-#@ +9!(x4=:?.
-#@ x
-#@ 13
-#@ n*Z8ApQ2TA.EffD>v
-#@ x
-#@ 4
-#@ (w=JD
-#@ x
-#@ 1
-#@ +!
-#@ x
-#@ 4
-#@ DP)*F
-#@ x
-#@ 52
-#@ TnlO.tnlO.tnlO.tnlO.tnlO.tnlO.tnlO.tnlO.tnlO.tnlO.tnlO.tnlO.tnlO.
-#@ x
-#@ 28
-#@ bDnlBt?VTA7O,D+Gp><@%xRQBblqJD3ZbDF
-#@ x
-#@ 6
-#@ ,Qs/DL+%
-#@ x
-#@ 49
-#@ pOccEjEVTAK527@sXo;@X1F?+8x?3@%iSC+.Aj'2`Tu0/3>m;@FXME+,/4F1?v
-#@ x
-#@ 5
-#@ -4Pe02v
-#@ x
-#@ 49
-#@ ^EV5B,QffDU527@sXo;@X1F?+8x?3@%iSC+.Aj'2`Tu0/3>m;@FXME+,/4F1?v
-#@ x
-#@ 49
-#@ eE?<@S527@sXo;@X1F?+LdV<+8x?3@%iSC+.Aj'2`Tu0/3>m;@FXME+,/4F1?v
-#@ x
-#@ 51
-#@ tnlO.tnlO.tnlO.tnlO.tnlO.tnlO.tnlO.tnlO.tnlO.tnlO.tnlO.tnlO.JHK%
-#@ x
-#@ 26
-#@ bDnlBt?VTA7O,D+Gp><@%xRQB*DY-EO(%
-#@ x
-#@ 11
-#@ ^EV5B,QffD=15'
-#@ x
-#@ 33
-#@ LdV<+LdV<+LdV<+LdV<+LdV<+LdV<+EaVE+0*|CF4v
-#@ x
-#@ 41
-#@ 4nsdD2KsJD4LVE+LdV<+-lTKDKeV<+1ntD+0,R;@OeV<+9LuwG1v
-#@ x
-#@ 42
-#@ f(/M/+P/M/+P/M/+P/M/+P/M/+P/M/+P/M/+P/M/+P/M/+P/M/&Tv
-#@ x
-#@ 20
-#@ pOccEjEVTAK527@sXo;@Vtec3
-#@ x
-#@ 41
-#@ AjQ,Ew3BCF3+uD+LdV<+-lTKDKeV<+1ntD+0,R;@OeV<+9LuwG1v
-#@ i
-#@ 1
-#@ x
-#@ 390
-#@ YP_nAM|8EFa7X:@&FuSA%#um#LdV<+DP)*FLZ/*Fo1#D+Zd'!,tsU<+GH8`FKr:s+i3hgC/P
-#@ +Y?gp><@%xRQB4&O+E,=^Z?1K|fD'bfRAZQY|G8oATA=;2EFd3DTAHQY|G-YU&,tsU<+GH8`
-#@ FKr:s+c4#D+%wviC5<=JD+A-bE@CDE+!6|,EiX|7AJj6|,6tk%,f5g0I1D5)F,n<@w5dV<+1
-#@ =,D+L1<)F%)A!,gFPF+crgm#82_`FjQtm#LdV<+;`4hC@mZQHXgZ!EIXME+ew>SA.o<iC3K4
-#@ mB'WYKA=u5cE&E*+Eu'uSA55oHD8o.6B_qgm#DP)*Fu;ueCk9MTArQ>SA/@G<F*%VE+JU_E+
-#@ qKhTAD=2`Fk7|7ArK|;@<W8UAe|ACFs,BCF95XW@lcZRAw^DTA_qgm#DP)*F(KL:@'p<JD0A
-#@ PQB!ZFID8=j?HV_W:@sXo;@,H#j@vkT;@uvj6w5dV<+')um#>#V<+a,v
-#@ x
-#@ 5
-#@ 3aMTA@v
-#@ x
-#@ 10
-#@ .XIIDmireDJSw
-#@ 6
-#@ C 1 57 670 -1 -1 734
-#@ L 2 129 15 147 122 -1
-#@ L 2 189 15 207 182 -1
-#@ L 2 320 26 349 313 -1
-#@ L 2 369 26 398 362 -1
-#@ L 2 418 28 449 411 -1
-#@ 5
-#@ F
-#@ 1 11 12
-#@ 2
-#@ 13 14
-#@ F
-#@ 1 17 18
-#@ 2
-#@ 13 14
-#@ F
-#@ 1 25 26
-#@ 1
-#@ 27
-#@ F
-#@ 1 29 30
-#@ 1
-#@ 27
-#@ F
-#@ 1 31 32
-#@ 2
-#@ 33 34
-#@ 1 35
-#@ 4
-#@ %N|(F
-#@ 0 0 257
-#@ 21
-#@ i3hgC/P+Y?gp><@%xRQBm&sJD1v
-#@ 1 0 9
-#@ 10
-#@ )FV5B,QffDX(%
-#@ 2 0 9
-#@ 3
-#@ i@w,
-#@ 3 0 9
-#@ 14
-#@ p'ZjB,@^Z?@5--E`+%
-#@ 4 0 9
-#@ 9
-#@ !^RdDFG;`F@v
-#@ 5 0 9
-#@ 9
-#@ oHRdDFG;`F@v
-#@ 6 0 9
-#@ 10
-#@ .XIIDmireDJSw
-#@ 7 0 8
-#@ 8
-#@ .4^Z?6>;EF
-#@ 8 0 9
-#@ 22
-#@ .9BfDs++:@dMxX?0F?<@m-%lB^+%
-#@ 9 0 9
-#@ 11
-#@ .9BfDs++:@ZGB+
-#@ 10 0 8
-#@ 0
-#@ 
-#@ 11 0 521
-#@ 0
-#@ 
-#@ 12 0 521
-#@ 1
-#@ Dv
-#@ 13 0 9
-#@ 5
-#@ -lTKD@v
-#@ 14 0 9
-#@ 19
-#@ .9BfDs++:@dMxX?l-VgCr9E-
-#@ 15 0 9
-#@ 8
-#@ (O^Z?6>;EF
-#@ 16 0 9
-#@ 0
-#@ 
-#@ 17 0 521
-#@ 0
-#@ 
-#@ 18 0 521
-#@ 7
-#@ )FV5BUIu,
-#@ 19 0 9
-#@ 6
-#@ .4^Z?Ktw
-#@ 20 0 8
-#@ 6
-#@ (O^Z?Ktw
-#@ 21 0 8
-#@ 9
-#@ )FV5B!|G)F@v
-#@ 22 0 9
-#@ 14
-#@ gp><@%xRQBsb1`FY+%
-#@ 23 0 9
-#@ 16
-#@ .9BfD/pNaE4>2`F%jJ(F
-#@ 24 0 8
-#@ 0
-#@ 
-#@ 25 0 521
-#@ 0
-#@ 
-#@ 26 0 521
-#@ 9
-#@ 'NB,E(^mID@v
-#@ 27 0 9
-#@ 3
-#@ sdu,
-#@ 28 0 9
-#@ 0
-#@ 
-#@ 29 0 521
-#@ 0
-#@ 
-#@ 30 0 521
-#@ 0
-#@ 
-#@ 31 0 521
-#@ 0
-#@ 
-#@ 32 0 521
-#@ 8
-#@ j?VTA9hd#H
-#@ 33 0 9
-#@ 8
-#@ .30bE.&6cE
-#@ 34 0 9
-#@ x
-#@ 265
-#@ 6dV<+9MfCF'LFY?!(wx?*XxlBagbSAq2K(FmF5SAAFGQB!Zb@Gu,aaEegpgCcdkSA&k54Br,
-#@ 00D1#V<++olRAo3uSA(fTfDdNACF)kKV@9HK(F1YFID8=j?HV_W:@sXo;@>?Y<+7<;oAEWuZ
-#@ E.o5cE&LU:@sXo;@,H#j@3QBfD-ZbDF5fAoA';>0AuE)5BGkV<+)L>nAh++Y?%N|(FRvZ<+D
-#@ rAkB5H:s+5^wpGHwD9G0LVE+:G7*CIxVE+i%97A.0?SA4&O+E@G)*FufY8A>%lDF'9DTA'Y#
-#@ D+&CR.DA?/gA)SY%,F@ccE+S5D+4<nlBv4hgCyY93I+!
-#@ x
-#@ 4
-#@ !xMTA
-#@ x
-#@ 23
-#@ 6dV<+rK|;@<W8UAe|ACFs,BCF^i'v
-#@ x
-#@ 15
-#@ rpwhC;Z2b3<?<+EfqT+
-#@ 0
-#@ 0
-#@ }
-#@ # -- End source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/auxx/syn/scripts/analyze_datapath.tbc
+#@ # -- End source /cadtools/synopsys/2009/synthesis/auxx/syn/scripts/list_duplicate_designs.tcl
 
 #@ 
 #@ 
@@ -3098,14 +1767,6 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ set test_bsd_default_bidir_delay  0.0
 #@ set test_bsd_default_strobe  95.0
 #@ set test_bsd_default_strobe_width  0.0
-#@ 
-#@ #
-#@ #       Test Variable Group:
-#@ #
-#@ #       These variables affects the set_scan_state command.
-#@ #
-#@ 
-#@ set compile_seqmap_identify_shift_registers_with_synchronous_logic_ascii false
 #@ 
 #@ #
 #@ #       Write_Test Variable Group:
@@ -3340,68 +2001,105 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ #       These variables are for controlling hdl reading, writing,
 #@ #       and optimizing.
 #@ #
-#@ set hdlin_enable_upf_compatible_naming	"FALSE"
+#@ set hdlin_enable_presto 		"TRUE"
+#@ set hdlin_allow_4state_parameters	"FALSE"
+#@ set hdlin_auto_netlist_reader           "TRUE"
+#@ set hdlin_enable_presto_for_vhdl	"TRUE"
+#@ set hdlin_enable_rtldrc_info      	"false"
 #@ set hdlin_auto_save_templates		"FALSE"
+#@ set hdlin_build_selectop_for_var_index  "FALSE"
+#@ set hdlin_ff_always_async_set_reset	"TRUE"
+#@ set hdlin_ff_always_sync_set_reset	"FALSE"
+#@ set hdlin_fsm_effort			2
 #@ set hdlin_generate_naming_style   	"%s_%d"
-#@ set hdlin_enable_relative_placement     "rb"
-#@ set hdlin_mux_rp_limit                  "128x4"
 #@ set hdlin_generate_separator_style	"_"
+#@ set hdlin_group_selectors         	"TRUE"
 #@ set hdlin_ignore_textio_constructs      "TRUE"
+#@ set hdlin_infer_block_local_latches	"TRUE"
+#@ set hdlin_infer_comparators       	"TRUE"
+#@ set hdlin_infer_complex_set_reset	"FALSE"
 #@ set hdlin_infer_function_local_latches	"FALSE"
+#@ set hdlin_infer_multibit          	"default_none"
+#@ set hdlin_infer_mux               	"default"
+#@ set hdlin_keep_feedback           	"FALSE"
 #@ set hdlin_keep_signal_name		"all_driving"
+#@ set hdlin_loop_invariant_code_motion	"TRUE"
+#@ set hdlin_map_to_entity           	"TRUE"
+#@ set hdlin_map_to_module           	"TRUE"
+#@ set hdlin_map_to_operator         	"TRUE"
+#@ set hdlin_infer_complex_enable	"FALSE"
 #@ set hdlin_module_arch_name_splitting	"FALSE"
+#@ set hdlin_mux_oversize_ratio      	100
+#@ set hdlin_mux_size_limit          	32
+#@ set hdlin_mux_size_min            	2
+#@ set hdlin_no_adder_feedthroughs   	"TRUE"
+#@ set hdlin_no_group_register		"FALSE"
+#@ set hdlin_optimize_case_default   	"TRUE"
+#@ set hdlin_optimize_shift_expressions	"TRUE"
+#@ set hdlin_pla_mode			"FALSE"
 #@ set hdlin_preserve_sequential           "none"
+#@ set hdlin_preserve_sequential_loop_variables "FALSE"
 #@ set hdlin_presto_net_name_prefix	"N"
 #@ set hdlin_presto_cell_name_prefix	"C"
-#@ set hdlin_strict_verilog_reader		"FALSE"
+#@ set hdlin_redundancy_elimination  	"TRUE"
+#@ set hdlin_register_report_depth   	3
+#@ set hdlin_report_carry_in               "FALSE"
+#@ set hdlin_report_case_analysis          "FALSE"
+#@ set hdlin_report_enumerated_types 	"FALSE"
+#@ set hdlin_report_inferred_modules 	"true"
+#@ set hdlin_report_floating_net_to_ground "FALSE"
+#@ set hdlin_report_fsm               	"FALSE"
+#@ set hdlin_report_mux_op           	"TRUE"
+#@ set hdlin_report_syn_cell         	"FALSE"
+#@ set hdlin_report_tri_state        	"TRUE"
+#@ set hdlin_selector_simplify_effort	1
+#@ set hdlin_seqmap_async_search_depth     3
+#@ set hdlin_seqmap_sync_search_depth     	3
 #@ set hdlin_sv_ieee_assignment_patterns   1
+#@ set hdlin_compare_const_with_gates      "TRUE"
+#@ set hdlin_compare_eq_with_gates		"FALSE"
 #@ set hdlin_prohibit_nontri_multiple_drivers  "TRUE"
-#@ if { $synopsys_program_name == "de_shell" } { 
-#@   set hdlin_elab_errors_deep		"TRUE"
-#@ } else {
-#@   set hdlin_elab_errors_deep		"FALSE"
-#@ }
+#@ set hdlin_elab_errors_deep		"FALSE"
 #@ set hdlin_mux_size_min			2
+#@ set hdlin_share_all_operators     	"FALSE"
 #@ set hdlin_subprogram_default_values	"FALSE"
 #@ set hdlin_field_naming_style		"" 
+#@ set hdlin_translate_off_on        	"TRUE"
 #@ set hdlin_upcase_names            	"FALSE"
-#@ set hdlin_vhdl_std		        1993
-#@ set hdlin_vhdl93_concat				"TRUE"
-#@ set hdlin_vhdl_syntax_extensions	"FALSE"
-#@ set hdlin_vrlg_std                	2005
-#@ set hdlin_sverilog_std                	2005
+#@ set hdlin_use_syn_shifter         	"TRUE"
+#@ set hdlin_vhdl93_concat           	"true"
+#@ set hdlin_vhdl_87                 	"FALSE"
+#@ set hdlin_vrlg_std                	2001
 #@ set hdlin_while_loop_iterations   	1024
-#@ set hdlin_reporting_level        	"basic"
-#@ set hdlin_autoread_verilog_extensions ".v"
-#@ set hdlin_autoread_sverilog_extensions ".sv .sverilog"
-#@ set hdlin_autoread_vhdl_extensions ".vhd .vhdl"
-#@ set hdlin_autoread_exclude_extensions ""
 #@ 
 #@ set bus_minus_style   "-%d"
+#@ set hdlin_enable_analysis_info   "false"
 #@ set hdlin_latch_always_async_set_reset   FALSE
 #@ set hdlin_ff_always_sync_set_reset   FALSE
 #@ set hdlin_ff_always_async_set_reset   TRUE
 #@ set hdlin_check_input_netlist   FALSE
 #@ set hdlin_check_no_latch   FALSE
-#@ set hdlin_mux_for_array_read_sparseness_limit 90
+#@ set hdlin_report_inferred_modules   "true"
+#@ set hdlin_keep_feedback   FALSE
 #@ set hdlin_infer_mux   "default"
+#@ set hdlin_dont_infer_mux_for_resource_sharing   "true"
 #@ set hdlin_mux_oversize_ratio   100
 #@ set hdlin_mux_size_limit   32
 #@ set hdlin_mux_size_only    1
 #@ set hdlin_infer_multibit   "default_none"
+#@ set hdlin_vhdl93_concat	"true"
 #@ set hdlin_enable_rtldrc_info "false"
-#@ set hdlin_interface_port_ABI 3
+#@ set hdlin_pla_mode FALSE
+#@ set hdlin_presto_net_name_prefix "N"
 #@ set hdlin_shorten_long_module_name "false"
 #@ set hdlin_module_name_limit 256
 #@ set hdlin_enable_assertions "FALSE"
 #@ set hdlin_enable_configurations "FALSE"
+#@ set hdlin_enable_variable_width_ports "TRUE"
+#@ set hdlin_sv_auto_decl_inits "TRUE"
 #@ set hdlin_sv_tokens "FALSE"
 #@ set hdlin_sv_packages "enable"
-#@ set hdlin_verification_priority "FALSE"
 #@ set hdlin_optimize_pla_effort 2
-#@ set hdlin_enable_elaborate_ref_linking "FALSE"
-#@ set hdlin_enable_hier_naming "FALSE"
-#@ set hdlin_vhdl_mixed_language_instantiation "FALSE"
 #@ set hdl_preferred_license   ""
 #@ set hdl_keep_licenses   "true"
 #@ set hlo_resource_allocation   "constraint_driven"
@@ -3442,9 +2140,6 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ set verilogout_show_unconnected_pins   "FALSE"
 #@ set verilogout_no_negative_index   "FALSE"
 #@ #set enable_2003.03_verilog_reader TRUE 
-#@ # to have a net instead of 1'b0 and 1'b1 in inouts:
-#@ set verilogout_indirect_inout_connection "FALSE"
-#@ 
 #@ # set vhdlout_architecture_name   "SYN_%a_%u"
 #@ set vhdlout_bit_type   "std_logic"
 #@ # set vhdlout_bit_type_resolved   "TRUE"
@@ -3593,14 +2288,14 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ set power_rtl_saif_file                       "power_rtl.saif"
 #@ set power_sdpd_saif_file                      "power_sdpd.saif"
 #@ set power_preserve_rtl_hier_names             "false"
-#@ set power_do_not_size_icg_cells               "true"
+#@ set power_do_not_size_icg_cells               "false"
 #@ set power_hdlc_do_not_split_cg_cells          "false"
 #@ set power_cg_flatten                          "false"
 #@ set power_opto_extra_high_dynamic_power_effort "false"
 #@ set power_default_static_probability          0.5
 #@ set power_default_toggle_rate                 0.1
 #@ set power_default_toggle_rate_type            "fastest_clock"
-#@ set power_model_preference                    "nlpm"
+#@ set power_model_preference                    "ccs"
 #@ set power_sa_propagation_effort               "low"
 #@ set power_sa_propagation_verbose              "false"
 #@ set power_fix_sdpd_annotation                 "true"
@@ -3616,6 +2311,10 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ set power_lib2saif_rise_fall_pd               "false"
 #@ set power_min_internal_power_threshold        ""
 #@ 
+#@ #
+#@ # Control FSM auto-inferring
+#@ #
+#@ set fsm_auto_inferring                        "false"
 #@ 
 #@ # SystemC related variables
 #@ set systemcout_levelize "true"
@@ -3660,6 +2359,22 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ }
 #@ 
 #@ #
+#@ #     eco variable group
+#@ # 
+#@ #     These variables affect ECO Compiler functionality
+#@ #
+#@ #
+#@ set eco_align_design_verbose            "false"
+#@ set eco_allow_register_type_difference  "false"
+#@ set eco_connect_resource_cell_inputs    "true"
+#@ set eco_correspondence_analysis_verbose "false"
+#@ set eco_directives_verbose              "false"
+#@ set eco_implement_effort_level          "low"
+#@ set eco_instance_name_prefix            "eco_"
+#@ set eco_recycle_verbose                 "true"
+#@ set eco_remap_register_verbose          "false"
+#@ set eco_reuse_verbose                   "false"
+#@ 
 #@ #
 #@ #        DesignTime Variable Group
 #@ #
@@ -3668,6 +2383,7 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ 
 #@ set case_analysis_log_file ""
 #@ set case_analysis_sequential_propagate "false"
+#@ set case_analysis_with_logic_constants "false"
 #@ set create_clock_no_input_delay "false"
 #@ set disable_auto_time_borrow "false"
 #@ set disable_case_analysis "false"
@@ -3776,6 +2492,7 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@   group_variable  system  "default_name_rules"  
 #@   group_variable  system  "verbose_messages" 
 #@   group_variable  system  "link_library"  
+#@   group_variable  system  "physical_library"  
 #@   group_variable  system  "link_force_case"  
 #@   group_variable  system  "search_path"  
 #@   group_variable  system  "synthetic_library"  
@@ -3804,6 +2521,7 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@   group_variable  compile  "auto_wire_load_selection"  
 #@   group_variable  compile  "rtl_load_resistance_factor"
 #@   group_variable  compile  "compile_implementation_selection"  
+#@   group_variable  compile  "compile_use_fast_delay_mode"  
 #@   group_variable  compile  "compile_use_low_timing_effort"  
 #@   group_variable  compile  "compile_fix_cell_degradation"  
 #@   group_variable  compile  "compile_preserve_subdesign_interfaces" 
@@ -3821,7 +2539,6 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ 
 #@   if { $synopsys_program_name == "dc_shell" && [shell_is_in_topographical_mode] } {
 #@     group_variable  compile  "dct_prioritize_area_correlation"
-#@     group_variable  compile  "compile_error_on_missing_physical_cells"
 #@   }
 #@ 
 #@   # "multibit" variables are used by the the multibit mapping functionality 
@@ -4114,14 +2831,19 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@   group_variable hdl "bus_dimension_separator_style"
 #@   group_variable hdl "bus_minus_style"
 #@   group_variable hdl "bus_naming_style"
+#@   group_variable hdl "hdlin_enable_presto"
+#@   group_variable hdl "hdlin_infer_complex_set_reset"
+#@   group_variable hdl "hdlin_enable_analysis_info"
 #@   group_variable hdl "hdlin_ignore_textio_constructs"
 #@   group_variable hdl "hdlin_latch_always_async_set_reset"
 #@   group_variable hdl "hdlin_ff_always_sync_set_reset"
 #@   group_variable hdl "hdlin_ff_always_async_set_reset"
+#@   group_variable hdl "hdlin_keep_feedback"
 #@   group_variable hdl "hdlin_check_input_netlist"
 #@   group_variable hdl "hdlin_check_no_latch"
-#@   group_variable hdl "hdlin_reporting_level"
+#@   group_variable hdl "hdlin_report_inferred_modules"
 #@   group_variable hdl "hdlin_infer_mux"
+#@   group_variable hdl "hdlin_dont_infer_mux_for_resource_sharing"
 #@   group_variable hdl "hdlin_mux_oversize_ratio"
 #@   group_variable hdl "hdlin_mux_size_limit"
 #@   group_variable hdl "hdlin_infer_multibit"
@@ -4142,45 +2864,39 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@   group_variable hdl "verilogout_show_unconnected_pins"
 #@   group_variable hdl "verilogout_no_negative_index"
 #@   group_variable hdl "hdlin_enable_rtldrc_info"
+#@   group_variable hdl "hdlin_compare_const_with_gates"
+#@   group_variable hdl "hdlin_compare_eq_with_gates"
+#@   group_variable hdl "hdlin_group_selectors"
 #@   group_variable hdl "hdlin_infer_function_local_latches"
+#@   group_variable hdl "hdlin_loop_invariant_code_motion"
+#@   group_variable hdl "hdlin_map_to_entity"
+#@   group_variable hdl "hdlin_map_to_module"
+#@   group_variable hdl "hdlin_map_to_operator"
 #@   group_variable hdl "hdlin_module_arch_name_splitting"
 #@   group_variable hdl "hdlin_mux_size_min"
+#@   group_variable hdl "hdlin_no_adder_feedthroughs"
+#@   group_variable hdl "hdlin_optimize_case_default"
+#@   group_variable hdl "hdlin_optimize_shift_expressions"
 #@   group_variable hdl "hdlin_prohibit_nontri_multiple_drivers"
+#@   group_variable hdl "hdlin_redundancy_elimination"
+#@   group_variable hdl "hdlin_register_report_depth"
+#@   group_variable hdl "hdlin_report_enumerated_types"
+#@   group_variable hdl "hdlin_report_mux_op"
+#@   group_variable hdl "hdlin_report_syn_cell"
+#@   group_variable hdl "hdlin_report_tri_state"
+#@   group_variable hdl "hdlin_selector_simplify_effort"
+#@   group_variable hdl "hdlin_seqmap_async_search_depth"
+#@   group_variable hdl "hdlin_seqmap_sync_search_depth"
+#@   group_variable hdl "hdlin_share_all_operators"
 #@   group_variable hdl "hdlin_subprogram_default_values"
+#@   group_variable hdl "hdlin_translate_off_on"
 #@   group_variable hdl "hdlin_upcase_names"
-#@   group_variable hdl "hdlin_vhdl_std"
+#@   group_variable hdl "hdlin_use_syn_shifter"
+#@   group_variable hdl "hdlin_vhdl_87"
 #@   group_variable hdl "hdlin_vhdl93_concat"
-#@   group_variable hdl "hdlin_vhdl_syntax_extensions"
 #@   group_variable hdl "hdlin_vrlg_std"
 #@   group_variable hdl "hdlin_while_loop_iterations"
-#@   group_variable hdl "hdlin_auto_save_templates"
-#@   group_variable hdl "hdlin_elab_errors_deep"
-#@   group_variable hdl "hdlin_enable_assertions"
-#@   group_variable hdl "hdlin_enable_configurations"
-#@   group_variable hdl "hdlin_field_naming_style"
-#@   group_variable hdl "hdlin_generate_naming_style"
-#@   group_variable hdl "hdlin_generate_separator_style"
-#@   group_variable hdl "hdlin_enable_relative_placement"
-#@   group_variable hdl "hdlin_mux_rp_limit"
-#@   group_variable hdl "hdlin_keep_signal_name"
-#@   group_variable hdl "hdlin_module_name_limit"
-#@   group_variable hdl "hdlin_mux_size_only"
-#@   group_variable hdl "hdlin_optimize_pla_effort"
-#@   group_variable hdl "hdlin_preserve_sequential"
-#@   group_variable hdl "hdlin_presto_cell_name_prefix"
-#@   group_variable hdl "hdlin_presto_net_name_prefix"
-#@   group_variable hdl "hdlin_strict_verilog_reader"
-#@   group_variable hdl "hdlin_shorten_long_module_name"
-#@   group_variable hdl "hdlin_sv_ieee_assignment_patterns"
-#@   group_variable hdl "hdlin_sv_packages"
-#@   group_variable hdl "hdlin_sv_tokens"
-#@   group_variable hdl "hdlin_enable_elaborate_ref_linking"
-#@   group_variable hdl "hdlin_enable_hier_naming"
-#@   group_variable hdl "hdlin_autoread_verilog_extensions"
-#@   group_variable hdl "hdlin_autoread_sverilog_extensions"
-#@   group_variable hdl "hdlin_autoread_vhdl_extensions"
-#@   group_variable hdl "hdlin_autoread_exclude_extensions"
-#@   group_variable hdl "hdlin_enable_upf_compatible_naming"
+#@ 
 #@ 
 #@   # "vhdlio" variables are variables pertaining to VHDL generation 
 #@   group_variable vhdlio "vhdllib_timing_mesg"
@@ -4329,6 +3045,18 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ 
 #@   }
 #@ 
+#@   # eco group includes variables related to ECO Compiler
+#@   group_variable eco "eco_align_design_verbose"
+#@   group_variable eco "eco_allow_register_type_difference"
+#@   group_variable eco "eco_connect_resource_cell_inputs" 
+#@   group_variable eco "eco_correspondence_analysis_verbose" 
+#@   group_variable eco "eco_directives_verbose"
+#@   group_variable eco "eco_implement_effort_level"
+#@   group_variable eco "eco_instance_name_prefix"         
+#@   group_variable eco "eco_recycle_verbose"           
+#@   group_variable eco "eco_remap_register_verbose"
+#@   group_variable eco "eco_reuse_verbose"         
+#@  
 #@   #
 #@   # DesignTime Variable Group timing
 #@   #
@@ -4400,6 +3128,7 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ alias compile_test         insert_test
 #@ alias check_clocks      check_timing
 #@ alias lint              check_design
+#@ alias verify            compare_design
 #@ # gen removed; alias gen               create_schematic
 #@ alias free              remove_design
 #@ alias group_bus         create_bus
@@ -4430,7 +3159,6 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ alias vh_write_changes dps_write_changes
 #@ alias vh_read_changes dps_read_changes
 #@ alias vh_write_module_clock dps_write_module_clock
-#@ alias get_lib get_libs
 #@ 
 #@ # Enable unsupported psyn commands
 #@ if { $synopsys_program_name == "psyn_shell" || $synopsys_program_name == "icc_shell"} {
@@ -4595,12 +3323,7 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@   #source ${synopsys_root}/admin/setup/.dc_layers
 #@ 
 #@   source ${synopsys_root}/admin/setup/.dc_name_rules
-#@ } else {
-#@   #for read_lib -html	
-#@   source ${synopsys_root}/auxx/syn/lc/read_lib_html_msg_list.tcl
 #@ }
-#@ # -- Starting source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.dc_name_rules
-
 #@ #
 #@ 
 #@ #	.dc_name_rules Initialization file for
@@ -4649,7 +3372,7 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ define_name_rules vhdl -map { {{"__","_"},{"_$",""}} }
 #@ 
 #@ ####/* Name rule for VHDL */
-#@ # -- End source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.dc_name_rules
+#@ # -- End source /cadtools/synopsys/2009/synthesis/admin/setup/.dc_name_rules
 
 #@ 
 #@ if { $synopsys_program_name == "psyn_gui"} {
@@ -4677,10 +3400,6 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@   source -encrypted $synopsys_root/auxx/syn/cts/fast_atomic_cts.tcl.e
 #@ }
 #@ 
-#@ if { $synopsys_program_name == "icc_shell"} {
-#@   alias report_scenario report_scenarios
-#@ }
-#@ 
 #@ # floorplanning preferences globals
 #@ global fp_snap_type
 #@ 
@@ -4694,6 +3413,9 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ set fp_snap_type(net_shape) wiretrack
 #@ set fp_snap_type(route_shape) wiretrack
 #@ set fp_snap_type(none) litho
+#@ 
+#@ # 6/24/05 cpark requested to add to GA image
+#@ set suppress_errors "$suppress_errors RCCALC-010 RCCALC-011"
 #@ 
 #@ # alias for write_sge is always the last line of the setup file
 #@ #if { [string compare $dc_shell_mode "tcl"] == 0 } {
@@ -4723,19 +3445,19 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ #
 #@ # check_ccs_lib
 #@ # use libchecker under $ncx_path defined above
-#@ # Disable this command since 2010.12-SP3 (should be done in 2010.12 release)
-#@ #proc check_ccs_lib {args} {
-#@ #    global ncx_path
-#@ #    set cmdStr [linsert  $args 0 ${ncx_path}/libchecker -lc_shell]
-#@ #    set cmd [open "| $cmdStr 2>@ stdout"]
-#@ #    catch {
-#@ #      while {[gets $cmd info] >= 0} {
-#@ #        echo $info
-#@ #      }
-#@ #    }
-#@ #    if {[catch {close $cmd} msg]} {
-#@ #    }
-#@ #}
+#@ #
+#@ proc check_ccs_lib {args} {
+#@     global ncx_path
+#@     set cmdStr [linsert  $args 0 ${ncx_path}/libchecker -lc_shell]
+#@     set cmd [open "| $cmdStr 2>@ stdout"]
+#@     catch {
+#@       while {[gets $cmd info] >= 0} {
+#@         echo $info
+#@       }
+#@     }
+#@     if {[catch {close $cmd} msg]} {
+#@     }
+#@ }
 #@ 
 #@ #
 #@ # format_lib
@@ -4756,1158 +3478,575 @@ source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_d
 #@ 
 #@ }
 #@ 
-#@ # -- End source /home/by1e11/local/eda/synopsys/dc_vG-2012.06-SP2/admin/setup/.synopsys_dc.setup
+#@ # -- End source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 
-source dc_setup.tcl
-#@ # -- Starting source dc_setup.tcl
-
-#@ source -echo -verbose common_setup.tcl
-#@ # -- Starting source common_setup.tcl
-
-#@ ##########################################################################################
-#@ # Variables common to all RM scripts
-#@ # Script: common_setup.tcl
-#@ # Version: B-2008.09-SP4 (Mar. 25, 2009)
-#@ # Copyright (C) 2007, 2008, 2009 Synopsys All rights reserved.
-#@ ##########################################################################################
-#@ 
-#@ #set DESIGN_NAME                   "des"  ;#  The name of the top-level design
-#@ 
-#@ #set DESIGN_REF_DATA_PATH          [sh pwd]  ;#  Absolute path prefix variable for library/design data.
-#@ #  Use this variable to prefix the common absolute path to 
-#@ #  the common variables defined below.
-#@ #  Absolute paths are mandatory for hierarchical RM flow.
-#@ 
-#@ ##########################################################################################
-#@ # Hierarchical Flow Design Variables
-#@ ##########################################################################################
-#@ 
-#@ set HIERARCHICAL_DESIGNS           "" ;# List of hierarchical block design names "DesignA DesignB" ...
-#@ set HIERARCHICAL_CELLS             "" ;# List of hierarchical block cell instance names "u_DesignA u_DesignB" ...
-#@ 
-#@ ##########################################################################################
-#@ # Library Setup Variables
-#@ ##########################################################################################
-#@ 
-#@ if { [catch {echo $ANALYSIS_TYPE}] } {
-#@   echo "Assuming analysis type is TIMING..."
-#@   set ANALYSIS_TYPE timing
-#@   }
+source /user/erasmus/danielrb/Dropbox/Tesi/Adder_Linearization_CPE/synthesis/.synopsys_dc.setup
+#@ set DESIGN_NAME                   "nonlin_cla_decomposed";
+#@ set VARIANT_NAME "coned";
 #@ 
 #@ echo "Target library: TSMC 65nm GP CMOS"
 #@ set LIBSEL "tcbn65gplus";
 #@ set OCSEL "WCCOM";
-#@ # echo "Target library: TSMC 40nm LP CMOS"
-#@ # set LIBSEL "tcbn40lpbwp";
-#@ # set OCSEL "NC0D9COM";
-#@ # echo "Target library: NangateOpenCellLibrary 45nm"
-#@ # set LIBSEL "Nangate45nm";
-#@ set LIBROOT "/home/by1e11/local/eda/libs";
-#@ set SYNOPSYSROOT "/home/by1e11/local/eda/synopsys"
+#@ set LIBROOT "/cadtools/tsmc/";
 #@ 
 #@ set MIN_LIBRARY_FILES             ""  ;#  List of max min library pairs "max1 min1 max2 min2 max3 min3"...
 #@ 
-#@ set ADDITIONAL_SEARCH_PATH        "$SYNOPSYSROOT/dc_vG-2012.06-SP2/libraries/syn 
-#@                                     $LIBROOT/tsmc/digital/Front_End/timing_power_noise/NLDM/tcbn40lpbwp_110b/
-#@                                     $LIBROOT/tsmc/digital/Front_End/timing_power_noise/NLDM/tcbn65gplus_121b/
-#@                                     $LIBROOT/NangateOpenCellLibrary_PDKv1_3_v2010_12/Front_End/Liberty/NLDM"
+#@ set ADDITIONAL_SEARCH_PATH        "$LIBROOT/digital/Front_End/timing_power_noise/NLDM/tcbn65gplus_121b/ $LIBROOT/digital/Front_End/timing_power_noise/NLDM/tcbn65gplushvt_121b/ $LIBROOT/digital/Front_End/timing_power/tcbn65gpluscg_121a/ $LIBROOT/digital/Front_End/timing_power/tcbn65gpluscghvt_121a/ /cadtools/synopsys/2009/synthesis/libraries/syn/ ";
 #@ 
-#@ switch $LIBSEL {
-#@   tcbn40lpbwp {
-#@     switch $OCSEL {
-#@       WCCOM {
-#@         # process k = 1, voltage = 0.99, temp = 125degC
-#@         set TARGET_LIBRARY_FILES          "tcbn40lpbwpwc.db";
-#@       }
-#@       BCCOM {
-#@         # process k = 1, voltage = 1.1, temp = 0degC
-#@         set TARGET_LIBRARY_FILES          "tcbn40lpbwpbc.db";
-#@       }
-#@       NCCOM {
-#@         # process k = 1, voltage = 1.1, temp = 25degC
-#@         set TARGET_LIBRARY_FILES          "tcbn40lpbwptc.db";
-#@       }
-#@       NC0D9COM {
-#@         set TARGET_LIBRARY_FILES          "tcbn40lpbwptc0d9.db";
-#@       }
-#@       default {
-#@         set TARGET_LIBRARY_FILES          "tcbn40lpbwptc.db";
-#@       }
-#@     }
+#@ switch $OCSEL {
+#@   WCCOM {
+#@     # 65nm GP std cells @ WCCOM (Vdd = 0.9V, 125degC, nominal process):
+#@     set TARGET_LIBRARY_FILES          "tcbn65gpluswc.db tcbn65gpluscgwc.db tcbn65gplushvtwc.db tcbn65gpluscghvtwc.db "; #  Target technology logical libraries
+#@     set MIN_LIBRARY_FILES             "tcbn65gpluswc.db tcbn65gplusbc.db tcbn65gpluscgwc.db tcbn65gpluscgbc.db tcbn65gplushvtwc.db tcbn65gplushvtbc.db tcbn65gpluscghvtwc.db tcbn65gpluscghvtbc.db "  ;#  List of max min library pairs "max1 min1 max2 min2 max3 min3"...
 #@   }
-#@   tcbn65gplus {
-#@     switch $OCSEL {
-#@       WCCOM {
-#@         set TARGET_LIBRARY_FILES          "tcbn65gpluswc.db";
-#@       }
-#@       BCCOM {
-#@         set TARGET_LIBRARY_FILES          "tcbn65gplusbc.db";
-#@       }
-#@       NCCOM {
-#@         set TARGET_LIBRARY_FILES          "tcbn65gplustc.db";
-#@       }
-#@       default {
-#@         set TARGET_LIBRARY_FILES          "tcbn65gplustc.db";
-#@       }
-#@     }
+#@   BCCOM {
+#@     # 65nm GP std cells @ BCCOM (Vdd = 1.1V, 0degC, nominal process):
+#@     set TARGET_LIBRARY_FILES          "tcbn65gplusbc.db tcbn65gpluscgbc.db tcbn65gplushvtbc.db tcbn65gpluscghvtbc.db "; #  Target technology logical libraries
 #@   }
-#@   Nangate45nm {
-#@     set TARGET_LIBRARY_FILES          "Nangate45nm.db";
+#@   default {
+#@     # 65nm GP std cells @ NCCOM (Vdd = 1V, 25degC, nominal process):
+#@     set TARGET_LIBRARY_FILES          "tcbn65gplustc.db tcbn65gpluscgtc.db tcbn65gplushvttc.db tcbn65gpluscghvttc.db "; #  Target technology logical libraries
 #@   }
-#@   default {}
 #@ }
 #@ 
-#@ # switch $OCSEL {
-#@ #   WCCOM {
-#@ #     # 65nm GP std cells @ WCCOM (Vdd = 0.9V, 125degC, nominal process):
-#@ #     set TARGET_LIBRARY_FILES          "tcbn65gpluswc.db";
-#@ #   }
-#@ #   BCCOM {
-#@ #     # 65nm GP std cells @ BCCOM (Vdd = 1.1V, 0degC, nominal process):
-#@ #     set TARGET_LIBRARY_FILES          "tcbn65gpluswc.db";
-#@ #   }
-#@ #   default {
-#@ #     # 65nm GP std cells @ NCCOM (Vdd = 1V, 25degC, nominal process):
-#@ #     set TARGET_LIBRARY_FILES          "tcbn65gpluswc.db";
-#@ #   }
-#@ # }
+#@ set SYMBOL_LIBRARY_FILES          "tcbn65gplus.sdb tcbn65gpluscg.sdb tcbn65gplushvt.sdb tcbn65gpluscghvt.sdb "; #  Symbol libraries for Design Vision schematics
+#@ set ADDITIONAL_LINK_LIB_FILES     " "; #  Extra link logical libraries not included in TARGET_LIBRARY_FILES
 #@ 
-#@ #  Symbol libraries for Design Vision schematics
-#@ set SYMBOL_LIBRARY_FILES          "tcbn65gplus.sdb tcbn65gpluscg.sdb tcbn65gplushvt.sdb tcbn65gpluscghvt.sdb";
-#@ set ADDITIONAL_LINK_LIB_FILES     ""; #  Extra link logical libraries not included in TARGET_LIBRARY_FILES
-#@ set POWER_GATING_SUPPORT          1;
+#@ set alib_library_analysis_path ./cache/
+#@ 
+#@ set RTL_SOURCE_FILES "cones/nonlin_out/c1.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c10.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c100.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c101.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c102.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c103.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c104.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c105.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c106.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c107.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c108.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c109.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c11.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c110.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c111.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c112.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c113.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c114.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c115.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c116.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c117.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c118.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c119.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c12.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c120.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c121.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c122.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c123.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c124.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c125.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c126.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c127.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c128.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c129.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c13.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c130.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c131.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c132.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c133.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c134.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c135.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c136.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c137.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c138.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c139.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c14.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c140.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c141.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c142.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c143.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c144.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c145.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c146.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c147.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c148.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c149.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c15.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c150.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c151.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c152.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c153.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c154.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c155.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c156.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c157.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c158.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c159.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c16.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c160.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c161.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c162.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c163.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c164.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c165.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c166.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c167.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c168.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c169.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c17.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c170.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c171.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c172.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c173.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c174.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c175.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c176.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c177.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c178.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c179.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c18.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c180.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c181.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c182.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c183.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c184.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c185.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c186.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c187.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c188.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c189.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c19.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c190.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c191.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c192.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c193.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c194.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c195.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c196.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c197.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c198.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c199.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c2.v  "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c20.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c200.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c201.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c202.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c203.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c204.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c205.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c206.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c207.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c208.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c209.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c21.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c210.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c211.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c212.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c213.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c214.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c215.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c216.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c217.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c218.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c219.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c22.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c220.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c221.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c222.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c223.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c224.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c225.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c226.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c227.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c228.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c229.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c23.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c230.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c231.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c232.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c233.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c234.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c235.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c236.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c237.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c238.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c239.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c24.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c240.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c241.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c242.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c243.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c244.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c245.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c246.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c247.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c248.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c249.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c25.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c250.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c251.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c252.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c253.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c254.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c255.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c256.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c257.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c258.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c259.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c26.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c260.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c261.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c262.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c263.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c264.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c265.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c266.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c267.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c268.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c269.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c27.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c270.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c271.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c272.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c273.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c274.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c275.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c276.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c277.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c278.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c279.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c28.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c280.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c281.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c282.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c283.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c284.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c285.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c286.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c287.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c288.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c289.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c29.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c290.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c291.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c292.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c293.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c294.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c295.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c296.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c297.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c298.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c299.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c3.v  "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c30.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c300.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c301.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c302.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c303.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c304.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c305.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c306.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c307.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c308.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c309.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c31.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c310.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c311.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c312.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c313.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c314.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c315.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c316.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c317.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c318.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c319.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c32.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c320.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c321.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c322.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c323.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c324.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c325.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c326.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c327.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c328.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c329.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c33.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c330.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c331.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c332.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c333.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c334.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c335.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c336.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c337.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c338.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c339.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c34.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c340.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c341.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c342.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c343.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c344.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c345.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c346.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c347.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c348.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c349.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c35.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c350.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c351.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c352.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c353.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c354.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c355.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c356.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c357.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c358.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c359.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c36.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c360.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c361.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c362.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c363.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c364.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c365.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c366.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c367.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c368.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c369.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c37.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c370.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c371.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c372.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c373.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c374.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c375.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c376.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c377.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c378.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c379.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c38.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c380.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c381.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c382.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c383.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c384.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c385.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c386.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c387.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c388.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c389.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c39.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c390.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c391.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c392.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c393.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c394.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c395.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c396.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c397.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c398.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c399.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c4.v  "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c40.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c400.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c401.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c402.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c403.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c404.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c405.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c406.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c407.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c408.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c409.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c41.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c410.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c411.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c412.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c413.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c414.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c415.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c416.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c417.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c418.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c419.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c42.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c420.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c421.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c422.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c423.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c424.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c425.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c426.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c427.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c428.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c429.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c43.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c430.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c431.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c432.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c433.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c434.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c435.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c436.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c437.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c438.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c439.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c44.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c440.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c441.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c442.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c443.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c444.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c445.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c446.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c447.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c448.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c449.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c45.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c450.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c451.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c452.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c453.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c454.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c455.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c456.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c457.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c458.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c459.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c46.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c460.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c461.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c462.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c463.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c464.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c465.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c466.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c467.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c468.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c469.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c47.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c470.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c471.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c472.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c473.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c474.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c475.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c476.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c477.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c478.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c479.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c48.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c480.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c481.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c482.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c483.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c484.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c485.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c486.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c487.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c488.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c489.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c49.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c490.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c491.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c492.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c493.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c494.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c495.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c496.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c497.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c498.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c499.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c5.v  "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c50.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c500.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c501.v"
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c51.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c52.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c53.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c54.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c55.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c56.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c57.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c58.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c59.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c6.v  "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c60.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c61.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c62.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c63.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c64.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c65.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c66.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c67.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c68.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c69.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c7.v  "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c70.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c71.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c72.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c73.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c74.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c75.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c76.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c77.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c78.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c79.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c8.v  "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c80.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c81.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c82.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c83.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c84.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c85.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c86.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c87.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c88.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c89.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c9.v  "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c90.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c91.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c92.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c93.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c94.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c95.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c96.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c97.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c98.v "
+#@ lappend  RTL_SOURCE_FILES "cones/nonlin_out/c99.v "
 #@ 
 #@ 
-#@ set MIN_ROUTING_LAYER             "M1"   ;# Min routing layer
-#@ set CLOCK_ROUTING_LAYERS          "M2 M3 M4 M5 M6 M7 M8 M9";
-#@ set PNET_ROUTING_LAYERS           "M1 M2";
-#@ set ALL_ROUTING_LAYERS            "M1 M2 M3 M4 M5 M6 M7 M8 M9";
-#@ set MAX_ROUTING_LAYER             "M9"   ;# Max routing layer
-#@ 
-#@ set PNS_POWER_BUDGET       	      "100"  ;# Unit in milliWatts; default is 1000
-#@ set PNS_VOLTAGE_SUPPLY     	      "1"    ;# Unit in Volts; default is 1.5
-#@ set PNS_TARGET_VOLTAGE_DROP       "100"   ;# Unit in milliVolts. Tool default is 10% of PNS_POWER_BUDGET
-#@ 
-#@ # set MW_REFERENCE_CONTROL_FILE     ""  ;#  Reference Control file to define the MW ref libs
-#@ # set MW_REFERENCE_LIB_DIRS         "/user/archive/tome/dev/synth/milkyway/tcbn65gplus/ /user/archive/tome/dev/synth/milkyway/tcbn65gplushvt/ /user/archive/tome/dev/synth/milkyway/tcbn65gpluscg/ /user/archive/tome/dev/synth/milkyway/tcbn65gpluscghvt/ "  ;#  Milkyway reference libraries
-#@ # set TECH_FILE                     "$LIBROOT/digital/Back_End/milkyway/tcbn65gplus_121b/techfiles/tsmcn65_9lmT2.tf"  ; # same on all proc versions of a node, i.e. 65gp = 65gphvt = ...
-#@ # set MAP_FILE                      "/user/archive/tome/dev/synth/milkyway/tcbn65gplus_tf_to_itf.map"  ;#  Mapping file for TLUplus
-#@ # set TLUPLUS_MAX_FILE              "$LIBROOT/digital/Back_End/milkyway/tcbn65gplus_121b/techfiles/tluplus/cln65g+_1p09m+alrdl_top2_typical.tluplus"  ;#  Max TLUplus file
-#@ # set TLUPLUS_MIN_FILE              "$LIBROOT/digital/Back_End/milkyway/tcbn65gplus_121b/techfiles/tluplus/cln65g+_1p09m+alrdl_top2_typical.tluplus"  ;#  Min TLUplus file
-#@ 
-#@ echo " "
-#@ echo Common Setup (adapted from DC-RM 2008.09 by Tom English)
-#@ echo ********************************************************
-#@ echo " "
-#@ echo "Target std. cell library : $LIBSEL";
-#@ # echo "Max. operating condition : $OCSEL";
-#@ echo " "
-#@ 
-#@ set MW_POWER_NET                "VDD" ;#
-#@ set MW_POWER_PORT               "VDD" ;#
-#@ set MW_GROUND_NET               "VSS" ;#
-#@ set MW_GROUND_PORT              "VSS" ;#
-#@ 
-#@ # set RESULTS_DIR "${LIBSEL}_results";
-#@ # set REPORTS_DIR "${LIBSEL}_reports";
-#@ 
-#@ set LIBRARY_DONT_USE_FILE        ""   ;# Tcl file with library modifications for dont_use
-#@ # -- End source common_setup.tcl
-
-#@ 
-#@ #################################################################################
-#@ # Design Compiler Top-Down Reference Methodology Setup
-#@ # Script: dc_setup.tcl
-#@ # Version: B-2008.09-SP4 (Mar. 25, 2009)
-#@ # Copyright (C) 2007, 2008, 2009 Synopsys All rights reserved.
-#@ #################################################################################
-#@ 
-#@ 
-#@ #################################################################################
-#@ # Setup Variables
-#@ #
-#@ # Modify settings in this section to customize your DC-RM run.
-#@ #################################################################################
-#@ 
-#@ # Portions of dc_setup.tcl may be used by other tools so do check for DC only commands
-#@ if {$synopsys_program_name == "dc_shell"}  {
-#@ 
-#@   # Change alib_library_analysis_path to point to a central cache of analyzed libraries
-#@   # to save some runtime and disk space.  The following setting only reflects the
-#@   # the default value and should be changed to a central location for best results.
-#@ 
-#@   set alib_library_analysis_path ./cache/
-#@ 
-#@   # Add any additional DC variables needed here
-#@ }
-#@ 
-#@ # The following variables are used by scripts in dc_scripts to direct the location
-#@ # of the output files
-#@ 
-#@ set REPORTS_DIR [join [list $LIBSEL "_reports"] ""]
+#@ #set REPORTS_DIR [join [list $LIBSEL "_reports"] ""]
+#@ set REPORTS_DIR "nonlin_decomposed_reports"
 #@ set RESULTS_DIR [join [list $LIBSEL "_results"] ""]
-#@ #set MILKYWAY_DESIGN_LIB_DIR [join [list $LIBSEL ".mw"] ""]
 #@ set CONSTRAINTS_DIR "constraints"
 #@ 
-#@ # file mkdir $REPORTS_DIR
-#@ # file mkdir $RESULTS_DIR
+#@ file mkdir $REPORTS_DIR
+#@ file mkdir $RESULTS_DIR
 #@ 
-#@ echo " "
-#@ echo DC Setup (adapted from DC-RM 2008.09 by Tom English)
-#@ echo ****************************************************
-#@ echo " "
 #@ echo Constraints directory  : $CONSTRAINTS_DIR
 #@ echo Reports directory      : $REPORTS_DIR
 #@ echo Results directory      : $RESULTS_DIR
 #@ echo " "
 #@ 
-#@ # TE ported from old dctflow
-#@ set enable_recovery_removal_arcs true
+#@ set search_path ". $ADDITIONAL_SEARCH_PATH $search_path"
+#@ set target_library $TARGET_LIBRARY_FILES
+#@ set symbol_library $SYMBOL_LIBRARY_FILES
+#@ set synthetic_library dw_foundation.sldb
+#@ set link_library "* $target_library $ADDITIONAL_LINK_LIB_FILES $synthetic_library"
 #@ 
-#@ #################################################################################
-#@ # Library Setup
-#@ #
-#@ # This section is designed to work with the settings from common_setup.tcl
-#@ # without any additional modification.
-#@ #################################################################################
-#@ 
-#@ # Define all the library variables shared by all the front-end tools
-#@ 
-#@ set search_path ". ${ADDITIONAL_SEARCH_PATH} $search_path"
-#@ 
-#@ 
-#@ # Milkyway variable settings
-#@ 
-#@ # Make sure to define the following Milkyway library variables
-#@ # mw_logic1_net, mw_logic0_net and mw_design_library are needed by write_milkyway
-#@ 
-#@ # set mw_logic1_net ${MW_POWER_NET}
-#@ # set mw_logic0_net ${MW_GROUND_NET}
-#@ 
-#@ # set mw_reference_library ${MW_REFERENCE_LIB_DIRS}
-#@ # set mw_design_library ${DESIGN_NAME}_LIB
-#@ 
-#@ # set mw_site_name_mapping [list CORE unit Core unit core unit]
-#@ 
-#@ # Include all libraries for multi-Vth leakage power optimization
-#@ set target_library ${TARGET_LIBRARY_FILES}
-#@ set symbol_library ${SYMBOL_LIBRARY_FILES}
-#@ #set synthetic_library dw_foundation.sldb
-#@ set link_library [concat $target_library "*" $ADDITIONAL_LINK_LIB_FILES]
-#@ 
-#@ define_design_lib WORK -path ./WORK
-#@ 
-#@ # set dont_use cells in the target_library
-#@ # source dc_scripts/mask_library_tcbn65gpluswc.tcl
-#@ switch $LIBSEL {
-#@   Nangate45nm {
-#@     source dc_scripts/mask_library_Nangate45_AOI.tcl
-#@   }
-#@   tcbn65gplus {
-#@     source dc_scripts/mask_library_tcbn65gpluswc_AOI.tcl
-#@   }
-#@   tcbn40lpbwp {
-#@     switch $OCSEL {
-#@       WCCOM {
-#@         source dc_scripts/mask_library_tcbn40lpbwpwc.tcl
-#@       }
-#@       BCCOM {
-#@         source dc_scripts/mask_library_tcbn40lpbwpbc.tcl
-#@       }
-#@       NCCOM {
-#@         source dc_scripts/mask_library_tcbn40lpbwptc.tcl
-#@       }
-#@       NC0D9COM {
-#@         source dc_scripts/mask_library_tcbn40lpbwptc0d9.tcl
-#@       }
-#@       default {}
-#@     }
-#@     
-#@   }
-#@   default {}
-#@ }
-#@ # -- Starting source dc_scripts/mask_library_tcbn65gpluswc_AOI.tcl
-
-#@ set_dont_use {tcbn65gpluswc/ANTENNA}
-#@ set_dont_use {tcbn65gpluswc/AO21D0}
-#@ set_dont_use {tcbn65gpluswc/AO21D1}
-#@ set_dont_use {tcbn65gpluswc/AO21D2}
-#@ set_dont_use {tcbn65gpluswc/AO21D4}
-#@ set_dont_use {tcbn65gpluswc/AO22D0}
-#@ set_dont_use {tcbn65gpluswc/AO22D1}
-#@ set_dont_use {tcbn65gpluswc/AO22D2}
-#@ set_dont_use {tcbn65gpluswc/AO22D4}
-#@ set_dont_use {tcbn65gpluswc/AO31D0}
-#@ set_dont_use {tcbn65gpluswc/AO31D1}
-#@ set_dont_use {tcbn65gpluswc/AO31D2}
-#@ set_dont_use {tcbn65gpluswc/AO31D4}
-#@ set_dont_use {tcbn65gpluswc/AO32D0}
-#@ set_dont_use {tcbn65gpluswc/AO32D1}
-#@ set_dont_use {tcbn65gpluswc/AO32D2}
-#@ set_dont_use {tcbn65gpluswc/AO32D4}
-#@ set_dont_use {tcbn65gpluswc/AO33D0}
-#@ set_dont_use {tcbn65gpluswc/AO33D1}
-#@ set_dont_use {tcbn65gpluswc/AO33D2}
-#@ set_dont_use {tcbn65gpluswc/AO33D4}
-#@ set_dont_use {tcbn65gpluswc/AO211D0}
-#@ set_dont_use {tcbn65gpluswc/AO211D1}
-#@ set_dont_use {tcbn65gpluswc/AO211D2}
-#@ set_dont_use {tcbn65gpluswc/AO211D4}
-#@ set_dont_use {tcbn65gpluswc/AO221D0}
-#@ set_dont_use {tcbn65gpluswc/AO221D1}
-#@ set_dont_use {tcbn65gpluswc/AO221D2}
-#@ set_dont_use {tcbn65gpluswc/AO221D4}
-#@ set_dont_use {tcbn65gpluswc/AO222D0}
-#@ set_dont_use {tcbn65gpluswc/AO222D1}
-#@ set_dont_use {tcbn65gpluswc/AO222D2}
-#@ set_dont_use {tcbn65gpluswc/AO222D4}
-#@ set_dont_use {tcbn65gpluswc/AOI21D0}
-#@ set_dont_use {tcbn65gpluswc/AOI21D1}
-#@ set_dont_use {tcbn65gpluswc/AOI21D2}
-#@ set_dont_use {tcbn65gpluswc/AOI21D4}
-#@ set_dont_use {tcbn65gpluswc/AOI22D0}
-#@ set_dont_use {tcbn65gpluswc/AOI22D1}
-#@ set_dont_use {tcbn65gpluswc/AOI22D2}
-#@ set_dont_use {tcbn65gpluswc/AOI22D4}
-#@ set_dont_use {tcbn65gpluswc/AOI31D0}
-#@ set_dont_use {tcbn65gpluswc/AOI31D1}
-#@ set_dont_use {tcbn65gpluswc/AOI31D2}
-#@ set_dont_use {tcbn65gpluswc/AOI31D4}
-#@ set_dont_use {tcbn65gpluswc/AOI32D0}
-#@ set_dont_use {tcbn65gpluswc/AOI32D1}
-#@ set_dont_use {tcbn65gpluswc/AOI32D2}
-#@ set_dont_use {tcbn65gpluswc/AOI32D4}
-#@ set_dont_use {tcbn65gpluswc/AOI32XD4}
-#@ set_dont_use {tcbn65gpluswc/AOI33D0}
-#@ set_dont_use {tcbn65gpluswc/AOI33D1}
-#@ set_dont_use {tcbn65gpluswc/AOI33D2}
-#@ set_dont_use {tcbn65gpluswc/AOI33D4}
-#@ set_dont_use {tcbn65gpluswc/AOI33XD4}
-#@ set_dont_use {tcbn65gpluswc/AOI211D0}
-#@ set_dont_use {tcbn65gpluswc/AOI211D1}
-#@ set_dont_use {tcbn65gpluswc/AOI211D2}
-#@ set_dont_use {tcbn65gpluswc/AOI211D4}
-#@ set_dont_use {tcbn65gpluswc/AOI211XD0}
-#@ set_dont_use {tcbn65gpluswc/AOI211XD1}
-#@ set_dont_use {tcbn65gpluswc/AOI211XD2}
-#@ set_dont_use {tcbn65gpluswc/AOI211XD4}
-#@ set_dont_use {tcbn65gpluswc/AOI221D0}
-#@ set_dont_use {tcbn65gpluswc/AOI221D1}
-#@ set_dont_use {tcbn65gpluswc/AOI221D2}
-#@ set_dont_use {tcbn65gpluswc/AOI221D4}
-#@ set_dont_use {tcbn65gpluswc/AOI221XD4}
-#@ set_dont_use {tcbn65gpluswc/AOI222D0}
-#@ set_dont_use {tcbn65gpluswc/AOI222D1}
-#@ set_dont_use {tcbn65gpluswc/AOI222D2}
-#@ set_dont_use {tcbn65gpluswc/AOI222D4}
-#@ set_dont_use {tcbn65gpluswc/AOI222XD4}
-#@ set_dont_use {tcbn65gpluswc/BENCD1}
-#@ set_dont_use {tcbn65gpluswc/BENCD2}
-#@ set_dont_use {tcbn65gpluswc/BENCD4}
-#@ set_dont_use {tcbn65gpluswc/BHD}
-#@ set_dont_use {tcbn65gpluswc/BMLD1}
-#@ set_dont_use {tcbn65gpluswc/BMLD2}
-#@ set_dont_use {tcbn65gpluswc/BMLD4}
-#@ set_dont_use {tcbn65gpluswc/BUFFD1}
-#@ set_dont_use {tcbn65gpluswc/BUFFD2}
-#@ set_dont_use {tcbn65gpluswc/BUFFD3}
-#@ set_dont_use {tcbn65gpluswc/BUFFD4}
-#@ set_dont_use {tcbn65gpluswc/BUFFD6}
-#@ set_dont_use {tcbn65gpluswc/BUFFD8}
-#@ set_dont_use {tcbn65gpluswc/BUFFD12}
-#@ set_dont_use {tcbn65gpluswc/BUFFD16}
-#@ set_dont_use {tcbn65gpluswc/BUFFD20}
-#@ set_dont_use {tcbn65gpluswc/BUFFD24}
-#@ set_dont_use {tcbn65gpluswc/BUFTD0}
-#@ set_dont_use {tcbn65gpluswc/BUFTD1}
-#@ set_dont_use {tcbn65gpluswc/BUFTD2}
-#@ set_dont_use {tcbn65gpluswc/BUFTD3}
-#@ set_dont_use {tcbn65gpluswc/BUFTD4}
-#@ set_dont_use {tcbn65gpluswc/BUFTD6}
-#@ set_dont_use {tcbn65gpluswc/BUFTD8}
-#@ set_dont_use {tcbn65gpluswc/BUFTD12}
-#@ set_dont_use {tcbn65gpluswc/BUFTD16}
-#@ set_dont_use {tcbn65gpluswc/BUFTD20}
-#@ set_dont_use {tcbn65gpluswc/BUFTD24}
-#@ set_dont_use  {tcbn65gpluswc/CKAN2D0}
-#@ set_dont_use  {tcbn65gpluswc/CKAN2D1}
-#@ set_dont_use  {tcbn65gpluswc/CKAN2D2}
-#@ set_dont_use  {tcbn65gpluswc/CKAN2D4}
-#@ set_dont_use  {tcbn65gpluswc/CKAN2D8}
-#@ set_dont_use  {tcbn65gpluswc/CKBD0}
-#@ set_dont_use  {tcbn65gpluswc/CKBD1}
-#@ set_dont_use  {tcbn65gpluswc/CKBD2}
-#@ set_dont_use  {tcbn65gpluswc/CKBD3}
-#@ set_dont_use  {tcbn65gpluswc/CKBD4}
-#@ set_dont_use  {tcbn65gpluswc/CKBD6}
-#@ set_dont_use  {tcbn65gpluswc/CKBD8}
-#@ set_dont_use  {tcbn65gpluswc/CKBD12}
-#@ set_dont_use  {tcbn65gpluswc/CKBD16}
-#@ set_dont_use  {tcbn65gpluswc/CKBD20}
-#@ set_dont_use  {tcbn65gpluswc/CKBD24}
-#@ set_dont_use {tcbn65gpluswc/CKLHQD1}
-#@ set_dont_use {tcbn65gpluswc/CKLHQD2}
-#@ set_dont_use {tcbn65gpluswc/CKLHQD3}
-#@ set_dont_use {tcbn65gpluswc/CKLHQD4}
-#@ set_dont_use {tcbn65gpluswc/CKLHQD6}
-#@ set_dont_use {tcbn65gpluswc/CKLHQD8}
-#@ set_dont_use {tcbn65gpluswc/CKLHQD12}
-#@ set_dont_use {tcbn65gpluswc/CKLHQD16}
-#@ set_dont_use {tcbn65gpluswc/CKLHQD20}
-#@ set_dont_use {tcbn65gpluswc/CKLHQD24}
-#@ set_dont_use {tcbn65gpluswc/CKLNQD1}
-#@ set_dont_use {tcbn65gpluswc/CKLNQD2}
-#@ set_dont_use {tcbn65gpluswc/CKLNQD3}
-#@ set_dont_use {tcbn65gpluswc/CKLNQD4}
-#@ set_dont_use {tcbn65gpluswc/CKLNQD6}
-#@ set_dont_use {tcbn65gpluswc/CKLNQD8}
-#@ set_dont_use {tcbn65gpluswc/CKLNQD12}
-#@ set_dont_use {tcbn65gpluswc/CKLNQD16}
-#@ set_dont_use {tcbn65gpluswc/CKLNQD20}
-#@ set_dont_use {tcbn65gpluswc/CKLNQD24}
-#@ set_dont_use {tcbn65gpluswc/CKMUX2D0}
-#@ set_dont_use {tcbn65gpluswc/CKMUX2D1}
-#@ set_dont_use {tcbn65gpluswc/CKMUX2D2}
-#@ set_dont_use {tcbn65gpluswc/CKMUX2D4}
-#@ set_dont_use {tcbn65gpluswc/CKND0}
-#@ set_dont_use {tcbn65gpluswc/CKND1}
-#@ set_dont_use {tcbn65gpluswc/CKND2}
-#@ set_dont_use {tcbn65gpluswc/CKND2D0}
-#@ set_dont_use {tcbn65gpluswc/CKND2D1}
-#@ set_dont_use {tcbn65gpluswc/CKND2D2}
-#@ set_dont_use {tcbn65gpluswc/CKND2D3}
-#@ set_dont_use {tcbn65gpluswc/CKND2D4}
-#@ set_dont_use {tcbn65gpluswc/CKND2D8}
-#@ set_dont_use {tcbn65gpluswc/CKND3}
-#@ set_dont_use {tcbn65gpluswc/CKND4}
-#@ set_dont_use {tcbn65gpluswc/CKND6}
-#@ set_dont_use {tcbn65gpluswc/CKND8}
-#@ set_dont_use {tcbn65gpluswc/CKND12}
-#@ set_dont_use {tcbn65gpluswc/CKND16}
-#@ set_dont_use {tcbn65gpluswc/CKND20}
-#@ set_dont_use {tcbn65gpluswc/CKND24}
-#@ set_dont_use {tcbn65gpluswc/CKXOR2D0}
-#@ set_dont_use {tcbn65gpluswc/CKXOR2D1}
-#@ set_dont_use {tcbn65gpluswc/CKXOR2D2}
-#@ set_dont_use {tcbn65gpluswc/CKXOR2D4}
-#@ set_dont_use {tcbn65gpluswc/CMPE42D1}
-#@ set_dont_use {tcbn65gpluswc/CMPE42D2}
-#@ set_dont_use {tcbn65gpluswc/DCAP}
-#@ set_dont_use {tcbn65gpluswc/DCAP4}
-#@ set_dont_use {tcbn65gpluswc/DCAP8}
-#@ set_dont_use {tcbn65gpluswc/DCAP16}
-#@ set_dont_use {tcbn65gpluswc/DCAP32}
-#@ set_dont_use {tcbn65gpluswc/DCAP64}
-#@ set_dont_use {tcbn65gpluswc/DEL0}
-#@ set_dont_use {tcbn65gpluswc/DEL1}
-#@ set_dont_use {tcbn65gpluswc/DEL01}
-#@ set_dont_use {tcbn65gpluswc/DEL2}
-#@ set_dont_use {tcbn65gpluswc/DEL02}
-#@ set_dont_use {tcbn65gpluswc/DEL3}
-#@ set_dont_use {tcbn65gpluswc/DEL4}
-#@ set_dont_use {tcbn65gpluswc/DEL005}
-#@ set_dont_use {tcbn65gpluswc/DEL015}
-#@ set_dont_use {tcbn65gpluswc/DFCND1}
-#@ set_dont_use {tcbn65gpluswc/DFCND2}
-#@ set_dont_use {tcbn65gpluswc/DFCND4}
-#@ set_dont_use {tcbn65gpluswc/DFCNQD1}
-#@ set_dont_use {tcbn65gpluswc/DFCNQD2}
-#@ set_dont_use {tcbn65gpluswc/DFCNQD4}
-#@ set_dont_use {tcbn65gpluswc/DFCSND1}
-#@ set_dont_use {tcbn65gpluswc/DFCSND2}
-#@ set_dont_use {tcbn65gpluswc/DFCSND4}
-#@ set_dont_use {tcbn65gpluswc/DFCSNQD1}
-#@ set_dont_use {tcbn65gpluswc/DFCSNQD2}
-#@ set_dont_use {tcbn65gpluswc/DFCSNQD4}
-#@ set_dont_use {tcbn65gpluswc/DFD1}
-#@ set_dont_use {tcbn65gpluswc/DFD2}
-#@ set_dont_use {tcbn65gpluswc/DFD4}
-#@ set_dont_use {tcbn65gpluswc/DFKCND1}
-#@ set_dont_use {tcbn65gpluswc/DFKCND2}
-#@ set_dont_use {tcbn65gpluswc/DFKCND4}
-#@ set_dont_use {tcbn65gpluswc/DFKCNQD1}
-#@ set_dont_use {tcbn65gpluswc/DFKCNQD2}
-#@ set_dont_use {tcbn65gpluswc/DFKCNQD4}
-#@ set_dont_use {tcbn65gpluswc/DFKCSND1}
-#@ set_dont_use {tcbn65gpluswc/DFKCSND2}
-#@ set_dont_use {tcbn65gpluswc/DFKCSND4}
-#@ set_dont_use {tcbn65gpluswc/DFKSND1}
-#@ set_dont_use {tcbn65gpluswc/DFKSND2}
-#@ set_dont_use {tcbn65gpluswc/DFKSND4}
-#@ set_dont_use {tcbn65gpluswc/DFNCND1}
-#@ set_dont_use {tcbn65gpluswc/DFNCND2}
-#@ set_dont_use {tcbn65gpluswc/DFNCND4}
-#@ set_dont_use {tcbn65gpluswc/DFNCSND1}
-#@ set_dont_use {tcbn65gpluswc/DFNCSND2}
-#@ set_dont_use {tcbn65gpluswc/DFNCSND4}
-#@ set_dont_use {tcbn65gpluswc/DFND1}
-#@ set_dont_use {tcbn65gpluswc/DFND2}
-#@ set_dont_use {tcbn65gpluswc/DFND4}
-#@ set_dont_use {tcbn65gpluswc/DFNSND1}
-#@ set_dont_use {tcbn65gpluswc/DFNSND2}
-#@ set_dont_use {tcbn65gpluswc/DFNSND4}
-#@ set_dont_use {tcbn65gpluswc/DFQD1}
-#@ set_dont_use {tcbn65gpluswc/DFQD2}
-#@ set_dont_use {tcbn65gpluswc/DFQD4}
-#@ set_dont_use {tcbn65gpluswc/DFSND1}
-#@ set_dont_use {tcbn65gpluswc/DFSND2}
-#@ set_dont_use {tcbn65gpluswc/DFSND4}
-#@ set_dont_use {tcbn65gpluswc/DFSNQD1}
-#@ set_dont_use {tcbn65gpluswc/DFSNQD2}
-#@ set_dont_use {tcbn65gpluswc/DFSNQD4}
-#@ set_dont_use {tcbn65gpluswc/DFXD1}
-#@ set_dont_use {tcbn65gpluswc/DFXD2}
-#@ set_dont_use {tcbn65gpluswc/DFXD4}
-#@ set_dont_use {tcbn65gpluswc/DFXQD1}
-#@ set_dont_use {tcbn65gpluswc/DFXQD2}
-#@ set_dont_use {tcbn65gpluswc/DFXQD4}
-#@ set_dont_use {tcbn65gpluswc/EDFCND1}
-#@ set_dont_use {tcbn65gpluswc/EDFCND2}
-#@ set_dont_use {tcbn65gpluswc/EDFCND4}
-#@ set_dont_use {tcbn65gpluswc/EDFCNQD1}
-#@ set_dont_use {tcbn65gpluswc/EDFCNQD2}
-#@ set_dont_use {tcbn65gpluswc/EDFCNQD4}
-#@ set_dont_use {tcbn65gpluswc/EDFD1}
-#@ set_dont_use {tcbn65gpluswc/EDFD2}
-#@ set_dont_use {tcbn65gpluswc/EDFD4}
-#@ set_dont_use {tcbn65gpluswc/EDFKCND1}
-#@ set_dont_use {tcbn65gpluswc/EDFKCND2}
-#@ set_dont_use {tcbn65gpluswc/EDFKCND4}
-#@ set_dont_use {tcbn65gpluswc/EDFKCNQD1}
-#@ set_dont_use {tcbn65gpluswc/EDFKCNQD2}
-#@ set_dont_use {tcbn65gpluswc/EDFKCNQD4}
-#@ set_dont_use {tcbn65gpluswc/EDFQD1}
-#@ set_dont_use {tcbn65gpluswc/EDFQD2}
-#@ set_dont_use {tcbn65gpluswc/EDFQD4}
-#@ set_dont_use {tcbn65gpluswc/FA1D0}
-#@ set_dont_use {tcbn65gpluswc/FA1D1}
-#@ set_dont_use {tcbn65gpluswc/FA1D2}
-#@ set_dont_use {tcbn65gpluswc/FA1D4}
-#@ set_dont_use {tcbn65gpluswc/FCICIND1}
-#@ set_dont_use {tcbn65gpluswc/FCICIND2}
-#@ set_dont_use {tcbn65gpluswc/FCICOND1}
-#@ set_dont_use {tcbn65gpluswc/FCICOND2}
-#@ set_dont_use {tcbn65gpluswc/FCSICIND1}
-#@ set_dont_use {tcbn65gpluswc/FCSICIND2}
-#@ set_dont_use {tcbn65gpluswc/FCSICOND1}
-#@ set_dont_use {tcbn65gpluswc/FCSICOND2}
-#@ set_dont_use {tcbn65gpluswc/FICIND1}
-#@ set_dont_use {tcbn65gpluswc/FICIND2}
-#@ set_dont_use {tcbn65gpluswc/FICOND1}
-#@ set_dont_use {tcbn65gpluswc/FICOND2}
-#@ set_dont_use {tcbn65gpluswc/FIICOND1}
-#@ set_dont_use {tcbn65gpluswc/FIICOND2}
-#@ set_dont_use {tcbn65gpluswc/GAN2D1}
-#@ set_dont_use {tcbn65gpluswc/GAN2D2}
-#@ set_dont_use {tcbn65gpluswc/GAOI21D1}
-#@ set_dont_use {tcbn65gpluswc/GAOI21D2}
-#@ set_dont_use {tcbn65gpluswc/GAOI22D1}
-#@ set_dont_use {tcbn65gpluswc/GBUFFD1}
-#@ set_dont_use {tcbn65gpluswc/GBUFFD2}
-#@ set_dont_use {tcbn65gpluswc/GBUFFD3}
-#@ set_dont_use {tcbn65gpluswc/GBUFFD4}
-#@ set_dont_use {tcbn65gpluswc/GBUFFD8}
-#@ set_dont_use {tcbn65gpluswc/GDCAP}
-#@ set_dont_use {tcbn65gpluswc/GDCAP2}
-#@ set_dont_use {tcbn65gpluswc/GDCAP3}
-#@ set_dont_use {tcbn65gpluswc/GDCAP4}
-#@ set_dont_use {tcbn65gpluswc/GDCAP10}
-#@ set_dont_use {tcbn65gpluswc/GDFCNQD1}
-#@ set_dont_use {tcbn65gpluswc/GDFQD1}
-#@ set_dont_use {tcbn65gpluswc/GINVD1}
-#@ set_dont_use {tcbn65gpluswc/GINVD2}
-#@ set_dont_use {tcbn65gpluswc/GINVD3}
-#@ set_dont_use {tcbn65gpluswc/GINVD4}
-#@ set_dont_use {tcbn65gpluswc/GINVD8}
-#@ set_dont_use {tcbn65gpluswc/GMUX2D1}
-#@ set_dont_use {tcbn65gpluswc/GMUX2D2}
-#@ set_dont_use {tcbn65gpluswc/GMUX2ND1}
-#@ set_dont_use {tcbn65gpluswc/GMUX2ND2}
-#@ set_dont_use {tcbn65gpluswc/GND2D1}
-#@ set_dont_use {tcbn65gpluswc/GND2D2}
-#@ set_dont_use {tcbn65gpluswc/GND2D3}
-#@ set_dont_use {tcbn65gpluswc/GND2D4}
-#@ set_dont_use {tcbn65gpluswc/GND3D1}
-#@ set_dont_use {tcbn65gpluswc/GND3D2}
-#@ set_dont_use {tcbn65gpluswc/GNR2D1}
-#@ set_dont_use {tcbn65gpluswc/GNR2D2}
-#@ set_dont_use {tcbn65gpluswc/GNR3D1}
-#@ set_dont_use {tcbn65gpluswc/GNR3D2}
-#@ set_dont_use {tcbn65gpluswc/GOAI21D1}
-#@ set_dont_use {tcbn65gpluswc/GOAI21D2}
-#@ set_dont_use {tcbn65gpluswc/GOR2D1}
-#@ set_dont_use {tcbn65gpluswc/GOR2D2}
-#@ set_dont_use {tcbn65gpluswc/GSDFCNQD1}
-#@ set_dont_use {tcbn65gpluswc/GTIEH}
-#@ set_dont_use {tcbn65gpluswc/GTIEL}
-#@ set_dont_use {tcbn65gpluswc/GXNR2D1}
-#@ set_dont_use {tcbn65gpluswc/GXNR2D2}
-#@ set_dont_use {tcbn65gpluswc/GXOR2D1}
-#@ set_dont_use {tcbn65gpluswc/GXOR2D2}
-#@ set_dont_use {tcbn65gpluswc/HA1D0}
-#@ set_dont_use {tcbn65gpluswc/HA1D1}
-#@ set_dont_use {tcbn65gpluswc/HA1D2}
-#@ set_dont_use {tcbn65gpluswc/HA1D4}
-#@ set_dont_use {tcbn65gpluswc/HCOSCIND1}
-#@ set_dont_use {tcbn65gpluswc/HCOSCIND2}
-#@ set_dont_use {tcbn65gpluswc/HCOSCOND1}
-#@ set_dont_use {tcbn65gpluswc/HCOSCOND2}
-#@ set_dont_use {tcbn65gpluswc/HICIND1}
-#@ set_dont_use {tcbn65gpluswc/HICIND2}
-#@ set_dont_use {tcbn65gpluswc/HICOND1}
-#@ set_dont_use {tcbn65gpluswc/HICOND2}
-#@ set_dont_use {tcbn65gpluswc/IAO21D0}
-#@ set_dont_use {tcbn65gpluswc/IAO21D1}
-#@ set_dont_use {tcbn65gpluswc/IAO21D2}
-#@ set_dont_use {tcbn65gpluswc/IAO21D4}
-#@ set_dont_use {tcbn65gpluswc/IAO22D0}
-#@ set_dont_use {tcbn65gpluswc/IAO22D1}
-#@ set_dont_use {tcbn65gpluswc/IAO22D2}
-#@ set_dont_use {tcbn65gpluswc/IAO22D4}
-#@ set_dont_use {tcbn65gpluswc/IIND4D0}
-#@ set_dont_use {tcbn65gpluswc/IIND4D1}
-#@ set_dont_use {tcbn65gpluswc/IIND4D2}
-#@ set_dont_use {tcbn65gpluswc/IIND4D4}
-#@ set_dont_use {tcbn65gpluswc/IINR4D0}
-#@ set_dont_use {tcbn65gpluswc/IINR4D1}
-#@ set_dont_use {tcbn65gpluswc/IINR4D2}
-#@ set_dont_use {tcbn65gpluswc/IINR4D4}
-#@ set_dont_use {tcbn65gpluswc/IND2D0}
-#@ set_dont_use {tcbn65gpluswc/IND2D1}
-#@ set_dont_use {tcbn65gpluswc/IND2D2}
-#@ set_dont_use {tcbn65gpluswc/IND2D4}
-#@ set_dont_use {tcbn65gpluswc/IND3D0}
-#@ set_dont_use {tcbn65gpluswc/IND3D1}
-#@ set_dont_use {tcbn65gpluswc/IND3D2}
-#@ set_dont_use {tcbn65gpluswc/IND3D4}
-#@ set_dont_use {tcbn65gpluswc/IND4D0}
-#@ set_dont_use {tcbn65gpluswc/IND4D1}
-#@ set_dont_use {tcbn65gpluswc/IND4D2}
-#@ set_dont_use {tcbn65gpluswc/IND4D4}
-#@ set_dont_use {tcbn65gpluswc/INR2D0}
-#@ set_dont_use {tcbn65gpluswc/INR2D1}
-#@ set_dont_use {tcbn65gpluswc/INR2D2}
-#@ set_dont_use {tcbn65gpluswc/INR2D4}
-#@ set_dont_use {tcbn65gpluswc/INR2XD0}
-#@ set_dont_use {tcbn65gpluswc/INR2XD1}
-#@ set_dont_use {tcbn65gpluswc/INR2XD2}
-#@ set_dont_use {tcbn65gpluswc/INR2XD4}
-#@ set_dont_use {tcbn65gpluswc/INR3D0}
-#@ set_dont_use {tcbn65gpluswc/INR3D1}
-#@ set_dont_use {tcbn65gpluswc/INR3D2}
-#@ set_dont_use {tcbn65gpluswc/INR3D4}
-#@ set_dont_use {tcbn65gpluswc/INR4D0}
-#@ set_dont_use {tcbn65gpluswc/INR4D1}
-#@ set_dont_use {tcbn65gpluswc/INR4D2}
-#@ set_dont_use {tcbn65gpluswc/INR4D4}
-#@ set_dont_use {tcbn65gpluswc/IOA21D0}
-#@ set_dont_use {tcbn65gpluswc/IOA21D1}
-#@ set_dont_use {tcbn65gpluswc/IOA21D2}
-#@ set_dont_use {tcbn65gpluswc/IOA21D4}
-#@ set_dont_use {tcbn65gpluswc/IOA22D0}
-#@ set_dont_use {tcbn65gpluswc/IOA22D1}
-#@ set_dont_use {tcbn65gpluswc/IOA22D2}
-#@ set_dont_use {tcbn65gpluswc/IOA22D4}
-#@ set_dont_use {tcbn65gpluswc/LHCND1}
-#@ set_dont_use {tcbn65gpluswc/LHCND2}
-#@ set_dont_use {tcbn65gpluswc/LHCND4}
-#@ set_dont_use {tcbn65gpluswc/LHCNDD1}
-#@ set_dont_use {tcbn65gpluswc/LHCNDD2}
-#@ set_dont_use {tcbn65gpluswc/LHCNDD4}
-#@ set_dont_use {tcbn65gpluswc/LHCNDQD1}
-#@ set_dont_use {tcbn65gpluswc/LHCNDQD2}
-#@ set_dont_use {tcbn65gpluswc/LHCNDQD4}
-#@ set_dont_use {tcbn65gpluswc/LHCNQD1}
-#@ set_dont_use {tcbn65gpluswc/LHCNQD2}
-#@ set_dont_use {tcbn65gpluswc/LHCNQD4}
-#@ set_dont_use {tcbn65gpluswc/LHCSND1}
-#@ set_dont_use {tcbn65gpluswc/LHCSND2}
-#@ set_dont_use {tcbn65gpluswc/LHCSND4}
-#@ set_dont_use {tcbn65gpluswc/LHCSNDD1}
-#@ set_dont_use {tcbn65gpluswc/LHCSNDD2}
-#@ set_dont_use {tcbn65gpluswc/LHCSNDD4}
-#@ set_dont_use {tcbn65gpluswc/LHCSNDQD1}
-#@ set_dont_use {tcbn65gpluswc/LHCSNDQD2}
-#@ set_dont_use {tcbn65gpluswc/LHCSNDQD4}
-#@ set_dont_use {tcbn65gpluswc/LHCSNQD1}
-#@ set_dont_use {tcbn65gpluswc/LHCSNQD2}
-#@ set_dont_use {tcbn65gpluswc/LHCSNQD4}
-#@ set_dont_use {tcbn65gpluswc/LHD1}
-#@ set_dont_use {tcbn65gpluswc/LHD2}
-#@ set_dont_use {tcbn65gpluswc/LHD4}
-#@ set_dont_use {tcbn65gpluswc/LHQD1}
-#@ set_dont_use {tcbn65gpluswc/LHQD2}
-#@ set_dont_use {tcbn65gpluswc/LHQD4}
-#@ set_dont_use {tcbn65gpluswc/LHSND1}
-#@ set_dont_use {tcbn65gpluswc/LHSND2}
-#@ set_dont_use {tcbn65gpluswc/LHSND4}
-#@ set_dont_use {tcbn65gpluswc/LHSNDD1}
-#@ set_dont_use {tcbn65gpluswc/LHSNDD2}
-#@ set_dont_use {tcbn65gpluswc/LHSNDD4}
-#@ set_dont_use {tcbn65gpluswc/LHSNDQD1}
-#@ set_dont_use {tcbn65gpluswc/LHSNDQD2}
-#@ set_dont_use {tcbn65gpluswc/LHSNDQD4}
-#@ set_dont_use {tcbn65gpluswc/LHSNQD1}
-#@ set_dont_use {tcbn65gpluswc/LHSNQD2}
-#@ set_dont_use {tcbn65gpluswc/LHSNQD4}
-#@ set_dont_use {tcbn65gpluswc/LNCND1}
-#@ set_dont_use {tcbn65gpluswc/LNCND2}
-#@ set_dont_use {tcbn65gpluswc/LNCND4}
-#@ set_dont_use {tcbn65gpluswc/LNCNDD1}
-#@ set_dont_use {tcbn65gpluswc/LNCNDD2}
-#@ set_dont_use {tcbn65gpluswc/LNCNDD4}
-#@ set_dont_use {tcbn65gpluswc/LNCNDQD1}
-#@ set_dont_use {tcbn65gpluswc/LNCNDQD2}
-#@ set_dont_use {tcbn65gpluswc/LNCNDQD4}
-#@ set_dont_use {tcbn65gpluswc/LNCNQD1}
-#@ set_dont_use {tcbn65gpluswc/LNCNQD2}
-#@ set_dont_use {tcbn65gpluswc/LNCNQD4}
-#@ set_dont_use {tcbn65gpluswc/LNCSND1}
-#@ set_dont_use {tcbn65gpluswc/LNCSND2}
-#@ set_dont_use {tcbn65gpluswc/LNCSND4}
-#@ set_dont_use {tcbn65gpluswc/LNCSNDD1}
-#@ set_dont_use {tcbn65gpluswc/LNCSNDD2}
-#@ set_dont_use {tcbn65gpluswc/LNCSNDD4}
-#@ set_dont_use {tcbn65gpluswc/LNCSNDQD1}
-#@ set_dont_use {tcbn65gpluswc/LNCSNDQD2}
-#@ set_dont_use {tcbn65gpluswc/LNCSNDQD4}
-#@ set_dont_use {tcbn65gpluswc/LNCSNQD1}
-#@ set_dont_use {tcbn65gpluswc/LNCSNQD2}
-#@ set_dont_use {tcbn65gpluswc/LNCSNQD4}
-#@ set_dont_use {tcbn65gpluswc/LND1}
-#@ set_dont_use {tcbn65gpluswc/LND2}
-#@ set_dont_use {tcbn65gpluswc/LND4}
-#@ set_dont_use {tcbn65gpluswc/LNQD1}
-#@ set_dont_use {tcbn65gpluswc/LNQD2}
-#@ set_dont_use {tcbn65gpluswc/LNQD4}
-#@ set_dont_use {tcbn65gpluswc/LNSND1}
-#@ set_dont_use {tcbn65gpluswc/LNSND2}
-#@ set_dont_use {tcbn65gpluswc/LNSND4}
-#@ set_dont_use {tcbn65gpluswc/LNSNDD1}
-#@ set_dont_use {tcbn65gpluswc/LNSNDD2}
-#@ set_dont_use {tcbn65gpluswc/LNSNDD4}
-#@ set_dont_use {tcbn65gpluswc/LNSNDQD1}
-#@ set_dont_use {tcbn65gpluswc/LNSNDQD2}
-#@ set_dont_use {tcbn65gpluswc/LNSNDQD4}
-#@ set_dont_use {tcbn65gpluswc/LNSNQD1}
-#@ set_dont_use {tcbn65gpluswc/LNSNQD2}
-#@ set_dont_use {tcbn65gpluswc/LNSNQD4}
-#@ set_dont_use {tcbn65gpluswc/MAOI22D0}
-#@ set_dont_use {tcbn65gpluswc/MAOI22D1}
-#@ set_dont_use {tcbn65gpluswc/MAOI22D2}
-#@ set_dont_use {tcbn65gpluswc/MAOI22D4}
-#@ set_dont_use {tcbn65gpluswc/MAOI222D0}
-#@ set_dont_use {tcbn65gpluswc/MAOI222D1}
-#@ set_dont_use {tcbn65gpluswc/MAOI222D2}
-#@ set_dont_use {tcbn65gpluswc/MAOI222D4}
-#@ set_dont_use {tcbn65gpluswc/MOAI22D0}
-#@ set_dont_use {tcbn65gpluswc/MOAI22D1}
-#@ set_dont_use {tcbn65gpluswc/MOAI22D2}
-#@ set_dont_use {tcbn65gpluswc/MOAI22D4}
-#@ set_dont_use {tcbn65gpluswc/MUX2D0}
-#@ set_dont_use {tcbn65gpluswc/MUX2D1}
-#@ set_dont_use {tcbn65gpluswc/MUX2D2}
-#@ set_dont_use {tcbn65gpluswc/MUX2D4}
-#@ set_dont_use {tcbn65gpluswc/MUX2ND0}
-#@ set_dont_use {tcbn65gpluswc/MUX2ND1}
-#@ set_dont_use {tcbn65gpluswc/MUX2ND2}
-#@ set_dont_use {tcbn65gpluswc/MUX2ND4}
-#@ set_dont_use {tcbn65gpluswc/MUX3D0}
-#@ set_dont_use {tcbn65gpluswc/MUX3D1}
-#@ set_dont_use {tcbn65gpluswc/MUX3D2}
-#@ set_dont_use {tcbn65gpluswc/MUX3D4}
-#@ set_dont_use {tcbn65gpluswc/MUX3ND0}
-#@ set_dont_use {tcbn65gpluswc/MUX3ND1}
-#@ set_dont_use {tcbn65gpluswc/MUX3ND2}
-#@ set_dont_use {tcbn65gpluswc/MUX3ND4}
-#@ set_dont_use {tcbn65gpluswc/MUX4D0}
-#@ set_dont_use {tcbn65gpluswc/MUX4D1}
-#@ set_dont_use {tcbn65gpluswc/MUX4D2}
-#@ set_dont_use {tcbn65gpluswc/MUX4D4}
-#@ set_dont_use {tcbn65gpluswc/MUX4ND0}
-#@ set_dont_use {tcbn65gpluswc/MUX4ND1}
-#@ set_dont_use {tcbn65gpluswc/MUX4ND2}
-#@ set_dont_use {tcbn65gpluswc/MUX4ND4}
-#@ set_dont_use {tcbn65gpluswc/ND2D1}
-#@ set_dont_use {tcbn65gpluswc/ND2D2}
-#@ set_dont_use {tcbn65gpluswc/ND2D3}
-#@ set_dont_use {tcbn65gpluswc/ND2D4}
-#@ set_dont_use {tcbn65gpluswc/ND2D8}
-#@ set_dont_use {tcbn65gpluswc/ND3D1}
-#@ set_dont_use {tcbn65gpluswc/ND3D2}
-#@ set_dont_use {tcbn65gpluswc/ND3D3}
-#@ set_dont_use {tcbn65gpluswc/ND3D4}
-#@ set_dont_use {tcbn65gpluswc/ND3D8}
-#@ set_dont_use {tcbn65gpluswc/ND4D1}
-#@ set_dont_use {tcbn65gpluswc/ND4D2}
-#@ set_dont_use {tcbn65gpluswc/ND4D3}
-#@ set_dont_use {tcbn65gpluswc/ND4D4}
-#@ set_dont_use {tcbn65gpluswc/ND4D8}
-#@ set_dont_use {tcbn65gpluswc/NR2D1}
-#@ set_dont_use {tcbn65gpluswc/NR2D2}
-#@ set_dont_use {tcbn65gpluswc/NR2D3}
-#@ set_dont_use {tcbn65gpluswc/NR2D4}
-#@ set_dont_use {tcbn65gpluswc/NR2D8}
-#@ set_dont_use {tcbn65gpluswc/NR2XD0}
-#@ set_dont_use {tcbn65gpluswc/NR2XD1}
-#@ set_dont_use {tcbn65gpluswc/NR2XD2}
-#@ set_dont_use {tcbn65gpluswc/NR2XD3}
-#@ set_dont_use {tcbn65gpluswc/NR2XD4}
-#@ set_dont_use {tcbn65gpluswc/NR2XD8}
-#@ set_dont_use {tcbn65gpluswc/NR3D1}
-#@ set_dont_use {tcbn65gpluswc/NR3D2}
-#@ set_dont_use {tcbn65gpluswc/NR3D3}
-#@ set_dont_use {tcbn65gpluswc/NR3D4}
-#@ set_dont_use {tcbn65gpluswc/NR3D8}
-#@ set_dont_use {tcbn65gpluswc/NR4D1}
-#@ set_dont_use {tcbn65gpluswc/NR4D2}
-#@ set_dont_use {tcbn65gpluswc/NR4D3}
-#@ set_dont_use {tcbn65gpluswc/NR4D4}
-#@ set_dont_use {tcbn65gpluswc/NR4D8}
-#@ set_dont_use {tcbn65gpluswc/OA21D0}
-#@ set_dont_use {tcbn65gpluswc/OA21D1}
-#@ set_dont_use {tcbn65gpluswc/OA21D2}
-#@ set_dont_use {tcbn65gpluswc/OA21D4}
-#@ set_dont_use {tcbn65gpluswc/OA22D0}
-#@ set_dont_use {tcbn65gpluswc/OA22D1}
-#@ set_dont_use {tcbn65gpluswc/OA22D2}
-#@ set_dont_use {tcbn65gpluswc/OA22D4}
-#@ set_dont_use {tcbn65gpluswc/OA31D0}
-#@ set_dont_use {tcbn65gpluswc/OA31D1}
-#@ set_dont_use {tcbn65gpluswc/OA31D2}
-#@ set_dont_use {tcbn65gpluswc/OA31D4}
-#@ set_dont_use {tcbn65gpluswc/OA32D0}
-#@ set_dont_use {tcbn65gpluswc/OA32D1}
-#@ set_dont_use {tcbn65gpluswc/OA32D2}
-#@ set_dont_use {tcbn65gpluswc/OA32D4}
-#@ set_dont_use {tcbn65gpluswc/OA33D0}
-#@ set_dont_use {tcbn65gpluswc/OA33D1}
-#@ set_dont_use {tcbn65gpluswc/OA33D2}
-#@ set_dont_use {tcbn65gpluswc/OA33D4}
-#@ set_dont_use {tcbn65gpluswc/OA211D0}
-#@ set_dont_use {tcbn65gpluswc/OA211D1}
-#@ set_dont_use {tcbn65gpluswc/OA211D2}
-#@ set_dont_use {tcbn65gpluswc/OA211D4}
-#@ set_dont_use {tcbn65gpluswc/OA221D0}
-#@ set_dont_use {tcbn65gpluswc/OA221D1}
-#@ set_dont_use {tcbn65gpluswc/OA221D2}
-#@ set_dont_use {tcbn65gpluswc/OA221D4}
-#@ set_dont_use {tcbn65gpluswc/OA222D0}
-#@ set_dont_use {tcbn65gpluswc/OA222D1}
-#@ set_dont_use {tcbn65gpluswc/OA222D2}
-#@ set_dont_use {tcbn65gpluswc/OA222D4}
-#@ set_dont_use {tcbn65gpluswc/OAI21D0}
-#@ set_dont_use {tcbn65gpluswc/OAI21D1}
-#@ set_dont_use {tcbn65gpluswc/OAI21D2}
-#@ set_dont_use {tcbn65gpluswc/OAI21D4}
-#@ set_dont_use {tcbn65gpluswc/OAI22D0}
-#@ set_dont_use {tcbn65gpluswc/OAI22D1}
-#@ set_dont_use {tcbn65gpluswc/OAI22D2}
-#@ set_dont_use {tcbn65gpluswc/OAI22D4}
-#@ set_dont_use {tcbn65gpluswc/OAI31D0}
-#@ set_dont_use {tcbn65gpluswc/OAI31D1}
-#@ set_dont_use {tcbn65gpluswc/OAI31D2}
-#@ set_dont_use {tcbn65gpluswc/OAI31D4}
-#@ set_dont_use {tcbn65gpluswc/OAI32D0}
-#@ set_dont_use {tcbn65gpluswc/OAI32D1}
-#@ set_dont_use {tcbn65gpluswc/OAI32D2}
-#@ set_dont_use {tcbn65gpluswc/OAI32D4}
-#@ set_dont_use {tcbn65gpluswc/OAI32XD4}
-#@ set_dont_use {tcbn65gpluswc/OAI33D0}
-#@ set_dont_use {tcbn65gpluswc/OAI33D1}
-#@ set_dont_use {tcbn65gpluswc/OAI33D2}
-#@ set_dont_use {tcbn65gpluswc/OAI33D4}
-#@ set_dont_use {tcbn65gpluswc/OAI33XD4}
-#@ set_dont_use {tcbn65gpluswc/OAI211D0}
-#@ set_dont_use {tcbn65gpluswc/OAI211D1}
-#@ set_dont_use {tcbn65gpluswc/OAI211D2}
-#@ set_dont_use {tcbn65gpluswc/OAI211D4}
-#@ set_dont_use {tcbn65gpluswc/OAI221D0}
-#@ set_dont_use {tcbn65gpluswc/OAI221D1}
-#@ set_dont_use {tcbn65gpluswc/OAI221D2}
-#@ set_dont_use {tcbn65gpluswc/OAI221D4}
-#@ set_dont_use {tcbn65gpluswc/OAI221XD4}
-#@ set_dont_use {tcbn65gpluswc/OAI222D0}
-#@ set_dont_use {tcbn65gpluswc/OAI222D1}
-#@ set_dont_use {tcbn65gpluswc/OAI222D2}
-#@ set_dont_use {tcbn65gpluswc/OAI222D4}
-#@ set_dont_use {tcbn65gpluswc/OAI222XD4}
-#@ set_dont_use {tcbn65gpluswc/OD18DCAP16}
-#@ set_dont_use {tcbn65gpluswc/OD18DCAP32}
-#@ set_dont_use {tcbn65gpluswc/OD18DCAP64}
-#@ set_dont_use {tcbn65gpluswc/SDFCND0}
-#@ set_dont_use {tcbn65gpluswc/SDFCND1}
-#@ set_dont_use {tcbn65gpluswc/SDFCND2}
-#@ set_dont_use {tcbn65gpluswc/SDFCND4}
-#@ set_dont_use {tcbn65gpluswc/SDFCNQD0}
-#@ set_dont_use {tcbn65gpluswc/SDFCNQD1}
-#@ set_dont_use {tcbn65gpluswc/SDFCNQD2}
-#@ set_dont_use {tcbn65gpluswc/SDFCNQD4}
-#@ set_dont_use {tcbn65gpluswc/SDFCSND0}
-#@ set_dont_use {tcbn65gpluswc/SDFCSND1}
-#@ set_dont_use {tcbn65gpluswc/SDFCSND2}
-#@ set_dont_use {tcbn65gpluswc/SDFCSND4}
-#@ set_dont_use {tcbn65gpluswc/SDFCSNQD0}
-#@ set_dont_use {tcbn65gpluswc/SDFCSNQD1}
-#@ set_dont_use {tcbn65gpluswc/SDFCSNQD2}
-#@ set_dont_use {tcbn65gpluswc/SDFCSNQD4}
-#@ set_dont_use {tcbn65gpluswc/SDFD0}
-#@ set_dont_use {tcbn65gpluswc/SDFD1}
-#@ set_dont_use {tcbn65gpluswc/SDFD2}
-#@ set_dont_use {tcbn65gpluswc/SDFD4}
-#@ set_dont_use {tcbn65gpluswc/SDFKCND0}
-#@ set_dont_use {tcbn65gpluswc/SDFKCND1}
-#@ set_dont_use {tcbn65gpluswc/SDFKCND2}
-#@ set_dont_use {tcbn65gpluswc/SDFKCND4}
-#@ set_dont_use {tcbn65gpluswc/SDFKCNQD0}
-#@ set_dont_use {tcbn65gpluswc/SDFKCNQD1}
-#@ set_dont_use {tcbn65gpluswc/SDFKCNQD2}
-#@ set_dont_use {tcbn65gpluswc/SDFKCNQD4}
-#@ set_dont_use {tcbn65gpluswc/SDFKCSND0}
-#@ set_dont_use {tcbn65gpluswc/SDFKCSND1}
-#@ set_dont_use {tcbn65gpluswc/SDFKCSND2}
-#@ set_dont_use {tcbn65gpluswc/SDFKCSND4}
-#@ set_dont_use {tcbn65gpluswc/SDFKCSNQD0}
-#@ set_dont_use {tcbn65gpluswc/SDFKCSNQD1}
-#@ set_dont_use {tcbn65gpluswc/SDFKCSNQD2}
-#@ set_dont_use {tcbn65gpluswc/SDFKCSNQD4}
-#@ set_dont_use {tcbn65gpluswc/SDFKSND0}
-#@ set_dont_use {tcbn65gpluswc/SDFKSND1}
-#@ set_dont_use {tcbn65gpluswc/SDFKSND2}
-#@ set_dont_use {tcbn65gpluswc/SDFKSND4}
-#@ set_dont_use {tcbn65gpluswc/SDFKSNQD0}
-#@ set_dont_use {tcbn65gpluswc/SDFKSNQD1}
-#@ set_dont_use {tcbn65gpluswc/SDFKSNQD2}
-#@ set_dont_use {tcbn65gpluswc/SDFKSNQD4}
-#@ set_dont_use {tcbn65gpluswc/SDFNCND0}
-#@ set_dont_use {tcbn65gpluswc/SDFNCND1}
-#@ set_dont_use {tcbn65gpluswc/SDFNCND2}
-#@ set_dont_use {tcbn65gpluswc/SDFNCND4}
-#@ set_dont_use {tcbn65gpluswc/SDFNCSND0}
-#@ set_dont_use {tcbn65gpluswc/SDFNCSND1}
-#@ set_dont_use {tcbn65gpluswc/SDFNCSND2}
-#@ set_dont_use {tcbn65gpluswc/SDFNCSND4}
-#@ set_dont_use {tcbn65gpluswc/SDFND0}
-#@ set_dont_use {tcbn65gpluswc/SDFND1}
-#@ set_dont_use {tcbn65gpluswc/SDFND2}
-#@ set_dont_use {tcbn65gpluswc/SDFND4}
-#@ set_dont_use {tcbn65gpluswc/SDFNSND0}
-#@ set_dont_use {tcbn65gpluswc/SDFNSND1}
-#@ set_dont_use {tcbn65gpluswc/SDFNSND2}
-#@ set_dont_use {tcbn65gpluswc/SDFNSND4}
-#@ set_dont_use {tcbn65gpluswc/SDFQD0}
-#@ set_dont_use {tcbn65gpluswc/SDFQD1}
-#@ set_dont_use {tcbn65gpluswc/SDFQD2}
-#@ set_dont_use {tcbn65gpluswc/SDFQD4}
-#@ set_dont_use {tcbn65gpluswc/SDFQND0}
-#@ set_dont_use {tcbn65gpluswc/SDFQND1}
-#@ set_dont_use {tcbn65gpluswc/SDFQND2}
-#@ set_dont_use {tcbn65gpluswc/SDFQND4}
-#@ set_dont_use {tcbn65gpluswc/SDFSND0}
-#@ set_dont_use {tcbn65gpluswc/SDFSND1}
-#@ set_dont_use {tcbn65gpluswc/SDFSND2}
-#@ set_dont_use {tcbn65gpluswc/SDFSND4}
-#@ set_dont_use {tcbn65gpluswc/SDFSNQD0}
-#@ set_dont_use {tcbn65gpluswc/SDFSNQD1}
-#@ set_dont_use {tcbn65gpluswc/SDFSNQD2}
-#@ set_dont_use {tcbn65gpluswc/SDFSNQD4}
-#@ set_dont_use {tcbn65gpluswc/SDFXD0}
-#@ set_dont_use {tcbn65gpluswc/SDFXD1}
-#@ set_dont_use {tcbn65gpluswc/SDFXD2}
-#@ set_dont_use {tcbn65gpluswc/SDFXD4}
-#@ set_dont_use {tcbn65gpluswc/SDFXQD0}
-#@ set_dont_use {tcbn65gpluswc/SDFXQD1}
-#@ set_dont_use {tcbn65gpluswc/SDFXQD2}
-#@ set_dont_use {tcbn65gpluswc/SDFXQD4}
-#@ set_dont_use {tcbn65gpluswc/SEDFCND0}
-#@ set_dont_use {tcbn65gpluswc/SEDFCND1}
-#@ set_dont_use {tcbn65gpluswc/SEDFCND2}
-#@ set_dont_use {tcbn65gpluswc/SEDFCND4}
-#@ set_dont_use {tcbn65gpluswc/SEDFCNQD0}
-#@ set_dont_use {tcbn65gpluswc/SEDFCNQD1}
-#@ set_dont_use {tcbn65gpluswc/SEDFCNQD2}
-#@ set_dont_use {tcbn65gpluswc/SEDFCNQD4}
-#@ set_dont_use {tcbn65gpluswc/SEDFD0}
-#@ set_dont_use {tcbn65gpluswc/SEDFD1}
-#@ set_dont_use {tcbn65gpluswc/SEDFD2}
-#@ set_dont_use {tcbn65gpluswc/SEDFD4}
-#@ set_dont_use {tcbn65gpluswc/SEDFKCND0}
-#@ set_dont_use {tcbn65gpluswc/SEDFKCND1}
-#@ set_dont_use {tcbn65gpluswc/SEDFKCND2}
-#@ set_dont_use {tcbn65gpluswc/SEDFKCND4}
-#@ set_dont_use {tcbn65gpluswc/SEDFKCNQD0}
-#@ set_dont_use {tcbn65gpluswc/SEDFKCNQD1}
-#@ set_dont_use {tcbn65gpluswc/SEDFKCNQD2}
-#@ set_dont_use {tcbn65gpluswc/SEDFKCNQD4}
-#@ set_dont_use {tcbn65gpluswc/SEDFQD0}
-#@ set_dont_use {tcbn65gpluswc/SEDFQD1}
-#@ set_dont_use {tcbn65gpluswc/SEDFQD2}
-#@ set_dont_use {tcbn65gpluswc/SEDFQD4}
-#@ set_dont_use {tcbn65gpluswc/SEDFQND0}
-#@ set_dont_use {tcbn65gpluswc/SEDFQND1}
-#@ set_dont_use {tcbn65gpluswc/SEDFQND2}
-#@ set_dont_use {tcbn65gpluswc/SEDFQND4}
-#@ set_dont_use {tcbn65gpluswc/SEDFQNXD0}
-#@ set_dont_use {tcbn65gpluswc/SEDFQNXD1}
-#@ set_dont_use {tcbn65gpluswc/SEDFQNXD2}
-#@ set_dont_use {tcbn65gpluswc/SEDFQNXD4}
-#@ set_dont_use {tcbn65gpluswc/SEDFQXD0}
-#@ set_dont_use {tcbn65gpluswc/SEDFQXD1}
-#@ set_dont_use {tcbn65gpluswc/SEDFQXD2}
-#@ set_dont_use {tcbn65gpluswc/SEDFQXD4}
-#@ set_dont_use {tcbn65gpluswc/SEDFXD0}
-#@ set_dont_use {tcbn65gpluswc/SEDFXD1}
-#@ set_dont_use {tcbn65gpluswc/SEDFXD2}
-#@ set_dont_use {tcbn65gpluswc/SEDFXD4}
-#@ set_dont_use {tcbn65gpluswc/TIEH}
-#@ set_dont_use {tcbn65gpluswc/TIEL}
-#@ set_dont_use {tcbn65gpluswc/XNR2D1}
-#@ set_dont_use {tcbn65gpluswc/XNR2D2}
-#@ set_dont_use {tcbn65gpluswc/XNR2D4}
-#@ set_dont_use {tcbn65gpluswc/XNR3D0}
-#@ set_dont_use {tcbn65gpluswc/XNR3D1}
-#@ set_dont_use {tcbn65gpluswc/XNR3D2}
-#@ set_dont_use {tcbn65gpluswc/XNR3D4}
-#@ set_dont_use {tcbn65gpluswc/XNR4D0}
-#@ set_dont_use {tcbn65gpluswc/XNR4D1}
-#@ set_dont_use {tcbn65gpluswc/XNR4D2}
-#@ set_dont_use {tcbn65gpluswc/XNR4D4}
-#@ set_dont_use {tcbn65gpluswc/XOR2D1}
-#@ set_dont_use {tcbn65gpluswc/XOR2D2}
-#@ set_dont_use {tcbn65gpluswc/XOR2D4}
-#@ set_dont_use {tcbn65gpluswc/XOR3D1}
-#@ set_dont_use {tcbn65gpluswc/XOR3D2}
-#@ set_dont_use {tcbn65gpluswc/XOR3D4}
-#@ set_dont_use {tcbn65gpluswc/XOR4D1}
-#@ set_dont_use {tcbn65gpluswc/XOR4D2}
-#@ set_dont_use {tcbn65gpluswc/XOR4D4}
-#@ set_dont_use {tcbn65gpluswc/AN2D1}
-#@ set_dont_use {tcbn65gpluswc/AN2D2}
-#@ set_dont_use {tcbn65gpluswc/AN2D4}
-#@ set_dont_use {tcbn65gpluswc/AN2D8}
-#@ set_dont_use {tcbn65gpluswc/AN2XD1}
-#@ set_dont_use {tcbn65gpluswc/AN3D1}
-#@ set_dont_use {tcbn65gpluswc/AN3D2}
-#@ set_dont_use {tcbn65gpluswc/AN3D4}
-#@ set_dont_use {tcbn65gpluswc/AN3D8}
-#@ set_dont_use {tcbn65gpluswc/AN3XD1}
-#@ set_dont_use {tcbn65gpluswc/AN4D1}
-#@ set_dont_use {tcbn65gpluswc/AN4D2}
-#@ set_dont_use {tcbn65gpluswc/AN4D4}
-#@ set_dont_use {tcbn65gpluswc/AN4D8}
-#@ set_dont_use {tcbn65gpluswc/AN4XD1}
-#@ set_dont_use {tcbn65gpluswc/INVD1}
-#@ set_dont_use {tcbn65gpluswc/INVD2}
-#@ set_dont_use {tcbn65gpluswc/INVD3}
-#@ set_dont_use {tcbn65gpluswc/INVD4}
-#@ set_dont_use {tcbn65gpluswc/INVD6}
-#@ set_dont_use {tcbn65gpluswc/INVD8}
-#@ set_dont_use {tcbn65gpluswc/INVD12}
-#@ set_dont_use {tcbn65gpluswc/INVD16}
-#@ set_dont_use {tcbn65gpluswc/INVD20}
-#@ set_dont_use {tcbn65gpluswc/INVD24}
-#@ set_dont_use {tcbn65gpluswc/OR2D1}
-#@ set_dont_use {tcbn65gpluswc/OR2D2}
-#@ set_dont_use {tcbn65gpluswc/OR2D4}
-#@ set_dont_use {tcbn65gpluswc/OR2D8}
-#@ set_dont_use {tcbn65gpluswc/OR2XD1}
-#@ set_dont_use {tcbn65gpluswc/OR3D1}
-#@ set_dont_use {tcbn65gpluswc/OR3D2}
-#@ set_dont_use {tcbn65gpluswc/OR3D4}
-#@ set_dont_use {tcbn65gpluswc/OR3D8}
-#@ set_dont_use {tcbn65gpluswc/OR3XD1}
-#@ set_dont_use {tcbn65gpluswc/OR4D1}
-#@ set_dont_use {tcbn65gpluswc/OR4D2}
-#@ set_dont_use {tcbn65gpluswc/OR4D4}
-#@ set_dont_use {tcbn65gpluswc/OR4D8}
-#@ set_dont_use {tcbn65gpluswc/OR4XD1}
-#@ set_dont_use {tcbn65gpluswc/BUFFD0}
-#@ 
-#@ #set_prefer {tcbn65gpluswc/AN2D0}
-#@ #set_prefer {tcbn65gpluswc/OR2D0}
-#@ 
-#@ #set_prefer {tcbn65gpluswc/AN3D0}
-#@ #set_prefer {tcbn65gpluswc/AN4D0}
-#@ #set_prefer {tcbn65gpluswc/OR3D0}
-#@ #set_prefer {tcbn65gpluswc/OR4D0}
-#@ #set_prefer {tcbn65gpluswc/XOR2D0}
-#@ #set_prefer {tcbn65gpluswc/XOR3D0}
-#@ #set_prefer {tcbn65gpluswc/XOR4D0}
-#@ #set_prefer {tcbn65gpluswc/XNR2D0}
-#@ #set_prefer {tcbn65gpluswc/XNR3D0}
-#@ #set_prefer {tcbn65gpluswc/XNR4D0}
-#@ #set_prefer {tcbn65gpluswc/NR2D0}
-#@ #set_prefer {tcbn65gpluswc/NR3D0}
-#@ #set_prefer {tcbn65gpluswc/NR4D0}
-#@ #set_prefer {tcbn65gpluswc/ND2D0}
-#@ #set_prefer {tcbn65gpluswc/ND3D0}
-#@ #set_prefer {tcbn65gpluswc/ND4D0}
-#@ 
-#@ set_prefer {tcbn65gpluswc/INVD0}
-#@ set_dont_use {tcbn65gpluswc/AN2D0}
-#@ set_dont_use {tcbn65gpluswc/OR2D0}
-#@ set_prefer {tcbn65gpluswc/NR2D0}
-#@ set_prefer {tcbn65gpluswc/ND2D0}
-#@ set_dont_use {tcbn65gpluswc/XOR2D0}
-#@ 
-#@ set_dont_use {tcbn65gpluswc/AN3D0}
-#@ set_dont_use {tcbn65gpluswc/AN4D0}
-#@ set_dont_use {tcbn65gpluswc/OR3D0}
-#@ set_dont_use {tcbn65gpluswc/OR4D0}
-#@ set_dont_use {tcbn65gpluswc/XOR3D0}
-#@ set_dont_use {tcbn65gpluswc/XOR4D0}
-#@ set_dont_use {tcbn65gpluswc/XNR2D0}
-#@ set_dont_use {tcbn65gpluswc/XNR3D0}
-#@ set_dont_use {tcbn65gpluswc/XNR4D0}
-#@ set_dont_use {tcbn65gpluswc/NR3D0}
-#@ set_dont_use {tcbn65gpluswc/NR4D0}
-#@ set_dont_use {tcbn65gpluswc/ND3D0}
-#@ set_dont_use {tcbn65gpluswc/ND4D0}
-#@ # -- End source dc_scripts/mask_library_tcbn65gpluswc_AOI.tcl
-
-#@ 
-#@ # The remainder of the setup below should only be performed in Design Compiler
-#@ if {$synopsys_program_name == "dc_shell"}  {
-#@   # Set min libraries if they exist
+#@ if { [expr {$synopsys_program_name != "fm_shell"}] } {
 #@   foreach {max_library min_library} $MIN_LIBRARY_FILES {
 #@     echo Max. delay library: $max_library
 #@     echo Min. delay library: $min_library
 #@     set_min_library $max_library -min_version $min_library
 #@   }
+#@ }
 #@ 
-#@   if {[shell_is_in_topographical_mode]} {
-#@ 
-#@     # Only create new Milkyway design library if it doesn't already exist
-#@     if {![file isdirectory $mw_design_library ]} {
-#@       create_mw_lib   -technology $TECH_FILE                       -mw_reference_library $mw_reference_library                       $mw_design_library
-#@     } else {
-#@       # If Milkyway design library already exists, ensure that it is consistent with specified Milkyway reference libraries
-#@       set_mw_lib_reference $mw_design_library -mw_reference_library $mw_reference_library
-#@     }
-#@ 
-#@     open_mw_lib     $mw_design_library
-#@ 
-#@     check_library
-#@ 
-#@     set_tlu_plus_files -max_tluplus $TLUPLUS_MAX_FILE                        -min_tluplus $TLUPLUS_MIN_FILE                        -tech2itf_map $MAP_FILE
-#@ 
-#@     check_tlu_plus_files
-#@ 
-#@   }
-#@ 
-#@   #################################################################################
-#@   # Library Modifications
-#@   #
-#@   # Apply library modifications here after the libraries are loaded.
-#@   #################################################################################
-#@ 
-#@   if {[file exists [which ${LIBRARY_DONT_USE_FILE}]]} {
-#@     source -echo -verbose ${LIBRARY_DONT_USE_FILE}
-#@   }
-#@ } 
-#@ # -- End source dc_setup.tcl
+#@ # -- End source /user/erasmus/danielrb/Dropbox/Tesi/Adder_Linearization_CPE/synthesis/.synopsys_dc.setup
 
 read_verilog ../src/gen_nonlinear_part.v
-compile
-write -format verilog -output nonlin_mapped.v
+compile -area_effort high
+report_cell -nosplit > nonlinear_cell.rpt
 exit
