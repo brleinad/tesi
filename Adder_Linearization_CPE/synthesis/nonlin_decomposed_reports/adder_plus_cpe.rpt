@@ -1,0 +1,26 @@
+Warning: Design 'adder_cpe' has '3' unresolved references. For more detailed information, use the "link" command. (UID-341)
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : cell
+Design : adder_cpe
+Version: B-2008.09-SP4
+Date   : Sat Feb 13 18:50:44 2016
+****************************************
+
+Attributes:
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+CPE                       generator                       0.000000  b
+LIN_ADDER                 gen_linear_part                 0.000000  b
+NONLIN_ADDER              gen_nonlinear_part              0.000000  b
+U2                        TIEL            tcbn65gpluswc   1.080000  
+--------------------------------------------------------------------------------
+Total 4 cells                                             1.080000
+1

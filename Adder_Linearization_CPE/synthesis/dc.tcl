@@ -110,7 +110,8 @@ foreach_in_collection DESIGN [get_designs *] {
 	#report_timing -transition_time -nets -attributes -nosplit > ${REPORTS_DIR}/timing/${DESIGN_NAME}${VARIANT_NAME}_mapped_timing.rpt
 	#report_timing -transition_time -nets -attributes -nosplit > reports/timing/${current_design}_mapped_timing.rpt
 	# report_reference -nosplit > ${REPORTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}_mapped_reference.rpt
-	 report_area -nosplit > ${REPORTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}cone_.rpt
+	 #report_area -nosplit > ${REPORTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}cone_.rpt
+	 report_cell -nosplit > ${REPORTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.rpt
 
 
 	# Use SAIF file for power analysis
