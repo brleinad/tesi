@@ -1,0 +1,24 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : cell
+Design : simple_adder
+Version: B-2008.09-SP4
+Date   : Mon Feb 15 11:54:01 2016
+****************************************
+
+Attributes:
+   BO - reference allows boundary optimization
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+U3                        TIEL            tcbn65gpluswc   1.080000  
+add_1_root_add_13_2       simple_adder_DW01_add_0         63.000000 BO, h
+--------------------------------------------------------------------------------
+Total 2 cells                                             64.080000
+1

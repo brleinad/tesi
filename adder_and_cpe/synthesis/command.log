@@ -1,6 +1,6 @@
 #@ # 
 #@ # Running dc_shell Version B-2008.09-SP4 for linux -- Feb 27, 2009
-#@ # Date:   Tue Feb  9 12:20:10 2016
+#@ # Date:   Mon Feb 15 11:52:04 2016
 #@ # Run by: danielrb@uews040.ue.ucc.ie
 #@ 
 
@@ -3481,7 +3481,7 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ # -- End source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 
 source /user/erasmus/danielrb/Dropbox/Tesi/adder_and_cpe/synthesis/.synopsys_dc.setup
-#@ set DESIGN_NAME                   "adder_cpe";
+#@ set DESIGN_NAME                   "adder_cpe_dec";
 #@ 
 #@ echo "Target library: TSMC 65nm GP CMOS"
 #@ set LIBSEL "tcbn65gplus";
@@ -3516,7 +3516,9 @@ source /user/erasmus/danielrb/Dropbox/Tesi/adder_and_cpe/synthesis/.synopsys_dc.
 #@ set RTL_SOURCE_FILES "../source/gen_linear_part.v"
 #@ set RTL_SOURCE_FILES "../source/gen_nonlinear_part.v"
 #@ set RTL_SOURCE_FILES "../source/generator.v"
-#@ set RTL_SOURCE_FILES "../source/adder_cpe.v"
+#@ set RTL_SOURCE_FILES "../source/detector.v"
+#@ set RTL_SOURCE_FILES "../source/corrector.v"
+#@ set RTL_SOURCE_FILES "../source/adder_cpe_dec.v"
 #@ 
 #@ set REPORTS_DIR [join [list $LIBSEL "_reports"] ""]
 #@ set RESULTS_DIR [join [list $LIBSEL "_results"] ""]
@@ -3546,36 +3548,8 @@ source /user/erasmus/danielrb/Dropbox/Tesi/adder_and_cpe/synthesis/.synopsys_dc.
 #@ 
 #@ # -- End source /user/erasmus/danielrb/Dropbox/Tesi/adder_and_cpe/synthesis/.synopsys_dc.setup
 
-gui_start
-source synth.sh
-#@ #!/bin/bash
-#@ 
-#@ 
-#@ read_verilog  ../source/gen_linear_part.v
-#@ read_verilog  ../source/gen_nonlinear_part.v
-#@ read_verilog  ../source/generator.v
-#@ read_verilog  ../source/adder_cpe.v
-#@ 
-#@ #adder_cpe.v
-#@ #corrector.v
-#@ #detector.v
-#@ #gen_cla_decomposed.v
-#@ #gen_linear_part.v
-#@ #gen_nonlinear_part.v
-#@ #generator.v
-#@ #tb_gen_cla_decomposed.v
-#@ #tb_generator_detector.v
-#@ # -- End source synth.sh
-
-change_selection [get_s adder_cpe]
-::cmenus::create_schematic
-change_selection [get_s CPE]
-change_selection [get_s NONLIN_ADDER]
-change_selection 
-change_selection [get_s LIN_ADDER]
-change_selection [get_s LIN_ADDER]
-change_selection [get_s LIN_ADDER]
-report_area > area_adderCPE.rpt
-report_cell > cell_adderCPE.rpt
-write -format verilog -output syn_adder.v
-write -format verilog -hierarchy -output syn_adder.v
+read_verilog ../source/simple_adder.v
+read_verilog ../source/simple_adder.v
+compile -area_effort high
+report_cell > cell_simple_adder.rpt
+exit

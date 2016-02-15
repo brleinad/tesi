@@ -1,4 +1,4 @@
-set DESIGN_NAME                   "adder_cpe";
+set DESIGN_NAME                   "adder_cpe_dec";
 
 echo "Target library: TSMC 65nm GP CMOS"
 set LIBSEL "tcbn65gplus";
@@ -33,7 +33,9 @@ set alib_library_analysis_path ./cache/
 set RTL_SOURCE_FILES "../source/gen_linear_part.v"
 set RTL_SOURCE_FILES "../source/gen_nonlinear_part.v"
 set RTL_SOURCE_FILES "../source/generator.v"
-set RTL_SOURCE_FILES "../source/adder_cpe.v"
+set RTL_SOURCE_FILES "../source/detector.v"
+set RTL_SOURCE_FILES "../source/corrector.v"
+set RTL_SOURCE_FILES "../source/adder_cpe_dec.v"
 
 set REPORTS_DIR [join [list $LIBSEL "_reports"] ""]
 set RESULTS_DIR [join [list $LIBSEL "_results"] ""]

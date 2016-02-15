@@ -53,7 +53,7 @@ begin
         end
         else
         begin
-                for (i= 14; i != 0 ; --i)
+                for (i= 14; i != 0 ; i = i - 1)
                 begin
                         ct[i] <= ct[i-1];
                 end
@@ -72,7 +72,7 @@ reg [1:0] state, next_state;
 
 
 // Sequential logic, going to next state in FSM
-always @(posedge clk or error)
+always @(posedge clk)
 begin
         //  if an error is detected the corrector starts
         if(error)

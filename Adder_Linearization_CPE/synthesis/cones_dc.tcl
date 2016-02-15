@@ -37,13 +37,14 @@ echo "source files are:............................"
 echo ${RTL_SOURCE_FILES}
 
 #set cone "./cones/nonlin_out/c"
-set Ncones 501
+#set Ncones 501
+set Ncones 8
 #set Ncones 3
 
 for {set i 1} {$i <= $Ncones } {incr i} {
 	#current_design $DESIGN
 	link
-	read_verilog ./cones/nonlin_out/c$i.v
+	read_verilog ./cones/lin_out/c$i.v
 	#################################################################################
 	# Apply Additional Optimization Constraints
 	#################################################################################
@@ -57,8 +58,8 @@ for {set i 1} {$i <= $Ncones } {incr i} {
 
 	# compile_ultra
 	compile -area_effort high 
-	report_area -nosplit > cones/area_reports/area_cone$i.rpt
-	report_cell -nosplit > cones/cell_reports/cell_cone$i.rpt
+	report_area -nosplit > cones/area_reports/area_lincone$i.rpt
+	report_cell -nosplit > cones/cell_reports/cell_lincone$i.rpt
 }
 	# Write and close SVF file and make it available for immediate use
 	set_svf -off

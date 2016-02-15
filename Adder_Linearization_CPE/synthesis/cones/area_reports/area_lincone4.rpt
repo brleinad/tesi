@@ -1,0 +1,25 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : area
+Design : c4
+Version: B-2008.09-SP4
+Date   : Mon Feb 15 12:15:04 2016
+****************************************
+
+Library(s) Used:
+
+    tcbn65gpluswc (File: /cadtools/tsmc/digital/Front_End/timing_power_noise/NLDM/tcbn65gplus_121b/tcbn65gpluswc.db)
+
+Number of ports:               18
+Number of nets:                23
+Number of cells:                6
+Number of references:           3
+
+Combinational area:         48.240000
+Noncombinational area:       0.000000
+Net Interconnect area:      undefined  (Wire load has zero net area)
+
+Total cell area:            48.240000
+Total area:                 undefined
+1

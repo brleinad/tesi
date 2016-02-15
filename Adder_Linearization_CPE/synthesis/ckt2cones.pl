@@ -16,7 +16,7 @@ my $input_cnt;
 
 # gate type list, if more gates added, just modify here
 # then the gate keywords will be able to be detected by the script
-my $gate_pattern = "and|inv";
+my $gate_pattern = "and|inv|xor";
 
 my $VERILOG_FILE = shift @ARGV;
 $VERILOG_FILE =~ /\b(.*)\.v/;
