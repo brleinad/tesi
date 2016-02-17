@@ -1,0 +1,70 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : cell
+Design : c15
+Version: B-2008.09-SP4
+Date   : Wed Feb 17 17:44:30 2016
+****************************************
+
+Attributes:
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+U52                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U53                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U54                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U55                       XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U56                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U57                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U58                       XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U59                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U60                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U61                       XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U62                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U63                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U64                       XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U65                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U66                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U67                       XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U68                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U69                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U70                       XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U71                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U72                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U73                       XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U74                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U75                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U76                       XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U77                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U78                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U79                       XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U80                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U81                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U82                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U83                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U84                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U85                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U86                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U87                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U88                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U89                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U90                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U91                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U92                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U93                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U94                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U95                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U96                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U97                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U98                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U99                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U100                      XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+--------------------------------------------------------------------------------
+Total 49 cells                                            415.079999
+1

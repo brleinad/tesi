@@ -9,7 +9,7 @@ my $line;
 
 print "Calculation of the total area of the linear part of the Adder decomposed into cones\n\n";
 
-while (open(CONE, "./cones/lin_out/cell_reports/cell_lincone$i.rpt"))
+while (open(CONE, "./cones/linear_out/cell_reports/cell_linear_cone$i.rpt"))
 {
 #	open(CONE, "./cones/lin_out/cell_reports/cell_lincone$i.rpt");
 	while($line = <CONE>)

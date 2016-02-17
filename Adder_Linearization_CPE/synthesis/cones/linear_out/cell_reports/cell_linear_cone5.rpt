@@ -1,0 +1,33 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : cell
+Design : c5
+Version: B-2008.09-SP4
+Date   : Wed Feb 17 17:42:21 2016
+****************************************
+
+Attributes:
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+U13                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U14                       XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U15                       XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U16                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U17                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U18                       XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U19                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U20                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U21                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U22                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U23                       XNR3D0HVT       tcbn65gplushvtwc 6.120000 
+U24                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+--------------------------------------------------------------------------------
+Total 12 cells                                            96.480000
+1

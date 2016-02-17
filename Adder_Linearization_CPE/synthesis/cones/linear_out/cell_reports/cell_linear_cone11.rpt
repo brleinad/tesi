@@ -1,0 +1,85 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : cell
+Design : c11
+Version: B-2008.09-SP4
+Date   : Wed Feb 17 17:43:38 2016
+****************************************
+
+Attributes:
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+U65                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U66                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U67                       XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U68                       XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U69                       XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U70                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U71                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U72                       XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U73                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U74                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U75                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U76                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U77                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U78                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U79                       XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U80                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U81                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U82                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U83                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U84                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U85                       XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U86                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U87                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U88                       XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U89                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U90                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U91                       XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U92                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U93                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U94                       XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U95                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U96                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U97                       XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U98                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U99                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U100                      XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U101                      XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U102                      XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U103                      XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U104                      XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U105                      XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U106                      XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U107                      XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U108                      XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U109                      XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U110                      XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U111                      XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U112                      XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U113                      XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U114                      XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U115                      XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U116                      XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U117                      XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U118                      XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U119                      XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U120                      XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U121                      XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U122                      XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U123                      XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U124                      XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U125                      XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U126                      XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U127                      XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U128                      XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+--------------------------------------------------------------------------------
+Total 64 cells                                            535.679998
+1

@@ -1,0 +1,22 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : cell
+Design : c1
+Version: B-2008.09-SP4
+Date   : Wed Feb 17 17:41:33 2016
+****************************************
+
+Attributes:
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+U2                        CKBD1HVT        tcbn65gplushvtwc 1.440000 
+--------------------------------------------------------------------------------
+Total 1 cells                                             1.440000
+1

@@ -11,7 +11,7 @@ my %inv_hash;
 
 my $VERILOG_FILE = shift @ARGV;
 
-my $gate_pattern = "XNOR2D0|XOR2D0|CKXOR2D1|ND2D0|INVD0|OR2D0|NR2D0|AN2D0|CLKBUF_X1";
+my $gate_pattern = "XNOR2D0|XOR2D0|CKXOR2D1|CKXOR2D1HVT|ND2D0|INVD0|OR2D0|NR2D0|AN2D0|CLKBUF_X1";
 
 # Open the original circuit to be split
 open CKT, $VERILOG_FILE or die $!;
@@ -274,7 +274,7 @@ while($original_nl = <CKT_TEMP>)
 			}
 			print "  assign $out = ~($left | $right);\n";
 		}
-		elsif($gate_type eq 'XOR2D0' or $gate_type eq 'CKXOR2D1')
+		elsif($gate_type eq 'XOR2D0' or $gate_type eq 'CKXOR2D1'or $gate_type eq 'CKXOR2D1HVT')
 		{
 			$original_nl =~ /\.\w+\s*\((\w+)\)\s*,\s*\.\w+\s*\((\w+)\)\s*,\s*\.\w+\s*\((\w+)\)/;
 			$left = $1;

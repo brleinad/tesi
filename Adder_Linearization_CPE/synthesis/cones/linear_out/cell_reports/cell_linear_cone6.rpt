@@ -1,0 +1,44 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : cell
+Design : c6
+Version: B-2008.09-SP4
+Date   : Wed Feb 17 17:42:34 2016
+****************************************
+
+Attributes:
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+U24                       XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U25                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U26                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U27                       XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U28                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U29                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U30                       XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U31                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U32                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U33                       XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U34                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U35                       XOR4D0HVT       tcbn65gplushvtwc 9.000000 
+U36                       XOR3D0HVT       tcbn65gplushvtwc 6.120000 
+U37                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U38                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U39                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U40                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U41                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U42                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U43                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U44                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U45                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+U46                       XNR4D0HVT       tcbn65gplushvtwc 9.000000 
+--------------------------------------------------------------------------------
+Total 23 cells                                            192.599999
+1

@@ -13,5 +13,5 @@ wire [NB:0] sum;
 assign sum = a + b + cin;
 assign cout = sum[NB];
 assign s = sum[7:0];
-
 endmodule
+
