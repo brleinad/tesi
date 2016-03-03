@@ -1,0 +1,7 @@
+Loading internal null logger. Install Log::Log4perl for logging messages
+
+CPAN.pm requires configuration, but most of it can be done automatically.
+If you answer 'no' below, you will enter an interactive dialog for each
+configuration option instead.
+
+Would you like to configure as much as possible automatically? [yes] 

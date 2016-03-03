@@ -1,9 +1,0 @@
-<interfaceDefinition version='1.2' language='verilog' kind='module' name='top_adder'>
-    <portList>
-
-      <port name='a' direction='input' type='[3:0]' kind='array' packedDimension='[3:0]'> </port>
-      <port name='b' direction='input' type='[3:0]' kind='array' packedDimension='[3:0]'> </port>
-      <port name='s' direction='output' type='[4:0]' kind='array' packedDimension='[4:0]'> </port>
-
-    </portList>
-</interfaceDefinition>

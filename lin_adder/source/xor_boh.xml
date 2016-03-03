@@ -1,9 +1,0 @@
-<interfaceDefinition version='1.2' language='verilog' kind='module' name='xor_boh'>
-    <portList>
-
-      <port name='a' direction='input' type='' kind=''> </port>
-      <port name='b' direction='input' type='' kind=''> </port>
-      <port name='s' direction='output' type='' kind=''> </port>
-
-    </portList>
-</interfaceDefinition>

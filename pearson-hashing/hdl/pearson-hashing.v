@@ -1,3 +1,0 @@
-module pearson();
-
-endmodule
