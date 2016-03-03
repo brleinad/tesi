@@ -6,6 +6,8 @@ ldpc/*.un~
 */a.out
 CPE_test/
 papers/
+tools
+misc
 steinbach/
 *dropbox*
 
