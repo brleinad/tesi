@@ -1,14 +1,14 @@
-set DESIGN_NAME "cla_adder"
-set VARIANT_NAME "1024bit"
+set DESIGN_NAME "gen_cla_decomposed"
+set VARIANT_NAME "8bit"
 
 # set RTL_SOURCE_FILES "../src/verilog/pair.v"
-set RTL_SOURCE_FILES "../src/${DESIGN_NAME}.v"
-
-../source/linear_part.v
-../source/nonlinear_part.v
-../source/cla_decomposed.v
-../source/cla_8bit.v
-
+set RTL_SOURCE_FILES [
+../src/constants.v
+../src/gen_cla_decomposed.v
+../src/gen_linear_part.v
+../src/gen_nonlinear_part.v
+../src/tb_gen_cla_decomposed.v
+]
 
 #set RTL_SOURCE_FILES "../src/cla_adder.v"
 
@@ -25,4 +25,3 @@ source dc_setup.tcl
 # call a script which compiles the design
 source dc.tcl
 
-quit
