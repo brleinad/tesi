@@ -1,4 +1,4 @@
-module gen_cla_decomposed(a,b, c_in ,s);
+module gen_cla_decomposed(a,b,s);
 //module gen_cla_decomposed(a,b, c_in ,s,c_out);
 
 //parameter NBIT = 7; //Number of bits of the adder
@@ -6,8 +6,8 @@ module gen_cla_decomposed(a,b, c_in ,s);
 `include "constants.v"
  
 input [NBIT-1:0]  a,b;
-input             c_in;
-output [NBIT:0] s;
+//input             c_in;
+output [NBIT-1:0] s;
 //output           c_out;
 
 wire [NNL-1:0]   n;
@@ -17,7 +17,7 @@ gen_nonlinear_part
 NLIN(
         .a (a),
         .b (b),
-        .c (c_in),
+        //.c (c_in),
         .n (n)
 );
 
@@ -25,7 +25,7 @@ gen_linear_part
 LIN(
         .a (a),
         .b (b),
-        .c_in (c_in), //first carry in is zero
+        //.c_in (c_in), //first carry in is zero
         .n (n),
         .s (s)//,
 );

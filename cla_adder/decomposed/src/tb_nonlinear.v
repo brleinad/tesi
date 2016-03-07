@@ -1,11 +1,12 @@
 module tb_nonlinear();
 
-parameter NBIT = 4; // number of bits of the adder
-parameter NNL=56; //Number of bits of the non-linear outputs
+//parameter NBIT = 4; // number of bits of the adder
+//parameter NNL=56; //Number of bits of the non-linear outputs
+`include "constants.v"
 
 //inputs
 reg [NBIT-1:0] a,b;
-reg c_in;
+//reg c_in;
 //outputs
 wire [NNL-1:0] nonlin;
 
@@ -14,7 +15,7 @@ gen_nonlinear_part
 DUT (
         .a (a),
         .b (b),
-        .c (c_in),
+        //.c (c_in),
         .n (nonlin)
 );
 

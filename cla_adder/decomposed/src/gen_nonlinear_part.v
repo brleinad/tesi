@@ -1,26 +1,23 @@
-module gen_nonlinear_part(a,b,c,n);
-
-//parameter NBIT = 7; // number of bits of the adder
-//parameter NNL=2**(NBIT+2)-NBIT-4; //Number of bits of the non-linear outputs
+module gen_nonlinear_part(a,b,n);
 
 `include "constants.v"
 
 input [NBIT-1:0] a, b; //adder inputs
-input c; // carry in
+//input c; // carry in
 
 output [NNL-1:0] n; // non-linear outputs
 
 reg [NNL:0] g ;//= 0; //non-linear intermediate values
 integer i,j, ii,inter;
 
-always @(a or b or c)
+always @(a or b)// or c)
 begin
         //initial values
         i = 1; //index for g
         j = 0; //index for a, b
         inter = 1; //interval
 
-        g[0] = c; 
+        g[0] = 0; 
 
         while (i < NNL)
         begin 

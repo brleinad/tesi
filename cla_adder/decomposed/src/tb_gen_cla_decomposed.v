@@ -2,15 +2,16 @@
 
 module tb_gen_cla_decomposed();
 
-parameter NBIT = 7; //Number of bits of the adder
+//parameter NBIT = 7; //Number of bits of the adder
 //parameter NNL= 56; //Number of bits of the non linear input
-parameter NNL=2**(NBIT+2)-NBIT-4; //Number of bits of the non-linear outputs
+//parameter NNL=2**(NBIT+2)-NBIT-4; //Number of bits of the non-linear outputs
+`include "constants.v"
  
 //inputs
 reg [NBIT-1:0]  a,b;
-reg             c_in;
+//reg             c_in;
 // outputs
-wire [NBIT:0] s;
+wire [NBIT-1:0] s;
 //wire c_out;
 
 
@@ -18,7 +19,7 @@ gen_cla_decomposed
 DUT(
         .a(a),
         .b(b),
-        .c_in(c_in),
+        //.c_in(c_in),
         .s(s)//,
         //.c_out(c_out)
 );
@@ -28,7 +29,7 @@ begin
         //$monitor("A:%d\tB:%d\tS:%d\tCout:%d",a,b,s,c_out);
         $monitor("A:%d\tB:%d\tS:%d\t%b",a,b,s,s);
         a <= 0;
-        c_in <= 0;
+        //c_in <= 0;
         b <= 0;
         #3
         a <= 2;
