@@ -57,8 +57,9 @@ set_fix_multiple_port_nets -all -buffer_constants
 # Compile the Design
 #################################################################################
 
-#compile_ultra
-compile -incremental_mapping
+#compile_ultra 
+compile -area_effort high
+#compile -incremental_mapping
 
 #################################################################################
 # Write Out Final Design and Reports

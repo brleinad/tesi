@@ -1,5 +1,4 @@
-set DESIGN_NAME                   "adder_plus_cpe";
-set VARIANT_NAME "";
+set DESIGN_NAME                   "cla_decomposed";
 
 echo "Target library: TSMC 65nm GP CMOS"
 set LIBSEL "tcbn65gplus";
@@ -31,14 +30,11 @@ set ADDITIONAL_LINK_LIB_FILES     " "; #  Extra link logical libraries not inclu
 
 set alib_library_analysis_path ./cache/
 
-set RTL_SOURCE_FILES "../src/gen_linear_part.v"
-set RTL_SOURCE_FILES "../src/gen_nonlinear_part.v"
-set RTL_SOURCE_FILES "../src/generator.v"
-set RTL_SOURCE_FILES "../src/adder_cpe.v"
-#lappend  RTL_SOURCE_FILES "cones/nonlin_out/c10.v"
+set RTL_SOURCE_FILES "../source/linear_part.vhd"
+set RTL_SOURCE_FILES "../source/nonlinear_part.vhd"
+set RTL_SOURCE_FILES "../source/cla_decomposed.vhd"
 
-#set REPORTS_DIR [join [list $LIBSEL "_reports"] ""]
-set REPORTS_DIR "nonlin_decomposed_reports"
+set REPORTS_DIR [join [list $LIBSEL "_reports"] ""]
 set RESULTS_DIR [join [list $LIBSEL "_results"] ""]
 set CONSTRAINTS_DIR "constraints"
 
