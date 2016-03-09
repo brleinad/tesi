@@ -3,7 +3,7 @@
 Report : cell
 Design : gen_cla_decomposed
 Version: B-2008.09-SP4
-Date   : Mon Mar  7 23:18:00 2016
+Date   : Tue Mar  8 10:16:51 2016
 ****************************************
 
 Attributes:
@@ -16,7 +16,7 @@ Attributes:
 Cell                      Reference       Library             Area  Attributes
 --------------------------------------------------------------------------------
 LIN                       gen_linear_part                 910.799976 h
-NLIN                      gen_nonlinear_part              364.320014 h
+NLIN                      gen_nonlinear_part              363.240014 h
 --------------------------------------------------------------------------------
-Total 2 cells                                             1275.119990
+Total 2 cells                                             1274.039990
 1

@@ -1,7 +1,7 @@
 #@ # 
 #@ # Running dc_shell Version B-2008.09-SP4 for linux -- Feb 27, 2009
-#@ # Date:   Mon Mar  7 23:17:49 2016
-#@ # Run by: danielrb@uews041.ue.ucc.ie
+#@ # Date:   Tue Mar  8 10:18:02 2016
+#@ # Run by: danielrb@uews040.ue.ucc.ie
 #@ 
 
 source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
@@ -3482,7 +3482,7 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 
 source -echo -verbose /user/erasmus/danielrb/Dropbox/Tesi/cla_adder/decomposed/syn/run.tcl
 #@ set DESIGN_NAME "gen_cla_decomposed"
-#@ set VARIANT_NAME "7bit"
+#@ set VARIANT_NAME "16bit"
 #@ 
 #@ set RTL_SOURCE_FILES "../src/gen_linear_part.v ../src/gen_nonlinear_part.v ../src/gen_cla_decomposed.v"
 #@ 
@@ -4587,92 +4587,3 @@ source -echo -verbose /user/erasmus/danielrb/Dropbox/Tesi/cla_adder/decomposed/s
 #@ analyze -format verilog ${RTL_SOURCE_FILES}
 #@ #analyze -format VHDL ${RTL_SOURCE_FILES}
 #@ elaborate ${DESIGN_NAME}
-#@ rtl2saif -output ${DESIGN_NAME}_forward.saif -design ${DESIGN_NAME}
-#@ link
-#@ 
-#@ #################################################################################
-#@ # Apply Logical Design Constraints
-#@ #################################################################################
-#@ 
-#@ #source -echo -verbose ${CONSTRAINTS_DIR}/logical_constraints.tcl
-#@ 
-#@ #################################################################################
-#@ # Apply Additional Optimization Constraints
-#@ #################################################################################
-#@ 
-#@ # Prevent assignment statements in the Verilog netlist.
-#@ set_fix_multiple_port_nets -all -buffer_constants
-#@ 
-#@ #################################################################################
-#@ # Compile the Design
-#@ #################################################################################
-#@ 
-#@ #compile_ultra 
-#@ compile -area_effort high
-#@ #compile -incremental_mapping
-#@ 
-#@ #################################################################################
-#@ # Write Out Final Design and Reports
-#@ #
-#@ #        .ddc:   Recommended binary format used for subsequent Design Compiler sessions
-#@ #    Milkyway:   Recommended binary format for IC Compiler
-#@ #        .v  :   Verilog netlist for ASCII flow (Formality, PrimeTime, VCS)
-#@ #       .spef:   Topographical mode parasitics for PrimeTime
-#@ #        .sdf:   SDF backannotated topographical mode timing for PrimeTime
-#@ #        .sdc:   SDC constraints for ASCII flow
-#@ #        .upf:   UPF multivoltage setup information for mapped design
-#@ #
-#@ #################################################################################
-#@ 
-#@ #source dc_scripts/maskgates_onlyAOI.tcl
-#@ #source dc_scripts/maskgates_onlycomb.tcl
-#@ #source dc_scripts/mask_library_tcbn65gpluswc.tcl
-#@ 
-#@ #################################################################################
-#@ # Write out Design
-#@ #################################################################################
-#@ 
-#@ # Write and close SVF file and make it available for immediate use
-#@ set_svf -off
-#@ 
-#@ #write -format ddc -hierarchy -output ${RESULTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.ddc
-#@ write -f verilog -hierarchy -output ${RESULTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.v
-#@ #write -f vhdl -hierarchy -output ${RESULTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.vhdl
-#@ 
-#@ #################################################################################
-#@ # Write out Design Data
-#@ #################################################################################
-#@ 
-#@ #write_sdc -nosplit ${RESULTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.sdc
-#@ 
-#@ # Write out link library information for PrimeTime when using instance-based target library settings
-#@ #write_link_library -out ${RESULTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.link_library.tcl
-#@ # If SAIF is used, write out SAIF name mapping file for PrimeTime-PX
-#@ # saif_map -type ptpx -write_map ${RESULTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.SAIF.namemap
-#@ 
-#@ #################################################################################
-#@ # Generate Final Reports
-#@ #################################################################################
-#@ 
-#@ #report_qor > ${REPORTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.qor.rpt
-#@ #report_timing -transition_time -nets -attributes -nosplit > ${REPORTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.timing.rpt
-#@ #report_reference -nosplit > ${REPORTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.reference.rpt
-#@ report_area -nosplit > ${REPORTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.area.rpt
-#@ report_cell -nosplit > ${REPORTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.cell.rpt
-#@ 
-#@ 
-#@ # Use SAIF file for power analysis
-#@ # read_saif -auto_map_names -input ${DESIGN_NAME}${VARIANT_NAME}.saif -instance < DESIGN_INSTANCE > -verbose
-#@ 
-#@ #report_power -nosplit > ${REPORTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.power.rpt
-#@ #report_clock_gating -nosplit > ${REPORTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.clock_gating.rpt
-#@ 
-#@ ungroup -all -flatten 
-#@ change_names -rules verilog -hierarchy  -log_changes dumy.log
-#@ #change_name -rules collpse -hier -vebose
-#@ 
-#@ #set_flatten true
-#@ write -f equation -output ${RESULTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.flattend.eqn
-#@ #write -f verilog -hierarchy -output ${RESULTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.flattend.v
-#@ 
-#@ exit

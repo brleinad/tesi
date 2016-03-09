@@ -1,5 +1,5 @@
 set DESIGN_NAME "gen_cla_decomposed"
-set VARIANT_NAME "7bit"
+set VARIANT_NAME "16bit"
 
 set RTL_SOURCE_FILES "../src/gen_linear_part.v ../src/gen_nonlinear_part.v ../src/gen_cla_decomposed.v"
 
