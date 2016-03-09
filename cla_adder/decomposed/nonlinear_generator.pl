@@ -1,27 +1,17 @@
 #!/bin/perl -w
 use strict;
 
-#my $input_file  = $ARGV[0];
 my $NBIT = $ARGV[0];
-#my $output_file = $ARGV[1];
-#
-#open (INPUT_FILE,  "<$input_filename") ;
-#open (OUTPUT_FILE, ">$output_file");
 
 my $i;
 my $j;
-my $k;
-my $l;
-my $kk;
-my $ll;
 my $inter;
 my $ii;
-#my $NBIT = 4;
 my $NNL = 2**($NBIT+1) - $NBIT - 3;
 
-print "module gen_nonlinear_part(a,b,n);\n
-input  [$NBIT-1:0] a, b; //adder inputs
-output [$NNL-1:0] n; // non-linear outputs\n\n";
+print "module gen_nonlinear_part(a,b,n);\n";
+printf("input  [%d:0] a, b; //adder inputs\n", $NBIT-1);
+printf("output [%d:0] n; // non-linear outputs\n\n", $NNL-1);
 
 $i = 1; #index for g
 $j = 0; #index for a, b
@@ -39,12 +29,8 @@ while ($i < $NNL)
 
         for ($ii = 0; $ii < $inter; $ii++ )
         {
-                $k = $i + $ii;
-                $l = $i + $ii + $inter;
-                $kk = $i+$ii-$inter-1;
-                $ll = $i+$ii-$inter-1;
-                print "assign g[$k] = a[$j] & g[$kk];\n";
-                print "assign g[$l] = b[$j] & g[$ll];\n";
+                printf("assign g[%d] = a[%d] & g[%d];\n", $i+$ii, $j, $i+$ii-$inter-1 );
+                printf("assign g[%d] = b[%d] & g[%d];\n", $i+$ii+$inter, $j, $i+$ii-$inter-1);
         }
         $i += $inter + $ii; #go to next g after the last one assigned
         $j++;  #go to next input bit
