@@ -1,0 +1,62 @@
+ 
+****************************************
+Report : cell
+Design : cla_adder
+Version: B-2008.09-SP4
+Date   : Fri Apr  8 12:44:20 2016
+****************************************
+
+Attributes:
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+C42                       AN2D0           tcbn65gpluswc   2.160000  
+C43                       AN2D0           tcbn65gpluswc   2.160000  
+C44                       AN2D0           tcbn65gpluswc   2.160000  
+C45                       AN2D0           tcbn65gpluswc   2.160000  
+C46                       AN2D0           tcbn65gpluswc   2.160000  
+C47                       AN2D0           tcbn65gpluswc   2.160000  
+C48                       AN2D0           tcbn65gpluswc   2.160000  
+C49                       AN2D0           tcbn65gpluswc   2.160000  
+C50                       XOR2D1          tcbn65gpluswc   3.600000  
+C51                       XOR2D1          tcbn65gpluswc   3.600000  
+C52                       XOR2D1          tcbn65gpluswc   3.600000  
+C53                       XOR2D1          tcbn65gpluswc   3.600000  
+C54                       XOR2D1          tcbn65gpluswc   3.600000  
+C55                       XOR2D1          tcbn65gpluswc   3.600000  
+C56                       XOR2D1          tcbn65gpluswc   3.600000  
+C57                       XOR2D1          tcbn65gpluswc   3.600000  
+C58                       XOR2D1          tcbn65gpluswc   3.600000  
+C59                       OR2D1           tcbn65gpluswc   2.160000  
+C60                       AN2D0           tcbn65gpluswc   2.160000  
+C61                       OR2D1           tcbn65gpluswc   2.160000  
+C62                       AN2D0           tcbn65gpluswc   2.160000  
+C63                       OR2D1           tcbn65gpluswc   2.160000  
+C64                       AN2D0           tcbn65gpluswc   2.160000  
+C65                       OR2D1           tcbn65gpluswc   2.160000  
+C66                       AN2D0           tcbn65gpluswc   2.160000  
+C67                       OR2D1           tcbn65gpluswc   2.160000  
+C68                       AN2D0           tcbn65gpluswc   2.160000  
+C69                       OR2D1           tcbn65gpluswc   2.160000  
+C70                       AN2D0           tcbn65gpluswc   2.160000  
+C71                       OR2D1           tcbn65gpluswc   2.160000  
+C72                       AN2D0           tcbn65gpluswc   2.160000  
+C73                       OR2D1           tcbn65gpluswc   2.160000  
+C74                       AN2D0           tcbn65gpluswc   2.160000  
+C75                       XOR2D1          tcbn65gpluswc   3.600000  
+C76                       XOR2D1          tcbn65gpluswc   3.600000  
+C77                       XOR2D1          tcbn65gpluswc   3.600000  
+C78                       XOR2D1          tcbn65gpluswc   3.600000  
+C79                       XOR2D1          tcbn65gpluswc   3.600000  
+C80                       XOR2D1          tcbn65gpluswc   3.600000  
+C81                       XOR2D1          tcbn65gpluswc   3.600000  
+C82                       XOR2D1          tcbn65gpluswc   3.600000  
+C83                       XOR2D1          tcbn65gpluswc   3.600000  
+--------------------------------------------------------------------------------
+Total 42 cells                                            116.640000
+1

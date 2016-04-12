@@ -1,7 +1,7 @@
 set DESIGN_NAME "cla_adder"
-set VARIANT_NAME "1024bit"
+set VARIANT_NAME "11bit"
 
-# set RTL_SOURCE_FILES "../src/verilog/pair.v"
+# set RTL_SOURCE_FiLES "../src/verilog/pair.v"
 set RTL_SOURCE_FILES "../src/${DESIGN_NAME}.v"
 
 #set RTL_SOURCE_FILES "../src/cla_adder.v"

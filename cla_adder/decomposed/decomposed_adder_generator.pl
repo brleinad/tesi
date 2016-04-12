@@ -4,8 +4,8 @@ use strict;
 my $NBIT = $ARGV[0];
 my $NNL = 2**($NBIT+1) - $NBIT - 3;
 
-`./linear_generator.pl $NBIT > gen_linear_part.v`;
-`./nonlinear_generator.pl $NBIT > gen_nonlinear_part.v`;
+`perl ./linear_generator.pl $NBIT > gen_linear_part.v`;
+`perl ./nonlinear_generator.pl $NBIT > gen_nonlinear_part.v`;
 
 print "module gen_cla_decomposed(a,b,s);\n\n";
  

@@ -1,0 +1,22 @@
+ 
+****************************************
+Report : cell
+Design : gen_cla_decomposed
+Version: B-2008.09-SP4
+Date   : Fri Apr  8 12:14:30 2016
+****************************************
+
+Attributes:
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+LIN                       gen_linear_part                 3073.319991 h
+NLIN                      gen_nonlinear_part              1635.120065 h
+--------------------------------------------------------------------------------
+Total 2 cells                                             4708.440056
+1

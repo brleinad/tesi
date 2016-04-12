@@ -1,0 +1,37 @@
+ 
+****************************************
+Report : cell
+Design : cla_adder
+Version: B-2008.09-SP4
+Date   : Fri Apr  8 12:36:08 2016
+****************************************
+
+Attributes:
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+C22                       AN2D0           tcbn65gpluswc   2.160000  
+C23                       AN2D0           tcbn65gpluswc   2.160000  
+C24                       AN2D0           tcbn65gpluswc   2.160000  
+C25                       XOR2D1          tcbn65gpluswc   3.600000  
+C26                       XOR2D1          tcbn65gpluswc   3.600000  
+C27                       XOR2D1          tcbn65gpluswc   3.600000  
+C28                       XOR2D1          tcbn65gpluswc   3.600000  
+C29                       OR2D1           tcbn65gpluswc   2.160000  
+C30                       AN2D0           tcbn65gpluswc   2.160000  
+C31                       OR2D1           tcbn65gpluswc   2.160000  
+C32                       AN2D0           tcbn65gpluswc   2.160000  
+C33                       OR2D1           tcbn65gpluswc   2.160000  
+C34                       AN2D0           tcbn65gpluswc   2.160000  
+C35                       XOR2D1          tcbn65gpluswc   3.600000  
+C36                       XOR2D1          tcbn65gpluswc   3.600000  
+C37                       XOR2D1          tcbn65gpluswc   3.600000  
+C38                       XOR2D1          tcbn65gpluswc   3.600000  
+--------------------------------------------------------------------------------
+Total 17 cells                                            48.240000
+1

@@ -1,0 +1,42 @@
+ 
+****************************************
+Report : cell
+Design : cla_adder
+Version: B-2008.09-SP4
+Date   : Fri Apr  8 12:39:04 2016
+****************************************
+
+Attributes:
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+C26                       AN2D0           tcbn65gpluswc   2.160000  
+C27                       AN2D0           tcbn65gpluswc   2.160000  
+C28                       AN2D0           tcbn65gpluswc   2.160000  
+C29                       AN2D0           tcbn65gpluswc   2.160000  
+C30                       XOR2D1          tcbn65gpluswc   3.600000  
+C31                       XOR2D1          tcbn65gpluswc   3.600000  
+C32                       XOR2D1          tcbn65gpluswc   3.600000  
+C33                       XOR2D1          tcbn65gpluswc   3.600000  
+C34                       XOR2D1          tcbn65gpluswc   3.600000  
+C35                       OR2D1           tcbn65gpluswc   2.160000  
+C36                       AN2D0           tcbn65gpluswc   2.160000  
+C37                       OR2D1           tcbn65gpluswc   2.160000  
+C38                       AN2D0           tcbn65gpluswc   2.160000  
+C39                       OR2D1           tcbn65gpluswc   2.160000  
+C40                       AN2D0           tcbn65gpluswc   2.160000  
+C41                       OR2D1           tcbn65gpluswc   2.160000  
+C42                       AN2D0           tcbn65gpluswc   2.160000  
+C43                       XOR2D1          tcbn65gpluswc   3.600000  
+C44                       XOR2D1          tcbn65gpluswc   3.600000  
+C45                       XOR2D1          tcbn65gpluswc   3.600000  
+C46                       XOR2D1          tcbn65gpluswc   3.600000  
+C47                       XOR2D1          tcbn65gpluswc   3.600000  
+--------------------------------------------------------------------------------
+Total 22 cells                                            61.920000
+1

@@ -2,7 +2,7 @@ module cla_adder(
 	a,b,s,cin,cout
 );
 
-parameter NBIT = 1024;
+parameter NBIT = 11;
 
 input [NBIT-1:0] a,b;
 input cin;

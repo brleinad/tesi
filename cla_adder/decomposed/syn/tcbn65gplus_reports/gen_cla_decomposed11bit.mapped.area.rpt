@@ -1,0 +1,26 @@
+Information: Updating design information... (UID-85)
+Warning: Design 'gen_cla_decomposed' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+ 
+****************************************
+Report : area
+Design : gen_cla_decomposed
+Version: B-2008.09-SP4
+Date   : Fri Apr  8 12:23:27 2016
+****************************************
+
+Library(s) Used:
+
+    tcbn65gpluswc (File: /cadtools/tsmc/digital/Front_End/timing_power_noise/NLDM/tcbn65gplus_121b/tcbn65gpluswc.db)
+
+Number of ports:               33
+Number of nets:              2070
+Number of cells:                2
+Number of references:           2
+
+Combinational area:       18923.400228
+Noncombinational area:       0.000000
+Net Interconnect area:      undefined  (Wire load has zero net area)
+
+Total cell area:          18923.400228
+Total area:                 undefined
+1

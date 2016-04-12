@@ -81,8 +81,8 @@ set target_library ${TARGET_LIBRARY_FILES}
 set synthetic_library dw_foundation.sldb
 set link_library "* $target_library $ADDITIONAL_LINK_LIB_FILES $synthetic_library"
 
-source dc_scripts/mask_library_tcbn65gpluswc.tcl 
-#source dc_scripts/maskgates_onlyAOI.tcl
+#source dc_scripts/mask_library_tcbn65gpluswc.tcl 
+source dc_scripts/maskgates_onlyAOI.tcl
 
 # The remainder of the setup below should only be performed in Design Compiler
 if {$synopsys_program_name == "dc_shell"}  {

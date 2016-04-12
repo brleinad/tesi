@@ -1,0 +1,47 @@
+ 
+****************************************
+Report : cell
+Design : cla_adder
+Version: B-2008.09-SP4
+Date   : Fri Apr  8 12:40:58 2016
+****************************************
+
+Attributes:
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+C30                       AN2D0           tcbn65gpluswc   2.160000  
+C31                       AN2D0           tcbn65gpluswc   2.160000  
+C32                       AN2D0           tcbn65gpluswc   2.160000  
+C33                       AN2D0           tcbn65gpluswc   2.160000  
+C34                       AN2D0           tcbn65gpluswc   2.160000  
+C35                       XOR2D1          tcbn65gpluswc   3.600000  
+C36                       XOR2D1          tcbn65gpluswc   3.600000  
+C37                       XOR2D1          tcbn65gpluswc   3.600000  
+C38                       XOR2D1          tcbn65gpluswc   3.600000  
+C39                       XOR2D1          tcbn65gpluswc   3.600000  
+C40                       XOR2D1          tcbn65gpluswc   3.600000  
+C41                       OR2D1           tcbn65gpluswc   2.160000  
+C42                       AN2D0           tcbn65gpluswc   2.160000  
+C43                       OR2D1           tcbn65gpluswc   2.160000  
+C44                       AN2D0           tcbn65gpluswc   2.160000  
+C45                       OR2D1           tcbn65gpluswc   2.160000  
+C46                       AN2D0           tcbn65gpluswc   2.160000  
+C47                       OR2D1           tcbn65gpluswc   2.160000  
+C48                       AN2D0           tcbn65gpluswc   2.160000  
+C49                       OR2D1           tcbn65gpluswc   2.160000  
+C50                       AN2D0           tcbn65gpluswc   2.160000  
+C51                       XOR2D1          tcbn65gpluswc   3.600000  
+C52                       XOR2D1          tcbn65gpluswc   3.600000  
+C53                       XOR2D1          tcbn65gpluswc   3.600000  
+C54                       XOR2D1          tcbn65gpluswc   3.600000  
+C55                       XOR2D1          tcbn65gpluswc   3.600000  
+C56                       XOR2D1          tcbn65gpluswc   3.600000  
+--------------------------------------------------------------------------------
+Total 27 cells                                            75.600000
+1
