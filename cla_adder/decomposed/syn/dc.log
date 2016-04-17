@@ -1,0 +1,63 @@
+
+                        DC Professional (TM)
+                           DC Expert (TM)
+                            DC Ultra (TM)
+                       FloorPlan Manager (TM)
+                          HDL Compiler (TM)
+                         VHDL Compiler (TM)
+                        Library Compiler (TM)
+                      DesignWare Developer (TM)
+                          DFT Compiler (TM)
+                            BSD Compiler
+                         Power Compiler (TM)
+
+           Version B-2008.09-SP4 for linux -- Feb 27, 2009
+              Copyright (c) 1988-2008 by Synopsys, Inc.
+                         ALL RIGHTS RESERVED
+
+This software and the associated documentation are confidential and 
+proprietary to Synopsys, Inc. Your use or disclosure of this software 
+is subject to the terms and conditions of a written license agreement 
+between you, or your company, and Synopsys, Inc.
+
+The above trademark notice does not imply that you are licensed to use 
+all of the listed products. You are licensed to use only those products 
+for which you have lawfully obtained a valid license key.
+
+Initializing...
+date
+Tue Apr 12 11:50:42 2016
+analyze -f verilog { ../decomposed12bit_adder.v ../nonlinear_part12bit_adder.v ../linear_part12bit_adder.v}
+Running PRESTO HDLC
+Error:  Unable to open file `../decomposed12bit_adder.v': No such file or directory. (VER-41)
+*** Presto compilation terminated with 1 errors. ***
+Warning: Can't read link_library file 'your_library.db'. (UID-3)
+0
+elaborate gen_cla_decomposed
+Loading db file '/cadtools/synopsys/2009/synthesis/libraries/syn/gtech.db'
+Loading db file '/cadtools/synopsys/2009/synthesis/libraries/syn/standard.sldb'
+  Loading link library 'gtech'
+Warning: Can't read link_library file 'your_library.db'. (UID-3)
+Warning: Can't read link_library file 'your_library.db'. (UID-3)
+Error: Can't find the design 'gen_cla_decomposed'
+	in the library 'WORK'. (LBR-0)
+0
+check_design > check_design.pre.log
+set_max_delay 4 -from [all_inputs] to [all_outputs]
+Error: Current design is not defined. (UID-4)
+Error: Current design is not defined. (UID-4)
+Error: extra positional option '' (CMD-012)
+compile
+Error: Current design is not defined. (UID-4)
+0
+report_timing > report_timing.log
+check_design > check_design.post.log
+report_area > report_area.log
+write -h -o emanuel.ddc
+Error: No files or designs were specified. (UID-22)
+0
+date
+Tue Apr 12 11:50:43 2016
+quit
+
+Thank you...

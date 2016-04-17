@@ -1,0 +1,18 @@
+#-----------------------------------------------------------
+# Vivado v2015.1 (64-bit)
+# SW Build 1215546 on Mon Apr 27 19:07:21 MDT 2015
+# IP Build 1209967 on Tue Apr 21 11:39:20 MDT 2015
+# Start of session at: Wed Apr 13 10:19:05 2016
+# Process ID: 11141
+# Log file: /user/erasmus/danielrb/Dropbox/Tesi/cla_adder/decomposed/viv/vivado.log
+# Journal file: /user/erasmus/danielrb/Dropbox/Tesi/cla_adder/decomposed/viv/vivado.jou
+#-----------------------------------------------------------
+start_gui
+create_project decomposed_adder /user/erasmus/danielrb/Dropbox/Tesi/cla_adder/decomposed/viv/decomposed_adder -part xc7z010clg400-1
+set_property board_part digilentinc.com:zybo:part0:1.0 [current_project]
+add_files -norecurse -scan_for_includes {/user/erasmus/danielrb/Dropbox/Tesi/cla_adder/decomposed/gen_linear_part.v /user/erasmus/danielrb/Dropbox/Tesi/cla_adder/decomposed/gen_nonlinear_part.v /user/erasmus/danielrb/Dropbox/Tesi/cla_adder/decomposed/gen_cla_decomposed.v}
+import_files -force -norecurse
+update_compile_order -fileset sources_1
+update_compile_order -fileset sim_1
+launch_runs synth_1
+wait_on_run synth_1

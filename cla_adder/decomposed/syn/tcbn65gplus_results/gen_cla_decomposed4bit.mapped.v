@@ -1,3 +1,43 @@
+/////////////////////////////////////////////////////////////
+// Created by: Synopsys DC Expert(TM) in wire load mode
+// Version   : K-2015.06-SP5-1
+// Date      : Wed Apr 13 11:14:49 2016
+/////////////////////////////////////////////////////////////
+
+
+module gen_nonlinear_part ( a, b, n );
+  input [3:0] a;
+  input [3:0] b;
+  output [24:0] n;
+
+  assign n[1] = 1'b0;
+  assign n[2] = 1'b0;
+  assign n[5] = 1'b0;
+  assign n[6] = 1'b0;
+  assign n[8] = 1'b0;
+  assign n[9] = 1'b0;
+  assign n[13] = 1'b0;
+  assign n[14] = 1'b0;
+  assign n[16] = 1'b0;
+  assign n[17] = 1'b0;
+  assign n[20] = 1'b0;
+  assign n[21] = 1'b0;
+  assign n[23] = 1'b0;
+  assign n[24] = 1'b0;
+
+  AN2D0 U2 ( .A1(b[2]), .A2(n[7]), .Z(n[22]) );
+  AN2D0 U3 ( .A1(n[4]), .A2(b[2]), .Z(n[19]) );
+  AN2D0 U4 ( .A1(n[3]), .A2(b[2]), .Z(n[18]) );
+  AN2D0 U5 ( .A1(a[2]), .A2(n[7]), .Z(n[15]) );
+  AN2D0 U6 ( .A1(n[0]), .A2(b[1]), .Z(n[7]) );
+  AN2D0 U7 ( .A1(a[2]), .A2(n[4]), .Z(n[12]) );
+  AN2D0 U8 ( .A1(n[0]), .A2(a[1]), .Z(n[4]) );
+  AN2D0 U9 ( .A1(a[2]), .A2(n[3]), .Z(n[11]) );
+  AN2D0 U10 ( .A1(b[1]), .A2(a[1]), .Z(n[3]) );
+  AN2D0 U11 ( .A1(a[2]), .A2(b[2]), .Z(n[10]) );
+  AN2D0 U12 ( .A1(b[0]), .A2(a[0]), .Z(n[0]) );
+endmodule
+
 
 module gen_linear_part ( a, b, n, s );
   input [3:0] a;
@@ -18,40 +58,6 @@ module gen_linear_part ( a, b, n, s );
   XOR3D0 U10 ( .A1(b[1]), .A2(a[1]), .A3(n8), .Z(s[1]) );
   XOR3D0 U11 ( .A1(n[2]), .A2(n[1]), .A3(n[0]), .Z(n8) );
   XOR2D0 U12 ( .A1(b[0]), .A2(a[0]), .Z(s[0]) );
-endmodule
-
-
-module gen_nonlinear_part ( a, b, n );
-  input [3:0] a;
-  input [3:0] b;
-  output [24:0] n;
-
-
-  INVD0 U2 ( .I(1'b1), .ZN(n[1]) );
-  INVD0 U4 ( .I(1'b1), .ZN(n[2]) );
-  INVD0 U6 ( .I(1'b1), .ZN(n[5]) );
-  INVD0 U8 ( .I(1'b1), .ZN(n[6]) );
-  INVD0 U10 ( .I(1'b1), .ZN(n[8]) );
-  INVD0 U12 ( .I(1'b1), .ZN(n[9]) );
-  INVD0 U15 ( .I(1'b1), .ZN(n[13]) );
-  INVD0 U17 ( .I(1'b1), .ZN(n[14]) );
-  INVD0 U19 ( .I(1'b1), .ZN(n[16]) );
-  INVD0 U21 ( .I(1'b1), .ZN(n[17]) );
-  INVD0 U23 ( .I(1'b1), .ZN(n[20]) );
-  INVD0 U25 ( .I(1'b1), .ZN(n[21]) );
-  INVD0 U27 ( .I(1'b1), .ZN(n[23]) );
-  INVD0 U29 ( .I(1'b1), .ZN(n[24]) );
-  AN2D0 U31 ( .A1(b[2]), .A2(n[7]), .Z(n[22]) );
-  AN2D0 U32 ( .A1(n[4]), .A2(b[2]), .Z(n[19]) );
-  AN2D0 U33 ( .A1(n[3]), .A2(b[2]), .Z(n[18]) );
-  AN2D0 U34 ( .A1(a[2]), .A2(n[7]), .Z(n[15]) );
-  AN2D0 U35 ( .A1(n[0]), .A2(b[1]), .Z(n[7]) );
-  AN2D0 U36 ( .A1(a[2]), .A2(n[4]), .Z(n[12]) );
-  AN2D0 U37 ( .A1(n[0]), .A2(a[1]), .Z(n[4]) );
-  AN2D0 U38 ( .A1(a[2]), .A2(n[3]), .Z(n[11]) );
-  AN2D0 U39 ( .A1(b[1]), .A2(a[1]), .Z(n[3]) );
-  AN2D0 U40 ( .A1(a[2]), .A2(b[2]), .Z(n[10]) );
-  AN2D0 U41 ( .A1(b[0]), .A2(a[0]), .Z(n[0]) );
 endmodule
 
 

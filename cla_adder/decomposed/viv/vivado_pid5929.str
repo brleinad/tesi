@@ -1,0 +1,138 @@
+/*
+
+Vivado v2015.1 (64-bit)
+SW Build 1215546 on Mon Apr 27 19:07:21 MDT 2015
+Process ID: 5929
+
+Current time: 	4/13/16 3:22:39 PM IST
+Time zone: 	Greenwich Mean Time (Europe/Dublin)
+
+OS: CentOS release 6.7 (Final)
+Version: 2.6.32-573.18.1.el6.x86_64
+Architecture: amd64
+Available processors (cores): 8
+
+DISPLAY: :0.0
+Screen size: 1920x1080
+Screen resolution (DPI): 96
+Available screens: 1
+Default font: family=Dialog,name=Dialog,style=plain,size=12
+
+Java version: 	1.8.0_25 64-bit
+Java home: 	/cadtools/xilinx/2010/Vivado/Vivado/2015.1/tps/lnx64/jre
+
+User name: 	danielrb
+User directory: /user/erasmus/danielrb/Dropbox/Tesi/cla_adder/decomposed/viv
+User country: 	US
+User language: 	en
+User locale: 	en_US
+
+Vivado preferences path: /user/erasmus/danielrb/.Xilinx/Vivado/2015.1/vivado.ini
+Vivado layouts directory: /user/erasmus/danielrb/.Xilinx/Vivado/2015.1/layouts/application
+
+GUI allocated memory:	120 MB
+GUI max memory:		3,052 MB
+Engine allocated memory: 4,845 MB
+
+*/
+
+// TclEventType: START_GUI
+// Tcl Message: start_gui 
+// [GUI Memory]: 53 MB (+53423kb) [00:00:09]
+// [Engine Memory]: 4,845 MB (+4929231kb) [00:00:09]
+// HMemoryUtils.trashcanNow. Engine heap size: 4,850 MB. GUI used memory: 27 MB. Current time: 4/13/16 3:22:41 PM IST
+selectList(PAResourceEtoH.GettingStartedView_RECENT_PROJECTS, "/user/erasmus/danielrb/Dropbox/Tesi/cla_adder/decomposed/viv/decomposed_adder/decomposed_adder.xpr", 0); // t:v (JViewport:JComponent, cl:JFrame)
+// Opening Vivado Project: /user/erasmus/danielrb/Dropbox/Tesi/cla_adder/decomposed/viv/decomposed_adder/decomposed_adder.xpr. Version: Vivado v2015.1 
+// cp:P (cl:JFrame):  Open Project : addNotify
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// Tcl Message: open_project /user/erasmus/danielrb/Dropbox/Tesi/cla_adder/decomposed/viv/decomposed_adder/decomposed_adder.xpr 
+// HMemoryUtils.trashcanNow. Engine heap size: 4,867 MB. GUI used memory: 27 MB. Current time: 4/13/16 3:23:06 PM IST
+// TclEventType: MSGMGR_MOVEMSG
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_FAILED
+// TclEventType: RUN_CURRENT
+// TclEventType: PROJECT_NEW
+// Tcl Message: open_project /user/erasmus/danielrb/Dropbox/Tesi/cla_adder/decomposed/viv/decomposed_adder/decomposed_adder.xpr 
+// Tcl Message: Scanning sources... Finished scanning sources 
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1704] No user IP repositories specified 
+// TclEventType: PROJECT_NEW
+// [GUI Memory]: 59 MB (+3458kb) [00:00:43]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/cadtools/xilinx/2010/Vivado/Vivado/2015.1/data/ip'. 
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [GUI Memory]: 79 MB (+17679kb) [00:00:44]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Project name: decomposed_adder; location: /user/erasmus/danielrb/Dropbox/Tesi/cla_adder/decomposed/viv/decomposed_adder; part: xc7z010clg400-1
+// Tcl Message: open_project: Time (s): cpu = 00:00:10 ; elapsed = 00:00:09 . Memory (MB): peak = 5790.852 ; gain = 91.574 ; free physical = 5653 ; free virtual = 18949 
+dismissDialog("Open Project"); // cp:P (cl:JFrame)
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, gen_cla_decomposed (gen_cla_decomposed.v)]", 1); // A:k (H:JPanel, cl:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, gen_cla_decomposed (gen_cla_decomposed.v), NLIN - gen_nonlinear_part (gen_nonlinear_part.v)]", 2, false); // A:k (H:JPanel, cl:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, gen_cla_decomposed (gen_cla_decomposed.v), NLIN - gen_nonlinear_part (gen_nonlinear_part.v)]", 2, false, false, false, false, false, true); // A:k (H:JPanel, cl:JFrame) - Double Click
+// [GUI Memory]: 113 MB (+30877kb) [00:00:56]
+selectButton(PAResourceCommand.PACommandNames_RUN_SYNTHESIS, "run_synthesis"); // w:JideButton (CommandBar:DockableBar, cl:JFrame)
+// Run Command: PAResourceCommand.PACommandNames_RUN_SYNTHESIS
+// cp:P (cl:JFrame):  Resetting Runs : addNotify
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// Tcl Message: reset_run synth_1 
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// cp:P (cl:JFrame):  Starting Design Runs : addNotify
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// Tcl Message: launch_runs synth_1 
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// Tcl Message: [Wed Apr 13 15:23:32 2016] Launched synth_1... Run output will be captured here: /user/erasmus/danielrb/Dropbox/Tesi/cla_adder/decomposed/viv/decomposed_adder/decomposed_adder.runs/synth_1/runme.log 
+dismissDialog("Starting Design Runs"); // cp:P (cl:JFrame)
+// [GUI Memory]: 119 MB (+1043kb) [00:02:31]
+// TclEventType: RUN_FAILED
+// Q:ap (cl:JFrame): Synthesis Failed: addNotify
+// [GUI Memory]: 126 MB (+732kb) [00:07:35]
+// Elapsed time: 436 seconds
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a:JButton (JPanel:JComponent, Q:ap)
+// Run Command: PAResourceCommand.PACommandNames_MESSAGE_WINDOW
+dismissDialog("Synthesis Failed"); // Q:ap (cl:JFrame)
+selectButton(RDIResource.FilterToolBar_SHOW_ALL, "Show All"); // a:JButton (JPanel:JComponent, cl:JFrame)
+selectTab((HResource) null, (HResource) null, "Log", 2); // FrameContainer:JideTabbedPane (ContainerContainer:JideSplitPane, cl:JFrame)
+// [GUI Memory]: 133 MB (+706kb) [00:20:56]
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 60 MB. Current time: 4/13/16 3:53:06 PM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 58 MB. Current time: 4/13/16 4:23:06 PM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 58 MB. Current time: 4/13/16 4:53:06 PM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 58 MB. Current time: 4/13/16 5:23:06 PM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 58 MB. Current time: 4/13/16 5:53:06 PM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 58 MB. Current time: 4/13/16 6:23:06 PM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/13/16 6:53:06 PM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/13/16 7:23:06 PM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/13/16 7:53:06 PM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/13/16 8:23:07 PM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/13/16 8:53:07 PM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/13/16 9:23:07 PM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/13/16 9:53:07 PM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/13/16 10:23:07 PM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/13/16 10:53:07 PM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/13/16 11:23:07 PM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/13/16 11:53:07 PM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/14/16 12:23:07 AM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/14/16 12:53:07 AM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/14/16 1:23:07 AM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/14/16 1:53:07 AM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/14/16 2:23:07 AM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/14/16 2:53:07 AM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/14/16 3:23:07 AM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/14/16 3:53:07 AM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/14/16 4:23:07 AM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/14/16 4:53:07 AM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/14/16 5:23:07 AM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/14/16 5:53:07 AM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/14/16 6:23:07 AM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/14/16 6:53:07 AM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/14/16 7:23:07 AM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/14/16 7:53:07 AM IST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,028 MB. GUI used memory: 57 MB. Current time: 4/14/16 8:23:08 AM IST

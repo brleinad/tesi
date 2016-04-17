@@ -1,0 +1,70 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -nets
+        -max_paths 1
+        -transition_time
+Design : gen_cla_decomposed
+Version: K-2015.06-SP5-1
+Date   : Wed Apr 13 11:14:49 2016
+****************************************
+
+Operating Conditions: WCCOM   Library: tcbn65gpluswc
+Wire Load Model Mode: segmented
+
+  Startpoint: a[0] (input port)
+  Endpoint: s[3] (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  gen_linear_part    ZeroWireload          tcbn65gpluswc
+  gen_cla_decomposed ZeroWireload          tcbn65gpluswc
+  gen_nonlinear_part ZeroWireload          tcbn65gpluswc
+
+Attributes:
+    d - dont_touch
+    u - dont_use
+   mo - map_only
+   so - size_only
+    i - ideal_net or ideal_network
+  inf - infeasible path
+
+  Point                        Fanout     Trans      Incr       Path      Attributes
+  ------------------------------------------------------------------------------------------
+  input external delay                               0.00       0.00 r
+  a[0] (in)                                0.00      0.00       0.00 r
+  a[0] (net)                     2                   0.00       0.00 r
+  NLIN/a[0] (gen_nonlinear_part)                     0.00       0.00 r
+  NLIN/a[0] (net)                                    0.00       0.00 r
+  NLIN/U12/Z (AN2D0)                       0.06      0.07       0.07 r
+  NLIN/n[0] (net)                3                   0.00       0.07 r
+  NLIN/U8/Z (AN2D0)                        0.06      0.08       0.15 r
+  NLIN/n[4] (net)                3                   0.00       0.15 r
+  NLIN/U7/Z (AN2D0)                        0.05      0.08       0.23 r
+  NLIN/n[12] (net)               1                   0.00       0.23 r
+  NLIN/n[12] (gen_nonlinear_part)                    0.00       0.23 r
+  n[12] (net)                                        0.00       0.23 r
+  LIN/n[12] (gen_linear_part)                        0.00       0.23 r
+  LIN/n[12] (net)                                    0.00       0.23 r
+  LIN/U4/Z (XOR4D0)                        0.06      0.18       0.41 f
+  LIN/n5 (net)                   1                   0.00       0.41 f
+  LIN/U3/Z (XOR3D0)                        0.03      0.19       0.60 f
+  LIN/n3 (net)                   1                   0.00       0.60 f
+  LIN/U2/Z (XOR3D0)                        0.04      0.12       0.73 f
+  LIN/n2 (net)                   1                   0.00       0.73 f
+  LIN/U1/Z (XOR4D0)                        0.05      0.16       0.89 f
+  LIN/s[3] (net)                 1                   0.00       0.89 f
+  LIN/s[3] (gen_linear_part)                         0.00       0.89 f
+  s[3] (net)                                         0.00       0.89 f
+  s[3] (out)                               0.05      0.00       0.89 f
+  data arrival time                                             0.89
+  ------------------------------------------------------------------------------------------
+  (Path is unconstrained)
+
+
+1

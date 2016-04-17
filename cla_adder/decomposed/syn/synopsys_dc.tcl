@@ -30,9 +30,9 @@ set ADDITIONAL_LINK_LIB_FILES     " "; #  Extra link logical libraries not inclu
 
 set alib_library_analysis_path ./cache/
 
-set RTL_SOURCE_FILES "../source/linear_part.vhd"
-set RTL_SOURCE_FILES "../source/nonlinear_part.vhd"
-set RTL_SOURCE_FILES "../source/cla_decomposed.vhd"
+#set RTL_SOURCE_FILES "../source/linear_part.vhd"
+#set RTL_SOURCE_FILES "../source/nonlinear_part.vhd"
+#set RTL_SOURCE_FILES "../source/cla_decomposed.vhd"
 
 set REPORTS_DIR [join [list $LIBSEL "_reports"] ""]
 set RESULTS_DIR [join [list $LIBSEL "_results"] ""]

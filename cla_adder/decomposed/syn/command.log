@@ -1,10 +1,12 @@
 #@ # 
-#@ # Running dc_shell Version B-2008.09-SP4 for linux -- Feb 27, 2009
-#@ # Date:   Tue Apr 12 11:35:36 2016
-#@ # Run by: danielrb@uews040.ue.ucc.ie
+#@ # Running dc_shell Version K-2015.06-SP5-2 for linux64 -- Apr 11, 2016
+#@ # Date:   Fri Apr 15 15:19:27 2016
+#@ # Run by: danielrb@uews050.ue.ucc.ie
 #@ 
 
-source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
+source /cadtools/synopsys/2015/synthesis/admin/setup/.synopsys_dc.setup
+#@ # -- Starting source /cadtools/synopsys/2015/synthesis/admin/setup/.synopsys_dc.setup
+
 #@ #
 #@ #		".synopsys_dc.setup" Initialization File for
 #@ #
@@ -39,15 +41,37 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ update_app_var -default true sh_enable_page_mode
 #@ set sh_source_uses_search_path   "true"
 #@ update_app_var -default true sh_source_uses_search_path
+#@ if {$synopsys_program_name == "dc_shell" ||     $synopsys_program_name == "de_shell" ||     $synopsys_program_name == "dc_sms_shell" } {
+#@ set sh_new_variable_message	 "false"
+#@ update_app_var -default false sh_new_variable_message
+#@ } else {
 #@ set sh_new_variable_message	 "true"
 #@ update_app_var -default true sh_new_variable_message
+#@ }
+#@ 
+#@ if {$synopsys_program_name == "dc_shell"} {
+#@ set html_log_enable	     "false"
+#@ set html_log_filename	 "default.html"
+#@ }
+#@ 
+#@ if {$synopsys_program_name == "de_shell"} {
+#@ set de_log_html_filename	 "default.html"
+#@ }
+#@ 
 #@ if { [string compare $dc_shell_mode "tcl"] == 0 } {
 #@  set sh_enable_line_editing       "true"
 #@  set sh_line_editing_mode         "emacs"
 #@ }
 #@ 
 #@ if {$synopsys_program_name == "icc_shell"} {
-#@  set sh_output_log_file "icc_output.txt"
+#@  if {"$sh_output_log_file" == ""} {
+#@   set sh_output_log_file "icc_output.txt"
+#@  }
+#@ 
+#@ ## the variable sh_redirect_progress_messages only makes it possible 
+#@ ## for some commands to redirect progress messages to the log file,thereby
+#@ ## bypassing the console and reducing the volume of messages on the console.
+#@  set sh_redirect_progress_messages true
 #@  }
 #@ 
 #@ 
@@ -55,8 +79,8 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ array set auto_index {}
 #@ set auto_oldpath ""
 #@ 
-#@ # Enable debug output on fatal 
-#@ if { $sh_arch == "sparc"   || $sh_arch == "sparcOS5" ||      $sh_arch == "sparc64" || $sh_arch == "hpux10"   ||      $sh_arch == "hp700"   || $sh_arch == "hp32"     ||      $sh_arch == "hp64"    || $sh_arch == "linux" } {
+#@ # Enable customer support banner on fatal
+#@ if { $sh_arch == "linux"    || $sh_arch == "amd64"    || $sh_arch == "linux64" ||     $sh_arch == "suse32"   || $sh_arch == "suse64"   ||      $sh_arch == "sparcOS5" || $sh_arch == "sparc64"  ||      $sh_arch == "x86sol32" || $sh_arch == "x86sol64" ||      $sh_arch == "rs6000"   || $sh_arch == "aix64" } {
 #@    setenv SYNOPSYS_TRACE ""
 #@ }
 #@ 
@@ -65,9 +89,13 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ #
 #@ if { [string compare $dc_shell_mode "tcl"] == 0 } {
 #@   source $synopsys_root/auxx/syn/.dc_common_procs.tcl
-#@   source $synopsys_root/auxx/syn/.dc_procs.tcl
+#@   if {$synopsys_program_name != "dc_sms_shell"} {
+#@     source $synopsys_root/auxx/syn/.dc_procs.tcl
+#@   }
 #@   alias list_commands help
 #@ }
+#@ # -- Starting source /cadtools/synopsys/2015/synthesis/auxx/syn/.dc_common_procs.tcl
+
 #@ ##############################################################################
 #@ #
 #@ #
@@ -264,7 +292,9 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ }
 #@ define_proc_attributes _Variable_Groups_Get_Variables_Of_Group -hidden
 #@ 
-#@ # -- End source /cadtools/synopsys/2009/synthesis/auxx/syn/.dc_common_procs.tcl
+#@ # -- End source /cadtools/synopsys/2015/synthesis/auxx/syn/.dc_common_procs.tcl
+
+#@ # -- Starting source /cadtools/synopsys/2015/synthesis/auxx/syn/.dc_procs.tcl
 
 #@ ##############################################################################
 #@ #
@@ -345,7 +375,6 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@    {-hdl_compiler "Use HDL Compiler (ignored)" "" boolean {hidden optional}}
 #@ }
 #@ 
-#@ 
 #@ ##############################################################################
 #@ #
 #@ #
@@ -396,7 +425,7 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@   return [uplevel #0 $cmd]
 #@ }
 #@ 
-#@ define_proc_attributes read_db     -info " Read one or more db files"     -permanent     -define_args {
+#@ define_proc_attributes read_db     -info " Read one or more db files"     -permanent    -define_args {
 #@       {file_names "Files to read" file_names list required}
 #@       {-netlist_only "Do not read any attributes from db (ignored)" "" boolean {hidden optional}}
 #@       {-library "File is a library DB (ignored)" "" boolean {hidden optional}}
@@ -464,9 +493,9 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ define_proc_attributes read_ddc     -info "Read one or more ddc files"     -permanent     -define_args {
 #@       {file_names "Files to read" file_names list required}
 #@       {-scenarios "list of scenarios to be read from ddc file"
-#@ 	scenario_list list optional}
+#@ 	  scenario_list list optional}
 #@       {-active_scenarios "list of scenarios to be made active"
-#@ 	active_scenario_list list optional}}
+#@ 	  active_scenario_list list optional}}
 #@ 
 #@ 
 #@ 
@@ -659,9 +688,11 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ #
 #@ #  ABSTRACT:    wrapper around update_mw_lib
 #@ #
+#@ #  HISTORY :    2009/6/21, yunz, support ALF reader in ICC
+#@ #
 #@ ##############################################################################
 #@ if { [string match -nocase {*icc_shell*} $synopsys_program_name] || 
-#@     ([string match -nocase {*dc_shell*} $synopsys_program_name] && [shell_is_mwlib_enabled]) }  {
+#@     ([string match -nocase {*d[ce]_shell*} $synopsys_program_name] && [shell_is_mwlib_enabled]) }  {
 #@ 
 #@ proc set_mw_technology_file args {
 #@ 
@@ -671,9 +702,16 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@   set lib_name ""
 #@   set pdb_file "tech.pdb"
 #@   set log_file "log_file"
+#@   set alf_file ""
 #@ 
 #@   if {[info exists ra(-technology)] && [info exists ra(-plib)]} {
 #@       echo "Error: the $ra(-technology) and $ra(-plib) options are mutually exclusive."
+#@       return [uplevel #0 $cmd]
+#@   } elseif {[info exists ra(-technology)] && [info exists ra(-alf)]} {
+#@       echo "Error: the $ra(-technology) and $ra(-alf) options are mutually exclusive."
+#@       return [uplevel #0 $cmd]
+#@   } elseif {[info exists ra(-plib)] && [info exists ra(-alf)]} {
+#@       echo "Error: the $ra(-plib) and $ra(-alf) options are mutually exclusive."
 #@       return [uplevel #0 $cmd]
 #@   }
 #@ 
@@ -682,60 +720,17 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@     set cmd [format {update_mw_lib -technology %s %s} 		     $ra(-technology) 		     $ra() ]
 #@   }
 #@ 
-#@   if {[info exists ra(-plib)]} {
+#@   if {[info exists ra(-alf)]} {
 #@ 
 #@     set cmd [format {update_mw_lib %s} 		     $ra() ]
 #@ 
-#@     if {[string match -nocase {*.pdb} $ra(-plib) ] } {
-#@       set cmd [concat [concat $cmd " -plib " ] " $ra(-plib) "]
-#@     }  
-#@     if {[string match -nocase {*.plib} $ra(-plib) ] } {
-#@       set subcmd [format {read_lib %s} $ra(-plib)]
-#@       redirect -file log_file {uplevel #0 $subcmd}
-#@       set f1 [open $log_file]
-#@       while {[gets $f1 line] >= 0} {
-#@    	set msg1 [lindex $line 3]
-#@ 	set msg2 [lindex $line 4]
-#@         if {[string match {read} $msg1] &&
-#@ 	    [string match {successfully} $msg2] } {
-#@ 	  set msg [lindex $line 2]
-#@ 	  set len [string length $msg]
-#@ 	  set lib_name [string range $msg 1 [expr $len-2] ]
-#@ 	  break
-#@         }  
-#@         if {[string match {old} $msg1] &&
-#@             [string match {technology} $msg2] } {
-#@ 	  set msg [lindex $line 6]
-#@ 	  set len [string length $msg]
-#@ 	  set path [string range $msg 1 [expr $len-2] ]
-#@ 	  set name1 [lindex [split $path {/}] end]
-#@ 	  regexp {(.+?).pdb} $name1 match lib_name
-#@ 	  break
-#@         }
-#@       }
-#@       if {$lib_name != ""} {
-#@         set subcmd [format {write_lib %s -output %s} $lib_name $pdb_file]
-#@         uplevel #0 $subcmd
-#@ 
-#@         echo "Command is : "
-#@         echo $cmd
-#@ 
-#@         set cmd [concat [concat $cmd " -plib " ] " $pdb_file "]
-#@ 
-#@         echo "Command is : "
-#@         echo $cmd
-#@ 
-#@       } else {
-#@         echo "Error: Can not compile $ra(-plib) to pdb successfully"
-#@         return 0;
-#@       }
-#@     }
+#@     set cmd [concat [concat $cmd " -alf " ] " $ra(-alf) "]
 #@   }
 #@ 
 #@   return [uplevel #0 $cmd]
 #@ }
 #@ 
-#@ define_proc_attributes set_mw_technology_file -hide_body     -info " Set technology file for the library "     -define_args       {{-technology "Technology file name" "tech_file" string {optional}}       {-plib "Plib file name" "file_name" string  {optional}}      {"" "Library name" "libName" string {required}}}
+#@ define_proc_attributes set_mw_technology_file -hide_body     -info " Set technology file for the library "     -define_args       {{-technology "Technology file name" "tech_file" string {optional}}       {-alf "alf file name" "file_name" string  {optional}}      {"" "Library name" "libName" string {required}}}
 #@ 
 #@ ##############################################################################
 #@ #
@@ -831,45 +826,6 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@     set cmd [concat [concat [concat $cmd " -mw_reference_library {" ] " $ra(-mw_reference_library) "] "}"]
 #@   }
 #@   
-#@   if {[info exists ra(-plib)]} {
-#@ 	if {[string match -nocase {*.pdb} $ra(-plib) ] } {
-#@   	  set cmd [concat [concat $cmd " -plib " ] " $ra(-plib) "]
-#@ 	}  
-#@ 	if {[string match -nocase {*.plib} $ra(-plib) ] } {
-#@ 	  set subcmd [format {read_lib %s} $ra(-plib)]
-#@ 	  redirect -file log_file {uplevel #0 $subcmd}
-#@ 	  set f1 [open $log_file]
-#@ 	  while {[gets $f1 line] >= 0} {
-#@ 	  	set msg1 [lindex $line 3]
-#@ 		set msg2 [lindex $line 4]
-#@ 	    if {[string match {read} $msg1] &&
-#@ 		    [string match {successfully} $msg2] } {
-#@ 		  set msg [lindex $line 2]
-#@ 		  set len [string length $msg]
-#@ 		  set lib_name [string range $msg 1 [expr $len-2] ]
-#@ 		  break
-#@ 	    }  
-#@ 	    if {[string match {old} $msg1] &&
-#@ 		[string match {technology} $msg2] } {
-#@ 		  set msg [lindex $line 6]
-#@ 		  set len [string length $msg]
-#@ 		  set path [string range $msg 1 [expr $len-2] ]
-#@ 		  set name1 [lindex [split $path {/}] end]
-#@ 		  regexp {(.+?).pdb} $name1 match lib_name
-#@ 		  break
-#@ 	    }
-#@ 	  }
-#@ 	  if {$lib_name != ""} {
-#@ 	    set subcmd [format {write_lib %s -output %s} $lib_name $pdb_file]
-#@ 	    uplevel #0 $subcmd
-#@ 	    set cmd [concat [concat $cmd " -plib " ] " $pdb_file "]
-#@ 	  } else {
-#@ 	    echo "Error: Can not compile $ra(-plib) to pdb successfully"
-#@ 	    return 0;
-#@ 	  }
-#@ 	}
-#@   }
-#@ 
 #@   if { ![uplevel #0 $cmd] } {
 #@     return 0
 #@   }
@@ -884,7 +840,7 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@   return [uplevel #0 $cmd]
 #@ }
 #@ 
-#@ define_proc_attributes create_mw_lib -hide_body     -info " Create a milkyway library "     -define_args       {{-technology "Technology file name" "file_name" string {optional}}           {-ignore_tf_error "Ignore the error in technology file" "" boolean {hidden optional}} 	  {-plib "Plib file name" "file_name" string  {optional}}       {-hier_separator "Hierarchical separator, default is backslash / " "separator" string {optional}}       {-bus_naming_style "Bus naming style" "bus_naming_style" string {optional}}       {-ignore_case "Make case insensitive" "" boolean {hidden optional}}       {-case_sensitive "Make case sensitive" "" boolean {hidden optional}}       {-mw_reference_library "List of reference libraries" "lib_list" list {optional}}       {-reference_control_file "Reference control file" "file_name" string {optional}}       {-open "Open the library after creation" "" boolean {optional}}       {"" "Library name to create" "libName" string {required}}}
+#@ define_proc_attributes create_mw_lib -hide_body     -info " Create a milkyway library "     -define_args       {{-technology "Technology file name" "file_name" string {optional}}           {-ignore_tf_error "Ignore the error in technology file" "" boolean {hidden optional}}       {-hier_separator "Hierarchical separator, default is backslash / " "separator" string {hidden optional}}       {-bus_naming_style "Bus naming style" "bus_naming_style" string {optional}}       {-ignore_case "Make case insensitive" "" boolean {hidden optional}}       {-case_sensitive "Make case sensitive" "" boolean {hidden optional}}       {-mw_reference_library "List of reference libraries" "lib_list" list {optional}}       {-reference_control_file "Reference control file" "file_name" string {optional}}       {-open "Open the library after creation" "" boolean {optional}}       {"" "Library name to create" "libName" string {required}}}
 #@ 
 #@ #
 #@ ##############################################################################
@@ -903,9 +859,9 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ 
 #@   if {[info exists ra(-mw_reference_library)]} {
 #@     if {[info exists ra()]} {
-#@       set cmd [format {report_mw_lib_ref_lib_list %s} $ra() ]
+#@       set cmd [format {org_report_mw_lib -mw_reference_library %s} $ra() ]
 #@     } else {
-#@       set cmd [format {report_mw_lib_ref_lib_list} ]
+#@       set cmd [format {org_report_mw_lib -mw_reference_library} ]
 #@     }
 #@     return [uplevel #0 $cmd]
 #@   }
@@ -987,6 +943,9 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ #  PROCEDURE:   write_mw_lib_files
 #@ #
 #@ #  ABSTRACT:    Write technology or reference control file
+#@ #  History: Yun Zhang 2012/12/11, public option -stream_layer_map_file
+#@ #  History: Yun Zhang 2012/9/5. support new hidden option -vt_cell_placement_properties
+#@ #  History: Yun Zhang 2011/12/5. add new hidden option -stream_layer_map_file
 #@ #
 #@ ##############################################################################
 #@ proc write_mw_lib_files args {
@@ -996,22 +955,61 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@   set cmd ""
 #@ 
 #@   if {[info exists ra(-reference_control_file)]} {
-#@     set cmd [format {report_mw_lib_ref_ctrl_file -output %s %s}                         $ra(-output)                         $ra() ]
-#@     return [uplevel #0 $cmd]
+#@    #Option -reference_contrl_file, -plib and -technology are exclusive.
+#@    # If both of them are set at the same time, error reported.
+#@    # 9000273455, by xqsun, 2009/2/4
+#@      if {[info exists ra(-technology)]} {
+#@        echo "Error: Cannot specify '-reference_control_file' with '-technology'.(CMD-001)"
+#@        return 0
+#@      } elseif {[info exists ra(-plib)]} {
+#@        echo "Error: Cannot specify '-reference_control_file' with '-plib'.(CMD-001)"
+#@        return 0
+#@      } elseif {[info exists ra(-vt_cell_placement_properties)]} {
+#@        echo "Error: Cannot specify '-reference_control_file' with '-vt_cell_placement_properties'.(CMD-001)"
+#@        return 0
+#@      } elseif {[info exists ra(-stream_layer_map_file)]} {
+#@        echo "Error: Cannot specify '-reference_control_file' with '-stream_layer_map_file'.(CMD-001)"
+#@        return 0
+#@      } else {
+#@        set cmd [format {report_mw_lib_ref_ctrl_file -output %s %s}                            $ra(-output)                            $ra() ]
+#@        return [uplevel #0 $cmd]
+#@      }
 #@   }
 #@ 
 #@   if {[info exists ra(-technology)]} {
-#@     set cmd [format {org_report_mw_lib -output %s %s}                         $ra(-output)                         $ra() ]
-#@     return [uplevel #0 $cmd]
+#@      if {[info exists ra(-plib)]} {
+#@        echo "Error: Cannot specify '-technology' with '-plib'.(CMD-001)"
+#@        return 0
+#@      } elseif {[info exists ra(-vt_cell_placement_properties)]} {
+#@        echo "Error: Cannot specify '-technology' with '-vt_cell_placement_properties'.(CMD-001)"
+#@        return 0
+#@      } elseif {[info exists ra(-stream_layer_map_file)]} {
+#@        echo "Error: Cannot specify '-technology' with '-stream_layer_map_file'.(CMD-001)"
+#@        return 0
+#@      } else {
+#@        set cmd [format {org_report_mw_lib -output %s %s}                            $ra(-output)                            $ra() ]
+#@        return [uplevel #0 $cmd]
+#@      }
 #@   }
 #@ 
-#@   if {[info exists ra(-plib)]} {
-#@     set cmd [format {write_plib -lib_name %s %s}                         $ra()                         $ra(-output) ]
-#@     return [uplevel #0 $cmd]
+#@   if {[info exists ra(-vt_cell_placement_properties)]} {
+#@     if {[info exists ra(-stream_layer_map_file)]} {
+#@        echo "Error: Cannot specify '-vt_cell_placement_properties' with '-stream_layer_map_file'.(CMD-001)"
+#@        return 0
+#@      } else {
+#@        set cmd [format {org_report_mw_lib -vt_cell_placement_properties  -output %s %s}        $ra(-output)        $ra() ]
+#@        return [uplevel #0 $cmd]
+#@      }
 #@   }
+#@ 
+#@   if {[info exists ra(-stream_layer_map_file)]} {
+#@        set cmd [format {org_report_mw_lib -stream_layer_map_file %s -output %s %s} 			$ra(-stream_layer_map_file)                         $ra(-output)                         $ra() ]
+#@        return [uplevel #0 $cmd]
+#@   }
+#@   
 #@ }
 #@ 
-#@ define_proc_attributes write_mw_lib_files -hide_body     -info " Write technology or reference control file "     -define_args       {{-technology "Dump technology file" "" boolean {optional}} 	  {-plib "Dump plib file" "" boolean {optional}}       {-reference_control_file "Dump reference control file" "" boolean {optional}}       {-output "Output file" "file_name" string {required}}       {"" "Library to be reported" "libName" string {required}}}
+#@ define_proc_attributes write_mw_lib_files -hide_body     -info " Write technology or reference control file "     -define_args       {{-technology "Dump technology file" "" boolean {optional}}       {-vt_cell_placement_properties "Dump multi-VT cells' implant layer information of library" "" boolean {optional hidden}}       {-reference_control_file "Dump reference control file" "" boolean {optional}}       {-stream_layer_map_file "Dump layer map file during stream in/out" "" string {optional}}       {-output "Output file" "file_name" string {required}}       {"" "Library to be reported" "libName" string {required}}}
 #@ }
 #@ ##############################################################################
 #@ #
@@ -1042,8 +1040,12 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@   }
 #@   if {[info exists ra(-save)]} {
 #@       set cmd_close [format {%s -save} $cmd_close]
-#@   } else {
-#@       set cmd_close [format {%s -discard} $cmd_close]
+#@   } 
+#@   if {[info exists ra(-verbose)]} {
+#@       set cmd_close [format {%s -verbose} $cmd_close]
+#@   }
+#@   if {[info exists ra(-hierarchy)]} {
+#@       set cmd_close [format {%s -hierarchy} $cmd_close]
 #@   }
 #@ 
 #@   ui_util_clean_saved_lib_attr $args
@@ -1077,7 +1079,7 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@   }
 #@ }
 #@ 
-#@ define_proc_attributes close_mw_cel -hide_body     -info " Closes the design "     -define_args       {{-save "Save the cel" "" boolean {optional}}       {-discard "Discard any changes" "" boolean {optional hidden}}       {-all_views "Close all views of the cel" "" boolean {optional}}       {-all_versions "Close all versions of the cel" "" boolean {optional}}       {"" "cels to be closed" "design list" list {optional}}}
+#@ define_proc_attributes close_mw_cel -hide_body     -info " Closes the design "     -define_args       {{-save "Save the design" "" boolean {optional}}       {-discard "Discard any changes" "" boolean {optional hidden}}       {-verbose "Print out debugging messages" "" boolean {optional hidden}}       {-hierarchy "Close top design and its child designs" "" boolean {optional}}       {-all_views "Close all views of the design" "" boolean {optional}}       {-all_versions "Close all versions of the design" "" boolean {optional}}       {"" "designs to be closed" "design list" list {optional}}}
 #@ 
 #@ ##############################################################################
 #@ #
@@ -1198,20 +1200,6 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ }
 #@ 
 #@ define_proc_attributes dc_read_def -hide_body     -info " Read a def file "     -define_args       {{-design "name of design for which clusters are to be read" "" string {optional}}        {-quiet "do not print out any warnings" "" boolean {optional}}        {-verbose "print out more warnings" "" boolean {optional}}        {-allow_physical_cells "allow physical cells" "" boolean {optional}}        {-allow_physical_ports "allow physical ports" "" boolean {optional}}        {-allow_physical_nets "allow physical nets" "" boolean {optional}}        {-skip_signal_nets "skip signal nets" "" boolean {optional}}        {-incremental "incremental" "" boolean {optional}}        {-enforce_scaling "enforce_scaling" "" boolean {optional}}        {-move_bounds "move bounds" "" boolean {optional}}        {"" "input def file names" "input_def_file_name" string {required}}}
-#@ 
-#@ ##############################################################################
-#@ #  PROCEDURE:   read_pdef
-#@ #  ABSTRACT:    Wrapper around read_pdef to handle incremental update properly
-#@ ##############################################################################
-#@ rename -force read_pdef org_read_pdef
-#@ icc_hide_cmd org_read_pdef
-#@ proc read_pdef args {
-#@   parse_proc_arguments -args $args ra
-#@   return [eval execute_command_and_create_cel_from_scratch "org_read_pdef" $args]
-#@ }
-#@ 
-#@ define_proc_attributes read_pdef -hide_body     -info " Read a pdef file "     -define_args       {{-design "name of design for which clusters are to be read" "" string {optional}}        {-quiet "do not print out any warnings" "" boolean {optional}}        {-verbose "print out more warnings" "" boolean {optional}}        {-dont_update_core_area "do not overwrite the core area" "" boolean {optional}}        {-allow_physical_cells "allow physical cells" "" boolean {optional}}        {-allow_physical_ports "allow physical ports" "" boolean {optional}}        {-skip_signal_nets "skip signal nets" "" boolean {optional}}        {"" "input pdef file names" "file_name" string {required}}}
-#@ 
 #@ 
 #@ 
 #@ ##############################################################################
@@ -1361,13 +1349,52 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ ##############################################################################
 #@ if { [string match -nocase {*icc_shell*} $synopsys_program_name] } {
 #@     # Load the compiled Tcl byte-code:
+#@     # 9000784997: Do not log to command.log when sourcing .tbc files
+#@     set prev_sh_source_logging [get_app_var sh_source_logging]
+#@     set_app_var sh_source_logging 0
 #@     source $synopsys_root/auxx/syn/psyn/check_physical_design_core.tbc
 #@     source $synopsys_root/auxx/syn/psyn/check_physical_design_utils.tbc
 #@     source $synopsys_root/auxx/syn/psyn/check_physical_design_flows.tbc
 #@     source $synopsys_root/auxx/syn/psyn/check_physical_design_reports.tbc
 #@     source $synopsys_root/auxx/syn/psyn/check_physical_design_ui.tbc
+#@     source $synopsys_root/auxx/syn/psyn/sanity_setup_opt.tbc
+#@     source $synopsys_root/auxx/syn/psyn/sanity_setup_cmd.tbc
+#@     source $synopsys_root/auxx/syn/psyn/sanity_setup_rpt.tbc
 #@     source $synopsys_root/auxx/syn/psyn/create_qor_snapshot.tbc
 #@     source $synopsys_root/auxx/syn/psyn/report_qor_snapshot.tbc
+#@     source $synopsys_root/auxx/syn/psyn/msgParser.tbc
+#@     source $synopsys_root/auxx/syn/psyn/displacement_gui.tbc
+#@     source $synopsys_root/auxx/syn/psyn/categorize_timing_gui.tbc
+#@     set_app_var sh_source_logging $prev_sh_source_logging
+#@ 
+#@     source $synopsys_root/auxx/syn/psyn/mcmm_utils.tcl.e
+#@     source $synopsys_root/auxx/syn/psyn/propagate_all_clocks.tcl.e
+#@ }
+#@ 
+#@ if { [string match -nocase {*dc_shell*} $synopsys_program_name] && [shell_is_in_topographical_mode] }  {
+#@    # 9000784997: Do not log to command.log when sourcing .tbc files
+#@    set prev_sh_source_logging [get_app_var sh_source_logging]
+#@    set_app_var sh_source_logging 0
+#@    source $synopsys_root/auxx/syn/psyn/create_qor_snapshot.tbc
+#@    source $synopsys_root/auxx/syn/psyn/report_qor_snapshot.tbc
+#@    set_app_var sh_source_logging $prev_sh_source_logging
+#@ 
+#@    source $synopsys_root/auxx/syn/psyn/mcmm_utils.tcl.e
+#@ }
+#@ 
+#@ if { [string match -nocase {*icc_shell*} $synopsys_program_name] || [string match -nocase {*dc_shell*} $synopsys_program_name] || [string match -nocase {*de_shell*} $synopsys_program_name] } {
+#@    source $synopsys_root/auxx/syn/psyn/write_timing_context.tcl.e
+#@ }
+#@ 
+#@ if { $synopsys_program_name == "de_shell" }  {
+#@    # 9000784997: Do not log to command.log when sourcing .tbc files
+#@    set prev_sh_source_logging [get_app_var sh_source_logging]
+#@    set_app_var sh_source_logging 0
+#@    source $synopsys_root/auxx/syn/psyn/create_qor_snapshot.tbc
+#@    source $synopsys_root/auxx/syn/psyn/report_qor_snapshot.tbc
+#@    set_app_var sh_source_logging $prev_sh_source_logging
+#@ 
+#@    source $synopsys_root/auxx/syn/psyn/mcmm_utils.tcl.e
 #@ }
 #@ 
 #@ ##############################################################################
@@ -1375,8 +1402,8 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ ##############################################################################
 #@ 
 #@ if { [string match -nocase {*icc_shell*} $synopsys_program_name] } {
-#@ set  save_mw_cel_lib_setup  TRUE
-#@ set  auto_restore_mw_cel_lib_setup FALSE
+#@ #set  save_mw_cel_lib_setup  TRUE
+#@ #set  auto_restore_mw_cel_lib_setup FALSE
 #@ 
 #@ alias create_wiring_keepout create_wiring_keepouts
 #@ alias get_wiring_keepout get_wiring_keepouts
@@ -1385,8 +1412,6 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ 
 #@ icc_hide_cmd execute_command_and_create_cel_from_scratch
 #@ icc_hide_cmd dc_read_def
-#@ icc_hide_cmd read_pdef
-#@ icc_hide_cmd write_pdef
 #@ icc_hide_cmd read_edif
 #@ icc_hide_cmd read_sverilog
 #@ icc_hide_cmd read_vhdl
@@ -1397,7 +1422,132 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ }
 #@ 
 #@ 
-#@ # -- End source /cadtools/synopsys/2009/synthesis/auxx/syn/.dc_procs.tcl
+#@ ##############################################################################
+#@ # Tcl Command: get_dont_touch_nets
+#@ # Description: wrapper of "get_nets -filter dont_touch_reason==mv"
+#@ ##############################################################################
+#@ if { [string match -nocase {*icc_shell*} $synopsys_program_name] } {
+#@ 
+#@ proc get_dont_touch_nets args {
+#@ 
+#@   parse_proc_arguments -args $args ra
+#@ 
+#@   set cmd [format {get_nets}]
+#@ 
+#@   if {[info exists ra()]} {
+#@       set cmd [format {%s {%s}} $cmd $ra()]
+#@   }
+#@   if {[info exists ra(-type)]} {
+#@       set cmd [format {%s -filter dont_touch_reasons=~*%s*} $cmd $ra(-type)]
+#@   }
+#@   if {[info exists ra(-hierarchical)]} {
+#@       set cmd [format {%s -hierarchical} $cmd]
+#@   }
+#@   if {[info exists ra(-quiet)]} {
+#@       set cmd [format {%s -quiet} $cmd]
+#@   }
+#@   if {[info exists ra(-regexp)]} {
+#@       set cmd [format {%s -regexp} $cmd]
+#@   } 
+#@   if {[info exists ra(-nocase)]} {
+#@       set cmd [format {%s -nocase} $cmd]
+#@   }
+#@   if {[info exists ra(-exact)]} {
+#@       set cmd [format {%s -exact} $cmd]
+#@   }
+#@ 
+#@   return [uplevel #0 $cmd]
+#@ }
+#@ 
+#@ define_proc_attributes get_dont_touch_nets   -info " Get dont_touch nets "   -permanent   -define_args {     {"" "Match net names against patterns" "patterns" list {optional}}     {-type "Match net dont_touch reasons" "reasons" list {required}}     {-hierarchical "Search level-by-level in current instance" "" boolean {optional}}     {-quiet "Suppress all messages" "" boolean {optional hidden}}     {-regexp "Patterns are full regular expressions" "" boolean {optional hidden}}     {-nocase "With -regexp, matches are case-insensitive" "" boolean {optional hidden}}     {-exact "Wildcards are considered as plain characters" "" boolean {optional hidden}}   }
+#@ 
+#@ alias get_dont_touch_net get_dont_touch_nets
+#@ }
+#@ 
+#@ 
+#@ ##############################################################################
+#@ # return the first {index value} pair in Tcl array ary.
+#@ ##############################################################################
+#@ proc _snps_array_peek { level ary } {
+#@     upvar #$level $ary loc_ary
+#@     set ret [list]
+#@     set token [array startsearch loc_ary]
+#@     while {[array anymore loc_ary $token]} {
+#@         set k [array nextelement loc_ary $token]
+#@         set v $loc_ary($k)
+#@         set ret [list $k $v]
+#@             break
+#@         }
+#@     array donesearch loc_ary $token
+#@     return $ret;
+#@ }
+#@ define_proc_attributes _snps_array_peek -hidden
+#@ 
+#@ 
+#@ ##############################################################################
+#@ # Tcl Command: filter_collection
+#@ # Description: DC wrapper for filter_collection with fixes of direction filter
+#@ #
+#@ #              This is a fix for DC's filter using "direction" attribute. This
+#@ #              attribute is of integer type, but user wants a string format
+#@ ##############################################################################
+#@ if {[string match -nocase {*icc_shell*} $synopsys_program_name] == 0} {
+#@ rename -force -hidden filter_collection _real_filter_collection
+#@ proc filter_collection {args} {
+#@   parse_proc_arguments -args $args ra
+#@ 
+#@   set regexp ""
+#@   set nocase ""
+#@   if {[info exist ra(-regexp)]} {
+#@     set regexp "-regexp"
+#@   }
+#@   if {[info exist ra(-nocase)]} {
+#@     set nocase "-nocase"
+#@   }
+#@   set coll $ra(collection1)
+#@ 
+#@   # _real_filter_collection silently returns in this error condition
+#@   if {[catch {set coll_size [sizeof_collection $coll]}] || $coll_size <= 0} {
+#@     return [list]
+#@   }
+#@ 
+#@   if {$::sh_translate_direction_attribute == true} {
+#@     set filter_expr [replace_direction $coll $ra(expression)]
+#@   } else {
+#@     set filter_expr $ra(expression)
+#@   }
+#@ 
+#@   # if $ra(expression) is not empty but filter_expr is, collection is heterogrnous
+#@   # and expression has "direction" as substring.  We have to walk through all objects
+#@   if {[string length $filter_expr] == 0 && [string length $ra(expression)] != 0} {
+#@     set part1 [format {_real_filter_collection %s %s } $regexp $nocase]
+#@     set results ""
+#@     set subclxn ""
+#@     set subsize [expr [sizeof_collection $coll]/80 + 10]
+#@     set counter 0
+#@     foreach_in_collection obj $coll {
+#@       incr counter
+#@       set cmd [format {%s %s {%s}} $part1 $obj [replace_direction $obj $ra(expression)]]
+#@       append_to_collection subclxn [uplevel #0 $cmd]
+#@       if {[expr $counter % $subsize] == 0} {
+#@         append_to_collection results $subclxn
+#@         set subclxn ""
+#@       }
+#@     }
+#@     if {[sizeof_collection $subclxn] != 0} {
+#@       append_to_collection results $subclxn
+#@     }
+#@     return $results
+#@   } else {
+#@     set cmd [format {_real_filter_collection %s %s %s {%s}}                          $regexp $nocase $coll $filter_expr]
+#@     return [uplevel #0 $cmd]
+#@   }
+#@ }
+#@ define_proc_attributes filter_collection   -info " Filter a collection, resulting in new collection "   -permanent   -define_args {     {-regexp "Operators =~ and !~ use regular expressions" "" boolean {optional}}     {-nocase "Case insensitive string match" "" boolean {optional}}     {collection1 "Collection to filter" "collection1" string {required}}     {expression "Filter expression" "expression" string {required}}   }
+#@ 
+#@ }
+#@ 
+#@ # -- End source /cadtools/synopsys/2015/synthesis/auxx/syn/.dc_procs.tcl
 
 #@ 
 #@ # Temporary fix for the LMC_HOME variable- set it to an empty string 
@@ -1418,11 +1568,9 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ #
 #@ 
 #@ # from the System Variable Group 
-#@ set link_force_case  "check_reference"
 #@ set link_library  { * your_library.db }
-#@ set physical_library ""
 #@ 
-#@ set search_path [list . ${synopsys_root}/libraries/syn ${synopsys_root}/dw/syn_ver ${synopsys_root}/dw/sim_ver]
+#@ set search_path [list . ${synopsys_root}/libraries/syn ${synopsys_root}/minpower/syn ${synopsys_root}/dw/syn_ver ${synopsys_root}/dw/sim_ver]
 #@ set target_library  your_library.db
 #@ set synthetic_library  ""
 #@ set command_log_file  "./command.log"
@@ -1433,18 +1581,19 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ set symbol_library  your_library.sdb 
 #@ 
 #@ # Turn on Formality SVF recording
-#@ if { $synopsys_program_name == "dc_shell"      ||      $synopsys_program_name == "design_vision" } { 
+#@ if { $synopsys_program_name == "dc_shell"      ||      $synopsys_program_name == "de_shell"      ||      $synopsys_program_name == "design_vision" } { 
 #@   set_svf -default default.svf
 #@ }
 #@ 
 #@ # from the Schematic Variable Group 
 #@ 
 #@ # from the Plot Variable Group 
-#@ if { $sh_arch == "hp700" } {
-#@   set plot_command "lp -d" 
-#@ } else {
-#@   set plot_command "lpr -Plw" 
-#@ }
+#@ # [froi] 07/06/2012: Remove old Design Analyzer plot_command variable
+#@ #if { $sh_arch == "hp700" } {
+#@ #  set plot_command "lp -d" 
+#@ #} else {
+#@ #  set plot_command "lpr -Plw" 
+#@ #}
 #@ 
 #@ set view_command_log_file  "./view_command.log"
 #@ 
@@ -1484,10 +1633,10 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ set compile_instance_name_suffix   ""
 #@ set compile_negative_logic_methodology   "false"
 #@ set compile_disable_hierarchical_inverter_opt   "false"
-#@ set compile_use_fast_delay_mode   "true"
 #@ set compile_use_low_timing_effort   "false"
 #@ set compile_fix_cell_degradation   "false"
 #@ set compile_preserve_subdesign_interfaces   "false"
+#@ set compile_enable_constant_propagation_with_no_boundary_opt   "true"
 #@ set port_complement_naming_style   "%s_BAR"
 #@ set compile_implementation_selection   "true"
 #@ set compile_delete_unloaded_sequential_cells   "true"
@@ -1501,22 +1650,10 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ set compile_hold_reduce_cell_count "false"
 #@ set compile_retime_license_behavior "wait"
 #@ set dont_touch_nets_with_size_only_cells "false"
-#@ set suppress_errors  {PWR-18 OPT-932 OPT-317}
 #@ if { $synopsys_program_name == "dc_shell" && [shell_is_in_topographical_mode] } {
 #@    set dct_prioritize_area_correlation "false"
+#@    set compile_error_on_missing_physical_cells "false"
 #@ }
-#@ 
-#@ #
-#@ # Variable(s) to control the behavior of the optimize_registers command
-#@ #
-#@ set optimize_reg_always_insert_sequential false 
-#@ set optimize_reg_max_time_borrow -1048576.0
-#@ set optimize_reg_retime_clock_gating_latches false
-#@ 
-#@ group_variable retiming optimize_reg_always_insert_sequential
-#@ group_variable retiming optimize_reg_max_time_borrow
-#@ group_variable retiming optimize_reg_retime_clock_gating_latches
-#@ 
 #@ 
 #@ set ldd_return_val 0
 #@ if { [string compare $dc_shell_mode "default"] == 0 } {
@@ -1525,8 +1662,17 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ 
 #@ }
 #@ if { [string compare $dc_shell_mode "tcl"] == 0 } {
-#@   source ${synopsys_root}/auxx/syn/scripts/list_duplicate_designs.tcl
+#@   if {$synopsys_program_name != "dc_sms_shell"} {
+#@     source ${synopsys_root}/auxx/syn/scripts/list_duplicate_designs.tcl
+#@     # 9000784997: Do not log to command.log when sourcing .tbc files
+#@     set prev_sh_source_logging [get_app_var sh_source_logging]
+#@     set_app_var sh_source_logging 0
+#@     source ${synopsys_root}/auxx/syn/scripts/analyze_datapath.tbc
+#@     set_app_var sh_source_logging $prev_sh_source_logging
+#@   }
 #@ }
+#@ # -- Starting source /cadtools/synopsys/2015/synthesis/auxx/syn/scripts/list_duplicate_designs.tcl
+
 #@ ####################################################################### 
 #@ #
 #@ #  list_duplicate_designs.tcl		21 Sept. 2006
@@ -1537,11 +1683,10 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ #
 #@ #######################################################################
 #@ 
-#@ 
-#@ proc list_duplicate_designs {} {
+#@ proc list_duplicate_designs { args } {
+#@     parse_proc_arguments -args $args ra
 #@ 
 #@     # Get the list of duplicate designs
-#@ 
 #@     set the_pid [pid]
 #@     set rand_1 [expr int(rand() * 100000)]
 #@     set temp_file_1 [format "/tmp/ldd_design_%s_%s" $the_pid $rand_1]
@@ -1550,7 +1695,6 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@         echo [get_object_name $ldd_design]
 #@     } }
 #@ 
-#@ 
 #@     set rand_2 [expr int(rand() * 100000)]
 #@     set temp_file_2 [format "/tmp/ldd_design_%s_%s" $the_pid $rand_2]
 #@ 
@@ -1558,7 +1702,6 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@     file delete $temp_file_1 
 #@ 
 #@     # Report duplicates
-#@ 
 #@     if { ! [file size $temp_file_2] } {
 #@         echo [concat {No duplicate designs found.}]
 #@         set ldd_return_val 0
@@ -1576,12 +1719,14 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@     }
 #@ 
 #@     # Clean up
-#@ 
 #@     file delete $temp_file_2
 #@ 
 #@     set list_duplicate_designs1 $ldd_return_val
 #@ }
-#@ # -- End source /cadtools/synopsys/2009/synthesis/auxx/syn/scripts/list_duplicate_designs.tcl
+#@ 
+#@ define_proc_attributes list_duplicate_designs     -info " List designs of same names"     -permanent     -define_args {
+#@     }
+#@ # -- End source /cadtools/synopsys/2015/synthesis/auxx/syn/scripts/list_duplicate_designs.tcl
 
 #@ 
 #@ 
@@ -1595,7 +1740,7 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ #  commands.
 #@ #
 #@ set enable_recovery_removal_arcs  "false"
-#@ set timing_report_attributes {dont_touch dont_use map_only size_only ideal_net}
+#@ set timing_report_attributes {dont_touch dont_use map_only size_only ideal_net infeasible_paths}
 #@ 
 #@ #
 #@ #       Multibit Variable Group:
@@ -1604,6 +1749,7 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ #
 #@ 
 #@ set bus_multiple_separator_style  ","
+#@ set bus_multiple_name_separator_style  ",,"
 #@ 
 #@ #
 #@ #       ILM Variable Group:
@@ -1636,6 +1782,7 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ set synlib_dont_get_license  {}
 #@ set synlib_library_list   {DW01 DW02 DW03 DW04 DW05 DW06 DW07}
 #@ set synlib_wait_for_design_license {}
+#@ set synlib_dwhomeip {}
 #@ 
 #@ #
 #@ #       Insert_DFT Variable Group:
@@ -1767,6 +1914,14 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ set test_bsd_default_bidir_delay  0.0
 #@ set test_bsd_default_strobe  95.0
 #@ set test_bsd_default_strobe_width  0.0
+#@ 
+#@ #
+#@ #       Test Variable Group:
+#@ #
+#@ #       These variables affects the set_scan_state command.
+#@ #
+#@ 
+#@ set compile_seqmap_identify_shift_registers_with_synchronous_logic_ascii false
 #@ 
 #@ #
 #@ #       Write_Test Variable Group:
@@ -2001,105 +2156,70 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ #       These variables are for controlling hdl reading, writing,
 #@ #       and optimizing.
 #@ #
-#@ set hdlin_enable_presto 		"TRUE"
-#@ set hdlin_allow_4state_parameters	"FALSE"
-#@ set hdlin_auto_netlist_reader           "TRUE"
-#@ set hdlin_enable_presto_for_vhdl	"TRUE"
-#@ set hdlin_enable_rtldrc_info      	"false"
+#@ set hdlin_enable_upf_compatible_naming	"FALSE"
 #@ set hdlin_auto_save_templates		"FALSE"
-#@ set hdlin_build_selectop_for_var_index  "FALSE"
-#@ set hdlin_ff_always_async_set_reset	"TRUE"
-#@ set hdlin_ff_always_sync_set_reset	"FALSE"
-#@ set hdlin_fsm_effort			2
 #@ set hdlin_generate_naming_style   	"%s_%d"
+#@ set hdlin_enable_relative_placement     "rb"
+#@ set hdlin_mux_rp_limit                  "128x4"
 #@ set hdlin_generate_separator_style	"_"
-#@ set hdlin_group_selectors         	"TRUE"
 #@ set hdlin_ignore_textio_constructs      "TRUE"
-#@ set hdlin_infer_block_local_latches	"TRUE"
-#@ set hdlin_infer_comparators       	"TRUE"
-#@ set hdlin_infer_complex_set_reset	"FALSE"
 #@ set hdlin_infer_function_local_latches	"FALSE"
-#@ set hdlin_infer_multibit          	"default_none"
-#@ set hdlin_infer_mux               	"default"
-#@ set hdlin_keep_feedback           	"FALSE"
 #@ set hdlin_keep_signal_name		"all_driving"
-#@ set hdlin_loop_invariant_code_motion	"TRUE"
-#@ set hdlin_map_to_entity           	"TRUE"
-#@ set hdlin_map_to_module           	"TRUE"
-#@ set hdlin_map_to_operator         	"TRUE"
-#@ set hdlin_infer_complex_enable	"FALSE"
 #@ set hdlin_module_arch_name_splitting	"FALSE"
-#@ set hdlin_mux_oversize_ratio      	100
-#@ set hdlin_mux_size_limit          	32
-#@ set hdlin_mux_size_min            	2
-#@ set hdlin_no_adder_feedthroughs   	"TRUE"
-#@ set hdlin_no_group_register		"FALSE"
-#@ set hdlin_optimize_case_default   	"TRUE"
-#@ set hdlin_optimize_shift_expressions	"TRUE"
-#@ set hdlin_pla_mode			"FALSE"
 #@ set hdlin_preserve_sequential           "none"
-#@ set hdlin_preserve_sequential_loop_variables "FALSE"
 #@ set hdlin_presto_net_name_prefix	"N"
 #@ set hdlin_presto_cell_name_prefix	"C"
-#@ set hdlin_redundancy_elimination  	"TRUE"
-#@ set hdlin_register_report_depth   	3
-#@ set hdlin_report_carry_in               "FALSE"
-#@ set hdlin_report_case_analysis          "FALSE"
-#@ set hdlin_report_enumerated_types 	"FALSE"
-#@ set hdlin_report_inferred_modules 	"true"
-#@ set hdlin_report_floating_net_to_ground "FALSE"
-#@ set hdlin_report_fsm               	"FALSE"
-#@ set hdlin_report_mux_op           	"TRUE"
-#@ set hdlin_report_syn_cell         	"FALSE"
-#@ set hdlin_report_tri_state        	"TRUE"
-#@ set hdlin_selector_simplify_effort	1
-#@ set hdlin_seqmap_async_search_depth     3
-#@ set hdlin_seqmap_sync_search_depth     	3
-#@ set hdlin_sv_ieee_assignment_patterns   1
-#@ set hdlin_compare_const_with_gates      "TRUE"
-#@ set hdlin_compare_eq_with_gates		"FALSE"
+#@ set hdlin_strict_verilog_reader		"FALSE"
 #@ set hdlin_prohibit_nontri_multiple_drivers  "TRUE"
-#@ set hdlin_elab_errors_deep		"FALSE"
+#@ if { $synopsys_program_name == "de_shell" } { 
+#@   set hdlin_elab_errors_deep		"TRUE"
+#@ } else {
+#@   set hdlin_elab_errors_deep		"FALSE"
+#@ }
 #@ set hdlin_mux_size_min			2
-#@ set hdlin_share_all_operators     	"FALSE"
 #@ set hdlin_subprogram_default_values	"FALSE"
 #@ set hdlin_field_naming_style		"" 
-#@ set hdlin_translate_off_on        	"TRUE"
 #@ set hdlin_upcase_names            	"FALSE"
-#@ set hdlin_use_syn_shifter         	"TRUE"
-#@ set hdlin_vhdl93_concat           	"true"
-#@ set hdlin_vhdl_87                 	"FALSE"
-#@ set hdlin_vrlg_std                	2001
-#@ set hdlin_while_loop_iterations   	1024
+#@ set hdlin_sv_union_member_naming        "FALSE"
+#@ set hdlin_vhdl_std		        2008
+#@ set hdlin_vhdl93_concat				"TRUE"
+#@ set hdlin_vhdl_syntax_extensions	"FALSE"
+#@ set hdlin_analyze_verbose_mode		0
+#@ set hdlin_report_sequential_pruning	"FALSE"
+#@ set hdlin_vrlg_std                	2005
+#@ set hdlin_sverilog_std                	2012
+#@ set hdlin_while_loop_iterations   	4096	
+#@ set hdlin_reporting_level        	"basic"
+#@ set hdlin_autoread_verilog_extensions ".v"
+#@ set hdlin_autoread_sverilog_extensions ".sv .sverilog"
+#@ set hdlin_autoread_vhdl_extensions ".vhd .vhdl"
+#@ set hdlin_autoread_exclude_extensions ""
 #@ 
 #@ set bus_minus_style   "-%d"
-#@ set hdlin_enable_analysis_info   "false"
 #@ set hdlin_latch_always_async_set_reset   FALSE
 #@ set hdlin_ff_always_sync_set_reset   FALSE
 #@ set hdlin_ff_always_async_set_reset   TRUE
 #@ set hdlin_check_input_netlist   FALSE
 #@ set hdlin_check_no_latch   FALSE
-#@ set hdlin_report_inferred_modules   "true"
-#@ set hdlin_keep_feedback   FALSE
+#@ set hdlin_mux_for_array_read_sparseness_limit 90
 #@ set hdlin_infer_mux   "default"
-#@ set hdlin_dont_infer_mux_for_resource_sharing   "true"
 #@ set hdlin_mux_oversize_ratio   100
 #@ set hdlin_mux_size_limit   32
 #@ set hdlin_mux_size_only    1
 #@ set hdlin_infer_multibit   "default_none"
-#@ set hdlin_vhdl93_concat	"true"
 #@ set hdlin_enable_rtldrc_info "false"
-#@ set hdlin_pla_mode FALSE
-#@ set hdlin_presto_net_name_prefix "N"
+#@ set hdlin_interface_port_ABI 3
 #@ set hdlin_shorten_long_module_name "false"
 #@ set hdlin_module_name_limit 256
 #@ set hdlin_enable_assertions "FALSE"
 #@ set hdlin_enable_configurations "FALSE"
-#@ set hdlin_enable_variable_width_ports "TRUE"
-#@ set hdlin_sv_auto_decl_inits "TRUE"
+#@ set hdlin_sv_blackbox_modules ""
 #@ set hdlin_sv_tokens "FALSE"
 #@ set hdlin_sv_packages "enable"
-#@ set hdlin_optimize_pla_effort 2
+#@ set hdlin_verification_priority "FALSE"
+#@ set hdlin_enable_elaborate_ref_linking "FALSE"
+#@ set hdlin_enable_hier_naming "FALSE"
+#@ set hdlin_vhdl_mixed_language_instantiation "FALSE"
 #@ set hdl_preferred_license   ""
 #@ set hdl_keep_licenses   "true"
 #@ set hlo_resource_allocation   "constraint_driven"
@@ -2132,6 +2252,7 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ set verilogout_equation "false" 
 #@ set verilogout_ignore_case   "false"
 #@ set verilogout_no_tri   "false"
+#@ set verilogout_inout_is_in   "false"
 #@ set verilogout_single_bit   "false"
 #@ set verilogout_higher_designs_first   "FALSE"
 #@ # set verilogout_levelize   "FALSE"
@@ -2140,6 +2261,9 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ set verilogout_show_unconnected_pins   "FALSE"
 #@ set verilogout_no_negative_index   "FALSE"
 #@ #set enable_2003.03_verilog_reader TRUE 
+#@ # to have a net instead of 1'b0 and 1'b1 in inouts:
+#@ set verilogout_indirect_inout_connection "FALSE"
+#@ 
 #@ # set vhdlout_architecture_name   "SYN_%a_%u"
 #@ set vhdlout_bit_type   "std_logic"
 #@ # set vhdlout_bit_type_resolved   "TRUE"
@@ -2275,9 +2399,11 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ #        set_annotated_delay, compile, create_wire_load and reoptimize_design
 #@ #        commands.
 #@ #
+#@ if {$synopsys_program_name != "dc_sms_shell"} {
+#@   set auto_wire_load_selection   "true" 
+#@   set compile_create_wire_load_table   "false" 
+#@ }
 #@ set rtl_load_resistance_factor 0.0
-#@ set auto_wire_load_selection   "true" 
-#@ set compile_create_wire_load_table   "false" 
 #@ 
 #@ #      power Variable Group:
 #@ #
@@ -2288,14 +2414,14 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ set power_rtl_saif_file                       "power_rtl.saif"
 #@ set power_sdpd_saif_file                      "power_sdpd.saif"
 #@ set power_preserve_rtl_hier_names             "false"
-#@ set power_do_not_size_icg_cells               "false"
+#@ set power_do_not_size_icg_cells               "true"
 #@ set power_hdlc_do_not_split_cg_cells          "false"
 #@ set power_cg_flatten                          "false"
 #@ set power_opto_extra_high_dynamic_power_effort "false"
 #@ set power_default_static_probability          0.5
 #@ set power_default_toggle_rate                 0.1
 #@ set power_default_toggle_rate_type            "fastest_clock"
-#@ set power_model_preference                    "ccs"
+#@ set power_model_preference                    "nlpm"
 #@ set power_sa_propagation_effort               "low"
 #@ set power_sa_propagation_verbose              "false"
 #@ set power_fix_sdpd_annotation                 "true"
@@ -2311,10 +2437,6 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ set power_lib2saif_rise_fall_pd               "false"
 #@ set power_min_internal_power_threshold        ""
 #@ 
-#@ #
-#@ # Control FSM auto-inferring
-#@ #
-#@ set fsm_auto_inferring                        "false"
 #@ 
 #@ # SystemC related variables
 #@ set systemcout_levelize "true"
@@ -2359,22 +2481,6 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ }
 #@ 
 #@ #
-#@ #     eco variable group
-#@ # 
-#@ #     These variables affect ECO Compiler functionality
-#@ #
-#@ #
-#@ set eco_align_design_verbose            "false"
-#@ set eco_allow_register_type_difference  "false"
-#@ set eco_connect_resource_cell_inputs    "true"
-#@ set eco_correspondence_analysis_verbose "false"
-#@ set eco_directives_verbose              "false"
-#@ set eco_implement_effort_level          "low"
-#@ set eco_instance_name_prefix            "eco_"
-#@ set eco_recycle_verbose                 "true"
-#@ set eco_remap_register_verbose          "false"
-#@ set eco_reuse_verbose                   "false"
-#@ 
 #@ #
 #@ #        DesignTime Variable Group
 #@ #
@@ -2383,7 +2489,6 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ 
 #@ set case_analysis_log_file ""
 #@ set case_analysis_sequential_propagate "false"
-#@ set case_analysis_with_logic_constants "false"
 #@ set create_clock_no_input_delay "false"
 #@ set disable_auto_time_borrow "false"
 #@ set disable_case_analysis "false"
@@ -2410,8 +2515,9 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ set rc_slew_upper_threshold_pct_fall 80.000000
 #@ set rc_slew_upper_threshold_pct_rise 80.000000
 #@ set timing_disable_cond_default_arcs "false"
-#@ set timing_enable_multiple_clocks_per_reg "false"
-#@ set timing_report_attributes {dont_touch dont_use map_only size_only ideal_net}
+#@ #timing_enable_multiple_clocks_per_reg is on by default
+#@ #set timing_enable_multiple_clocks_per_reg "false"
+#@ set timing_report_attributes {dont_touch dont_use map_only size_only ideal_net infeasible_paths}
 #@ set timing_self_loops_no_skew "false"
 #@ set when_analysis_permitted "true"
 #@ set when_analysis_without_case_analysis "false"
@@ -2492,7 +2598,6 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@   group_variable  system  "default_name_rules"  
 #@   group_variable  system  "verbose_messages" 
 #@   group_variable  system  "link_library"  
-#@   group_variable  system  "physical_library"  
 #@   group_variable  system  "link_force_case"  
 #@   group_variable  system  "search_path"  
 #@   group_variable  system  "synthetic_library"  
@@ -2521,10 +2626,10 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@   group_variable  compile  "auto_wire_load_selection"  
 #@   group_variable  compile  "rtl_load_resistance_factor"
 #@   group_variable  compile  "compile_implementation_selection"  
-#@   group_variable  compile  "compile_use_fast_delay_mode"  
 #@   group_variable  compile  "compile_use_low_timing_effort"  
 #@   group_variable  compile  "compile_fix_cell_degradation"  
 #@   group_variable  compile  "compile_preserve_subdesign_interfaces" 
+#@   group_variable  compile  "compile_enable_constant_propagation_with_no_boundary_opt"
 #@   group_variable  compile  "compile_delete_unloaded_sequential_cells" 
 #@   group_variable  compile  "enable_recovery_removal_arcs" 
 #@   group_variable  compile  "compile_checkpoint_phases"
@@ -2539,6 +2644,7 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ 
 #@   if { $synopsys_program_name == "dc_shell" && [shell_is_in_topographical_mode] } {
 #@     group_variable  compile  "dct_prioritize_area_correlation"
+#@     group_variable  compile  "compile_error_on_missing_physical_cells"
 #@   }
 #@ 
 #@   # "multibit" variables are used by the the multibit mapping functionality 
@@ -2831,19 +2937,14 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@   group_variable hdl "bus_dimension_separator_style"
 #@   group_variable hdl "bus_minus_style"
 #@   group_variable hdl "bus_naming_style"
-#@   group_variable hdl "hdlin_enable_presto"
-#@   group_variable hdl "hdlin_infer_complex_set_reset"
-#@   group_variable hdl "hdlin_enable_analysis_info"
 #@   group_variable hdl "hdlin_ignore_textio_constructs"
 #@   group_variable hdl "hdlin_latch_always_async_set_reset"
 #@   group_variable hdl "hdlin_ff_always_sync_set_reset"
 #@   group_variable hdl "hdlin_ff_always_async_set_reset"
-#@   group_variable hdl "hdlin_keep_feedback"
 #@   group_variable hdl "hdlin_check_input_netlist"
 #@   group_variable hdl "hdlin_check_no_latch"
-#@   group_variable hdl "hdlin_report_inferred_modules"
+#@   group_variable hdl "hdlin_reporting_level"
 #@   group_variable hdl "hdlin_infer_mux"
-#@   group_variable hdl "hdlin_dont_infer_mux_for_resource_sharing"
 #@   group_variable hdl "hdlin_mux_oversize_ratio"
 #@   group_variable hdl "hdlin_mux_size_limit"
 #@   group_variable hdl "hdlin_infer_multibit"
@@ -2856,6 +2957,7 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@   group_variable hdl "verilogout_equation"
 #@   group_variable hdl "verilogout_ignore_case"
 #@   group_variable hdl "verilogout_no_tri"
+#@   group_variable hdl "verilogout_inout_is_in"
 #@   group_variable hdl "verilogout_single_bit"
 #@   group_variable hdl "verilogout_higher_designs_first"
 #@ #  group_variable hdl "verilogout_levelize"
@@ -2864,39 +2966,46 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@   group_variable hdl "verilogout_show_unconnected_pins"
 #@   group_variable hdl "verilogout_no_negative_index"
 #@   group_variable hdl "hdlin_enable_rtldrc_info"
-#@   group_variable hdl "hdlin_compare_const_with_gates"
-#@   group_variable hdl "hdlin_compare_eq_with_gates"
-#@   group_variable hdl "hdlin_group_selectors"
+#@   group_variable hdl "hdlin_sv_blackbox_modules"
 #@   group_variable hdl "hdlin_infer_function_local_latches"
-#@   group_variable hdl "hdlin_loop_invariant_code_motion"
-#@   group_variable hdl "hdlin_map_to_entity"
-#@   group_variable hdl "hdlin_map_to_module"
-#@   group_variable hdl "hdlin_map_to_operator"
 #@   group_variable hdl "hdlin_module_arch_name_splitting"
 #@   group_variable hdl "hdlin_mux_size_min"
-#@   group_variable hdl "hdlin_no_adder_feedthroughs"
-#@   group_variable hdl "hdlin_optimize_case_default"
-#@   group_variable hdl "hdlin_optimize_shift_expressions"
 #@   group_variable hdl "hdlin_prohibit_nontri_multiple_drivers"
-#@   group_variable hdl "hdlin_redundancy_elimination"
-#@   group_variable hdl "hdlin_register_report_depth"
-#@   group_variable hdl "hdlin_report_enumerated_types"
-#@   group_variable hdl "hdlin_report_mux_op"
-#@   group_variable hdl "hdlin_report_syn_cell"
-#@   group_variable hdl "hdlin_report_tri_state"
-#@   group_variable hdl "hdlin_selector_simplify_effort"
-#@   group_variable hdl "hdlin_seqmap_async_search_depth"
-#@   group_variable hdl "hdlin_seqmap_sync_search_depth"
-#@   group_variable hdl "hdlin_share_all_operators"
 #@   group_variable hdl "hdlin_subprogram_default_values"
-#@   group_variable hdl "hdlin_translate_off_on"
 #@   group_variable hdl "hdlin_upcase_names"
-#@   group_variable hdl "hdlin_use_syn_shifter"
-#@   group_variable hdl "hdlin_vhdl_87"
+#@   group_variable hdl "hdlin_vhdl_std"
 #@   group_variable hdl "hdlin_vhdl93_concat"
+#@   group_variable hdl "hdlin_vhdl_syntax_extensions"
 #@   group_variable hdl "hdlin_vrlg_std"
 #@   group_variable hdl "hdlin_while_loop_iterations"
-#@ 
+#@   group_variable hdl "hdlin_auto_save_templates"
+#@   group_variable hdl "hdlin_elab_errors_deep"
+#@   group_variable hdl "hdlin_enable_assertions"
+#@   group_variable hdl "hdlin_enable_configurations"
+#@   group_variable hdl "hdlin_field_naming_style"
+#@   group_variable hdl "hdlin_generate_naming_style"
+#@   group_variable hdl "hdlin_generate_separator_style"
+#@   group_variable hdl "hdlin_enable_relative_placement"
+#@   group_variable hdl "hdlin_mux_rp_limit"
+#@   group_variable hdl "hdlin_keep_signal_name"
+#@   group_variable hdl "hdlin_module_name_limit"
+#@   group_variable hdl "hdlin_mux_size_only"
+#@   group_variable hdl "hdlin_preserve_sequential"
+#@   group_variable hdl "hdlin_presto_cell_name_prefix"
+#@   group_variable hdl "hdlin_presto_net_name_prefix"
+#@   group_variable hdl "hdlin_strict_verilog_reader"
+#@   group_variable hdl "hdlin_shorten_long_module_name"
+#@   group_variable hdl "hdlin_sv_packages"
+#@   group_variable hdl "hdlin_sv_tokens"
+#@   group_variable hdl "hdlin_enable_elaborate_ref_linking"
+#@   group_variable hdl "hdlin_enable_hier_naming"
+#@   group_variable hdl "hdlin_autoread_verilog_extensions"
+#@   group_variable hdl "hdlin_autoread_sverilog_extensions"
+#@   group_variable hdl "hdlin_autoread_vhdl_extensions"
+#@   group_variable hdl "hdlin_autoread_exclude_extensions"
+#@   group_variable hdl "hdlin_enable_upf_compatible_naming"
+#@   group_variable hdl "hdlin_report_sequential_pruning"
+#@   group_variable hdl "hdlin_analyze_verbose_mode"
 #@ 
 #@   # "vhdlio" variables are variables pertaining to VHDL generation 
 #@   group_variable vhdlio "vhdllib_timing_mesg"
@@ -3045,18 +3154,6 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ 
 #@   }
 #@ 
-#@   # eco group includes variables related to ECO Compiler
-#@   group_variable eco "eco_align_design_verbose"
-#@   group_variable eco "eco_allow_register_type_difference"
-#@   group_variable eco "eco_connect_resource_cell_inputs" 
-#@   group_variable eco "eco_correspondence_analysis_verbose" 
-#@   group_variable eco "eco_directives_verbose"
-#@   group_variable eco "eco_implement_effort_level"
-#@   group_variable eco "eco_instance_name_prefix"         
-#@   group_variable eco "eco_recycle_verbose"           
-#@   group_variable eco "eco_remap_register_verbose"
-#@   group_variable eco "eco_reuse_verbose"         
-#@  
 #@   #
 #@   # DesignTime Variable Group timing
 #@   #
@@ -3090,7 +3187,7 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@   group_variable timing rc_slew_upper_threshold_pct_fall
 #@   group_variable timing rc_slew_upper_threshold_pct_rise
 #@   group_variable timing timing_disable_cond_default_arcs
-#@   group_variable timing timing_enable_multiple_clocks_per_reg
+#@ # group_variable timing timing_enable_multiple_clocks_per_reg
 #@   group_variable timing timing_report_attributes
 #@   group_variable timing timing_self_loops_no_skew
 #@   group_variable timing when_analysis_permitted
@@ -3128,7 +3225,6 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ alias compile_test         insert_test
 #@ alias check_clocks      check_timing
 #@ alias lint              check_design
-#@ alias verify            compare_design
 #@ # gen removed; alias gen               create_schematic
 #@ alias free              remove_design
 #@ alias group_bus         create_bus
@@ -3159,6 +3255,7 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ alias vh_write_changes dps_write_changes
 #@ alias vh_read_changes dps_read_changes
 #@ alias vh_write_module_clock dps_write_module_clock
+#@ alias get_lib get_libs
 #@ 
 #@ # Enable unsupported psyn commands
 #@ if { $synopsys_program_name == "psyn_shell" || $synopsys_program_name == "icc_shell"} {
@@ -3322,8 +3419,15 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@   # setup the default layer settings 
 #@   #source ${synopsys_root}/admin/setup/.dc_layers
 #@ 
-#@   source ${synopsys_root}/admin/setup/.dc_name_rules
+#@   if {$synopsys_program_name != "dc_sms_shell"} {
+#@     source ${synopsys_root}/admin/setup/.dc_name_rules
+#@   }
+#@ } else {
+#@   #for read_lib -html	
+#@   source ${synopsys_root}/auxx/syn/lc/read_lib_html_msg_list.tcl
 #@ }
+#@ # -- Starting source /cadtools/synopsys/2015/synthesis/admin/setup/.dc_name_rules
+
 #@ #
 #@ 
 #@ #	.dc_name_rules Initialization file for
@@ -3372,7 +3476,7 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ define_name_rules vhdl -map { {{"__","_"},{"_$",""}} }
 #@ 
 #@ ####/* Name rule for VHDL */
-#@ # -- End source /cadtools/synopsys/2009/synthesis/admin/setup/.dc_name_rules
+#@ # -- End source /cadtools/synopsys/2015/synthesis/admin/setup/.dc_name_rules
 
 #@ 
 #@ if { $synopsys_program_name == "psyn_gui"} {
@@ -3400,6 +3504,10 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@   source -encrypted $synopsys_root/auxx/syn/cts/fast_atomic_cts.tcl.e
 #@ }
 #@ 
+#@ if { $synopsys_program_name == "icc_shell"} {
+#@   alias report_scenario report_scenarios
+#@ }
+#@ 
 #@ # floorplanning preferences globals
 #@ global fp_snap_type
 #@ 
@@ -3414,8 +3522,10 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ set fp_snap_type(route_shape) wiretrack
 #@ set fp_snap_type(none) litho
 #@ 
-#@ # 6/24/05 cpark requested to add to GA image
-#@ set suppress_errors "$suppress_errors RCCALC-010 RCCALC-011"
+#@ # STAR 9000615813.  PWR-18 is no longer internally suppressed.
+#@ # Instead call tcl suppress_message so that it can be unsuppressed by users in
+#@ # command line if needed
+#@ suppress_message PWR-18
 #@ 
 #@ # alias for write_sge is always the last line of the setup file
 #@ #if { [string compare $dc_shell_mode "tcl"] == 0 } {
@@ -3445,39 +3555,1402 @@ source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
 #@ #
 #@ # check_ccs_lib
 #@ # use libchecker under $ncx_path defined above
-#@ #
-#@ proc check_ccs_lib {args} {
-#@     global ncx_path
-#@     set cmdStr [linsert  $args 0 ${ncx_path}/libchecker -lc_shell]
-#@     set cmd [open "| $cmdStr 2>@ stdout"]
-#@     catch {
-#@       while {[gets $cmd info] >= 0} {
-#@         echo $info
-#@       }
-#@     }
-#@     if {[catch {close $cmd} msg]} {
-#@     }
-#@ }
+#@ # Disable this command since 2010.12-SP3 (should be done in 2010.12 release)
+#@ #proc check_ccs_lib {args} {
+#@ #    global ncx_path
+#@ #    set cmdStr [linsert  $args 0 ${ncx_path}/libchecker -lc_shell]
+#@ #    set cmd [open "| $cmdStr 2>@ stdout"]
+#@ #    catch {
+#@ #      while {[gets $cmd info] >= 0} {
+#@ #        echo $info
+#@ #      }
+#@ #    }
+#@ #    if {[catch {close $cmd} msg]} {
+#@ #    }
+#@ #}
 #@ 
 #@ #
 #@ # format_lib
 #@ # use ncx under $ncx_path defined above
-#@ #
-#@ proc format_lib {args} {
-#@     global ncx_path
-#@     set cmdStr [linsert  $args 0 ${ncx_path}/ncx -lc_shell]
-#@     set cmd [open "| $cmdStr 2>@ stdout"]
-#@     catch {
-#@       while {[gets $cmd info] >= 0} {
-#@         echo $info
+#@ # Disable format_lib command in 2014.09 release -- xwwang, 7/25/2014
+#@ #proc format_lib {args} {
+#@ #    global ncx_path
+#@ #    echo "Warning: format_lib command is scheduled to become obsolete in a future production release."
+#@ #    set cmdStr [linsert  $args 0 ${ncx_path}/ncx -lc_shell]
+#@ #    set cmd [open "| $cmdStr 2>@ stdout"]
+#@ #    catch {
+#@ #      while {[gets $cmd info] >= 0} {
+#@ #        echo $info
+#@ #      }
+#@ #    }
+#@ #    if {[catch {close $cmd} msg]} {
+#@ #    }
+#@ #}
+#@ 
+#@ }
+#@ 
+#@ proc get_nglc_search_path { } {
+#@   set exec_path "invalid"
+#@   if {[info exists ::env(SYNOPSYS_LC_ROOT)] && [file exists $::env(SYNOPSYS_LC_ROOT)/$::sh_arch/lc/bin/lc_shell_exec]} {
+#@     set exec_path $::env(SYNOPSYS_LC_ROOT)/$::sh_arch/lc/bin/lc_shell_exec
+#@   } else {
+#@      set path "$::synopsys_root/$::sh_arch/syn/bin/lc_shell_exec"
+#@      if {  [file exists $::synopsys_root/$::sh_arch/syn/bin/lc_shell_exec] } {
+#@       while { [catch {file readlink $path}] == 0 } {
+#@         if { [file pathtype [file readlink $path] ] == "relative" } {
+#@           # set path [file join [file dirname $path] [file readlink $path] ]
+#@           # when lc_shell_is a relative path, return the path directly,
+#@           # this is mostly for the case in build client.
+#@           break
+#@        } else {
+#@           set path [file readlink $path]
+#@        }
+#@         if { [file exists $path] } {
+#@           continue
+#@         } else {
+#@           break
+#@         }
+#@       }
+#@       if { [file exists $path] } {
+#@         set exec_path $path
 #@       }
 #@     }
-#@     if {[catch {close $cmd} msg]} {
+#@   }
+#@   return $exec_path
+#@ }
+#@ 
+#@ proc get_libra_synopsys_root { } {
+#@   return [file dirname [file dirname [file dirname [file dirname $::nglc_search_path] ] ] ] 
+#@ }
+#@ 
+#@ proc valias {v_orig v_alias} {
+#@    uplevel 1 "upvar 0 $v_orig $v_alias"
+#@ }
+#@ 
+#@ set nglc_result_path "/tmp"
+#@ set nglc_replay_tcl_file "nglc_shell_command.tcl"
+#@ set nglc_search_path [get_nglc_search_path]
+#@ set lc_run_from_legacy_library_compiler "true"
+#@ set nglc_is_none_tech_file "false"
+#@ set nglc_is_symbol_file "false"
+#@ set nglc_keep_nglc_temp_files "false"
+#@ set nglc_intermediate_db_files ""
+#@ set nglc_log_path ""
+#@ set lc_enable_legacy_library_compiler "false"
+#@ 
+#@ valias lc_enable_legacy_library_compiler lc_enable_common_shell_lc
+#@ 
+#@ proc make_hex s { 
+#@   binary scan $s H* hex
+#@   return $hex 
+#@ }
+#@ 
+#@ proc nglc_read_lib { args } {
+#@   common_shell_read_lib $args
+#@ }
+#@ 
+#@ 
+#@ proc common_shell_read_lib {args } {
+#@   set_folder_var
+#@   set tcl_file "$::nglc_result_path/$::nglc_log_path/$::nglc_replay_tcl_file"
+#@   set chan [open $tcl_file a]
+#@   export_tcl_var $chan 
+#@   gen_nglc_read_lib_procedure $chan $args
+#@   close $chan
+#@   run_libra_with_echo $tcl_file
+#@   common_shell_read_dbs
+#@   set_none_tech_file
+#@ }
+#@ 
+#@ # create the unique folder under tmp
+#@ proc set_folder_var { } {
+#@   set fileName [pid]
+#@   set ::nglc_log_path [append fileName "_" [clock microseconds]] 
+#@   file delete -force $::nglc_result_path/$::nglc_log_path
+#@   file mkdir $::nglc_result_path/$::nglc_log_path  
+#@ }
+#@ 
+#@ # export all the vars
+#@ # history
+#@ # 2016.03.09 Liping Zhao
+#@ # Fix STAR 9001014310. Under the hood mode will cause lc_shell overwrite the command.log for dc_shell.
+#@ # sh_command_log_file and command_log_file should not be exported to lc_shell.
+#@ proc export_tcl_var { fileName } {
+#@ # 2016.03.09 Liping Zhao
+#@ # Fix STAR 9001014310. 
+#@ # These vars should not be exported.
+#@ set filter_attrs [dict create ::errorInfo 1 ::sh_continue_on_error 1 ::sh_command_log_file 1 ::command_log_file 1 ] 
+#@   foreach var [info vars ::* ] {
+#@     if [array exists $var] {
+#@       continue;
 #@     }
+#@     if [ dict exists $filter_attrs $var ] {
+#@       continue;
+#@     }
+#@     if { [set $var] != "" } {
+#@       puts $fileName "catch \{ set $var \[list \[binary format H* [make_hex [set $var]]\]\] \}"
+#@     }  else {
+#@       puts $fileName "catch \{ set $var \"\" \}"
+#@     }
+#@  }
 #@ }
 #@ 
+#@ # excuted by libra shell to read the dbs generated by common_shell
+#@ proc common_shell_read_dbs { } {
+#@   set dbNames ""
+#@   foreach var [glob -nocomplain -directory $::nglc_result_path/$::nglc_log_path *.db] { 
+#@     append dbNames " " $var
+#@   }
+#@   set ::nglc_intermediate_db_files $dbNames
 #@ }
 #@ 
-#@ # -- End source /cadtools/synopsys/2009/synthesis/admin/setup/.synopsys_dc.setup
+#@ # display the log file genrated by common_shell in Libra and then remove the unique folder
+#@ proc common_shell_clean_up { } {
+#@   if { $::nglc_keep_nglc_temp_files == "false" } { 
+#@     file delete -force $::nglc_result_path/$::nglc_log_path 
+#@   }
+#@ }
+#@ 
+#@ proc gen_nglc_read_lib_procedure { fileName args} {
+#@   puts $fileName "##@@@## gen_common_shell_read_lib"
+#@   puts $fileName "eval [lindex [lindex $args 0] 0]"
+#@   puts $fileName "##@@@##"
+#@   puts $fileName "set lc_write_view_db_file false"
+#@   puts $fileName "set librs \[get_libs\]"
+#@   puts $fileName "for {set i 0} {\$i < \[ sizeof \$librs \]} {incr i 1} {"
+#@   puts $fileName "  set lib \[index_collection \$librs \$i]"
+#@   puts $fileName "  redirect -var a \"query_object \$lib\" "
+#@ # puts $fileName "  if \[regexp {{(\")?(gtech)(\")?}} \$a\] { "
+#@ #  puts $fileName "  } elseif \[regexp {{(\")?(standard.sldb)(\")?}} \$a] { "
+#@ #  puts $fileName "  } else {"
+#@   puts $fileName "  regexp {{(\")?(\[^\"\]*)(\")?}} \$a b c d e "
+#@   puts $fileName "  write_lib \$d -o \$nglc_result_path/\$nglc_log_path/\$d.db"
+#@ #  puts $fileName "  }"
+#@   puts $fileName "}"
+#@   puts $fileName "exit"
+#@ }
+#@ 
+#@ proc set_none_tech_file { } {
+#@   if { [file exists $::nglc_result_path/$::nglc_log_path/is_non_tech_file] } {
+#@     set ::nglc_is_none_tech_file true;
+#@     if { [file exists $::nglc_result_path/$::nglc_log_path/is_symbol_file] } {
+#@       set ::nglc_is_symbol_file true;
+#@     }
+#@   } else {
+#@     set ::nglc_is_none_tech_file false;
+#@     set ::nglc_is_symbol_file false;
+#@   }
+#@ }
+#@ 
+#@ proc run_libra_with_echo {tcl_file} {
+#@   set chan [open "|$::nglc_search_path -shell dcxr -r [get_libra_synopsys_root] -f $tcl_file < /dev/null" r]
+#@ # things to do: In debug mode, we want copy the whole output (beginning to end) 
+#@ # to a file
+#@   if {$::nglc_keep_nglc_temp_files} {
+#@       set log [open $::nglc_result_path/$::nglc_log_path/libra.log w]
+#@   }
+#@   set echo 0
+#@   set firstLine true
+#@   while {[gets $chan line] >= 0} {
+#@       if {$::nglc_keep_nglc_temp_files} { puts $log $line }
+#@       if {[string equal -length 7 $line "##@@@##"]} {
+#@ 	  set echo [expr ! $echo]
+#@ 	  continue;
+#@       }
+#@       if {$echo} { 
+#@         if { $firstLine } {
+#@           set firstLine false
+#@           continue;
+#@         } else { 
+#@           puts $line 
+#@         }
+#@       }
+#@   }
+#@   close $chan
+#@   if {$::nglc_keep_nglc_temp_files} {
+#@       close $log
+#@   }
+#@ }
+#@ 
+#@ proc nglc_report_lib { args } {
+#@   set tcl_file "$::nglc_result_path/$::nglc_log_path/$::nglc_replay_tcl_file"
+#@   common_shell_read_dbs
+#@   set chan [open $tcl_file a]
+#@   export_tcl_var $chan 
+#@   gen_nglc_report_lib_procedule $chan $args
+#@   close $chan
+#@   run_libra_with_echo $tcl_file
+#@   common_shell_clean_up
+#@ }
+#@ 
+#@ proc gen_nglc_report_lib_procedule {fileName args} {
+#@   foreach db $::nglc_intermediate_db_files {
+#@     puts $fileName "read_db $db"
+#@   }
+#@   puts $fileName "##@@@## gen_nglc_report_lib_procedue"
+#@   puts $fileName "[lindex [lindex $args 0] 0]"
+#@   puts $fileName "##@@@##"
+#@   puts $fileName "exit"
+#@ }
+#@ 
+#@ proc nglc_check_library { tcl_file0 } {
+#@   #set_folder_var
+#@   set tcl_file "$::nglc_result_path/$::nglc_log_path/$::nglc_replay_tcl_file"
+#@   set chan [open $tcl_file a]
+#@   #export all tcl variables to $tcl_file
+#@   export_tcl_var $chan 
+#@   puts $chan "##@@@## gen_nglc_check_lib_procedure"
+#@   puts $chan "source $tcl_file0"
+#@   puts $chan "##@@@##"
+#@   close $chan
+#@   run_libra_with_echo $tcl_file
+#@   common_shell_clean_up
+#@ }
+#@ # -- End source /cadtools/synopsys/2015/synthesis/admin/setup/.synopsys_dc.setup
 
-q
+source -echo -verbose /user/erasmus/danielrb/Dropbox/Tesi/cla_adder/decomposed/syn/run.tcl
+#@ # -- Starting source /user/erasmus/danielrb/Dropbox/Tesi/cla_adder/decomposed/syn/run.tcl
+
+#@ #set DESIGN_NAME "gen_cla_decomposed"
+#@ #set DESIGN_NAME "gen_nonlinear_part"
+#@ set DESIGN_NAME "gen_linear_part"
+#@ #set VARIANT_NAME "bit_generated"
+#@ set VARIANT_NAME "16bit"
+#@ 
+#@ #set RTL_SOURCE_FILES "../gen_nonlinear_part.v" 
+#@ set RTL_SOURCE_FILES "../gen_linear_part.v" 
+#@ #set RTL_SOURCE_FILES "../gen_linear_part.v ../gen_nonlinear_part.v ../gen_cla_decomposed.v"
+#@ #set RTL_SOURCE_FILES " ../decomposed12bit_adder.v ../nonlinear_part12bit_adder.v ../linear_part12bit_adder.v"
+#@ 
+#@ 
+#@ # call a script which sets up Design Compiler (same as writing the same commands in .synopsys_dc.setup file)
+#@ source dc_setup.tcl
+#@ # -- Starting source dc_setup.tcl
+
+#@ source -echo -verbose common_setup.tcl
+#@ # -- Starting source common_setup.tcl
+
+#@ ##########################################################################################
+#@ # Variables common to all RM scripts
+#@ # Script: common_setup.tcl
+#@ # Version: B-2008.09-SP4 (Mar. 25, 2009)
+#@ # Copyright (C) 2007, 2008, 2009 Synopsys All rights reserved.
+#@ ##########################################################################################
+#@ 
+#@ #set DESIGN_NAME                   "too_large"  ;#  The name of the top-level design
+#@ 
+#@ set DESIGN_REF_DATA_PATH          [sh pwd]  ;#  Absolute path prefix variable for library/design data.
+#@ #  Use this variable to prefix the common absolute path to 
+#@ #  the common variables defined below.
+#@ #  Absolute paths are mandatory for hierarchical RM flow.
+#@ 
+#@ ##########################################################################################
+#@ # Hierarchical Flow Design Variables
+#@ ##########################################################################################
+#@ 
+#@ set HIERARCHICAL_DESIGNS           "" ;# List of hierarchical block design names "DesignA DesignB" ...
+#@ set HIERARCHICAL_CELLS             "" ;# List of hierarchical block cell instance names "u_DesignA u_DesignB" ...
+#@ 
+#@ ##########################################################################################
+#@ # Library Setup Variables
+#@ ##########################################################################################
+#@ 
+#@ if { [catch {echo $ANALYSIS_TYPE}] } {
+#@   echo "Assuming analysis type is TIMING..."
+#@   set ANALYSIS_TYPE timing
+#@   }
+#@ 
+#@ echo "Target library: TSMC 65nm GP CMOS"
+#@ set LIBSEL "tcbn65gplus";
+#@ set OCSEL "WCCOM";
+#@ set LIBROOT "/cadtools/tsmc/";
+#@ 
+#@ set MIN_LIBRARY_FILES             ""  ;#  List of max min library pairs "max1 min1 max2 min2 max3 min3"...
+#@ 
+#@ set ADDITIONAL_SEARCH_PATH        "$LIBROOT/digital/Front_End/timing_power_noise/NLDM/tcbn65gplus_121b/ $LIBROOT/digital/Front_End/timing_power_noise/NLDM/tcbn65gplushvt_121b/ $LIBROOT/digital/Front_End/timing_power/tcbn65gpluscg_121a/ $LIBROOT/digital/Front_End/timing_power/tcbn65gpluscghvt_121a/ /cadtools/synopsys/2009/synthesis/libraries/syn/ ";
+#@ 
+#@ switch $OCSEL {
+#@   WCCOM {
+#@     # 65nm GP std cells @ WCCOM (Vdd = 0.9V, 125degC, nominal process):
+#@     set TARGET_LIBRARY_FILES          "tcbn65gpluswc.db";
+#@   }
+#@   BCCOM {
+#@     # 65nm GP std cells @ BCCOM (Vdd = 1.1V, 0degC, nominal process):
+#@     set TARGET_LIBRARY_FILES          "tcbn65gpluswc.db";
+#@   }
+#@   default {
+#@     # 65nm GP std cells @ NCCOM (Vdd = 1V, 25degC, nominal process):
+#@     set TARGET_LIBRARY_FILES          "tcbn65gpluswc.db";
+#@   }
+#@ }
+#@ 
+#@ set SYMBOL_LIBRARY_FILES          "tcbn65gplus.sdb tcbn65gpluscg.sdb tcbn65gplushvt.sdb tcbn65gpluscghvt.sdb "; #  Symbol libraries for Design Vision schematics
+#@ set ADDITIONAL_LINK_LIB_FILES     ""; #  Extra link logical libraries not included in TARGET_LIBRARY_FILES
+#@ set POWER_GATING_SUPPORT          1;
+#@ 
+#@ 
+#@ set MIN_ROUTING_LAYER             "M1"   ;# Min routing layer
+#@ set CLOCK_ROUTING_LAYERS          "M2 M3 M4 M5 M6 M7 M8 M9";
+#@ set PNET_ROUTING_LAYERS           "M1 M2";
+#@ set ALL_ROUTING_LAYERS            "M1 M2 M3 M4 M5 M6 M7 M8 M9";
+#@ set MAX_ROUTING_LAYER             "M9"   ;# Max routing layer
+#@ 
+#@ set PNS_POWER_BUDGET       	      "100"  ;# Unit in milliWatts; default is 1000
+#@ set PNS_VOLTAGE_SUPPLY     	      "1"    ;# Unit in Volts; default is 1.5
+#@ set PNS_TARGET_VOLTAGE_DROP       "100"   ;# Unit in milliVolts. Tool default is 10% of PNS_POWER_BUDGET
+#@ 
+#@ set MW_REFERENCE_CONTROL_FILE     ""  ;#  Reference Control file to define the MW ref libs
+#@ set MW_REFERENCE_LIB_DIRS         "/user/archive/tome/dev/synth/milkyway/tcbn65gplus/ /user/archive/tome/dev/synth/milkyway/tcbn65gplushvt/ /user/archive/tome/dev/synth/milkyway/tcbn65gpluscg/ /user/archive/tome/dev/synth/milkyway/tcbn65gpluscghvt/ "  ;#  Milkyway reference libraries
+#@ set TECH_FILE                     "$LIBROOT/digital/Back_End/milkyway/tcbn65gplus_121b/techfiles/tsmcn65_9lmT2.tf"  ; # same on all proc versions of a node, i.e. 65gp = 65gphvt = ...
+#@ set MAP_FILE                      "/user/archive/tome/dev/synth/milkyway/tcbn65gplus_tf_to_itf.map"  ;#  Mapping file for TLUplus
+#@ set TLUPLUS_MAX_FILE              "$LIBROOT/digital/Back_End/milkyway/tcbn65gplus_121b/techfiles/tluplus/cln65g+_1p09m+alrdl_top2_typical.tluplus"  ;#  Max TLUplus file
+#@ set TLUPLUS_MIN_FILE              "$LIBROOT/digital/Back_End/milkyway/tcbn65gplus_121b/techfiles/tluplus/cln65g+_1p09m+alrdl_top2_typical.tluplus"  ;#  Min TLUplus file
+#@ 
+#@ echo " "
+#@ echo Common Setup (adapted from DC-RM 2008.09 by Tom English)
+#@ echo ********************************************************
+#@ echo " "
+#@ echo "Target std. cell library : $LIBSEL";
+#@ echo "Max. operating condition : $OCSEL";
+#@ echo " "
+#@ 
+#@ set MW_POWER_NET                "VDD" ;#
+#@ set MW_POWER_PORT               "VDD" ;#
+#@ set MW_GROUND_NET               "VSS" ;#
+#@ set MW_GROUND_PORT              "VSS" ;#
+#@ 
+#@ set RESULTS_DIR "${LIBSEL}_results";
+#@ set REPORTS_DIR "${LIBSEL}_reports";
+#@ 
+#@ set LIBRARY_DONT_USE_FILE        ""   ;# Tcl file with library modifications for dont_use
+#@ # -- End source common_setup.tcl
+
+#@ 
+#@ #################################################################################
+#@ # Design Compiler Top-Down Reference Methodology Setup
+#@ # Script: dc_setup.tcl
+#@ # Version: B-2008.09-SP4 (Mar. 25, 2009)
+#@ # Copyright (C) 2007, 2008, 2009 Synopsys All rights reserved.
+#@ #################################################################################
+#@ 
+#@ 
+#@ #################################################################################
+#@ # Setup Variables
+#@ #
+#@ # Modify settings in this section to customize your DC-RM run.
+#@ #################################################################################
+#@ 
+#@ # Portions of dc_setup.tcl may be used by other tools so do check for DC only commands
+#@ if {$synopsys_program_name == "dc_shell"}  {
+#@ 
+#@   # Change alib_library_analysis_path to point to a central cache of analyzed libraries
+#@   # to save some runtime and disk space.  The following setting only reflects the
+#@   # the default value and should be changed to a central location for best results.
+#@ 
+#@   set alib_library_analysis_path ./cache/
+#@ 
+#@   # Add any additional DC variables needed here
+#@ }
+#@ 
+#@ #set RTL_SOURCE_FILES "./verilog_source/too_large.v"
+#@ 
+#@ # The following variables are used by scripts in dc_scripts to direct the location
+#@ # of the output files
+#@ 
+#@ set REPORTS_DIR [join [list $LIBSEL "_reports"] ""]
+#@ set RESULTS_DIR [join [list $LIBSEL "_results"] ""]
+#@ #set MILKYWAY_DESIGN_LIB_DIR [join [list $LIBSEL ".mw"] ""]
+#@ set CONSTRAINTS_DIR "constraints"
+#@ 
+#@ file mkdir $REPORTS_DIR
+#@ file mkdir $RESULTS_DIR
+#@ 
+#@ echo " "
+#@ echo DC Setup (adapted from DC-RM 2008.09 by Tom English)
+#@ echo ****************************************************
+#@ echo " "
+#@ echo Constraints directory  : $CONSTRAINTS_DIR
+#@ echo Reports directory      : $REPORTS_DIR
+#@ echo Results directory      : $RESULTS_DIR
+#@ echo " "
+#@ 
+#@ # TE ported from old dctflow
+#@ set enable_recovery_removal_arcs true
+#@ 
+#@ #################################################################################
+#@ # Library Setup
+#@ #
+#@ # This section is designed to work with the settings from common_setup.tcl
+#@ # without any additional modification.
+#@ #################################################################################
+#@ 
+#@ # Define all the library variables shared by all the front-end tools
+#@ 
+#@ set search_path ". ${ADDITIONAL_SEARCH_PATH} $search_path"
+#@ 
+#@ 
+#@ # Milkyway variable settings
+#@ 
+#@ # Make sure to define the following Milkyway library variables
+#@ # mw_logic1_net, mw_logic0_net and mw_design_library are needed by write_milkyway
+#@ 
+#@ set mw_logic1_net ${MW_POWER_NET}
+#@ set mw_logic0_net ${MW_GROUND_NET}
+#@ 
+#@ set mw_reference_library ${MW_REFERENCE_LIB_DIRS}
+#@ set mw_design_library ${DESIGN_NAME}_LIB
+#@ 
+#@ set mw_site_name_mapping [list CORE unit Core unit core unit]
+#@ 
+#@ # Include all libraries for multi-Vth leakage power optimization
+#@ set target_library ${TARGET_LIBRARY_FILES}
+#@ set synthetic_library dw_foundation.sldb
+#@ set link_library "* $target_library $ADDITIONAL_LINK_LIB_FILES $synthetic_library"
+#@ 
+#@ #source dc_scripts/mask_library_tcbn65gpluswc.tcl 
+#@ source dc_scripts/maskgates_onlyAOI.tcl
+#@ # -- Starting source dc_scripts/maskgates_onlyAOI.tcl
+
+#@ set_dont_use {tcbn65gpluswc/ANTENNA}
+#@ set_dont_use {tcbn65gpluswc/AO211D0}
+#@ set_dont_use {tcbn65gpluswc/AO211D1}
+#@ set_dont_use {tcbn65gpluswc/AO211D2}
+#@ set_dont_use {tcbn65gpluswc/AO211D4}
+#@ set_dont_use {tcbn65gpluswc/AO21D0}
+#@ set_dont_use {tcbn65gpluswc/AO21D1}
+#@ set_dont_use {tcbn65gpluswc/AO21D2}
+#@ set_dont_use {tcbn65gpluswc/AO21D4}
+#@ set_dont_use {tcbn65gpluswc/AO221D0}
+#@ set_dont_use {tcbn65gpluswc/AO221D1}
+#@ set_dont_use {tcbn65gpluswc/AO221D2}
+#@ set_dont_use {tcbn65gpluswc/AO221D4}
+#@ set_dont_use {tcbn65gpluswc/AO222D0}
+#@ set_dont_use {tcbn65gpluswc/AO222D1}
+#@ set_dont_use {tcbn65gpluswc/AO222D2}
+#@ set_dont_use {tcbn65gpluswc/AO222D4}
+#@ set_dont_use {tcbn65gpluswc/AO22D0}
+#@ set_dont_use {tcbn65gpluswc/AO22D1}
+#@ set_dont_use {tcbn65gpluswc/AO22D2}
+#@ set_dont_use {tcbn65gpluswc/AO22D4}
+#@ set_dont_use {tcbn65gpluswc/AO31D0}
+#@ set_dont_use {tcbn65gpluswc/AO31D1}
+#@ set_dont_use {tcbn65gpluswc/AO31D2}
+#@ set_dont_use {tcbn65gpluswc/AO31D4}
+#@ set_dont_use {tcbn65gpluswc/AO32D0}
+#@ set_dont_use {tcbn65gpluswc/AO32D1}
+#@ set_dont_use {tcbn65gpluswc/AO32D2}
+#@ set_dont_use {tcbn65gpluswc/AO32D4}
+#@ set_dont_use {tcbn65gpluswc/AO33D0}
+#@ set_dont_use {tcbn65gpluswc/AO33D1}
+#@ set_dont_use {tcbn65gpluswc/AO33D2}
+#@ set_dont_use {tcbn65gpluswc/AO33D4}
+#@ set_dont_use {tcbn65gpluswc/AOI211D0}
+#@ set_dont_use {tcbn65gpluswc/AOI211D1}
+#@ set_dont_use {tcbn65gpluswc/AOI211D2}
+#@ set_dont_use {tcbn65gpluswc/AOI211D4}
+#@ set_dont_use {tcbn65gpluswc/AOI211XD0}
+#@ set_dont_use {tcbn65gpluswc/AOI211XD1}
+#@ set_dont_use {tcbn65gpluswc/AOI211XD2}
+#@ set_dont_use {tcbn65gpluswc/AOI211XD4}
+#@ set_dont_use {tcbn65gpluswc/AOI21D0}
+#@ set_dont_use {tcbn65gpluswc/AOI21D1}
+#@ set_dont_use {tcbn65gpluswc/AOI21D2}
+#@ set_dont_use {tcbn65gpluswc/AOI21D4}
+#@ set_dont_use {tcbn65gpluswc/AOI221D0}
+#@ set_dont_use {tcbn65gpluswc/AOI221D1}
+#@ set_dont_use {tcbn65gpluswc/AOI221D2}
+#@ set_dont_use {tcbn65gpluswc/AOI221D4}
+#@ set_dont_use {tcbn65gpluswc/AOI221XD4}
+#@ set_dont_use {tcbn65gpluswc/AOI222D0}
+#@ set_dont_use {tcbn65gpluswc/AOI222D1}
+#@ set_dont_use {tcbn65gpluswc/AOI222D2}
+#@ set_dont_use {tcbn65gpluswc/AOI222D4}
+#@ set_dont_use {tcbn65gpluswc/AOI222XD4}
+#@ set_dont_use {tcbn65gpluswc/AOI22D0}
+#@ set_dont_use {tcbn65gpluswc/AOI22D1}
+#@ set_dont_use {tcbn65gpluswc/AOI22D2}
+#@ set_dont_use {tcbn65gpluswc/AOI22D4}
+#@ set_dont_use {tcbn65gpluswc/AOI31D0}
+#@ set_dont_use {tcbn65gpluswc/AOI31D1}
+#@ set_dont_use {tcbn65gpluswc/AOI31D2}
+#@ set_dont_use {tcbn65gpluswc/AOI31D4}
+#@ set_dont_use {tcbn65gpluswc/AOI32D0}
+#@ set_dont_use {tcbn65gpluswc/AOI32D1}
+#@ set_dont_use {tcbn65gpluswc/AOI32D2}
+#@ set_dont_use {tcbn65gpluswc/AOI32D4}
+#@ set_dont_use {tcbn65gpluswc/AOI32XD4}
+#@ set_dont_use {tcbn65gpluswc/AOI33D0}
+#@ set_dont_use {tcbn65gpluswc/AOI33D1}
+#@ set_dont_use {tcbn65gpluswc/AOI33D2}
+#@ set_dont_use {tcbn65gpluswc/AOI33D4}
+#@ set_dont_use {tcbn65gpluswc/AOI33XD4}
+#@ set_dont_use {tcbn65gpluswc/BENCD1}
+#@ set_dont_use {tcbn65gpluswc/BENCD2}
+#@ set_dont_use {tcbn65gpluswc/BENCD4}
+#@ set_dont_use {tcbn65gpluswc/BHD}
+#@ set_dont_use {tcbn65gpluswc/BMLD1}
+#@ set_dont_use {tcbn65gpluswc/BMLD2}
+#@ set_dont_use {tcbn65gpluswc/BMLD4}
+#@ set_dont_use {tcbn65gpluswc/BUFFD0}
+#@ set_dont_use {tcbn65gpluswc/BUFFD12}
+#@ set_dont_use {tcbn65gpluswc/BUFFD16}
+#@ set_dont_use {tcbn65gpluswc/BUFFD1}
+#@ set_dont_use {tcbn65gpluswc/BUFFD20}
+#@ set_dont_use {tcbn65gpluswc/BUFFD24}
+#@ set_dont_use {tcbn65gpluswc/BUFFD2}
+#@ set_dont_use {tcbn65gpluswc/BUFFD3}
+#@ set_dont_use {tcbn65gpluswc/BUFFD4}
+#@ set_dont_use {tcbn65gpluswc/BUFFD6}
+#@ set_dont_use {tcbn65gpluswc/BUFFD8}
+#@ set_dont_use {tcbn65gpluswc/BUFTD0}
+#@ set_dont_use {tcbn65gpluswc/BUFTD12}
+#@ set_dont_use {tcbn65gpluswc/BUFTD16}
+#@ set_dont_use {tcbn65gpluswc/BUFTD1}
+#@ set_dont_use {tcbn65gpluswc/BUFTD20}
+#@ set_dont_use {tcbn65gpluswc/BUFTD24}
+#@ set_dont_use {tcbn65gpluswc/BUFTD2}
+#@ set_dont_use {tcbn65gpluswc/BUFTD3}
+#@ set_dont_use {tcbn65gpluswc/BUFTD4}
+#@ set_dont_use {tcbn65gpluswc/BUFTD6}
+#@ set_dont_use {tcbn65gpluswc/BUFTD8}
+#@ set_dont_use {tcbn65gpluswc/CKAN2D0}
+#@ set_dont_use {tcbn65gpluswc/CKAN2D1}
+#@ set_dont_use {tcbn65gpluswc/CKAN2D2}
+#@ set_dont_use {tcbn65gpluswc/CKAN2D4}
+#@ set_dont_use {tcbn65gpluswc/CKAN2D8}
+#@ set_dont_use {tcbn65gpluswc/CKBD0}
+#@ set_dont_use {tcbn65gpluswc/CKBD12}
+#@ set_dont_use {tcbn65gpluswc/CKBD16}
+#@ set_dont_use {tcbn65gpluswc/CKBD1}
+#@ set_dont_use {tcbn65gpluswc/CKBD20}
+#@ set_dont_use {tcbn65gpluswc/CKBD24}
+#@ set_dont_use {tcbn65gpluswc/CKBD2}
+#@ set_dont_use {tcbn65gpluswc/CKBD3}
+#@ set_dont_use {tcbn65gpluswc/CKBD4}
+#@ set_dont_use {tcbn65gpluswc/CKBD6}
+#@ set_dont_use {tcbn65gpluswc/CKBD8}
+#@ set_dont_use {tcbn65gpluswc/CKLHQD12}
+#@ set_dont_use {tcbn65gpluswc/CKLHQD16}
+#@ set_dont_use {tcbn65gpluswc/CKLHQD1}
+#@ set_dont_use {tcbn65gpluswc/CKLHQD20}
+#@ set_dont_use {tcbn65gpluswc/CKLHQD24}
+#@ set_dont_use {tcbn65gpluswc/CKLHQD2}
+#@ set_dont_use {tcbn65gpluswc/CKLHQD3}
+#@ set_dont_use {tcbn65gpluswc/CKLHQD4}
+#@ set_dont_use {tcbn65gpluswc/CKLHQD6}
+#@ set_dont_use {tcbn65gpluswc/CKLHQD8}
+#@ set_dont_use {tcbn65gpluswc/CKLNQD12}
+#@ set_dont_use {tcbn65gpluswc/CKLNQD16}
+#@ set_dont_use {tcbn65gpluswc/CKLNQD1}
+#@ set_dont_use {tcbn65gpluswc/CKLNQD20}
+#@ set_dont_use {tcbn65gpluswc/CKLNQD24}
+#@ set_dont_use {tcbn65gpluswc/CKLNQD2}
+#@ set_dont_use {tcbn65gpluswc/CKLNQD3}
+#@ set_dont_use {tcbn65gpluswc/CKLNQD4}
+#@ set_dont_use {tcbn65gpluswc/CKLNQD6}
+#@ set_dont_use {tcbn65gpluswc/CKLNQD8}
+#@ set_dont_use {tcbn65gpluswc/CKMUX2D0}
+#@ set_dont_use {tcbn65gpluswc/CKMUX2D1}
+#@ set_dont_use {tcbn65gpluswc/CKMUX2D2}
+#@ set_dont_use {tcbn65gpluswc/CKMUX2D4}
+#@ set_dont_use {tcbn65gpluswc/CKND0}
+#@ set_dont_use {tcbn65gpluswc/CKND12}
+#@ set_dont_use {tcbn65gpluswc/CKND16}
+#@ set_dont_use {tcbn65gpluswc/CKND1}
+#@ set_dont_use {tcbn65gpluswc/CKND20}
+#@ set_dont_use {tcbn65gpluswc/CKND24}
+#@ set_dont_use {tcbn65gpluswc/CKND2D0}
+#@ set_dont_use {tcbn65gpluswc/CKND2D1}
+#@ set_dont_use {tcbn65gpluswc/CKND2D2}
+#@ set_dont_use {tcbn65gpluswc/CKND2D3}
+#@ set_dont_use {tcbn65gpluswc/CKND2D4}
+#@ set_dont_use {tcbn65gpluswc/CKND2D8}
+#@ set_dont_use {tcbn65gpluswc/CKND2}
+#@ set_dont_use {tcbn65gpluswc/CKND3}
+#@ set_dont_use {tcbn65gpluswc/CKND4}
+#@ set_dont_use {tcbn65gpluswc/CKND6}
+#@ set_dont_use {tcbn65gpluswc/CKND8}
+#@ set_dont_use {tcbn65gpluswc/CKXOR2D0}
+#@ set_dont_use {tcbn65gpluswc/CKXOR2D1}
+#@ set_dont_use {tcbn65gpluswc/CKXOR2D2}
+#@ set_dont_use {tcbn65gpluswc/CKXOR2D4}
+#@ set_dont_use {tcbn65gpluswc/CMPE42D1}
+#@ set_dont_use {tcbn65gpluswc/CMPE42D2}
+#@ set_dont_use {tcbn65gpluswc/DCAP}
+#@ set_dont_use {tcbn65gpluswc/DCAP16}
+#@ set_dont_use {tcbn65gpluswc/DCAP32}
+#@ set_dont_use {tcbn65gpluswc/DCAP4}
+#@ set_dont_use {tcbn65gpluswc/DCAP64}
+#@ set_dont_use {tcbn65gpluswc/DCAP8}
+#@ set_dont_use {tcbn65gpluswc/DEL005}
+#@ set_dont_use {tcbn65gpluswc/DEL015}
+#@ set_dont_use {tcbn65gpluswc/DEL01}
+#@ set_dont_use {tcbn65gpluswc/DEL02}
+#@ set_dont_use {tcbn65gpluswc/DEL0}
+#@ set_dont_use {tcbn65gpluswc/DEL1}
+#@ set_dont_use {tcbn65gpluswc/DEL2}
+#@ set_dont_use {tcbn65gpluswc/DEL3}
+#@ set_dont_use {tcbn65gpluswc/DEL4}
+#@ set_dont_use {tcbn65gpluswc/DFCND1}
+#@ set_dont_use {tcbn65gpluswc/DFCND2}
+#@ set_dont_use {tcbn65gpluswc/DFCND4}
+#@ set_dont_use {tcbn65gpluswc/DFCNQD1}
+#@ set_dont_use {tcbn65gpluswc/DFCNQD2}
+#@ set_dont_use {tcbn65gpluswc/DFCNQD4}
+#@ set_dont_use {tcbn65gpluswc/DFCSND1}
+#@ set_dont_use {tcbn65gpluswc/DFCSND2}
+#@ set_dont_use {tcbn65gpluswc/DFCSND4}
+#@ set_dont_use {tcbn65gpluswc/DFCSNQD1}
+#@ set_dont_use {tcbn65gpluswc/DFCSNQD2}
+#@ set_dont_use {tcbn65gpluswc/DFCSNQD4}
+#@ set_dont_use {tcbn65gpluswc/DFD1}
+#@ set_dont_use {tcbn65gpluswc/DFD2}
+#@ set_dont_use {tcbn65gpluswc/DFD4}
+#@ set_dont_use {tcbn65gpluswc/DFKCND1}
+#@ set_dont_use {tcbn65gpluswc/DFKCND2}
+#@ set_dont_use {tcbn65gpluswc/DFKCND4}
+#@ set_dont_use {tcbn65gpluswc/DFKCNQD1}
+#@ set_dont_use {tcbn65gpluswc/DFKCNQD2}
+#@ set_dont_use {tcbn65gpluswc/DFKCNQD4}
+#@ set_dont_use {tcbn65gpluswc/DFKCSND1}
+#@ set_dont_use {tcbn65gpluswc/DFKCSND2}
+#@ set_dont_use {tcbn65gpluswc/DFKCSND4}
+#@ set_dont_use {tcbn65gpluswc/DFKSND1}
+#@ set_dont_use {tcbn65gpluswc/DFKSND2}
+#@ set_dont_use {tcbn65gpluswc/DFKSND4}
+#@ set_dont_use {tcbn65gpluswc/DFNCND1}
+#@ set_dont_use {tcbn65gpluswc/DFNCND2}
+#@ set_dont_use {tcbn65gpluswc/DFNCND4}
+#@ set_dont_use {tcbn65gpluswc/DFNCSND1}
+#@ set_dont_use {tcbn65gpluswc/DFNCSND2}
+#@ set_dont_use {tcbn65gpluswc/DFNCSND4}
+#@ set_dont_use {tcbn65gpluswc/DFND1}
+#@ set_dont_use {tcbn65gpluswc/DFND2}
+#@ set_dont_use {tcbn65gpluswc/DFND4}
+#@ set_dont_use {tcbn65gpluswc/DFNSND1}
+#@ set_dont_use {tcbn65gpluswc/DFNSND2}
+#@ set_dont_use {tcbn65gpluswc/DFNSND4}
+#@ set_dont_use {tcbn65gpluswc/DFQD1}
+#@ set_dont_use {tcbn65gpluswc/DFQD2}
+#@ set_dont_use {tcbn65gpluswc/DFQD4}
+#@ set_dont_use {tcbn65gpluswc/DFSND1}
+#@ set_dont_use {tcbn65gpluswc/DFSND2}
+#@ set_dont_use {tcbn65gpluswc/DFSND4}
+#@ set_dont_use {tcbn65gpluswc/DFSNQD1}
+#@ set_dont_use {tcbn65gpluswc/DFSNQD2}
+#@ set_dont_use {tcbn65gpluswc/DFSNQD4}
+#@ set_dont_use {tcbn65gpluswc/DFXD1}
+#@ set_dont_use {tcbn65gpluswc/DFXD2}
+#@ set_dont_use {tcbn65gpluswc/DFXD4}
+#@ set_dont_use {tcbn65gpluswc/DFXQD1}
+#@ set_dont_use {tcbn65gpluswc/DFXQD2}
+#@ set_dont_use {tcbn65gpluswc/DFXQD4}
+#@ set_dont_use {tcbn65gpluswc/EDFCND1}
+#@ set_dont_use {tcbn65gpluswc/EDFCND2}
+#@ set_dont_use {tcbn65gpluswc/EDFCND4}
+#@ set_dont_use {tcbn65gpluswc/EDFCNQD1}
+#@ set_dont_use {tcbn65gpluswc/EDFCNQD2}
+#@ set_dont_use {tcbn65gpluswc/EDFCNQD4}
+#@ set_dont_use {tcbn65gpluswc/EDFD1}
+#@ set_dont_use {tcbn65gpluswc/EDFD2}
+#@ set_dont_use {tcbn65gpluswc/EDFD4}
+#@ set_dont_use {tcbn65gpluswc/EDFKCND1}
+#@ set_dont_use {tcbn65gpluswc/EDFKCND2}
+#@ set_dont_use {tcbn65gpluswc/EDFKCND4}
+#@ set_dont_use {tcbn65gpluswc/EDFKCNQD1}
+#@ set_dont_use {tcbn65gpluswc/EDFKCNQD2}
+#@ set_dont_use {tcbn65gpluswc/EDFKCNQD4}
+#@ set_dont_use {tcbn65gpluswc/EDFQD1}
+#@ set_dont_use {tcbn65gpluswc/EDFQD2}
+#@ set_dont_use {tcbn65gpluswc/EDFQD4}
+#@ set_dont_use {tcbn65gpluswc/FA1D0}
+#@ set_dont_use {tcbn65gpluswc/FA1D1}
+#@ set_dont_use {tcbn65gpluswc/FA1D2}
+#@ set_dont_use {tcbn65gpluswc/FA1D4}
+#@ set_dont_use {tcbn65gpluswc/FCICIND1}
+#@ set_dont_use {tcbn65gpluswc/FCICIND2}
+#@ set_dont_use {tcbn65gpluswc/FCICOND1}
+#@ set_dont_use {tcbn65gpluswc/FCICOND2}
+#@ set_dont_use {tcbn65gpluswc/FCSICIND1}
+#@ set_dont_use {tcbn65gpluswc/FCSICIND2}
+#@ set_dont_use {tcbn65gpluswc/FCSICOND1}
+#@ set_dont_use {tcbn65gpluswc/FCSICOND2}
+#@ set_dont_use {tcbn65gpluswc/FICIND1}
+#@ set_dont_use {tcbn65gpluswc/FICIND2}
+#@ set_dont_use {tcbn65gpluswc/FICOND1}
+#@ set_dont_use {tcbn65gpluswc/FICOND2}
+#@ set_dont_use {tcbn65gpluswc/FIICOND1}
+#@ set_dont_use {tcbn65gpluswc/FIICOND2}
+#@ set_dont_use {tcbn65gpluswc/GAN2D1}
+#@ set_dont_use {tcbn65gpluswc/GAN2D2}
+#@ set_dont_use {tcbn65gpluswc/GAOI21D1}
+#@ set_dont_use {tcbn65gpluswc/GAOI21D2}
+#@ set_dont_use {tcbn65gpluswc/GAOI22D1}
+#@ set_dont_use {tcbn65gpluswc/GBUFFD1}
+#@ set_dont_use {tcbn65gpluswc/GBUFFD2}
+#@ set_dont_use {tcbn65gpluswc/GBUFFD3}
+#@ set_dont_use {tcbn65gpluswc/GBUFFD4}
+#@ set_dont_use {tcbn65gpluswc/GBUFFD8}
+#@ set_dont_use {tcbn65gpluswc/GDCAP}
+#@ set_dont_use {tcbn65gpluswc/GDCAP10}
+#@ set_dont_use {tcbn65gpluswc/GDCAP2}
+#@ set_dont_use {tcbn65gpluswc/GDCAP3}
+#@ set_dont_use {tcbn65gpluswc/GDCAP4}
+#@ set_dont_use {tcbn65gpluswc/GDFCNQD1}
+#@ set_dont_use {tcbn65gpluswc/GDFQD1}
+#@ set_dont_use {tcbn65gpluswc/GINVD1}
+#@ set_dont_use {tcbn65gpluswc/GINVD2}
+#@ set_dont_use {tcbn65gpluswc/GINVD3}
+#@ set_dont_use {tcbn65gpluswc/GINVD4}
+#@ set_dont_use {tcbn65gpluswc/GINVD8}
+#@ set_dont_use {tcbn65gpluswc/GMUX2D1}
+#@ set_dont_use {tcbn65gpluswc/GMUX2D2}
+#@ set_dont_use {tcbn65gpluswc/GMUX2ND1}
+#@ set_dont_use {tcbn65gpluswc/GMUX2ND2}
+#@ set_dont_use {tcbn65gpluswc/GND2D1}
+#@ set_dont_use {tcbn65gpluswc/GND2D2}
+#@ set_dont_use {tcbn65gpluswc/GND2D3}
+#@ set_dont_use {tcbn65gpluswc/GND2D4}
+#@ set_dont_use {tcbn65gpluswc/GND3D1}
+#@ set_dont_use {tcbn65gpluswc/GND3D2}
+#@ set_dont_use {tcbn65gpluswc/GNR2D1}
+#@ set_dont_use {tcbn65gpluswc/GNR2D2}
+#@ set_dont_use {tcbn65gpluswc/GNR3D1}
+#@ set_dont_use {tcbn65gpluswc/GNR3D2}
+#@ set_dont_use {tcbn65gpluswc/GOAI21D1}
+#@ set_dont_use {tcbn65gpluswc/GOAI21D2}
+#@ set_dont_use {tcbn65gpluswc/GOR2D1}
+#@ set_dont_use {tcbn65gpluswc/GOR2D2}
+#@ set_dont_use {tcbn65gpluswc/GSDFCNQD1}
+#@ set_dont_use {tcbn65gpluswc/GTIEH}
+#@ set_dont_use {tcbn65gpluswc/GTIEL}
+#@ set_dont_use {tcbn65gpluswc/GXNR2D1}
+#@ set_dont_use {tcbn65gpluswc/GXNR2D2}
+#@ set_dont_use {tcbn65gpluswc/GXOR2D1}
+#@ set_dont_use {tcbn65gpluswc/GXOR2D2}
+#@ set_dont_use {tcbn65gpluswc/HA1D0}
+#@ set_dont_use {tcbn65gpluswc/HA1D1}
+#@ set_dont_use {tcbn65gpluswc/HA1D2}
+#@ set_dont_use {tcbn65gpluswc/HA1D4}
+#@ set_dont_use {tcbn65gpluswc/HCOSCIND1}
+#@ set_dont_use {tcbn65gpluswc/HCOSCIND2}
+#@ set_dont_use {tcbn65gpluswc/HCOSCOND1}
+#@ set_dont_use {tcbn65gpluswc/HCOSCOND2}
+#@ set_dont_use {tcbn65gpluswc/HICIND1}
+#@ set_dont_use {tcbn65gpluswc/HICIND2}
+#@ set_dont_use {tcbn65gpluswc/HICOND1}
+#@ set_dont_use {tcbn65gpluswc/HICOND2}
+#@ set_dont_use {tcbn65gpluswc/IAO21D0}
+#@ set_dont_use {tcbn65gpluswc/IAO21D1}
+#@ set_dont_use {tcbn65gpluswc/IAO21D2}
+#@ set_dont_use {tcbn65gpluswc/IAO21D4}
+#@ set_dont_use {tcbn65gpluswc/IAO22D0}
+#@ set_dont_use {tcbn65gpluswc/IAO22D1}
+#@ set_dont_use {tcbn65gpluswc/IAO22D2}
+#@ set_dont_use {tcbn65gpluswc/IAO22D4}
+#@ set_dont_use {tcbn65gpluswc/IIND4D0}
+#@ set_dont_use {tcbn65gpluswc/IIND4D1}
+#@ set_dont_use {tcbn65gpluswc/IIND4D2}
+#@ set_dont_use {tcbn65gpluswc/IIND4D4}
+#@ set_dont_use {tcbn65gpluswc/IINR4D0}
+#@ set_dont_use {tcbn65gpluswc/IINR4D1}
+#@ set_dont_use {tcbn65gpluswc/IINR4D2}
+#@ set_dont_use {tcbn65gpluswc/IINR4D4}
+#@ set_dont_use {tcbn65gpluswc/IND2D0}
+#@ set_dont_use {tcbn65gpluswc/IND2D1}
+#@ set_dont_use {tcbn65gpluswc/IND2D2}
+#@ set_dont_use {tcbn65gpluswc/IND2D4}
+#@ set_dont_use {tcbn65gpluswc/IND3D0}
+#@ set_dont_use {tcbn65gpluswc/IND3D1}
+#@ set_dont_use {tcbn65gpluswc/IND3D2}
+#@ set_dont_use {tcbn65gpluswc/IND3D4}
+#@ set_dont_use {tcbn65gpluswc/IND4D0}
+#@ set_dont_use {tcbn65gpluswc/IND4D1}
+#@ set_dont_use {tcbn65gpluswc/IND4D2}
+#@ set_dont_use {tcbn65gpluswc/IND4D4}
+#@ set_dont_use {tcbn65gpluswc/INR2D0}
+#@ set_dont_use {tcbn65gpluswc/INR2D1}
+#@ set_dont_use {tcbn65gpluswc/INR2D2}
+#@ set_dont_use {tcbn65gpluswc/INR2D4}
+#@ set_dont_use {tcbn65gpluswc/INR2XD0}
+#@ set_dont_use {tcbn65gpluswc/INR2XD1}
+#@ set_dont_use {tcbn65gpluswc/INR2XD2}
+#@ set_dont_use {tcbn65gpluswc/INR2XD4}
+#@ set_dont_use {tcbn65gpluswc/INR3D0}
+#@ set_dont_use {tcbn65gpluswc/INR3D1}
+#@ set_dont_use {tcbn65gpluswc/INR3D2}
+#@ set_dont_use {tcbn65gpluswc/INR3D4}
+#@ set_dont_use {tcbn65gpluswc/INR4D0}
+#@ set_dont_use {tcbn65gpluswc/INR4D1}
+#@ set_dont_use {tcbn65gpluswc/INR4D2}
+#@ set_dont_use {tcbn65gpluswc/INR4D4}
+#@ set_dont_use {tcbn65gpluswc/INVD12}
+#@ set_dont_use {tcbn65gpluswc/INVD16}
+#@ set_dont_use {tcbn65gpluswc/INVD1}
+#@ set_dont_use {tcbn65gpluswc/INVD20}
+#@ set_dont_use {tcbn65gpluswc/INVD24}
+#@ set_dont_use {tcbn65gpluswc/INVD2}
+#@ set_dont_use {tcbn65gpluswc/INVD3}
+#@ set_dont_use {tcbn65gpluswc/INVD4}
+#@ set_dont_use {tcbn65gpluswc/INVD6}
+#@ set_dont_use {tcbn65gpluswc/INVD8}
+#@ set_dont_use {tcbn65gpluswc/IOA21D0}
+#@ set_dont_use {tcbn65gpluswc/IOA21D1}
+#@ set_dont_use {tcbn65gpluswc/IOA21D2}
+#@ set_dont_use {tcbn65gpluswc/IOA21D4}
+#@ set_dont_use {tcbn65gpluswc/IOA22D0}
+#@ set_dont_use {tcbn65gpluswc/IOA22D1}
+#@ set_dont_use {tcbn65gpluswc/IOA22D2}
+#@ set_dont_use {tcbn65gpluswc/IOA22D4}
+#@ set_dont_use {tcbn65gpluswc/ISOHID1}
+#@ set_dont_use {tcbn65gpluswc/ISOHID2}
+#@ set_dont_use {tcbn65gpluswc/ISOHID4}
+#@ set_dont_use {tcbn65gpluswc/ISOHID8}
+#@ set_dont_use {tcbn65gpluswc/ISOLOD1}
+#@ set_dont_use {tcbn65gpluswc/ISOLOD2}
+#@ set_dont_use {tcbn65gpluswc/ISOLOD4}
+#@ set_dont_use {tcbn65gpluswc/ISOLOD8}
+#@ set_dont_use {tcbn65gpluswc/LHCND1}
+#@ set_dont_use {tcbn65gpluswc/LHCND2}
+#@ set_dont_use {tcbn65gpluswc/LHCND4}
+#@ set_dont_use {tcbn65gpluswc/LHCNDD1}
+#@ set_dont_use {tcbn65gpluswc/LHCNDD2}
+#@ set_dont_use {tcbn65gpluswc/LHCNDD4}
+#@ set_dont_use {tcbn65gpluswc/LHCNDQD1}
+#@ set_dont_use {tcbn65gpluswc/LHCNDQD2}
+#@ set_dont_use {tcbn65gpluswc/LHCNDQD4}
+#@ set_dont_use {tcbn65gpluswc/LHCNQD1}
+#@ set_dont_use {tcbn65gpluswc/LHCNQD2}
+#@ set_dont_use {tcbn65gpluswc/LHCNQD4}
+#@ set_dont_use {tcbn65gpluswc/LHCSND1}
+#@ set_dont_use {tcbn65gpluswc/LHCSND2}
+#@ set_dont_use {tcbn65gpluswc/LHCSND4}
+#@ set_dont_use {tcbn65gpluswc/LHCSNDD1}
+#@ set_dont_use {tcbn65gpluswc/LHCSNDD2}
+#@ set_dont_use {tcbn65gpluswc/LHCSNDD4}
+#@ set_dont_use {tcbn65gpluswc/LHCSNDQD1}
+#@ set_dont_use {tcbn65gpluswc/LHCSNDQD2}
+#@ set_dont_use {tcbn65gpluswc/LHCSNDQD4}
+#@ set_dont_use {tcbn65gpluswc/LHCSNQD1}
+#@ set_dont_use {tcbn65gpluswc/LHCSNQD2}
+#@ set_dont_use {tcbn65gpluswc/LHCSNQD4}
+#@ set_dont_use {tcbn65gpluswc/LHD1}
+#@ set_dont_use {tcbn65gpluswc/LHD2}
+#@ set_dont_use {tcbn65gpluswc/LHD4}
+#@ set_dont_use {tcbn65gpluswc/LHQD1}
+#@ set_dont_use {tcbn65gpluswc/LHQD2}
+#@ set_dont_use {tcbn65gpluswc/LHQD4}
+#@ set_dont_use {tcbn65gpluswc/LHSND1}
+#@ set_dont_use {tcbn65gpluswc/LHSND2}
+#@ set_dont_use {tcbn65gpluswc/LHSND4}
+#@ set_dont_use {tcbn65gpluswc/LHSNDD1}
+#@ set_dont_use {tcbn65gpluswc/LHSNDD2}
+#@ set_dont_use {tcbn65gpluswc/LHSNDD4}
+#@ set_dont_use {tcbn65gpluswc/LHSNDQD1}
+#@ set_dont_use {tcbn65gpluswc/LHSNDQD2}
+#@ set_dont_use {tcbn65gpluswc/LHSNDQD4}
+#@ set_dont_use {tcbn65gpluswc/LHSNQD1}
+#@ set_dont_use {tcbn65gpluswc/LHSNQD2}
+#@ set_dont_use {tcbn65gpluswc/LHSNQD4}
+#@ set_dont_use {tcbn65gpluswc/LNCND1}
+#@ set_dont_use {tcbn65gpluswc/LNCND2}
+#@ set_dont_use {tcbn65gpluswc/LNCND4}
+#@ set_dont_use {tcbn65gpluswc/LNCNDD1}
+#@ set_dont_use {tcbn65gpluswc/LNCNDD2}
+#@ set_dont_use {tcbn65gpluswc/LNCNDD4}
+#@ set_dont_use {tcbn65gpluswc/LNCNDQD1}
+#@ set_dont_use {tcbn65gpluswc/LNCNDQD2}
+#@ set_dont_use {tcbn65gpluswc/LNCNDQD4}
+#@ set_dont_use {tcbn65gpluswc/LNCNQD1}
+#@ set_dont_use {tcbn65gpluswc/LNCNQD2}
+#@ set_dont_use {tcbn65gpluswc/LNCNQD4}
+#@ set_dont_use {tcbn65gpluswc/LNCSND1}
+#@ set_dont_use {tcbn65gpluswc/LNCSND2}
+#@ set_dont_use {tcbn65gpluswc/LNCSND4}
+#@ set_dont_use {tcbn65gpluswc/LNCSNDD1}
+#@ set_dont_use {tcbn65gpluswc/LNCSNDD2}
+#@ set_dont_use {tcbn65gpluswc/LNCSNDD4}
+#@ set_dont_use {tcbn65gpluswc/LNCSNDQD1}
+#@ set_dont_use {tcbn65gpluswc/LNCSNDQD2}
+#@ set_dont_use {tcbn65gpluswc/LNCSNDQD4}
+#@ set_dont_use {tcbn65gpluswc/LNCSNQD1}
+#@ set_dont_use {tcbn65gpluswc/LNCSNQD2}
+#@ set_dont_use {tcbn65gpluswc/LNCSNQD4}
+#@ set_dont_use {tcbn65gpluswc/LND1}
+#@ set_dont_use {tcbn65gpluswc/LND2}
+#@ set_dont_use {tcbn65gpluswc/LND4}
+#@ set_dont_use {tcbn65gpluswc/LNQD1}
+#@ set_dont_use {tcbn65gpluswc/LNQD2}
+#@ set_dont_use {tcbn65gpluswc/LNQD4}
+#@ set_dont_use {tcbn65gpluswc/LNSND1}
+#@ set_dont_use {tcbn65gpluswc/LNSND2}
+#@ set_dont_use {tcbn65gpluswc/LNSND4}
+#@ set_dont_use {tcbn65gpluswc/LNSNDD1}
+#@ set_dont_use {tcbn65gpluswc/LNSNDD2}
+#@ set_dont_use {tcbn65gpluswc/LNSNDD4}
+#@ set_dont_use {tcbn65gpluswc/LNSNDQD1}
+#@ set_dont_use {tcbn65gpluswc/LNSNDQD2}
+#@ set_dont_use {tcbn65gpluswc/LNSNDQD4}
+#@ set_dont_use {tcbn65gpluswc/LNSNQD1}
+#@ set_dont_use {tcbn65gpluswc/LNSNQD2}
+#@ set_dont_use {tcbn65gpluswc/LNSNQD4}
+#@ set_dont_use {tcbn65gpluswc/LVLHLD1}
+#@ set_dont_use {tcbn65gpluswc/LVLHLD2}
+#@ set_dont_use {tcbn65gpluswc/LVLHLD4}
+#@ set_dont_use {tcbn65gpluswc/LVLHLD8}
+#@ set_dont_use {tcbn65gpluswc/LVLLHCD1}
+#@ set_dont_use {tcbn65gpluswc/LVLLHCD2}
+#@ set_dont_use {tcbn65gpluswc/LVLLHCD4}
+#@ set_dont_use {tcbn65gpluswc/LVLLHCD8}
+#@ set_dont_use {tcbn65gpluswc/LVLLHD1}
+#@ set_dont_use {tcbn65gpluswc/LVLLHD2}
+#@ set_dont_use {tcbn65gpluswc/LVLLHD4}
+#@ set_dont_use {tcbn65gpluswc/LVLLHD8}
+#@ set_dont_use {tcbn65gpluswc/MAOI222D0}
+#@ set_dont_use {tcbn65gpluswc/MAOI222D1}
+#@ set_dont_use {tcbn65gpluswc/MAOI222D2}
+#@ set_dont_use {tcbn65gpluswc/MAOI222D4}
+#@ set_dont_use {tcbn65gpluswc/MAOI22D0}
+#@ set_dont_use {tcbn65gpluswc/MAOI22D1}
+#@ set_dont_use {tcbn65gpluswc/MAOI22D2}
+#@ set_dont_use {tcbn65gpluswc/MAOI22D4}
+#@ set_dont_use {tcbn65gpluswc/MOAI22D0}
+#@ set_dont_use {tcbn65gpluswc/MOAI22D1}
+#@ set_dont_use {tcbn65gpluswc/MOAI22D2}
+#@ set_dont_use {tcbn65gpluswc/MOAI22D4}
+#@ set_dont_use {tcbn65gpluswc/MUX2D0}
+#@ set_dont_use {tcbn65gpluswc/MUX2D1}
+#@ set_dont_use {tcbn65gpluswc/MUX2D2}
+#@ set_dont_use {tcbn65gpluswc/MUX2D4}
+#@ set_dont_use {tcbn65gpluswc/MUX2ND0}
+#@ set_dont_use {tcbn65gpluswc/MUX2ND1}
+#@ set_dont_use {tcbn65gpluswc/MUX2ND2}
+#@ set_dont_use {tcbn65gpluswc/MUX2ND4}
+#@ set_dont_use {tcbn65gpluswc/MUX3D0}
+#@ set_dont_use {tcbn65gpluswc/MUX3D1}
+#@ set_dont_use {tcbn65gpluswc/MUX3D2}
+#@ set_dont_use {tcbn65gpluswc/MUX3D4}
+#@ set_dont_use {tcbn65gpluswc/MUX3ND0}
+#@ set_dont_use {tcbn65gpluswc/MUX3ND1}
+#@ set_dont_use {tcbn65gpluswc/MUX3ND2}
+#@ set_dont_use {tcbn65gpluswc/MUX3ND4}
+#@ set_dont_use {tcbn65gpluswc/MUX4D0}
+#@ set_dont_use {tcbn65gpluswc/MUX4D1}
+#@ set_dont_use {tcbn65gpluswc/MUX4D2}
+#@ set_dont_use {tcbn65gpluswc/MUX4D4}
+#@ set_dont_use {tcbn65gpluswc/MUX4ND0}
+#@ set_dont_use {tcbn65gpluswc/MUX4ND1}
+#@ set_dont_use {tcbn65gpluswc/MUX4ND2}
+#@ set_dont_use {tcbn65gpluswc/MUX4ND4}
+#@ set_dont_use {tcbn65gpluswc/ND2D0}
+#@ set_dont_use {tcbn65gpluswc/ND2D1}
+#@ set_dont_use {tcbn65gpluswc/ND2D2}
+#@ set_dont_use {tcbn65gpluswc/ND2D3}
+#@ set_dont_use {tcbn65gpluswc/ND2D4}
+#@ set_dont_use {tcbn65gpluswc/ND2D8}
+#@ set_dont_use {tcbn65gpluswc/ND3D0}
+#@ set_dont_use {tcbn65gpluswc/ND3D1}
+#@ set_dont_use {tcbn65gpluswc/ND3D2}
+#@ set_dont_use {tcbn65gpluswc/ND3D3}
+#@ set_dont_use {tcbn65gpluswc/ND3D4}
+#@ set_dont_use {tcbn65gpluswc/ND3D8}
+#@ set_dont_use {tcbn65gpluswc/ND4D0}
+#@ set_dont_use {tcbn65gpluswc/ND4D1}
+#@ set_dont_use {tcbn65gpluswc/ND4D2}
+#@ set_dont_use {tcbn65gpluswc/ND4D3}
+#@ set_dont_use {tcbn65gpluswc/ND4D4}
+#@ set_dont_use {tcbn65gpluswc/ND4D8}
+#@ set_dont_use {tcbn65gpluswc/NR2D0}
+#@ set_dont_use {tcbn65gpluswc/NR2D1}
+#@ set_dont_use {tcbn65gpluswc/NR2D2}
+#@ set_dont_use {tcbn65gpluswc/NR2D3}
+#@ set_dont_use {tcbn65gpluswc/NR2D4}
+#@ set_dont_use {tcbn65gpluswc/NR2D8}
+#@ set_dont_use {tcbn65gpluswc/NR2XD0}
+#@ set_dont_use {tcbn65gpluswc/NR2XD1}
+#@ set_dont_use {tcbn65gpluswc/NR2XD2}
+#@ set_dont_use {tcbn65gpluswc/NR2XD3}
+#@ set_dont_use {tcbn65gpluswc/NR2XD4}
+#@ set_dont_use {tcbn65gpluswc/NR2XD8}
+#@ set_dont_use {tcbn65gpluswc/NR3D0}
+#@ set_dont_use {tcbn65gpluswc/NR3D1}
+#@ set_dont_use {tcbn65gpluswc/NR3D2}
+#@ set_dont_use {tcbn65gpluswc/NR3D3}
+#@ set_dont_use {tcbn65gpluswc/NR3D4}
+#@ set_dont_use {tcbn65gpluswc/NR3D8}
+#@ set_dont_use {tcbn65gpluswc/NR4D0}
+#@ set_dont_use {tcbn65gpluswc/NR4D1}
+#@ set_dont_use {tcbn65gpluswc/NR4D2}
+#@ set_dont_use {tcbn65gpluswc/NR4D3}
+#@ set_dont_use {tcbn65gpluswc/NR4D4}
+#@ set_dont_use {tcbn65gpluswc/NR4D8}
+#@ set_dont_use {tcbn65gpluswc/OA211D0}
+#@ set_dont_use {tcbn65gpluswc/OA211D1}
+#@ set_dont_use {tcbn65gpluswc/OA211D2}
+#@ set_dont_use {tcbn65gpluswc/OA211D4}
+#@ set_dont_use {tcbn65gpluswc/OA21D0}
+#@ set_dont_use {tcbn65gpluswc/OA21D1}
+#@ set_dont_use {tcbn65gpluswc/OA21D2}
+#@ set_dont_use {tcbn65gpluswc/OA21D4}
+#@ set_dont_use {tcbn65gpluswc/OA221D0}
+#@ set_dont_use {tcbn65gpluswc/OA221D1}
+#@ set_dont_use {tcbn65gpluswc/OA221D2}
+#@ set_dont_use {tcbn65gpluswc/OA221D4}
+#@ set_dont_use {tcbn65gpluswc/OA222D0}
+#@ set_dont_use {tcbn65gpluswc/OA222D1}
+#@ set_dont_use {tcbn65gpluswc/OA222D2}
+#@ set_dont_use {tcbn65gpluswc/OA222D4}
+#@ set_dont_use {tcbn65gpluswc/OA22D0}
+#@ set_dont_use {tcbn65gpluswc/OA22D1}
+#@ set_dont_use {tcbn65gpluswc/OA22D2}
+#@ set_dont_use {tcbn65gpluswc/OA22D4}
+#@ set_dont_use {tcbn65gpluswc/OA31D0}
+#@ set_dont_use {tcbn65gpluswc/OA31D1}
+#@ set_dont_use {tcbn65gpluswc/OA31D2}
+#@ set_dont_use {tcbn65gpluswc/OA31D4}
+#@ set_dont_use {tcbn65gpluswc/OA32D0}
+#@ set_dont_use {tcbn65gpluswc/OA32D1}
+#@ set_dont_use {tcbn65gpluswc/OA32D2}
+#@ set_dont_use {tcbn65gpluswc/OA32D4}
+#@ set_dont_use {tcbn65gpluswc/OA33D0}
+#@ set_dont_use {tcbn65gpluswc/OA33D1}
+#@ set_dont_use {tcbn65gpluswc/OA33D2}
+#@ set_dont_use {tcbn65gpluswc/OA33D4}
+#@ set_dont_use {tcbn65gpluswc/OAI211D0}
+#@ set_dont_use {tcbn65gpluswc/OAI211D1}
+#@ set_dont_use {tcbn65gpluswc/OAI211D2}
+#@ set_dont_use {tcbn65gpluswc/OAI211D4}
+#@ set_dont_use {tcbn65gpluswc/OAI21D0}
+#@ set_dont_use {tcbn65gpluswc/OAI21D1}
+#@ set_dont_use {tcbn65gpluswc/OAI21D2}
+#@ set_dont_use {tcbn65gpluswc/OAI21D4}
+#@ set_dont_use {tcbn65gpluswc/OAI221D0}
+#@ set_dont_use {tcbn65gpluswc/OAI221D1}
+#@ set_dont_use {tcbn65gpluswc/OAI221D2}
+#@ set_dont_use {tcbn65gpluswc/OAI221D4}
+#@ set_dont_use {tcbn65gpluswc/OAI221XD4}
+#@ set_dont_use {tcbn65gpluswc/OAI222D0}
+#@ set_dont_use {tcbn65gpluswc/OAI222D1}
+#@ set_dont_use {tcbn65gpluswc/OAI222D2}
+#@ set_dont_use {tcbn65gpluswc/OAI222D4}
+#@ set_dont_use {tcbn65gpluswc/OAI222XD4}
+#@ set_dont_use {tcbn65gpluswc/OAI22D0}
+#@ set_dont_use {tcbn65gpluswc/OAI22D1}
+#@ set_dont_use {tcbn65gpluswc/OAI22D2}
+#@ set_dont_use {tcbn65gpluswc/OAI22D4}
+#@ set_dont_use {tcbn65gpluswc/OAI31D0}
+#@ set_dont_use {tcbn65gpluswc/OAI31D1}
+#@ set_dont_use {tcbn65gpluswc/OAI31D2}
+#@ set_dont_use {tcbn65gpluswc/OAI31D4}
+#@ set_dont_use {tcbn65gpluswc/OAI32D0}
+#@ set_dont_use {tcbn65gpluswc/OAI32D1}
+#@ set_dont_use {tcbn65gpluswc/OAI32D2}
+#@ set_dont_use {tcbn65gpluswc/OAI32D4}
+#@ set_dont_use {tcbn65gpluswc/OAI32XD4}
+#@ set_dont_use {tcbn65gpluswc/OAI33D0}
+#@ set_dont_use {tcbn65gpluswc/OAI33D1}
+#@ set_dont_use {tcbn65gpluswc/OAI33D2}
+#@ set_dont_use {tcbn65gpluswc/OAI33D4}
+#@ set_dont_use {tcbn65gpluswc/OAI33XD4}
+#@ set_dont_use {tcbn65gpluswc/OD18DCAP16}
+#@ set_dont_use {tcbn65gpluswc/OD18DCAP32}
+#@ set_dont_use {tcbn65gpluswc/OD18DCAP64}
+#@ set_dont_use {tcbn65gpluswc/SDFCND0}
+#@ set_dont_use {tcbn65gpluswc/SDFCND1}
+#@ set_dont_use {tcbn65gpluswc/SDFCND2}
+#@ set_dont_use {tcbn65gpluswc/SDFCND4}
+#@ set_dont_use {tcbn65gpluswc/SDFCNQD0}
+#@ set_dont_use {tcbn65gpluswc/SDFCNQD1}
+#@ set_dont_use {tcbn65gpluswc/SDFCNQD2}
+#@ set_dont_use {tcbn65gpluswc/SDFCNQD4}
+#@ set_dont_use {tcbn65gpluswc/SDFCSND0}
+#@ set_dont_use {tcbn65gpluswc/SDFCSND1}
+#@ set_dont_use {tcbn65gpluswc/SDFCSND2}
+#@ set_dont_use {tcbn65gpluswc/SDFCSND4}
+#@ set_dont_use {tcbn65gpluswc/SDFCSNQD0}
+#@ set_dont_use {tcbn65gpluswc/SDFCSNQD1}
+#@ set_dont_use {tcbn65gpluswc/SDFCSNQD2}
+#@ set_dont_use {tcbn65gpluswc/SDFCSNQD4}
+#@ set_dont_use {tcbn65gpluswc/SDFD0}
+#@ set_dont_use {tcbn65gpluswc/SDFD1}
+#@ set_dont_use {tcbn65gpluswc/SDFD2}
+#@ set_dont_use {tcbn65gpluswc/SDFD4}
+#@ set_dont_use {tcbn65gpluswc/SDFKCND0}
+#@ set_dont_use {tcbn65gpluswc/SDFKCND1}
+#@ set_dont_use {tcbn65gpluswc/SDFKCND2}
+#@ set_dont_use {tcbn65gpluswc/SDFKCND4}
+#@ set_dont_use {tcbn65gpluswc/SDFKCNQD0}
+#@ set_dont_use {tcbn65gpluswc/SDFKCNQD1}
+#@ set_dont_use {tcbn65gpluswc/SDFKCNQD2}
+#@ set_dont_use {tcbn65gpluswc/SDFKCNQD4}
+#@ set_dont_use {tcbn65gpluswc/SDFKCSND0}
+#@ set_dont_use {tcbn65gpluswc/SDFKCSND1}
+#@ set_dont_use {tcbn65gpluswc/SDFKCSND2}
+#@ set_dont_use {tcbn65gpluswc/SDFKCSND4}
+#@ set_dont_use {tcbn65gpluswc/SDFKCSNQD0}
+#@ set_dont_use {tcbn65gpluswc/SDFKCSNQD1}
+#@ set_dont_use {tcbn65gpluswc/SDFKCSNQD2}
+#@ set_dont_use {tcbn65gpluswc/SDFKCSNQD4}
+#@ set_dont_use {tcbn65gpluswc/SDFKSND0}
+#@ set_dont_use {tcbn65gpluswc/SDFKSND1}
+#@ set_dont_use {tcbn65gpluswc/SDFKSND2}
+#@ set_dont_use {tcbn65gpluswc/SDFKSND4}
+#@ set_dont_use {tcbn65gpluswc/SDFKSNQD0}
+#@ set_dont_use {tcbn65gpluswc/SDFKSNQD1}
+#@ set_dont_use {tcbn65gpluswc/SDFKSNQD2}
+#@ set_dont_use {tcbn65gpluswc/SDFKSNQD4}
+#@ set_dont_use {tcbn65gpluswc/SDFNCND0}
+#@ set_dont_use {tcbn65gpluswc/SDFNCND1}
+#@ set_dont_use {tcbn65gpluswc/SDFNCND2}
+#@ set_dont_use {tcbn65gpluswc/SDFNCND4}
+#@ set_dont_use {tcbn65gpluswc/SDFNCSND0}
+#@ set_dont_use {tcbn65gpluswc/SDFNCSND1}
+#@ set_dont_use {tcbn65gpluswc/SDFNCSND2}
+#@ set_dont_use {tcbn65gpluswc/SDFNCSND4}
+#@ set_dont_use {tcbn65gpluswc/SDFND0}
+#@ set_dont_use {tcbn65gpluswc/SDFND1}
+#@ set_dont_use {tcbn65gpluswc/SDFND2}
+#@ set_dont_use {tcbn65gpluswc/SDFND4}
+#@ set_dont_use {tcbn65gpluswc/SDFNSND0}
+#@ set_dont_use {tcbn65gpluswc/SDFNSND1}
+#@ set_dont_use {tcbn65gpluswc/SDFNSND2}
+#@ set_dont_use {tcbn65gpluswc/SDFNSND4}
+#@ set_dont_use {tcbn65gpluswc/SDFQD0}
+#@ set_dont_use {tcbn65gpluswc/SDFQD1}
+#@ set_dont_use {tcbn65gpluswc/SDFQD2}
+#@ set_dont_use {tcbn65gpluswc/SDFQD4}
+#@ set_dont_use {tcbn65gpluswc/SDFQND0}
+#@ set_dont_use {tcbn65gpluswc/SDFQND1}
+#@ set_dont_use {tcbn65gpluswc/SDFQND2}
+#@ set_dont_use {tcbn65gpluswc/SDFQND4}
+#@ set_dont_use {tcbn65gpluswc/SDFSND0}
+#@ set_dont_use {tcbn65gpluswc/SDFSND1}
+#@ set_dont_use {tcbn65gpluswc/SDFSND2}
+#@ set_dont_use {tcbn65gpluswc/SDFSND4}
+#@ set_dont_use {tcbn65gpluswc/SDFSNQD0}
+#@ set_dont_use {tcbn65gpluswc/SDFSNQD1}
+#@ set_dont_use {tcbn65gpluswc/SDFSNQD2}
+#@ set_dont_use {tcbn65gpluswc/SDFSNQD4}
+#@ set_dont_use {tcbn65gpluswc/SDFXD0}
+#@ set_dont_use {tcbn65gpluswc/SDFXD1}
+#@ set_dont_use {tcbn65gpluswc/SDFXD2}
+#@ set_dont_use {tcbn65gpluswc/SDFXD4}
+#@ set_dont_use {tcbn65gpluswc/SDFXQD0}
+#@ set_dont_use {tcbn65gpluswc/SDFXQD1}
+#@ set_dont_use {tcbn65gpluswc/SDFXQD2}
+#@ set_dont_use {tcbn65gpluswc/SDFXQD4}
+#@ set_dont_use {tcbn65gpluswc/SEDFCND0}
+#@ set_dont_use {tcbn65gpluswc/SEDFCND1}
+#@ set_dont_use {tcbn65gpluswc/SEDFCND2}
+#@ set_dont_use {tcbn65gpluswc/SEDFCND4}
+#@ set_dont_use {tcbn65gpluswc/SEDFCNQD0}
+#@ set_dont_use {tcbn65gpluswc/SEDFCNQD1}
+#@ set_dont_use {tcbn65gpluswc/SEDFCNQD2}
+#@ set_dont_use {tcbn65gpluswc/SEDFCNQD4}
+#@ set_dont_use {tcbn65gpluswc/SEDFD0}
+#@ set_dont_use {tcbn65gpluswc/SEDFD1}
+#@ set_dont_use {tcbn65gpluswc/SEDFD2}
+#@ set_dont_use {tcbn65gpluswc/SEDFD4}
+#@ set_dont_use {tcbn65gpluswc/SEDFKCND0}
+#@ set_dont_use {tcbn65gpluswc/SEDFKCND1}
+#@ set_dont_use {tcbn65gpluswc/SEDFKCND2}
+#@ set_dont_use {tcbn65gpluswc/SEDFKCND4}
+#@ set_dont_use {tcbn65gpluswc/SEDFKCNQD0}
+#@ set_dont_use {tcbn65gpluswc/SEDFKCNQD1}
+#@ set_dont_use {tcbn65gpluswc/SEDFKCNQD2}
+#@ set_dont_use {tcbn65gpluswc/SEDFKCNQD4}
+#@ set_dont_use {tcbn65gpluswc/SEDFQD0}
+#@ set_dont_use {tcbn65gpluswc/SEDFQD1}
+#@ set_dont_use {tcbn65gpluswc/SEDFQD2}
+#@ set_dont_use {tcbn65gpluswc/SEDFQD4}
+#@ set_dont_use {tcbn65gpluswc/SEDFQND0}
+#@ set_dont_use {tcbn65gpluswc/SEDFQND1}
+#@ set_dont_use {tcbn65gpluswc/SEDFQND2}
+#@ set_dont_use {tcbn65gpluswc/SEDFQND4}
+#@ set_dont_use {tcbn65gpluswc/SEDFQNXD0}
+#@ set_dont_use {tcbn65gpluswc/SEDFQNXD1}
+#@ set_dont_use {tcbn65gpluswc/SEDFQNXD2}
+#@ set_dont_use {tcbn65gpluswc/SEDFQNXD4}
+#@ set_dont_use {tcbn65gpluswc/SEDFQXD0}
+#@ set_dont_use {tcbn65gpluswc/SEDFQXD1}
+#@ set_dont_use {tcbn65gpluswc/SEDFQXD2}
+#@ set_dont_use {tcbn65gpluswc/SEDFQXD4}
+#@ set_dont_use {tcbn65gpluswc/SEDFXD0}
+#@ set_dont_use {tcbn65gpluswc/SEDFXD1}
+#@ set_dont_use {tcbn65gpluswc/SEDFXD2}
+#@ set_dont_use {tcbn65gpluswc/SEDFXD4}
+#@ set_dont_use {tcbn65gpluswc/TIEH}
+#@ set_dont_use {tcbn65gpluswc/TIEL}
+#@ set_dont_use {tcbn65gpluswc/XNR2D0}
+#@ set_dont_use {tcbn65gpluswc/XNR2D1}
+#@ set_dont_use {tcbn65gpluswc/XNR2D2}
+#@ set_dont_use {tcbn65gpluswc/XNR2D4}
+#@ set_dont_use {tcbn65gpluswc/XNR3D0}
+#@ set_dont_use {tcbn65gpluswc/XNR3D1}
+#@ set_dont_use {tcbn65gpluswc/XNR3D2}
+#@ set_dont_use {tcbn65gpluswc/XNR3D4}
+#@ set_dont_use {tcbn65gpluswc/XNR4D0}
+#@ set_dont_use {tcbn65gpluswc/XNR4D1}
+#@ set_dont_use {tcbn65gpluswc/XNR4D2}
+#@ set_dont_use {tcbn65gpluswc/XNR4D4}
+#@ set_prefer  {tcbn65gpluswc/XOR2D0}
+#@ set_prefer  {tcbn65gpluswc/XOR2D1}
+#@ set_prefer  {tcbn65gpluswc/XOR2D2}
+#@ set_prefer  {tcbn65gpluswc/XOR2D4}
+#@ set_prefer  {tcbn65gpluswc/XOR3D0}
+#@ set_prefer  {tcbn65gpluswc/XOR3D1}
+#@ set_prefer  {tcbn65gpluswc/XOR3D2}
+#@ set_prefer  {tcbn65gpluswc/XOR3D4}
+#@ set_prefer  {tcbn65gpluswc/XOR4D0}
+#@ set_prefer  {tcbn65gpluswc/XOR4D1}
+#@ set_prefer  {tcbn65gpluswc/XOR4D2}
+#@ set_prefer  {tcbn65gpluswc/XOR4D4}
+#@ set_prefer {tcbn65gpluswc/AN2D0}
+#@ set_prefer {tcbn65gpluswc/INVD0}
+#@ set_prefer {tcbn65gpluswc/OR2D0}
+#@ set_prefer {tcbn65gpluswc/AN2D1}
+#@ set_prefer {tcbn65gpluswc/AN2D2}
+#@ set_prefer {tcbn65gpluswc/AN2D4}
+#@ set_prefer {tcbn65gpluswc/AN2D8}
+#@ set_prefer {tcbn65gpluswc/AN3D0}
+#@ set_prefer {tcbn65gpluswc/AN3D1}
+#@ set_prefer {tcbn65gpluswc/AN3D2}
+#@ set_prefer {tcbn65gpluswc/AN3D4}
+#@ set_prefer {tcbn65gpluswc/AN3D8}
+#@ set_prefer {tcbn65gpluswc/AN4D0}
+#@ set_prefer {tcbn65gpluswc/AN4D1}
+#@ set_prefer {tcbn65gpluswc/AN4D2}
+#@ set_prefer {tcbn65gpluswc/AN4D4}
+#@ set_prefer {tcbn65gpluswc/AN4D8}
+#@ set_prefer {tcbn65gpluswc/OR2D1}
+#@ set_prefer {tcbn65gpluswc/OR2D2}
+#@ set_prefer {tcbn65gpluswc/OR2D4}
+#@ set_prefer {tcbn65gpluswc/OR2D8}
+#@ set_prefer {tcbn65gpluswc/OR3D0}
+#@ set_prefer {tcbn65gpluswc/OR3D1}
+#@ set_prefer {tcbn65gpluswc/OR3D2}
+#@ set_prefer {tcbn65gpluswc/OR3D4}
+#@ set_prefer {tcbn65gpluswc/OR3D8}
+#@ set_prefer {tcbn65gpluswc/OR4D0}
+#@ set_prefer {tcbn65gpluswc/OR4D1}
+#@ set_prefer {tcbn65gpluswc/OR4D2}
+#@ set_prefer {tcbn65gpluswc/OR4D4}
+#@ set_prefer {tcbn65gpluswc/OR4D8}
+#@ set_dont_use {tcbn65gpluswc/AN2XD1}
+#@ set_dont_use {tcbn65gpluswc/AN3XD1}
+#@ set_dont_use {tcbn65gpluswc/AN4XD1}
+#@ set_dont_use {tcbn65gpluswc/OR2XD1}
+#@ set_dont_use {tcbn65gpluswc/OR3XD1}
+#@ set_dont_use {tcbn65gpluswc/OR4XD1}
+#@ # -- End source dc_scripts/maskgates_onlyAOI.tcl
+
+#@ 
+#@ # The remainder of the setup below should only be performed in Design Compiler
+#@ if {$synopsys_program_name == "dc_shell"}  {
+#@ 
+#@   # Set min libraries if they exist
+#@   foreach {max_library min_library} $MIN_LIBRARY_FILES {
+#@     echo Max. delay library: $max_library
+#@     echo Min. delay library: $min_library
+#@     set_min_library $max_library -min_version $min_library
+#@   }
+#@ 
+#@   if {[shell_is_in_topographical_mode]} {
+#@ 
+#@     # Only create new Milkyway design library if it doesn't already exist
+#@     if {![file isdirectory $mw_design_library ]} {
+#@       create_mw_lib   -technology $TECH_FILE                       -mw_reference_library $mw_reference_library                       $mw_design_library
+#@     } else {
+#@       # If Milkyway design library already exists, ensure that it is consistent with specified Milkyway reference libraries
+#@       set_mw_lib_reference $mw_design_library -mw_reference_library $mw_reference_library
+#@     }
+#@ 
+#@     open_mw_lib     $mw_design_library
+#@ 
+#@     check_library
+#@ 
+#@     set_tlu_plus_files -max_tluplus $TLUPLUS_MAX_FILE                        -min_tluplus $TLUPLUS_MIN_FILE                        -tech2itf_map $MAP_FILE
+#@ 
+#@     check_tlu_plus_files
+#@ 
+#@   }
+#@ 
+#@   #################################################################################
+#@   # Library Modifications
+#@   #
+#@   # Apply library modifications here after the libraries are loaded.
+#@   #################################################################################
+#@ 
+#@   if {[file exists [which ${LIBRARY_DONT_USE_FILE}]]} {
+#@     source -echo -verbose ${LIBRARY_DONT_USE_FILE}
+#@   }
+#@ } 
+#@ # -- End source dc_setup.tcl
+
+#@ 
+#@ # call a script which compiles the design
+#@ source dc.tcl
+#@ # -- Starting source dc.tcl
+
+#@ 
+#@ #################################################################################
+#@ # Derived from Design Compiler Reference Methodology Script for Top-Down Flow
+#@ # Script: dc.tcl
+#@ # Version: B-2008.09-SP4 (Mar. 25, 2009)
+#@ # Copyright (C) 2007, 2008, 2009 Synopsys All rights reserved.
+#@ #################################################################################
+#@ 
+#@ #################################################################################
+#@ # Setup for Formality verification
+#@ #
+#@ # SVF should always be written to allow Formality verification
+#@ # for advanced optimizations.
+#@ #################################################################################
+#@ 
+#@ set_svf ${RESULTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.svf
+#@ 
+#@ #################################################################################
+#@ # Setup SAIF Name Mapping Database
+#@ #
+#@ # Include an RTL SAIF for better power optimization and analysis.
+#@ #
+#@ # saif_map should be issued prior to RTL elaboration to create a name mapping
+#@ # database for better annotation.
+#@ ################################################################################
+#@ 
+#@ saif_map -start
+#@ 
+#@ #################################################################################
+#@ # Read in the RTL Design
+#@ #
+#@ # Read in the RTL source files or read in the elaborated design (DDC).
+#@ # Use the -format option to specify: verilog, sverilog, or vhdl as needed.
+#@ #################################################################################
+#@ set power_preserve_rtl_hier_names true
+#@ define_design_lib WORK -path ./WORK
+#@ analyze -format verilog ${RTL_SOURCE_FILES}
+#@ #analyze -format VHDL ${RTL_SOURCE_FILES}
+#@ elaborate ${DESIGN_NAME}
+#@ #rtl2saif -output ${DESIGN_NAME}_forward.saif -design ${DESIGN_NAME}
+#@ #link
+#@ check_design > check_design.pre.log
+#@ 
+#@ #################################################################################
+#@ # Apply Logical Design Constraints
+#@ #################################################################################
+#@ 
+#@ #source -echo -verbose ${CONSTRAINTS_DIR}/logical_constraints.tcl
+#@ 
+#@ #################################################################################
+#@ # Apply Additional Optimization Constraints
+#@ #################################################################################
+#@ 
+#@ # Prevent assignment statements in the Verilog netlist.
+#@ #set_fix_multiple_port_nets -all -buffer_constants
+#@ 
+#@ #################################################################################
+#@ # Compile the Design
+#@ #################################################################################
+#@ 
+#@ #compile_ultra 
+#@ compile  
