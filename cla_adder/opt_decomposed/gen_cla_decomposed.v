@@ -1,8 +1,8 @@
 module gen_cla_decomposed(a,b,s);
 
-input [15:0]  a,b;
-output [15:0] s;
-wire [65518:0] n;
+input [16:0]  a,b;
+output [16:0] s;
+wire [131053:0] n;
 gen_nonlinear_part
 NLIN(
         .a (a),

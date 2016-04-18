@@ -1,0 +1,116 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -nets
+        -max_paths 1
+        -transition_time
+Design : gen_cla_decomposed
+Version: K-2015.06-SP5-1
+Date   : Mon Apr 18 15:19:37 2016
+****************************************
+
+Operating Conditions: WCCOM   Library: tcbn65gpluswc
+Wire Load Model Mode: segmented
+
+  Startpoint: a[0] (input port)
+  Endpoint: s[7] (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  gen_cla_decomposed ZeroWireload          tcbn65gpluswc
+
+Attributes:
+    d - dont_touch
+    u - dont_use
+   mo - map_only
+   so - size_only
+    i - ideal_net or ideal_network
+  inf - infeasible path
+
+  Point                        Fanout     Trans      Incr       Path      Attributes
+  ------------------------------------------------------------------------------------------
+  input external delay                               0.00       0.00 r
+  a[0] (in)                                0.00      0.00       0.00 r
+  a[0] (net)                     2                   0.00       0.00 r
+  NLIN/U247/Z (AN2D0)                      0.06      0.07       0.07 r
+  n[0] (net)                     3                   0.00       0.07 r
+  NLIN/U241/Z (AN2D0)                      0.06      0.08       0.15 r
+  n[3] (net)                     3                   0.00       0.15 r
+  NLIN/U240/Z (AN2D0)                      0.07      0.09       0.24 r
+  n[7] (net)                     3                   0.00       0.24 r
+  NLIN/U209/Z (AN2D0)                      0.06      0.09       0.33 r
+  n[15] (net)                    3                   0.00       0.33 r
+  NLIN/U163/Z (AN2D0)                      0.07      0.09       0.42 r
+  n[31] (net)                    3                   0.00       0.42 r
+  NLIN/U162/Z (AN2D0)                      0.07      0.09       0.51 r
+  n[63] (net)                    3                   0.00       0.51 r
+  NLIN/U161/Z (AN2D0)                      0.03      0.07       0.58 r
+  n[127] (net)                   1                   0.00       0.58 r
+  LIN/U29/Z (XOR4D0)                       0.06      0.20       0.78 f
+  LIN/n44 (net)                  1                   0.00       0.78 f
+  LIN/U27/Z (XOR3D0)                       0.03      0.20       0.98 f
+  LIN/n43 (net)                  1                   0.00       0.98 f
+  LIN/U26/Z (XOR3D0)                       0.04      0.12       1.10 f
+  LIN/n42 (net)                  1                   0.00       1.10 f
+  LIN/U25/Z (XOR3D0)                       0.04      0.19       1.29 f
+  LIN/n40 (net)                  1                   0.00       1.29 f
+  LIN/U24/Z (XOR4D0)                       0.06      0.17       1.47 f
+  LIN/n38 (net)                  1                   0.00       1.47 f
+  LIN/U23/Z (XOR4D0)                       0.06      0.22       1.68 f
+  LIN/n37 (net)                  1                   0.00       1.68 f
+  LIN/U22/Z (XOR3D0)                       0.04      0.20       1.88 f
+  LIN/n35 (net)                  1                   0.00       1.88 f
+  LIN/U21/Z (XOR4D0)                       0.06      0.17       2.06 f
+  LIN/n33 (net)                  1                   0.00       2.06 f
+  LIN/U20/Z (XOR4D0)                       0.06      0.22       2.27 f
+  LIN/n32 (net)                  1                   0.00       2.27 f
+  LIN/U19/Z (XOR3D0)                       0.04      0.20       2.47 f
+  LIN/n30 (net)                  1                   0.00       2.47 f
+  LIN/U18/Z (XOR4D0)                       0.06      0.17       2.64 f
+  LIN/n28 (net)                  1                   0.00       2.64 f
+  LIN/U17/Z (XOR4D0)                       0.06      0.22       2.86 f
+  LIN/n27 (net)                  1                   0.00       2.86 f
+  LIN/U16/Z (XOR3D0)                       0.04      0.20       3.06 f
+  LIN/n25 (net)                  1                   0.00       3.06 f
+  LIN/U15/Z (XOR4D0)                       0.06      0.17       3.23 f
+  LIN/n23 (net)                  1                   0.00       3.23 f
+  LIN/U14/Z (XOR4D0)                       0.06      0.22       3.45 f
+  LIN/n22 (net)                  1                   0.00       3.45 f
+  LIN/U13/Z (XOR3D0)                       0.04      0.20       3.65 f
+  LIN/n20 (net)                  1                   0.00       3.65 f
+  LIN/U12/Z (XOR4D0)                       0.06      0.17       3.82 f
+  LIN/n18 (net)                  1                   0.00       3.82 f
+  LIN/U11/Z (XOR4D0)                       0.06      0.22       4.04 f
+  LIN/n17 (net)                  1                   0.00       4.04 f
+  LIN/U10/Z (XOR3D0)                       0.04      0.20       4.24 f
+  LIN/n15 (net)                  1                   0.00       4.24 f
+  LIN/U9/Z (XOR4D0)                        0.06      0.17       4.41 f
+  LIN/n13 (net)                  1                   0.00       4.41 f
+  LIN/U8/Z (XOR4D0)                        0.06      0.22       4.63 f
+  LIN/n12 (net)                  1                   0.00       4.63 f
+  LIN/U7/Z (XOR3D0)                        0.04      0.20       4.83 f
+  LIN/n10 (net)                  1                   0.00       4.83 f
+  LIN/U6/Z (XOR4D0)                        0.06      0.17       5.00 f
+  LIN/n8 (net)                   1                   0.00       5.00 f
+  LIN/U5/Z (XOR4D0)                        0.06      0.22       5.22 f
+  LIN/n7 (net)                   1                   0.00       5.22 f
+  LIN/U4/Z (XOR3D0)                        0.04      0.20       5.42 f
+  LIN/n5 (net)                   1                   0.00       5.42 f
+  LIN/U3/Z (XOR4D0)                        0.06      0.17       5.59 f
+  LIN/n3 (net)                   1                   0.00       5.59 f
+  LIN/U2/Z (XOR4D0)                        0.06      0.22       5.81 f
+  LIN/n2 (net)                   1                   0.00       5.81 f
+  LIN/U1/Z (XOR4D0)                        0.05      0.17       5.97 f
+  s[7] (net)                     1                   0.00       5.97 f
+  s[7] (out)                               0.05      0.00       5.97 f
+  data arrival time                                             5.97
+  ------------------------------------------------------------------------------------------
+  (Path is unconstrained)
+
+
+1

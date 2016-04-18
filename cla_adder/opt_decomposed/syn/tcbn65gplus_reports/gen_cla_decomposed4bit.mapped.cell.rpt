@@ -1,0 +1,38 @@
+ 
+****************************************
+Report : cell
+Design : gen_cla_decomposed
+Version: K-2015.06-SP5-1
+Date   : Mon Apr 18 15:16:32 2016
+****************************************
+
+Attributes:
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+LIN/U1                    XOR3D0          tcbn65gpluswc   6.120000  
+LIN/U2                    XOR4D0          tcbn65gpluswc   9.000000  
+LIN/U3                    XOR4D0          tcbn65gpluswc   9.000000  
+LIN/U4                    XOR3D0          tcbn65gpluswc   6.120000  
+LIN/U5                    XOR3D0          tcbn65gpluswc   6.120000  
+LIN/U6                    XOR3D0          tcbn65gpluswc   6.120000  
+LIN/U7                    XOR2D0          tcbn65gpluswc   3.600000  
+NLIN/U1                   AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U2                   AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U3                   AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U4                   AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U5                   AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U6                   AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U7                   AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U8                   AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U9                   AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U10                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U11                  AN2D0           tcbn65gpluswc   2.160000  
+--------------------------------------------------------------------------------
+Total 18 cells                                            69.840000
+1

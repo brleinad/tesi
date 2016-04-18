@@ -105,10 +105,11 @@ write -f verilog -hierarchy -output ${RESULTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}
 #################################################################################
 # Generate Final Reports
 #################################################################################
+ungroup -all -flatten 
 
 #report_qor > ${REPORTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.qor.rpt
 report_timing -transition_time -nets -attributes -nosplit > ${REPORTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.timing.rpt
-#report_reference -nosplit > ${REPORTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.reference.rpt
+report_reference -nosplit > ${REPORTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.reference.rpt
 report_area -nosplit > ${REPORTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.area.rpt
 report_cell -nosplit > ${REPORTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.cell.rpt
 
@@ -118,7 +119,6 @@ report_cell -nosplit > ${REPORTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.cell.
 report_power -nosplit > ${REPORTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.power.rpt
 #report_clock_gating -nosplit > ${REPORTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.clock_gating.rpt
 
-ungroup -all -flatten 
 change_names -rules verilog -hierarchy  -log_changes dumy.log
 #change_name -rules collpse -hier -vebose
 

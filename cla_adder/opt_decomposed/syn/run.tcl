@@ -2,7 +2,7 @@ set DESIGN_NAME "gen_cla_decomposed"
 #set DESIGN_NAME "gen_nonlinear_part"
 #set DESIGN_NAME "gen_linear_part"
 #set VARIANT_NAME "bit_generated"
-set VARIANT_NAME "16bit"
+set VARIANT_NAME "17bit"
 
 #set RTL_SOURCE_FILES "../gen_nonlinear_part.v" 
 #set RTL_SOURCE_FILES "../gen_linear_part.v" 

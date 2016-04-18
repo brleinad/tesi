@@ -1,0 +1,102 @@
+ 
+****************************************
+Report : cell
+Design : gen_cla_decomposed
+Version: K-2015.06-SP5-1
+Date   : Mon Apr 18 15:22:03 2016
+****************************************
+
+Attributes:
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+LIN/U1                    XOR4D0          tcbn65gpluswc   9.000000  
+LIN/U2                    XOR3D0          tcbn65gpluswc   6.120000  
+LIN/U3                    XOR4D0          tcbn65gpluswc   9.000000  
+LIN/U4                    XOR4D0          tcbn65gpluswc   9.000000  
+LIN/U5                    XOR3D0          tcbn65gpluswc   6.120000  
+LIN/U6                    XOR3D0          tcbn65gpluswc   6.120000  
+LIN/U7                    XOR3D0          tcbn65gpluswc   6.120000  
+LIN/U8                    XOR4D0          tcbn65gpluswc   9.000000  
+LIN/U9                    XOR4D0          tcbn65gpluswc   9.000000  
+LIN/U10                   XOR4D0          tcbn65gpluswc   9.000000  
+LIN/U11                   XOR4D0          tcbn65gpluswc   9.000000  
+LIN/U12                   XOR4D0          tcbn65gpluswc   9.000000  
+LIN/U13                   XOR4D0          tcbn65gpluswc   9.000000  
+LIN/U14                   XOR3D0          tcbn65gpluswc   6.120000  
+LIN/U15                   XOR3D0          tcbn65gpluswc   6.120000  
+LIN/U16                   XOR4D0          tcbn65gpluswc   9.000000  
+LIN/U17                   XOR4D0          tcbn65gpluswc   9.000000  
+LIN/U18                   XOR4D0          tcbn65gpluswc   9.000000  
+LIN/U19                   XOR3D0          tcbn65gpluswc   6.120000  
+LIN/U20                   XOR4D0          tcbn65gpluswc   9.000000  
+LIN/U21                   XOR4D0          tcbn65gpluswc   9.000000  
+LIN/U22                   XOR3D0          tcbn65gpluswc   6.120000  
+LIN/U23                   XOR3D0          tcbn65gpluswc   6.120000  
+LIN/U24                   XOR3D0          tcbn65gpluswc   6.120000  
+LIN/U25                   XOR2D0          tcbn65gpluswc   3.600000  
+NLIN/U1                   AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U2                   AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U3                   AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U4                   AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U5                   AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U6                   AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U7                   AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U8                   AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U9                   AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U10                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U11                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U12                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U13                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U14                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U15                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U16                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U17                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U18                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U19                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U20                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U21                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U22                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U23                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U24                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U25                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U26                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U27                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U28                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U29                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U30                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U31                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U32                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U33                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U34                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U35                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U36                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U37                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U38                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U39                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U40                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U41                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U42                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U43                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U44                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U45                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U46                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U47                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U48                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U49                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U50                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U51                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U52                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U53                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U54                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U55                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U56                  AN2D0           tcbn65gpluswc   2.160000  
+NLIN/U57                  AN2D0           tcbn65gpluswc   2.160000  
+--------------------------------------------------------------------------------
+Total 82 cells                                            313.920004
+1
