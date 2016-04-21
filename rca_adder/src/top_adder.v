@@ -9,23 +9,23 @@
 //
 //include "globals.vh"
 module top_adder (A, B, S);
+`include "constants.v"
 
-parameter N = 32; //number of bits
-input [N-1:0] A,B;
-output [N:0] S;
+input [NBIT-1:0] A,B;
+output [NBIT-1:0] S;
 
-wire [N-4:0] r;
-wire [N*3-6:0] nl;
+wire [NBIT-4:0] r;
+wire [NBIT*3-6:0] nl;
 
 //connecting the non-linear part
-non_lin_part NL_part ( 
-   .a (A[N-2:0]),
-   .b (B[N-2:0]),
+nonlin_part NL_PART ( 
+   .a (A[NBIT-2:0]),
+   .b (B[NBIT-2:0]),
    .r (r),
    .nl (nl)
 );
 //connecting the linear part
-lin_adder L_part ( 
+lin_part L_PART ( 
    .a (A),
    .b (B),
    .nl (nl),

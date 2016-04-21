@@ -7,14 +7,13 @@
 //
 //
 //'include "globals.vh"
-module non_lin_part( a,b,r,nl);
+module nonlin_part( a,b,r,nl);
+`include "constants.v"
 
-parameter N = 32; //number of bits
-
-input  [N-2:0] a,b; //the same inputs as for the overall adder
+input  [NBIT-2:0] a,b; //the same inputs as for the overall adder
 //Note that the MSB of the inputs is not used in the non-linear part
-input [N-4:0] r; //the input from the linear part (semi-carry outs)
-output [3*N-6:0] nl; //The non-linear output
+input [NBIT-4:0] r; //the input from the linear part (semi-carry outs)
+output [3*NBIT-6:0] nl; //The non-linear output
 //for each bit there are 3 non-linear outputs except for the first two bits
 
 wire r1;
@@ -33,11 +32,11 @@ and ( nl[6], a[2], r[0]);*/
 //can be generalized from now on as follows:
 genvar i;
 generate
-for (i=2 ; i<N-1 ; i=i+1)
+for (i=2 ; i<NBIT-1 ; i=i+1)
 begin : AND_LOOP
-        and (nl[i*3-2], a[i], b[i]);
-        and (nl[i*3-1], a[i], r[i-2]);
-        and (nl[i*3], b[i], r[i-2]);
+    and (nl[i*3-2], a[i], b[i]);
+    and (nl[i*3-1], a[i], r[i-2]);
+    and (nl[i*3], b[i], r[i-2]);
 end
 endgenerate
 
