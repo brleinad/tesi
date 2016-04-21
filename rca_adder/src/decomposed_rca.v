@@ -8,7 +8,7 @@
 //author: Daniel Rodas Bautista
 //
 //include "globals.vh"
-module top_adder (A, B, S);
+module decomposed_rca (A, B, S);
 `include "constants.v"
 
 input [NBIT-1:0] A,B;

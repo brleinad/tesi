@@ -5,13 +5,13 @@
 //author: Daniel Rodas Bautista
 //
 `timescale 1 ns / 10 ps
-module tb_top_adder(); 
+module tb_decomposed_rca(); 
 `include "constants.v"
  
   reg  [NBIT-1:0]  a   ; 
   reg  [NBIT-1:0]  b   ; 
   wire  [NBIT-1:0]  s   ; 
-  top_adder  
+  decomposed_rca  
    DUT  ( 
        .A (a ) ,
       .B (b ) ,
