@@ -1,0 +1,4 @@
+.design_name nand2
+.inputnames  a b
+.outputnames c
+c = (b' + a') ;

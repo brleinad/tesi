@@ -1,4 +1,4 @@
-BIT=7
+BIT=6
 
 add:
 	perl decomposed_adder_generator.pl $(BIT) > gen_cla_decomposed.v

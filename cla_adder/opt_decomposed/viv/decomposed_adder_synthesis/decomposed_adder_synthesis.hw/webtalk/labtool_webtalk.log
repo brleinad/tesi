@@ -1,0 +1,9 @@
+
+****** Webtalk v2015.1 (64-bit)
+  **** SW Build 1215546 on Mon Apr 27 19:07:21 MDT 2015
+  **** IP Build 1209967 on Tue Apr 21 11:39:20 MDT 2015
+    ** Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+
+source /user/erasmus/danielrb/Dropbox/Tesi/cla_adder/opt_decomposed/viv/decomposed_adder_synthesis/decomposed_adder_synthesis.hw/webtalk/labtool_webtalk.tcl -notrace
+INFO: [Common 17-186] '/user/erasmus/danielrb/Dropbox/Tesi/cla_adder/opt_decomposed/viv/decomposed_adder_synthesis/decomposed_adder_synthesis.hw/webtalk/usage_statistics_ext_labtool.xml' has been successfully sent to Xilinx on Thu Apr 21 12:11:51 2016. For additional details about this file, please refer to the WebTalk help file at /cadtools/xilinx/2010/Vivado/Vivado/2015.1/doc/webtalk_introduction.html.
+INFO: [Common 17-206] Exiting Webtalk at Thu Apr 21 12:11:51 2016...

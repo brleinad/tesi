@@ -1,0 +1,25 @@
+ 
+****************************************
+Report : reference
+Design : nand2
+Version: K-2015.06-SP5-1
+Date   : Mon Apr 18 16:27:22 2016
+****************************************
+
+Attributes:
+    b - black box (unknown)
+   bo - allows boundary optimization
+    d - dont_touch
+   mo - map_only
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    s - synthetic operator
+    u - contains unmapped logic
+
+Reference          Library       Unit Area   Count    Total Area   Attributes
+-----------------------------------------------------------------------------
+CKND2D0            tcbn65gpluswc     1.440000       1     1.440000
+-----------------------------------------------------------------------------
+Total 1 references                                      1.440000
+1

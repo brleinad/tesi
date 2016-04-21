@@ -1,16 +1,1 @@
- 
-****************************************
-check_design summary:
-Version:     K-2015.06-SP5-1
-Date:        Mon Apr 18 16:15:54 2016
-****************************************
-
-                   Name                                            Total
---------------------------------------------------------------------------------
-Inputs/Outputs                                                      2
-    Unconnected ports (LINT-28)                                     2
---------------------------------------------------------------------------------
-
-Warning: In design 'gen_nonlinear_part', port 'a[16]' is not connected to any nets. (LINT-28)
-Warning: In design 'gen_nonlinear_part', port 'b[16]' is not connected to any nets. (LINT-28)
 1
