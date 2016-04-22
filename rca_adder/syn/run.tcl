@@ -1,5 +1,6 @@
 set DESIGN_NAME "decomposed_rca"
-set VARIANT_NAME "4bit"
+set VARIANT_NAME "6bit"
+
 
 set RTL_SOURCE_FILES "../src/lin_part.v ../src/nonlin_part.v ../src/decomposed_rca.v"
 

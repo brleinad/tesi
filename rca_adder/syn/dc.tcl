@@ -105,13 +105,14 @@ write -f verilog -hierarchy -output ${RESULTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}
 #################################################################################
 # Generate Final Reports
 #################################################################################
-ungroup -all -flatten 
 
 #report_qor > ${REPORTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.qor.rpt
 report_timing -transition_time -nets -attributes -nosplit > ${REPORTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.timing.rpt
-report_reference -nosplit > ${REPORTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.reference.rpt
 report_area -nosplit > ${REPORTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.area.rpt
 report_cell -nosplit > ${REPORTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.cell.rpt
+
+ungroup -all -flatten 
+report_reference -nosplit > ${REPORTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.reference.rpt
 
 # Use SAIF file for power analysis
 #read_saif -auto_map_names -input ${DESIGN_NAME}${VARIANT_NAME}.saif -instance < DESIGN_INSTANCE > -verbose

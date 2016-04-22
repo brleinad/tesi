@@ -1,0 +1,33 @@
+ 
+****************************************
+Report : cell
+Design : decomposed_rca
+Version: K-2015.06-SP5-1
+Date   : Fri Apr 22 14:59:33 2016
+****************************************
+
+Attributes:
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+L_PART/U1                 XOR3D0          tcbn65gpluswc   6.120000  
+L_PART/U2                 XOR3D0          tcbn65gpluswc   6.120000  
+L_PART/U3                 XOR3D0          tcbn65gpluswc   6.120000  
+L_PART/U4                 XOR3D0          tcbn65gpluswc   6.120000  
+L_PART/U5                 XOR2D0          tcbn65gpluswc   3.600000  
+L_PART/U6                 XOR3D0          tcbn65gpluswc   6.120000  
+NL_PART/U1                AN2D0           tcbn65gpluswc   2.160000  
+NL_PART/U2                AN2D0           tcbn65gpluswc   2.160000  
+NL_PART/U3                AN2D0           tcbn65gpluswc   2.160000  
+NL_PART/U4                AN2D0           tcbn65gpluswc   2.160000  
+NL_PART/U5                AN2D0           tcbn65gpluswc   2.160000  
+NL_PART/U6                AN2D0           tcbn65gpluswc   2.160000  
+NL_PART/U7                AN2D0           tcbn65gpluswc   2.160000  
+--------------------------------------------------------------------------------
+Total 13 cells                                            49.320000
+1

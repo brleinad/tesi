@@ -1,1 +1,1 @@
-parameter NBIT = 4; //number of bits
+parameter NBIT = 6; //number of bits
