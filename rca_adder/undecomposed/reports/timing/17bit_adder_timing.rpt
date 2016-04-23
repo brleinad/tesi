@@ -1,0 +1,51 @@
+Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2015.4 (lin64) Build 1412921 Wed Nov 18 09:44:32 MST 2015
+| Date         : Sat Apr 23 21:33:42 2016
+| Host         : localhost.localdomain running 64-bit CentOS Linux release 7.2.1511 (Core)
+| Command      : report_timing -file ./reports/timing/17bit_adder_timing.rpt
+| Design       : adder
+| Device       : 7z010-clg400
+| Speed File   : -1  PRODUCTION 1.11 2014-09-11
+-------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack:                    inf
+  Source:                 a[0]
+                            (input port)
+  Destination:            s[13]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        9.911ns  (logic 4.960ns (50.041%)  route 4.952ns (49.959%))
+  Logic Levels:           7  (CARRY4=4 IBUF=1 LUT2=1 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    T19                                               0.000     0.000 r  a[0] (IN)
+                         net (fo=0)                   0.000     0.000    a[0]
+    T19                  IBUF (Prop_ibuf_I_O)         0.950     0.950 r  a_IBUF[0]_inst/O
+                         net (fo=2, routed)           1.929     2.879    a_IBUF[0]
+    SLICE_X43Y22         LUT2 (Prop_lut2_I0_O)        0.124     3.003 r  s_OBUF[3]_inst_i_5/O
+                         net (fo=1, routed)           0.000     3.003    s_OBUF[3]_inst_i_5_n_0
+    SLICE_X43Y22         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532     3.535 r  s_OBUF[3]_inst_i_1/CO[3]
+                         net (fo=1, routed)           0.000     3.535    s_OBUF[3]_inst_i_1_n_0
+    SLICE_X43Y23         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     3.649 r  s_OBUF[7]_inst_i_1/CO[3]
+                         net (fo=1, routed)           0.000     3.649    s_OBUF[7]_inst_i_1_n_0
+    SLICE_X43Y24         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     3.763 r  s_OBUF[11]_inst_i_1/CO[3]
+                         net (fo=1, routed)           0.009     3.772    s_OBUF[11]_inst_i_1_n_0
+    SLICE_X43Y25         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.334     4.106 r  s_OBUF[15]_inst_i_1/O[1]
+                         net (fo=1, routed)           3.013     7.119    s_OBUF[13]
+    G20                  OBUF (Prop_obuf_I_O)         2.792     9.911 r  s_OBUF[13]_inst/O
+                         net (fo=0)                   0.000     9.911    s[13]
+    G20                                                               r  s[13] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+
+
+

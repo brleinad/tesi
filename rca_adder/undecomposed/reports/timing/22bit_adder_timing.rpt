@@ -1,0 +1,57 @@
+Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2015.4 (lin64) Build 1412921 Wed Nov 18 09:44:32 MST 2015
+| Date         : Sat Apr 23 21:36:45 2016
+| Host         : localhost.localdomain running 64-bit CentOS Linux release 7.2.1511 (Core)
+| Command      : report_timing -file ./reports/timing/22bit_adder_timing.rpt
+| Design       : adder
+| Device       : 7z010-clg400
+| Speed File   : -1  PRODUCTION 1.11 2014-09-11
+-------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack:                    inf
+  Source:                 a[0]
+                            (input port)
+  Destination:            s[21]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        10.518ns  (logic 5.198ns (49.418%)  route 5.320ns (50.582%))
+  Logic Levels:           9  (CARRY4=6 IBUF=1 LUT2=1 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    T19                                               0.000     0.000 r  a[0] (IN)
+                         net (fo=0)                   0.000     0.000    a[0]
+    T19                  IBUF (Prop_ibuf_I_O)         0.950     0.950 r  a_IBUF[0]_inst/O
+                         net (fo=2, routed)           2.196     3.146    a_IBUF[0]
+    SLICE_X43Y26         LUT2 (Prop_lut2_I0_O)        0.124     3.270 r  s_OBUF[3]_inst_i_5/O
+                         net (fo=1, routed)           0.000     3.270    s_OBUF[3]_inst_i_5_n_0
+    SLICE_X43Y26         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532     3.802 r  s_OBUF[3]_inst_i_1/CO[3]
+                         net (fo=1, routed)           0.000     3.802    s_OBUF[3]_inst_i_1_n_0
+    SLICE_X43Y27         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     3.916 r  s_OBUF[7]_inst_i_1/CO[3]
+                         net (fo=1, routed)           0.000     3.916    s_OBUF[7]_inst_i_1_n_0
+    SLICE_X43Y28         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     4.030 r  s_OBUF[11]_inst_i_1/CO[3]
+                         net (fo=1, routed)           0.000     4.030    s_OBUF[11]_inst_i_1_n_0
+    SLICE_X43Y29         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     4.144 r  s_OBUF[15]_inst_i_1/CO[3]
+                         net (fo=1, routed)           0.000     4.144    s_OBUF[15]_inst_i_1_n_0
+    SLICE_X43Y30         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     4.258 r  s_OBUF[19]_inst_i_1/CO[3]
+                         net (fo=1, routed)           0.000     4.258    s_OBUF[19]_inst_i_1_n_0
+    SLICE_X43Y31         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.334     4.592 r  s_OBUF[21]_inst_i_1/O[1]
+                         net (fo=1, routed)           3.124     7.716    s_OBUF[21]
+    H18                  OBUF (Prop_obuf_I_O)         2.802    10.518 r  s_OBUF[21]_inst/O
+                         net (fo=0)                   0.000    10.518    s[21]
+    H18                                                               r  s[21] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+
+
+

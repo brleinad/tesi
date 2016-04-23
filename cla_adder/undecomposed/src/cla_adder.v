@@ -1,17 +1,15 @@
 module cla_adder(
-	a,b,s,cin,cout
+	a,b,s
 );
 
-parameter NBIT = 11;
+`include constants.v
 
 input [NBIT-1:0] a,b;
-input cin;
 
 output reg [NBIT-1:0] s;
-output reg cout;
 
 reg [NBIT-1:0] g, p;
-reg [NBIT:0] c;
+reg [NBIT-1:0] c;
 
 integer i, j, k;
 
@@ -19,25 +17,11 @@ always @(a,b,cin)
 begin
         g = a & b;
         p = a ^ b;
-        c[0] = cin;
-/*
         c[0] = 0;
-	c[1] = g[0];
-	t(0) = 0;
-*/
-        for (i = 0; i < NBIT; i = i + 1)
+        for (i = 0; i < NBIT - 1; i = i + 1)
         begin
-/*
-		for (j = 1; j <= 2**i; j = j + 1)
-			t(i+j-1) =  g(i-1) | (p(i-1) & t(i+j-2);
-		end
-
-                c[i+1] = g[i] | (p[i] & t[i+j-1]) ;
-*/
                 c[i+1] = g[i] | (p[i] & c[i]) ;
         end
-
-        //cout = c[NBIT];
 
         s = p ^ c[NBIT-1:0];
 end

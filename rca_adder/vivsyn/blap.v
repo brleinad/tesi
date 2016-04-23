@@ -1,0 +1,1 @@
+paramter NBIT = 1

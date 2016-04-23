@@ -1,0 +1,43 @@
+Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2015.4 (lin64) Build 1412921 Wed Nov 18 09:44:32 MST 2015
+| Date         : Sat Apr 23 21:02:35 2016
+| Host         : localhost.localdomain running 64-bit unknown
+| Command      : report_timing -file ./reports/timing/7bit_decomposed_rca_timing.rpt
+| Design       : decomposed_rca
+| Device       : 7z010-clg400
+| Speed File   : -1  PRODUCTION 1.11 2014-09-11
+-------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack:                    inf
+  Source:                 A[2]
+                            (input port)
+  Destination:            S[6]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        8.729ns  (logic 4.166ns (47.728%)  route 4.563ns (52.272%))
+  Logic Levels:           5  (IBUF=1 LUT5=2 LUT6=1 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    P15                                               0.000     0.000 r  A[2] (IN)
+                         net (fo=0)                   0.000     0.000    A[2]
+    P15                  IBUF (Prop_ibuf_I_O)         0.936     0.936 r  A_IBUF[2]_inst/O
+                         net (fo=2, routed)           1.564     2.500    A_IBUF[2]
+    SLICE_X43Y8          LUT6 (Prop_lut6_I5_O)        0.124     2.624 r  S_OBUF[4]_inst_i_2/O
+                         net (fo=3, routed)           0.557     3.181    S_OBUF[4]_inst_i_2_n_0
+    SLICE_X43Y11         LUT5 (Prop_lut5_I0_O)        0.124     3.305 r  S_OBUF[6]_inst_i_2/O
+                         net (fo=2, routed)           0.433     3.738    S_OBUF[6]_inst_i_2_n_0
+    SLICE_X43Y11         LUT5 (Prop_lut5_I1_O)        0.150     3.888 r  S_OBUF[6]_inst_i_1/O
+                         net (fo=1, routed)           2.009     5.896    S_OBUF[6]
+    T20                  OBUF (Prop_obuf_I_O)         2.832     8.729 r  S_OBUF[6]_inst/O
+                         net (fo=0)                   0.000     8.729    S[6]
+    T20                                                               r  S[6] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+
+
+

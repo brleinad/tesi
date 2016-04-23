@@ -1,0 +1,380 @@
+/*
+
+Vivado v2015.4 (64-bit)
+SW Build 1412921 on Wed Nov 18 09:44:32 MST 2015
+Process ID: 4240
+
+Current time: 	4/23/16 7:31:23 PM BST
+Time zone: 	Greenwich Mean Time (Europe/London)
+
+OS: CentOS Linux release 7.2.1511 (Core) 
+Version: 3.10.0-327.4.5.el7.x86_64
+Architecture: amd64
+Available processors (cores): 4
+
+DISPLAY: :0
+Screen size: 1366x768
+Screen resolution (DPI): 96
+Available screens: 1
+Default font: family=Dialog,name=Dialog,style=plain,size=12
+
+Java version: 	1.8.0_45 64-bit
+Java home: 	/home/Xilinx/Vivado/2015.4/tps/lnx64/jre
+
+User name: 	danielrb
+User home directory: /home/danielrb
+User working directory: /home/danielrb/Dropbox/tesi/rca_adder/vivsyn
+User country: 	US
+User language: 	en
+User locale: 	en_US
+
+Vivado preferences path: /home/danielrb/.Xilinx/Vivado/2015.4/vivado.ini
+Vivado layouts directory: /home/danielrb/.Xilinx/Vivado/2015.4/layouts
+
+GUI allocated memory:	193 MB
+GUI max memory:		3,052 MB
+Engine allocated memory: 4,823 MB
+
+*/
+
+// TclEventType: START_GUI
+// Tcl Message: start_gui 
+// [GUI Memory]: 26 MB (+24534kb) [00:00:05]
+// [Engine Memory]: 4,821 MB (+4903848kb) [00:00:05]
+selectButton(PAResourceEtoH.GettingStartedView_CREATE_NEW_PROJECT, "Create New Project"); // l:JideButton (JPanel:JComponent, cq:JFrame)
+// Run Command: PAResourceCommand.PACommandNames_NEW_PROJECT
+// [GUI Memory]: 38 MB (+11908kb) [00:00:07]
+// [GUI Memory]: 53 MB (+13408kb) [00:00:08]
+// [GUI Memory]: 61 MB (+5097kb) [00:00:08]
+// h:g (cq:JFrame): New Project: addNotify
+// HMemoryUtils.trashcanNow. Engine heap size: 4,852 MB. GUI used memory: 24 MB. Current time: 4/23/16 7:31:25 PM BST
+selectButton("NEXT", "Next >"); // JButton:AbstractButton (ButtonPanel:JPanel, h:g)
+// Elapsed time: 35 seconds
+setText(PAResourceOtoP.ProjectNameChooser_PROJECT_NAME, "rca_decomposed"); // ao:JTextField (JPanel:JComponent, h:g)
+selectButton("NEXT", "Next >"); // JButton:AbstractButton (ButtonPanel:JPanel, h:g)
+selectCheckBox(PAResourceItoN.NewProjectWizard_DO_NOT_SPECIFY_SOURCES_AT_THIS_TIME, "Do not specify sources at this time", false); // h:JCheckBox (a:H, h:g): FALSE
+selectButton("NEXT", "Next >"); // JButton:AbstractButton (ButtonPanel:JPanel, h:g)
+selectButton(PAResourceQtoS.SrcChooserPanel_ADD_OR_CREATE_SOURCE_FILE, "Add"); // y:JideButton (CommandBar:DockableBar, h:g)
+selectMenuItem(PAResourceQtoS.SrcChooserPanel_ADD_HDL_AND_NETLIST_FILES_TO_YOUR_PROJECT, "Add Files..."); // ae:JMenuItem (al:JPopupMenu, h:g)
+// Elapsed time: 28 seconds
+String[] filenames31467 = {"/home/danielrb/Dropbox/tesi/rca_adder/src/constants.v", "/home/danielrb/Dropbox/tesi/rca_adder/src/decomposed_rca.v", "/home/danielrb/Dropbox/tesi/rca_adder/src/lin_part.v", "/home/danielrb/Dropbox/tesi/rca_adder/src/nonlin_part.v"};
+setFileChooser(filenames31467);
+selectCheckBox(PAResourceQtoS.SrcChooserPanel_SCAN_AND_ADD_RTL_INCLUDE_FILES_INTO, "Scan and add RTL include files into project", true); // h:JCheckBox (JPanel:JComponent, h:g): TRUE
+selectCheckBox(PAResourceQtoS.SrcChooserPanel_MAKE_LOCAL_COPY_OF_THESE_FILES_INTO, "Copy sources into project", false); // h:JCheckBox (JPanel:JComponent, h:g): FALSE
+// Elapsed time: 11 seconds
+selectButton("NEXT", "Next >"); // JButton:AbstractButton (ButtonPanel:JPanel, h:g)
+selectButton("NEXT", "Next >"); // JButton:AbstractButton (ButtonPanel:JPanel, h:g)
+selectButton("NEXT", "Next >"); // JButton:AbstractButton (ButtonPanel:JPanel, h:g)
+// HMemoryUtils.trashcanNow. Engine heap size: 4,870 MB. GUI used memory: 24 MB. Current time: 4/23/16 7:33:15 PM BST
+// Elapsed time: 14 seconds
+setText("PAResourceOtoP.PartChooser_PARTS_SEARCH_FIELD", (String) null); // OverlayTextField:JTextField (DefaultOverlayable:JPanel, h:g)
+selectLabel(PAResourceOtoP.PartChooser_FILTER, "Filter"); // b:JLabel (JPanel:JComponent, h:g)
+selectTable(PAResourceOtoP.PartChooser_PARTS, "xc7k480tffg901-2L ; 901 ; 955 ; 1920 ; 597200 ; 0 ; 28 ; 380 ; 298600 ; 8 ; 1 ; 85 ; 0 ; 85 ; C ; 1.03 ; 0.97 ; 0.97 ; 28", 427, "955", 2); // N:v (JViewport:JComponent, h:g)
+selectButton(PAResourceOtoP.PartChooser_BOARDS, "Boards"); // l:s (JPanel:JComponent, h:g): TRUE
+selectTable(PAResourceOtoP.PartChooser_BOARDS, "Zybo ; digilentinc.com ; B.3 ; xc7z010clg400-1 ; 400 ; 1.0 ; 60 ; 80 ; 35200 ; 0 ; 0 ; 100 ; 17600 ; 2 ; 0 ; 85 ; 0 ; 85 ; C ; 1.05 ; 0.95 ; 0.95 ; 0", 0, "Zybo", 0); // N:v (JViewport:JComponent, h:g)
+selectButton("NEXT", "Next >"); // JButton:AbstractButton (ButtonPanel:JPanel, h:g)
+// bF:g (h:g):  Create Project : addNotify
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_ADD
+// TclEventType: RUN_CURRENT
+// TclEventType: PROJECT_NEW
+// Tcl Message: create_project rca_decomposed /home/danielrb/Dropbox/tesi/rca_adder/vivsyn/rca_decomposed -part xc7z010clg400-1 
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1704] No user IP repositories specified 
+// TclEventType: PROJECT_NEW
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/home/Xilinx/Vivado/2015.4/data/ip'. 
+// HMemoryUtils.trashcanNow. Engine heap size: 4,918 MB. GUI used memory: 28 MB. Current time: 4/23/16 7:33:46 PM BST
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// TclEventType: BOARD_MODIFIED
+// Tcl Message: set_property board_part digilentinc.com:zybo:part0:1.0 [current_project] 
+// TclEventType: PROJECT_CHANGE
+// Tcl Message: set_property simulator_language Verilog [current_project] 
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: add_files -norecurse -scan_for_includes {/home/danielrb/Dropbox/tesi/rca_adder/src/decomposed_rca.v /home/danielrb/Dropbox/tesi/rca_adder/src/constants.v /home/danielrb/Dropbox/tesi/rca_adder/src/lin_part.v /home/danielrb/Dropbox/tesi/rca_adder/src/nonlin_part.v} 
+selectButton("FINISH", "Finish"); // JButton:AbstractButton (ButtonPanel:JPanel, h:g)
+// 'g' command handler elapsed time: 142 seconds
+dismissDialog("Create Project"); // bF:g (h:g)
+// TclEventType: DG_UPDATE_GRAPH
+dismissDialog("New Project"); // h:g (cq:JFrame)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// Tcl Message: update_compile_order -fileset sources_1 
+// Tcl Message: update_compile_order -fileset sources_1 
+// Tcl Message: update_compile_order -fileset sim_1 
+// TclEventType: DG_UPDATE_GRAPH
+// Elapsed time: 10 seconds
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, decomposed_rca (decomposed_rca.v)]", 2); // y:k (I:JPanel, cq:JFrame)
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Verilog Header]", 1); // y:k (I:JPanel, cq:JFrame)
+collapseTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Verilog Header]", 1); // y:k (I:JPanel, cq:JFrame)
+selectButton(PAResourceCommand.PACommandNames_RUN_SYNTHESIS, "run_synthesis"); // y:JideButton (CommandBar:DockableBar, cq:JFrame)
+// Run Command: PAResourceCommand.PACommandNames_RUN_SYNTHESIS
+// bF:g (cq:JFrame):  Starting Design Runs : addNotify
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs synth_1 -jobs 2 
+// Tcl Message: [Sat Apr 23 19:34:06 2016] Launched synth_1... Run output will be captured here: /home/danielrb/Dropbox/tesi/rca_adder/vivsyn/rca_decomposed/rca_decomposed.runs/synth_1/runme.log 
+dismissDialog("Starting Design Runs"); // bF:g (cq:JFrame)
+// TclEventType: RUN_COMPLETED
+// X:G (cq:JFrame): Synthesis Completed: addNotify
+// Elapsed time: 26 seconds
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a:JButton (JPanel:JComponent, X:G)
+// Run Command: PAResourceCommand.PACommandNames_RUN_IMPLEMENTATION
+// bF:g (cq:JFrame):  Starting Design Runs : addNotify
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs impl_1 -jobs 2 
+// Tcl Message: [Sat Apr 23 19:34:32 2016] Launched impl_1... Run output will be captured here: /home/danielrb/Dropbox/tesi/rca_adder/vivsyn/rca_decomposed/rca_decomposed.runs/impl_1/runme.log 
+dismissDialog("Starting Design Runs"); // bF:g (cq:JFrame)
+// HMemoryUtils.trashcanNow. Engine heap size: 4,933 MB. GUI used memory: 29 MB. Current time: 4/23/16 7:34:35 PM BST
+// TclEventType: RUN_STEP_COMPLETED
+// Elapsed time: 20 seconds
+selectTab(PAResourceOtoP.ProjectSummaryUtilizationPanel_PROJECT_SUMMARY_UTILIZATION_PANEL_TABBED, PAResourceOtoP.ProjectSummaryUtilizationPanel_TABLE, "Table", 1); // g:g (f:JPanel, cq:JFrame)
+// TclEventType: RUN_COMPLETED
+// X:G (cq:JFrame): Implementation Completed: addNotify
+// Elapsed time: 21 seconds
+selectRadioButton(PAResourceCommand.PACommandNames_REPORTS_WINDOW, "View Reports"); // a:JRadioButton (JPanel:JComponent, X:G)
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a:JButton (JPanel:JComponent, X:G)
+// Run Command: PAResourceCommand.PACommandNames_REPORTS_WINDOW
+dismissDialog("Implementation Completed"); // X:G (cq:JFrame)
+selectTab(PAResourceOtoP.ProjectSummaryUtilizationPanel_PROJECT_SUMMARY_UTILIZATION_PANEL_TABBED, PAResourceOtoP.ProjectSummaryUtilizationPanel_TABLE, "Table", 1); // g:g (f:JPanel, cq:JFrame)
+// Elapsed time: 28 seconds
+selectTab((HResource) null, (HResource) null, "Tcl Console", 0); // FrameContainer:JideTabbedPane (ContainerContainer:JideSplitPane, cq:JFrame)
+// [GUI Memory]: 65 MB (+1729kb) [00:04:34]
+// Elapsed time: 37 seconds
+setText(RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, (String) null); // ap:ao (R:ak, cq:JFrame)
+// [GUI Memory]: 69 MB (+410kb) [00:05:09]
+// Elapsed time: 104 seconds
+selectMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // U:JideMenu (CommandMenuBar:CommandBar, cq:JFrame)
+selectMenu(PAResourceItoN.MainMenuMgr_OPEN_RECENT_PROJECT, "Open Recent Project"); // aa:JMenu (JPopupMenu:JComponent, cq:JFrame)
+selectMenu(PAResourceItoN.MainMenuMgr_OPEN_RECENT_FILE, "Open Recent File"); // aa:JMenu (JPopupMenu:JComponent, cq:JFrame)
+selectMenu(PAResourceItoN.MainMenuMgr_OPEN_RECENT_FILE, "Open Recent File"); // aa:JMenu (JPopupMenu:JComponent, cq:JFrame)
+dismissMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // U:JideMenu (CommandMenuBar:CommandBar, cq:JFrame)
+selectTab((HResource) null, (HResource) null, "Reports", 3); // FrameContainer:JideTabbedPane (ContainerContainer:JideSplitPane, cq:JFrame)
+selectTab((HResource) null, (String) null, (HResource) null, "Reports", 3, true, false); // FrameContainer:JideTabbedPane (ContainerContainer:JideSplitPane, cq:JFrame) - Popup Trigger
+selectTab((HResource) null, (HResource) null, "Reports", 3); // FrameContainer:JideTabbedPane (ContainerContainer:JideSplitPane, cq:JFrame)
+// Elapsed time: 20 seconds
+selectTreeTable(PAResourceEtoH.ExpReportTreePanel_EXP_REPORT_TREE_TABLE, "Power Report ; Sat Apr 23 19:35:07 BST 2016 ; 7136 ; ", 26, "Power Report", 0, false); // z:aw (JViewport:JComponent, cq:JFrame)
+expandTreeTable(PAResourceEtoH.ExpReportTreePanel_EXP_REPORT_TREE_TABLE, "Power Report ; Sat Apr 23 19:35:07 BST 2016 ; 7136 ; ", 26); // z:aw (JViewport:JComponent, cq:JFrame)
+selectTreeTable(PAResourceEtoH.ExpReportTreePanel_EXP_REPORT_TREE_TABLE, "Power Report ; Sat Apr 23 19:35:07 BST 2016 ; 7136 ; ", 26, "Power Report", 0, false, false, false, false, false, true); // z:aw (JViewport:JComponent, cq:JFrame) - Double Click
+selectCodeEditor("Power Report - impl_1", 172, 139); // F:bl (JPanel:JComponent, cq:JFrame)
+selectCodeEditor("Power Report - impl_1", 172, 139); // F:bl (JPanel:JComponent, cq:JFrame)
+selectCodeEditor("Power Report - impl_1", 172, 139); // F:bl (JPanel:JComponent, cq:JFrame)
+selectCodeEditor("Power Report - impl_1", 172, 139); // F:bl (JPanel:JComponent, cq:JFrame)
+selectCodeEditor("Power Report - impl_1", 172, 139); // F:bl (JPanel:JComponent, cq:JFrame)
+selectCodeEditor("Power Report - impl_1", 172, 139); // F:bl (JPanel:JComponent, cq:JFrame)
+selectCodeEditor("Power Report - impl_1", 172, 139); // F:bl (JPanel:JComponent, cq:JFrame)
+selectCodeEditor("Power Report - impl_1", 172, 139); // F:bl (JPanel:JComponent, cq:JFrame)
+selectCodeEditor("Power Report - impl_1", 172, 139); // F:bl (JPanel:JComponent, cq:JFrame)
+selectCodeEditor("Power Report - impl_1", 172, 139); // F:bl (JPanel:JComponent, cq:JFrame)
+selectCodeEditor("Power Report - impl_1", 172, 139); // F:bl (JPanel:JComponent, cq:JFrame)
+selectCodeEditor("Power Report - impl_1", 172, 139); // F:bl (JPanel:JComponent, cq:JFrame)
+selectCodeEditor("Power Report - impl_1", 172, 139); // F:bl (JPanel:JComponent, cq:JFrame)
+selectCodeEditor("Power Report - impl_1", 172, 139); // F:bl (JPanel:JComponent, cq:JFrame)
+selectCodeEditor("Power Report - impl_1", 172, 139); // F:bl (JPanel:JComponent, cq:JFrame)
+selectCodeEditor("Power Report - impl_1", 172, 139); // F:bl (JPanel:JComponent, cq:JFrame)
+selectCodeEditor("Power Report - impl_1", 172, 139); // F:bl (JPanel:JComponent, cq:JFrame)
+selectCodeEditor("Power Report - impl_1", 172, 139); // F:bl (JPanel:JComponent, cq:JFrame)
+selectCodeEditor("Power Report - impl_1", 172, 139); // F:bl (JPanel:JComponent, cq:JFrame)
+selectCodeEditor("Power Report - impl_1", 172, 139); // F:bl (JPanel:JComponent, cq:JFrame)
+selectCodeEditor("Power Report - impl_1", 172, 139); // F:bl (JPanel:JComponent, cq:JFrame)
+selectCodeEditor("Power Report - impl_1", 172, 139); // F:bl (JPanel:JComponent, cq:JFrame)
+selectCodeEditor("Power Report - impl_1", 172, 139); // F:bl (JPanel:JComponent, cq:JFrame)
+selectCodeEditor("Power Report - impl_1", 172, 139); // F:bl (JPanel:JComponent, cq:JFrame)
+selectCodeEditor("Power Report - impl_1", 172, 139); // F:bl (JPanel:JComponent, cq:JFrame)
+selectCodeEditor("Power Report - impl_1", 172, 139); // F:bl (JPanel:JComponent, cq:JFrame)
+// Elapsed time: 50 seconds
+selectCodeEditor("Power Report - impl_1", 104, 175); // F:bl (JPanel:JComponent, cq:JFrame)
+// [GUI Memory]: 77 MB (+5136kb) [00:08:52]
+// HMemoryUtils.trashcanNow. Engine heap size: 4,966 MB. GUI used memory: 30 MB. Current time: 4/23/16 7:40:15 PM BST
+// Elapsed time: 20 seconds
+selectTab((HResource) null, (HResource) null, "Tcl Console", 0); // FrameContainer:JideTabbedPane (ContainerContainer:JideSplitPane, cq:JFrame)
+// Elapsed time: 202 seconds
+selectMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // U:JideMenu (CommandMenuBar:CommandBar, cq:JFrame)
+selectMenu(PAResourceItoN.MainMenuMgr_OPEN_RECENT_PROJECT, "Open Recent Project"); // aa:JMenu (JPopupMenu:JComponent, cq:JFrame)
+selectMenuItem(PAResourceCommand.PACommandNames_WRITE_PROJECT_TCL, "Write Project Tcl..."); // ae:JMenuItem (JPopupMenu:JComponent, cq:JFrame)
+dismissMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // U:JideMenu (CommandMenuBar:CommandBar, cq:JFrame)
+// Run Command: PAResourceCommand.PACommandNames_WRITE_PROJECT_TCL
+// aJ:x (cq:JFrame): Write Project to Tcl: addNotify
+// Elapsed time: 38 seconds
+setText(PAResourceTtoZ.WriteProjectTclDialog_PROJECT_TCL_FILE, "rca_script_viv"); // ao:JTextField (aK:ak, aJ:x)
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a:JButton (JPanel:JComponent, aJ:x)
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a:JButton (JPanel:JComponent, aJ:x)
+// Tcl Command: 'write_project_tcl -no_copy_sources {/home/danielrb/Dropbox/tesi/rca_adder/vivsyn/rca_script_viv.tcl}'
+// 'r' command handler elapsed time: 39 seconds
+dismissDialog("Write Project to Tcl"); // aJ:x (cq:JFrame)
+// TclEventType: PROJECT_CHANGE
+// bF:g (cq:JFrame):  Write Project to Tcl : addNotify
+// Tcl Message: write_project_tcl -no_copy_sources {/home/danielrb/Dropbox/tesi/rca_adder/vivsyn/rca_script_viv.tcl} 
+// TclEventType: PROJECT_CHANGE
+// Tcl Message:  
+// Tcl Message:  
+dismissDialog("Write Project to Tcl"); // bF:g (cq:JFrame)
+selectButton("PAResourceTtoZ.WriteProjectTclDialog_SUCCESSFULLY_GENERATED_FILE_WOULD_YOU_Yes", "Yes"); // JButton:AbstractButton (JPanel:JComponent, T:JDialog)
+// Elapsed time: 28 seconds
+selectCodeEditor("rca_script_viv.tcl", 327, 167); // F:bl (JPanel:JComponent, cq:JFrame)
+// Elapsed time: 47 seconds
+selectCodeEditor("rca_script_viv.tcl", 328, 165); // F:bl (JPanel:JComponent, cq:JFrame)
+// Elapsed time: 22 seconds
+selectCodeEditor("rca_script_viv.tcl", 317, 161); // F:bl (JPanel:JComponent, cq:JFrame)
+// Elapsed time: 25 seconds
+selectMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // U:JideMenu (CommandMenuBar:CommandBar, cq:JFrame)
+selectMenu(PAResourceItoN.MainMenuMgr_OPEN_RECENT_PROJECT, "Open Recent Project"); // aa:JMenu (JPopupMenu:JComponent, cq:JFrame)
+selectMenu(PAResourceItoN.MainMenuMgr_EXPORT, "Export"); // aa:JMenu (JPopupMenu:JComponent, cq:JFrame)
+selectMenu(PAResourceItoN.MainMenuMgr_EXPORT, "Export"); // aa:JMenu (JPopupMenu:JComponent, cq:JFrame)
+selectMenu(PAResourceItoN.MainMenuMgr_EXPORT, "Export"); // aa:JMenu (JPopupMenu:JComponent, cq:JFrame)
+selectMenu(PAResourceItoN.MainMenuMgr_EXPORT, "Export"); // aa:JMenu (JPopupMenu:JComponent, cq:JFrame)
+// Elapsed time: 11 seconds
+dismissMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // U:JideMenu (CommandMenuBar:CommandBar, cq:JFrame)
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 169, 49); // dy:J (JPanel:JComponent, cq:JFrame)
+selectTab((HResource) null, (HResource) null, "Log", 2); // FrameContainer:JideTabbedPane (ContainerContainer:JideSplitPane, cq:JFrame)
+selectTab((HResource) null, (HResource) null, "Tcl Console", 0); // FrameContainer:JideTabbedPane (ContainerContainer:JideSplitPane, cq:JFrame)
+// Elapsed time: 30 seconds
+setText(RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, "report_", true); // ap:ao (R:ak, cq:JFrame)
+applyEnter(RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, "report_power"); // ap:ao (R:ak, cq:JFrame)
+// Tcl Command: 'report_power'
+// Tcl Message: report_power 
+// Tcl Message: ERROR: [Common 17-53] User Exception: No open design. Please open an elaborated, synthesized or implemented design before executing this command. 
+// Elapsed time: 28 seconds
+setText(RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, "open", true); // ap:ao (R:ak, cq:JFrame)
+applyEnter(RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, "open_report"); // ap:ao (R:ak, cq:JFrame)
+// Tcl Command: 'open_report'
+// Tcl Message: open_report 
+// Tcl Message: ERROR: [Common 17-53] User Exception: No open design. Please open an elaborated, synthesized or implemented design before executing this command. 
+// Elapsed time: 20 seconds
+setText(RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, (String) null); // ap:ao (R:ak, cq:JFrame)
+// Elapsed time: 30 seconds
+closeView(PAResourceOtoP.PAViews_CODE, "Code"); // D:b
+selectCodeEditor("Power Report - impl_1", 143, 40); // F:bl (JPanel:JComponent, cq:JFrame)
+selectMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // U:JideMenu (CommandMenuBar:CommandBar, cq:JFrame)
+selectMenu(PAResourceItoN.MainMenuMgr_OPEN_RECENT_PROJECT, "Open Recent Project"); // aa:JMenu (JPopupMenu:JComponent, cq:JFrame)
+selectMenu(PAResourceItoN.MainMenuMgr_OPEN_RECENT_FILE, "Open Recent File"); // aa:JMenu (JPopupMenu:JComponent, cq:JFrame)
+selectMenu(PAResourceItoN.MainMenuMgr_EXPORT, "Export"); // aa:JMenu (JPopupMenu:JComponent, cq:JFrame)
+selectMenu(PAResourceItoN.MainMenuMgr_EXPORT, "Export"); // aa:JMenu (JPopupMenu:JComponent, cq:JFrame)
+selectMenuItem(RDIResourceCommand.RDICommands_SAVE_FILE_AS, "Save File As..."); // ae:JMenuItem (JPopupMenu:JComponent, cq:JFrame)
+dismissMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // U:JideMenu (CommandMenuBar:CommandBar, cq:JFrame)
+// Elapsed time: 18 seconds
+dismissFileChooser();
+selectMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // U:JideMenu (CommandMenuBar:CommandBar, cq:JFrame)
+selectMenu(PAResourceItoN.MainMenuMgr_OPEN_RECENT_PROJECT, "Open Recent Project"); // aa:JMenu (JPopupMenu:JComponent, cq:JFrame)
+selectMenu(PAResourceItoN.MainMenuMgr_OPEN_RECENT_FILE, "Open Recent File"); // aa:JMenu (JPopupMenu:JComponent, cq:JFrame)
+selectMenuItem(RDIResourceCommand.RDICommands_SAVE_FILE_AS, "Save File As..."); // ae:JMenuItem (JPopupMenu:JComponent, cq:JFrame)
+dismissMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // U:JideMenu (CommandMenuBar:CommandBar, cq:JFrame)
+setFileChooser("/home/danielrb/Dropbox/tesi/rca_adder/vivsyn/reports/decomposed_rca_power_routed.rpt");
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 152, 160); // dy:J (JPanel:JComponent, cq:JFrame)
+selectTab((HResource) null, (HResource) null, "Log", 2); // FrameContainer:JideTabbedPane (ContainerContainer:JideSplitPane, cq:JFrame)
+selectTab((HResource) null, (HResource) null, "Tcl Console", 0); // FrameContainer:JideTabbedPane (ContainerContainer:JideSplitPane, cq:JFrame)
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 57, 138); // dy:J (JPanel:JComponent, cq:JFrame)
+// Elapsed time: 24 seconds
+setText(RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, "write_"); // ap:ao (R:ak, cq:JFrame)
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 279, 82); // dy:J (JPanel:JComponent, cq:JFrame)
+selectCodeEditor("Power Report - impl_1", 53, 177, false, false, false, true, false); // F:bl (JPanel:JComponent, cq:JFrame) - Popup Trigger
+selectMenuItem(PAResourceOtoP.PACodeView_SAVE_AS, "Save File As..."); // ae:JMenuItem (al:JPopupMenu, cq:JFrame)
+// Elapsed time: 15 seconds
+setFileChooser("/home/danielrb/Dropbox/tesi/rca_adder/vivsyn/reports/4bit_decomposed_rca_power_routed.rpt");
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 277, 152); // dy:J (JPanel:JComponent, cq:JFrame)
+// Elapsed time: 475 seconds
+setText(RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, "report_utilization"); // ap:ao (R:ak, cq:JFrame)
+// Elapsed time: 17 seconds
+setText(RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, "report_utilization -file"); // ap:ao (R:ak, cq:JFrame)
+// Elapsed time: 12 seconds
+setText(RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, "report_utilization -file"); // ap:ao (R:ak, cq:JFrame)
+// Elapsed time: 243 seconds
+setText(RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, "report_timing_summary", true); // ap:ao (R:ak, cq:JFrame)
+// Tcl Command: 'report_timing_summary'
+// Tcl Message: report_timing_summary 
+// Tcl Message: ERROR: [Common 17-53] User Exception: No open design. Please open an elaborated, synthesized or implemented design before executing this command. 
+setText(RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, (String) null); // ap:ao (R:ak, cq:JFrame)
+// Elapsed time: 35 seconds
+setText(RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, "synth_design", true); // ap:ao (R:ak, cq:JFrame)
+// Tcl Command: 'synth_design'
+// Tcl Message: synth_design 
+// Tcl Message: Command: synth_design Starting synth_design Using part: xc7z010clg400-1 Top: decomposed_rca Attempting to get a license for feature 'Synthesis' and/or device 'xc7z010' 
+// Tcl Message: INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z010' 
+// Tcl Message: INFO: Launching helper process for spawning children vivado processes INFO: Helper process launched with PID 6951  
+// bF:g (cq:JFrame):  Tcl Command Line : addNotify
+// Tcl Message: --------------------------------------------------------------------------------- 
+// Tcl Message: Starting Synthesize : Time (s): cpu = 00:02:34 ; elapsed = 00:32:29 . Memory (MB): peak = 5940.691 ; gain = 5010.449 ; free physical = 535 ; free virtual = 2051 
+// Tcl Message: --------------------------------------------------------------------------------- 
+// Tcl Message: INFO: [Synth 8-638] synthesizing module 'decomposed_rca' [/home/danielrb/Dropbox/tesi/rca_adder/src/decomposed_rca.v:11] 
+// Tcl Message: 	Parameter NBIT bound to: 4 - type: integer  
+// Tcl Message: INFO: [Synth 8-638] synthesizing module 'nonlin_part' [/home/danielrb/Dropbox/tesi/rca_adder/src/nonlin_part.v:10] 
+// Tcl Message: 	Parameter NBIT bound to: 4 - type: integer  
+// Tcl Message: INFO: [Synth 8-256] done synthesizing module 'nonlin_part' (1#1) [/home/danielrb/Dropbox/tesi/rca_adder/src/nonlin_part.v:10] INFO: [Synth 8-638] synthesizing module 'lin_part' [/home/danielrb/Dropbox/tesi/rca_adder/src/lin_part.v:7] 
+// Tcl Message: 	Parameter NBIT bound to: 4 - type: integer  
+// Tcl Message: INFO: [Synth 8-256] done synthesizing module 'lin_part' (2#1) [/home/danielrb/Dropbox/tesi/rca_adder/src/lin_part.v:7] INFO: [Synth 8-256] done synthesizing module 'decomposed_rca' (3#1) [/home/danielrb/Dropbox/tesi/rca_adder/src/decomposed_rca.v:11] 
+// Tcl Message: --------------------------------------------------------------------------------- 
+// Tcl Message: Finished Synthesize : Time (s): cpu = 00:02:35 ; elapsed = 00:32:30 . Memory (MB): peak = 5970.949 ; gain = 5040.707 ; free physical = 504 ; free virtual = 2020 
+// Tcl Message: --------------------------------------------------------------------------------- 
+// Tcl Message: INFO: [Device 21-403] Loading part xc7z010clg400-1 
+// Tcl Message: --------------------------------------------------------------------------------- Finished RTL Optimization Phase 2 : Time (s): cpu = 00:02:35 ; elapsed = 00:32:30 . Memory (MB): peak = 5986.953 ; gain = 5056.711 ; free physical = 495 ; free virtual = 2011 ---------------------------------------------------------------------------------  Report RTL Partitions:  +-+--------------+------------+----------+ | |RTL Partition |Replication |Instances | +-+--------------+------------+----------+ +-+--------------+------------+----------+ 
+// Tcl Message: No constraint files found. 
+// HMemoryUtils.trashcanNow. Engine heap size: 5,086 MB. GUI used memory: 31 MB. Current time: 4/23/16 8:03:45 PM BST
+// Tcl Message: No constraint files found. 
+// Tcl Message: No constraint files found. 
+// TclEventType: FLOORPLAN_MODIFY
+// TclEventType: DESIGN_NEW
+// HMemoryUtils.trashcanNow. Engine heap size: 5,235 MB. GUI used memory: 31 MB. Current time: 4/23/16 8:03:48 PM BST
+// [Engine Memory]: 5,237 MB (+183677kb) [00:32:31]
+// TclEventType: DESIGN_NEW
+// TclEventType: HFED_INIT_ROUTE_STORAGE_COMPLETED
+// Xgd.load filename: /home/Xilinx/Vivado/2015.4/data/parts/xilinx/zynq/devint/zynq/xc7z010/xc7z010.xgd; ZipEntry: xc7z010_detail.xgd elapsed time: 1s
+// [GUI Memory]: 83 MB (+1474kb) [00:32:33]
+// [GUI Memory]: 89 MB (+1669kb) [00:32:33]
+// Device: addNotify
+// TclEventType: CURR_DESIGN_SET
+// Tcl Message: INFO: [Project 1-571] Translating synthesized netlist INFO: [Netlist 29-17] Analyzing 8 Unisim elements for replacement INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds INFO: [Project 1-570] Preparing netlist for logic optimization INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s). INFO: [Project 1-111] Unisim Transformation Summary: No Unisim elements were transformed.  
+// Device view-level: 0.0
+// Tcl Message: INFO: [Common 17-83] Releasing license: Synthesis 
+// Tcl Message: 15 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered. synth_design completed successfully 
+// Tcl Message: synth_design: Time (s): cpu = 00:00:22 ; elapsed = 00:00:13 . Memory (MB): peak = 6309.184 ; gain = 384.879 ; free physical = 197 ; free virtual = 1719 
+// Tcl Message: design_1 
+// Elapsed time: 14 seconds
+dismissDialog("Tcl Command Line"); // bF:g (cq:JFrame)
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 484, 75); // dy:J (JPanel:JComponent, cq:JFrame)
+// RouteApi::initDelayMediator elapsed time: 10.1s
+// [Engine Memory]: 5,582 MB (+87151kb) [00:32:48]
+// HMemoryUtils.trashcanNow. Engine heap size: 5,603 MB. GUI used memory: 58 MB. Current time: 4/23/16 8:04:05 PM BST
+// HMemoryUtils.trashcanNow. Engine heap size: 5,625 MB. GUI used memory: 58 MB. Current time: 4/23/16 8:04:14 PM BST
+// Elapsed time: 24 seconds
+setText(RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, "report_timing_summary", true); // ap:ao (R:ak, cq:JFrame)
+// Tcl Command: 'report_timing_summary'
+// TclEventType: TIMING_RESULTS_STALE
+// Tcl Message: report_timing_summary 
+// Tcl Message: INFO: [Timing 38-35] Done setting XDC timing constraints. INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: min_max. INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 4 CPUs 
+setText(RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, "report_timing", true); // ap:ao (R:ak, cq:JFrame)
+// Tcl Command: 'report_timing'
+// Tcl Message: report_timing 
+// Tcl Message: INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: max. INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 4 CPUs INFO: [Timing 38-78] ReportTimingParams: -max_paths 1 -nworst 1 -delay_type max -sort_by slack. 
+// HMemoryUtils.trashcanNow. Engine heap size: 5,637 MB. GUI used memory: 58 MB. Current time: 4/23/16 8:04:29 PM BST
+// Elapsed time: 27 seconds
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 665, 133); // dy:J (JPanel:JComponent, cq:JFrame)
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 665, 134); // dy:J (JPanel:JComponent, cq:JFrame)
+// HMemoryUtils.trashcanNow. Engine heap size: 5,654 MB. GUI used memory: 58 MB. Current time: 4/23/16 8:05:05 PM BST
+// Elapsed time: 163 seconds
+selectTab((HResource) null, (HResource) null, "Log", 2); // FrameContainer:JideTabbedPane (ContainerContainer:JideSplitPane, cq:JFrame)
+// Elapsed time: 34 seconds
+selectTab((HResource) null, (HResource) null, "Tcl Console", 0); // FrameContainer:JideTabbedPane (ContainerContainer:JideSplitPane, cq:JFrame)
+// HMemoryUtils.trashcanNow. Engine heap size: 5,671 MB. GUI used memory: 58 MB. Current time: 4/23/16 8:08:20 PM BST
+// Elapsed time: 53 seconds
+setText(RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, "create_project rca_decomposed /home/danielrb/Dropbox/tesi/rca_adder/vivsyn/rca_decomposed -part xc7z010clg400-1"); // ap:ao (R:ak, cq:JFrame)
+// Elapsed time: 13 seconds
+selectMenuItem(RDIResourceCommand.RDICommands_COPY, "Copy"); // ae:JMenuItem (al:JPopupMenu, Popup:JWindow)
+setText(RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, "create_project rca_decomposed /home/danielrb/Dropbox/tesi/rca_adder/vivsyn/rca_decomposed -part xc7z010clg400-1"); // ap:ao (R:ak, cq:JFrame)
+// Elapsed time: 35 seconds
+setText(RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, "create_project rca_decomposed /home/danielrb/Dropbox/tesi/rca_adder/vivsyn/rca_decomposed -part xc7z010clg400-1"); // ap:ao (R:ak, cq:JFrame)
