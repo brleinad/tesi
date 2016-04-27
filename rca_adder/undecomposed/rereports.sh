@@ -1,6 +1,6 @@
 #!/bin/bash
 
-design=adder
+design=cla_adder
 reportsDir=./reports
 
 for bit in {4..32}
@@ -10,7 +10,7 @@ do
 
     echo "
     read_verilog [glob ./constants.v]
-    read_verilog [glob ./adder.v]
+    read_verilog [glob ./cla_adder.v]
 
     synth_design -top $design -part xc7z010clg400-1
     opt_design
