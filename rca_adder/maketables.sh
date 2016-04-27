@@ -10,4 +10,4 @@ $HERE/get_timing.pl >> ./data/tables.tex
 echo "\\end{document}" >> ./data/tables.tex
 
 cd data
-pdflatex tables.tex & evince tables.pdf &
+#pdflatex tables.tex & evince tables.pdf &

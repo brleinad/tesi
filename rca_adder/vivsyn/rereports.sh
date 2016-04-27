@@ -3,7 +3,7 @@
 design=decomposed_rca
 reportsDir=./reports
 
-for bit in {4..32}
+for bit in {14..18}
 do
     echo "doing bit ${bit}..."
     echo "parameter NBIT = ${bit};" > ../src/constants.v

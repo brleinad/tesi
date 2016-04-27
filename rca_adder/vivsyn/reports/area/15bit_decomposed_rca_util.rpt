@@ -1,7 +1,7 @@
 Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2015.4 (lin64) Build 1412921 Wed Nov 18 09:44:32 MST 2015
-| Date         : Sat Apr 23 21:07:39 2016
+| Date         : Wed Apr 27 10:48:13 2016
 | Host         : localhost.localdomain running 64-bit CentOS Linux release 7.2.1511 (Core)
 | Command      : report_utilization -file ./reports/area/15bit_decomposed_rca_util.rpt
 | Design       : decomposed_rca

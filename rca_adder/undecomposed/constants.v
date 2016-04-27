@@ -1,1 +1,1 @@
-parameter NBIT = 8;
+parameter NBIT = 32;

@@ -1,0 +1,45 @@
+Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2015.4 (lin64) Build 1412921 Wed Nov 18 09:44:32 MST 2015
+| Date         : Wed Apr 27 10:23:51 2016
+| Host         : localhost.localdomain running 64-bit CentOS Linux release 7.2.1511 (Core)
+| Command      : report_timing -file ./reports/timing/21bit_cla_adder_timing.rpt
+| Design       : cla_adder
+| Device       : 7z010-clg400
+| Speed File   : -1  PRODUCTION 1.11 2014-09-11
+-------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack:                    inf
+  Source:                 a[4]
+                            (input port)
+  Destination:            s[20]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        12.106ns  (logic 4.092ns (33.800%)  route 8.014ns (66.200%))
+  Logic Levels:           6  (IBUF=1 LUT5=1 LUT6=3 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    N17                                               0.000     0.000 f  a[4] (IN)
+                         net (fo=0)                   0.000     0.000    a[4]
+    N17                  IBUF (Prop_ibuf_I_O)         0.981     0.981 f  a_IBUF[4]_inst/O
+                         net (fo=6, routed)           2.304     3.285    a_IBUF[4]
+    SLICE_X42Y26         LUT6 (Prop_lut6_I1_O)        0.124     3.409 f  s_OBUF[9]_inst_i_3/O
+                         net (fo=2, routed)           0.728     4.137    s_OBUF[9]_inst_i_3_n_0
+    SLICE_X43Y26         LUT5 (Prop_lut5_I4_O)        0.124     4.261 f  s_OBUF[20]_inst_i_10/O
+                         net (fo=4, routed)           1.211     5.471    s_OBUF[20]_inst_i_10_n_0
+    SLICE_X42Y32         LUT6 (Prop_lut6_I4_O)        0.124     5.595 r  s_OBUF[20]_inst_i_2/O
+                         net (fo=4, routed)           0.988     6.583    s_OBUF[20]_inst_i_2_n_0
+    SLICE_X43Y37         LUT6 (Prop_lut6_I0_O)        0.124     6.707 r  s_OBUF[20]_inst_i_1/O
+                         net (fo=1, routed)           2.784     9.491    s_OBUF[20]
+    F19                  OBUF (Prop_obuf_I_O)         2.615    12.106 r  s_OBUF[20]_inst/O
+                         net (fo=0)                   0.000    12.106    s[20]
+    F19                                                               r  s[20] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+
+
+

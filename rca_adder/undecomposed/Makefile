@@ -1,3 +1,3 @@
 cla: *.v
-	iverilog cla_adder.v tb_cla_adder.v -o cla
+	iverilog normal_adder.v tb_normal_adder.v -o adder 
 
