@@ -1,0 +1,22 @@
+ 
+****************************************
+Report : cell
+Design : decomposed_rca
+Version: K-2015.06-SP5-1
+Date   : Fri Apr 29 13:22:29 2016
+****************************************
+
+Attributes:
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+L_PART                    lin_part                        107.639998 h
+NL_PART                   nonlin_part                     54.000002 h
+--------------------------------------------------------------------------------
+Total 2 cells                                             161.640000
+1

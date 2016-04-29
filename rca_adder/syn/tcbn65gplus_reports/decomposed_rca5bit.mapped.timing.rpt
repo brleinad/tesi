@@ -9,7 +9,7 @@ Report : timing
         -transition_time
 Design : decomposed_rca
 Version: K-2015.06-SP5-1
-Date   : Fri Apr 22 15:03:41 2016
+Date   : Fri Apr 29 13:21:57 2016
 ****************************************
 
 Operating Conditions: WCCOM   Library: tcbn65gpluswc
@@ -22,7 +22,9 @@ Wire Load Model Mode: segmented
 
   Des/Clust/Port     Wire Load Model       Library
   ------------------------------------------------
+  lin_part           ZeroWireload          tcbn65gpluswc
   decomposed_rca     ZeroWireload          tcbn65gpluswc
+  nonlin_part        ZeroWireload          tcbn65gpluswc
 
 Attributes:
     d - dont_touch
@@ -37,22 +39,46 @@ Attributes:
   input external delay                               0.00       0.00 r
   A[0] (in)                                0.00      0.00       0.00 r
   A[0] (net)                     2                   0.00       0.00 r
+  NL_PART/a[0] (nonlin_part)                         0.00       0.00 r
+  NL_PART/a[0] (net)                                 0.00       0.00 r
   NL_PART/U10/Z (AN2D0)                    0.06      0.07       0.07 r
-  nl[0] (net)                    3                   0.00       0.07 r
+  NL_PART/nl[0] (net)            3                   0.00       0.07 r
   NL_PART/U7/Z (AN2D0)                     0.03      0.07       0.14 r
-  nl[3] (net)                    1                   0.00       0.14 r
+  NL_PART/nl[3] (net)            1                   0.00       0.14 r
+  NL_PART/nl[3] (nonlin_part)                        0.00       0.14 r
+  nl[3] (net)                                        0.00       0.14 r
+  L_PART/nl[3] (lin_part)                            0.00       0.14 r
+  L_PART/nl[3] (net)                                 0.00       0.14 r
   L_PART/U8/Z (XOR3D0)                     0.06      0.20       0.34 r
-  r[0] (net)                     3                   0.00       0.34 r
+  L_PART/r[0] (net)              3                   0.00       0.34 r
+  L_PART/r[0] (lin_part)                             0.00       0.34 r
+  r[0] (net)                                         0.00       0.34 r
+  NL_PART/r[0] (nonlin_part)                         0.00       0.34 r
+  NL_PART/r[0] (net)                                 0.00       0.34 r
   NL_PART/U4/Z (AN2D0)                     0.03      0.07       0.40 r
-  nl[6] (net)                    1                   0.00       0.40 r
+  NL_PART/nl[6] (net)            1                   0.00       0.40 r
+  NL_PART/nl[6] (nonlin_part)                        0.00       0.40 r
+  nl[6] (net)                                        0.00       0.40 r
+  L_PART/nl[6] (lin_part)                            0.00       0.40 r
+  L_PART/nl[6] (net)                                 0.00       0.40 r
   L_PART/U7/Z (XOR3D0)                     0.06      0.20       0.60 r
-  r[1] (net)                     3                   0.00       0.60 r
+  L_PART/r[1] (net)              3                   0.00       0.60 r
+  L_PART/r[1] (lin_part)                             0.00       0.60 r
+  r[1] (net)                                         0.00       0.60 r
+  NL_PART/r[1] (nonlin_part)                         0.00       0.60 r
+  NL_PART/r[1] (net)                                 0.00       0.60 r
   NL_PART/U2/Z (AN2D0)                     0.05      0.08       0.68 r
-  nl[8] (net)                    1                   0.00       0.68 r
+  NL_PART/nl[8] (net)            1                   0.00       0.68 r
+  NL_PART/nl[8] (nonlin_part)                        0.00       0.68 r
+  nl[8] (net)                                        0.00       0.68 r
+  L_PART/nl[8] (lin_part)                            0.00       0.68 r
+  L_PART/nl[8] (net)                                 0.00       0.68 r
   L_PART/U2/Z (XOR3D0)                     0.03      0.18       0.87 f
   L_PART/n1 (net)                1                   0.00       0.87 f
   L_PART/U1/Z (XOR3D0)                     0.02      0.10       0.97 f
-  S[4] (net)                     1                   0.00       0.97 f
+  L_PART/s[4] (net)              1                   0.00       0.97 f
+  L_PART/s[4] (lin_part)                             0.00       0.97 f
+  S[4] (net)                                         0.00       0.97 f
   S[4] (out)                               0.02      0.00       0.97 f
   data arrival time                                             0.97
   ------------------------------------------------------------------------------------------

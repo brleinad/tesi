@@ -1,0 +1,27 @@
+ 
+****************************************
+Report : reference
+Design : decomposed_rca
+Version: K-2015.06-SP5-1
+Date   : Fri Apr 29 13:22:49 2016
+****************************************
+
+Attributes:
+    b - black box (unknown)
+   bo - allows boundary optimization
+    d - dont_touch
+   mo - map_only
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    s - synthetic operator
+    u - contains unmapped logic
+
+Reference          Library       Unit Area   Count    Total Area   Attributes
+-----------------------------------------------------------------------------
+AN2D0              tcbn65gpluswc     2.160000      34    73.440003
+XOR2D0             tcbn65gpluswc     3.600000       1     3.600000
+XOR3D0             tcbn65gpluswc     6.120000      23   140.759997
+-----------------------------------------------------------------------------
+Total 3 references                                    217.800000
+1

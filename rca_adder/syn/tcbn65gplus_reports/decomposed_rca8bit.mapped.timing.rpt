@@ -1,0 +1,124 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -nets
+        -max_paths 1
+        -transition_time
+Design : decomposed_rca
+Version: K-2015.06-SP5-1
+Date   : Fri Apr 29 13:22:16 2016
+****************************************
+
+Operating Conditions: WCCOM   Library: tcbn65gpluswc
+Wire Load Model Mode: segmented
+
+  Startpoint: A[0] (input port)
+  Endpoint: S[7] (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  lin_part           ZeroWireload          tcbn65gpluswc
+  decomposed_rca     ZeroWireload          tcbn65gpluswc
+  nonlin_part        ZeroWireload          tcbn65gpluswc
+
+Attributes:
+    d - dont_touch
+    u - dont_use
+   mo - map_only
+   so - size_only
+    i - ideal_net or ideal_network
+  inf - infeasible path
+
+  Point                        Fanout     Trans      Incr       Path      Attributes
+  ------------------------------------------------------------------------------------------
+  input external delay                               0.00       0.00 r
+  A[0] (in)                                0.00      0.00       0.00 r
+  A[0] (net)                     2                   0.00       0.00 r
+  NL_PART/a[0] (nonlin_part)                         0.00       0.00 r
+  NL_PART/a[0] (net)                                 0.00       0.00 r
+  NL_PART/U19/Z (AN2D0)                    0.06      0.07       0.07 r
+  NL_PART/nl[0] (net)            3                   0.00       0.07 r
+  NL_PART/U7/Z (AN2D0)                     0.03      0.07       0.14 r
+  NL_PART/nl[3] (net)            1                   0.00       0.14 r
+  NL_PART/nl[3] (nonlin_part)                        0.00       0.14 r
+  nl[3] (net)                                        0.00       0.14 r
+  L_PART/nl[3] (lin_part)                            0.00       0.14 r
+  L_PART/nl[3] (net)                                 0.00       0.14 r
+  L_PART/U14/Z (XOR3D0)                    0.06      0.20       0.34 r
+  L_PART/r[0] (net)              3                   0.00       0.34 r
+  L_PART/r[0] (lin_part)                             0.00       0.34 r
+  r[0] (net)                                         0.00       0.34 r
+  NL_PART/r[0] (nonlin_part)                         0.00       0.34 r
+  NL_PART/r[0] (net)                                 0.00       0.34 r
+  NL_PART/U4/Z (AN2D0)                     0.03      0.07       0.40 r
+  NL_PART/nl[6] (net)            1                   0.00       0.40 r
+  NL_PART/nl[6] (nonlin_part)                        0.00       0.40 r
+  nl[6] (net)                                        0.00       0.40 r
+  L_PART/nl[6] (lin_part)                            0.00       0.40 r
+  L_PART/nl[6] (net)                                 0.00       0.40 r
+  L_PART/U13/Z (XOR3D0)                    0.06      0.20       0.60 r
+  L_PART/r[1] (net)              3                   0.00       0.60 r
+  L_PART/r[1] (lin_part)                             0.00       0.60 r
+  r[1] (net)                                         0.00       0.60 r
+  NL_PART/r[1] (nonlin_part)                         0.00       0.60 r
+  NL_PART/r[1] (net)                                 0.00       0.60 r
+  NL_PART/U1/Z (AN2D0)                     0.03      0.07       0.67 r
+  NL_PART/nl[9] (net)            1                   0.00       0.67 r
+  NL_PART/nl[9] (nonlin_part)                        0.00       0.67 r
+  nl[9] (net)                                        0.00       0.67 r
+  L_PART/nl[9] (lin_part)                            0.00       0.67 r
+  L_PART/nl[9] (net)                                 0.00       0.67 r
+  L_PART/U12/Z (XOR3D0)                    0.06      0.20       0.87 r
+  L_PART/r[2] (net)              3                   0.00       0.87 r
+  L_PART/r[2] (lin_part)                             0.00       0.87 r
+  r[2] (net)                                         0.00       0.87 r
+  NL_PART/r[2] (nonlin_part)                         0.00       0.87 r
+  NL_PART/r[2] (net)                                 0.00       0.87 r
+  NL_PART/U16/Z (AN2D0)                    0.03      0.07       0.94 r
+  NL_PART/nl[12] (net)           1                   0.00       0.94 r
+  NL_PART/nl[12] (nonlin_part)                       0.00       0.94 r
+  nl[12] (net)                                       0.00       0.94 r
+  L_PART/nl[12] (lin_part)                           0.00       0.94 r
+  L_PART/nl[12] (net)                                0.00       0.94 r
+  L_PART/U11/Z (XOR3D0)                    0.06      0.20       1.14 r
+  L_PART/r[3] (net)              3                   0.00       1.14 r
+  L_PART/r[3] (lin_part)                             0.00       1.14 r
+  r[3] (net)                                         0.00       1.14 r
+  NL_PART/r[3] (nonlin_part)                         0.00       1.14 r
+  NL_PART/r[3] (net)                                 0.00       1.14 r
+  NL_PART/U13/Z (AN2D0)                    0.03      0.07       1.20 r
+  NL_PART/nl[15] (net)           1                   0.00       1.20 r
+  NL_PART/nl[15] (nonlin_part)                       0.00       1.20 r
+  nl[15] (net)                                       0.00       1.20 r
+  L_PART/nl[15] (lin_part)                           0.00       1.20 r
+  L_PART/nl[15] (net)                                0.00       1.20 r
+  L_PART/U10/Z (XOR3D0)                    0.06      0.20       1.40 r
+  L_PART/r[4] (net)              3                   0.00       1.40 r
+  L_PART/r[4] (lin_part)                             0.00       1.40 r
+  r[4] (net)                                         0.00       1.40 r
+  NL_PART/r[4] (nonlin_part)                         0.00       1.40 r
+  NL_PART/r[4] (net)                                 0.00       1.40 r
+  NL_PART/U11/Z (AN2D0)                    0.05      0.08       1.48 r
+  NL_PART/nl[17] (net)           1                   0.00       1.48 r
+  NL_PART/nl[17] (nonlin_part)                       0.00       1.48 r
+  nl[17] (net)                                       0.00       1.48 r
+  L_PART/nl[17] (lin_part)                           0.00       1.48 r
+  L_PART/nl[17] (net)                                0.00       1.48 r
+  L_PART/U2/Z (XOR3D0)                     0.03      0.18       1.66 f
+  L_PART/n1 (net)                1                   0.00       1.66 f
+  L_PART/U1/Z (XOR3D0)                     0.02      0.10       1.77 f
+  L_PART/s[7] (net)              1                   0.00       1.77 f
+  L_PART/s[7] (lin_part)                             0.00       1.77 f
+  S[7] (net)                                         0.00       1.77 f
+  S[7] (out)                               0.02      0.00       1.77 f
+  data arrival time                                             1.77
+  ------------------------------------------------------------------------------------------
+  (Path is unconstrained)
+
+
+1

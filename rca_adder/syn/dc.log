@@ -1,0 +1,299 @@
+                                        
+                           Design Compiler Graphical 
+                                 DC Ultra (TM)
+                                  DFTMAX (TM)
+                              Power Compiler (TM)
+                                 DesignWare (R)
+                                 DC Expert (TM)
+                               Design Vision (TM)
+                               HDL Compiler (TM)
+                               VHDL Compiler (TM)
+                                  DFT Compiler
+                               Design Compiler(R)
+                                        
+              Version K-2015.06-SP5-1 for linux64 - Feb 26, 2016 
+                                        
+                    Copyright (c) 1988 - 2016 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+            or distribution of this software is strictly prohibited.
+Initializing...
+Initializing gui preferences from file  /user/erasmus/danielrb/.synopsys_dv_prefs.tcl
+set DESIGN_NAME decomposed_rca
+decomposed_rca
+set VARIANT_NAME 16bit
+16bit
+set RTL_SOURCE_FILES ../src/constants.v ../src/lin_part.v ../src/nonlin_part.v ../src/decomposed_rca.v
+Error: wrong # args: should be "set varName ?newValue?"
+	Use error_info for more info. (CMD-013)
+# call a script which sets up Design Compiler (same as writing the same commands in .synopsys_dc.setup file)
+source dc_setup.tcl
+##########################################################################################
+# Variables common to all RM scripts
+# Script: common_setup.tcl
+# Version: B-2008.09-SP4 (Mar. 25, 2009)
+# Copyright (C) 2007, 2008, 2009 Synopsys All rights reserved.
+##########################################################################################
+#set DESIGN_NAME                   "too_large"  ;#  The name of the top-level design
+set DESIGN_REF_DATA_PATH          [sh pwd]  ;#  Absolute path prefix variable for library/design data.
+/user/erasmus/danielrb/Dropbox/Tesi/rca_adder/syn
+#  Use this variable to prefix the common absolute path to 
+#  the common variables defined below.
+#  Absolute paths are mandatory for hierarchical RM flow.
+##########################################################################################
+# Hierarchical Flow Design Variables
+##########################################################################################
+set HIERARCHICAL_DESIGNS           "" ;# List of hierarchical block design names "DesignA DesignB" ...
+set HIERARCHICAL_CELLS             "" ;# List of hierarchical block cell instance names "u_DesignA u_DesignB" ...
+##########################################################################################
+# Library Setup Variables
+##########################################################################################
+if { [catch {echo $ANALYSIS_TYPE}] } {
+  echo "Assuming analysis type is TIMING..."
+  set ANALYSIS_TYPE timing
+  }
+Assuming analysis type is TIMING...
+timing
+echo "Target library: TSMC 65nm GP CMOS"
+Target library: TSMC 65nm GP CMOS
+set LIBSEL "tcbn65gplus";
+tcbn65gplus
+set OCSEL "WCCOM";
+WCCOM
+set LIBROOT "/cadtools/tsmc/";
+/cadtools/tsmc/
+set MIN_LIBRARY_FILES             ""  ;#  List of max min library pairs "max1 min1 max2 min2 max3 min3"...
+set ADDITIONAL_SEARCH_PATH        "$LIBROOT/digital/Front_End/timing_power_noise/NLDM/tcbn65gplus_121b/ $LIBROOT/digital/Front_End/timing_power_noise/NLDM/tcbn65gplushvt_121b/ $LIBROOT/digital/Front_End/timing_power/tcbn65gpluscg_121a/ $LIBROOT/digital/Front_End/timing_power/tcbn65gpluscghvt_121a/ /cadtools/synopsys/2009/synthesis/libraries/syn/ ";
+/cadtools/tsmc//digital/Front_End/timing_power_noise/NLDM/tcbn65gplus_121b/ /cadtools/tsmc//digital/Front_End/timing_power_noise/NLDM/tcbn65gplushvt_121b/ /cadtools/tsmc//digital/Front_End/timing_power/tcbn65gpluscg_121a/ /cadtools/tsmc//digital/Front_End/timing_power/tcbn65gpluscghvt_121a/ /cadtools/synopsys/2009/synthesis/libraries/syn/ 
+switch $OCSEL {
+  WCCOM {
+    # 65nm GP std cells @ WCCOM (Vdd = 0.9V, 125degC, nominal process):
+    set TARGET_LIBRARY_FILES          "tcbn65gpluswc.db";
+  }
+  BCCOM {
+    # 65nm GP std cells @ BCCOM (Vdd = 1.1V, 0degC, nominal process):
+    set TARGET_LIBRARY_FILES          "tcbn65gpluswc.db";
+  }
+  default {
+    # 65nm GP std cells @ NCCOM (Vdd = 1V, 25degC, nominal process):
+    set TARGET_LIBRARY_FILES          "tcbn65gpluswc.db";
+  }
+}
+tcbn65gpluswc.db
+set SYMBOL_LIBRARY_FILES          "tcbn65gplus.sdb tcbn65gpluscg.sdb tcbn65gplushvt.sdb tcbn65gpluscghvt.sdb "; #  Symbol libraries for Design Vision schematics
+tcbn65gplus.sdb tcbn65gpluscg.sdb tcbn65gplushvt.sdb tcbn65gpluscghvt.sdb 
+set ADDITIONAL_LINK_LIB_FILES     ""; #  Extra link logical libraries not included in TARGET_LIBRARY_FILES
+set POWER_GATING_SUPPORT          1;
+1
+set MIN_ROUTING_LAYER             "M1"   ;# Min routing layer
+M1
+set CLOCK_ROUTING_LAYERS          "M2 M3 M4 M5 M6 M7 M8 M9";
+M2 M3 M4 M5 M6 M7 M8 M9
+set PNET_ROUTING_LAYERS           "M1 M2";
+M1 M2
+set ALL_ROUTING_LAYERS            "M1 M2 M3 M4 M5 M6 M7 M8 M9";
+M1 M2 M3 M4 M5 M6 M7 M8 M9
+set MAX_ROUTING_LAYER             "M9"   ;# Max routing layer
+M9
+set PNS_POWER_BUDGET       	      "100"  ;# Unit in milliWatts; default is 1000
+100
+set PNS_VOLTAGE_SUPPLY     	      "1"    ;# Unit in Volts; default is 1.5
+1
+set PNS_TARGET_VOLTAGE_DROP       "100"   ;# Unit in milliVolts. Tool default is 10% of PNS_POWER_BUDGET
+100
+set MW_REFERENCE_CONTROL_FILE     ""  ;#  Reference Control file to define the MW ref libs
+set MW_REFERENCE_LIB_DIRS         "/user/archive/tome/dev/synth/milkyway/tcbn65gplus/ /user/archive/tome/dev/synth/milkyway/tcbn65gplushvt/ /user/archive/tome/dev/synth/milkyway/tcbn65gpluscg/ /user/archive/tome/dev/synth/milkyway/tcbn65gpluscghvt/ "  ;#  Milkyway reference libraries
+/user/archive/tome/dev/synth/milkyway/tcbn65gplus/ /user/archive/tome/dev/synth/milkyway/tcbn65gplushvt/ /user/archive/tome/dev/synth/milkyway/tcbn65gpluscg/ /user/archive/tome/dev/synth/milkyway/tcbn65gpluscghvt/ 
+set TECH_FILE                     "$LIBROOT/digital/Back_End/milkyway/tcbn65gplus_121b/techfiles/tsmcn65_9lmT2.tf"  ; # same on all proc versions of a node, i.e. 65gp = 65gphvt = ...
+/cadtools/tsmc//digital/Back_End/milkyway/tcbn65gplus_121b/techfiles/tsmcn65_9lmT2.tf
+set MAP_FILE                      "/user/archive/tome/dev/synth/milkyway/tcbn65gplus_tf_to_itf.map"  ;#  Mapping file for TLUplus
+/user/archive/tome/dev/synth/milkyway/tcbn65gplus_tf_to_itf.map
+set TLUPLUS_MAX_FILE              "$LIBROOT/digital/Back_End/milkyway/tcbn65gplus_121b/techfiles/tluplus/cln65g+_1p09m+alrdl_top2_typical.tluplus"  ;#  Max TLUplus file
+/cadtools/tsmc//digital/Back_End/milkyway/tcbn65gplus_121b/techfiles/tluplus/cln65g+_1p09m+alrdl_top2_typical.tluplus
+set TLUPLUS_MIN_FILE              "$LIBROOT/digital/Back_End/milkyway/tcbn65gplus_121b/techfiles/tluplus/cln65g+_1p09m+alrdl_top2_typical.tluplus"  ;#  Min TLUplus file
+/cadtools/tsmc//digital/Back_End/milkyway/tcbn65gplus_121b/techfiles/tluplus/cln65g+_1p09m+alrdl_top2_typical.tluplus
+echo " "
+ 
+echo Common Setup (adapted from DC-RM 2008.09 by Tom English)
+Common Setup (adapted from DC-RM 2008.09 by Tom English)
+echo ********************************************************
+********************************************************
+echo " "
+ 
+echo "Target std. cell library : $LIBSEL";
+Target std. cell library : tcbn65gplus
+echo "Max. operating condition : $OCSEL";
+Max. operating condition : WCCOM
+echo " "
+ 
+set MW_POWER_NET                "VDD" ;#
+VDD
+set MW_POWER_PORT               "VDD" ;#
+VDD
+set MW_GROUND_NET               "VSS" ;#
+VSS
+set MW_GROUND_PORT              "VSS" ;#
+VSS
+set RESULTS_DIR "${LIBSEL}_results";
+tcbn65gplus_results
+set REPORTS_DIR "${LIBSEL}_reports";
+tcbn65gplus_reports
+set LIBRARY_DONT_USE_FILE        ""   ;# Tcl file with library modifications for dont_use
+ 
+DC Setup (adapted from DC-RM 2008.09 by Tom English)
+****************************************************
+ 
+Constraints directory : constraints
+Reports directory : tcbn65gplus_reports
+Results directory : tcbn65gplus_results
+ 
+Loading db file '/cadtools/tsmc/digital/Front_End/timing_power_noise/NLDM/tcbn65gplus_121b/tcbn65gpluswc.db'
+Loading db file '/cadtools/synopsys/2009/synthesis/libraries/syn/dw_foundation.sldb'
+Error: Can't find object 'tcbn65gpluswc/ISOHID1'. (UID-109)
+Error: Value for list 'object_list' must have 1 elements. (CMD-036)
+Error: Can't find object 'tcbn65gpluswc/ISOHID2'. (UID-109)
+Error: Value for list 'object_list' must have 1 elements. (CMD-036)
+Error: Can't find object 'tcbn65gpluswc/ISOHID4'. (UID-109)
+Error: Value for list 'object_list' must have 1 elements. (CMD-036)
+Error: Can't find object 'tcbn65gpluswc/ISOHID8'. (UID-109)
+Error: Value for list 'object_list' must have 1 elements. (CMD-036)
+Error: Can't find object 'tcbn65gpluswc/ISOLOD1'. (UID-109)
+Error: Value for list 'object_list' must have 1 elements. (CMD-036)
+Error: Can't find object 'tcbn65gpluswc/ISOLOD2'. (UID-109)
+Error: Value for list 'object_list' must have 1 elements. (CMD-036)
+Error: Can't find object 'tcbn65gpluswc/ISOLOD4'. (UID-109)
+Error: Value for list 'object_list' must have 1 elements. (CMD-036)
+Error: Can't find object 'tcbn65gpluswc/ISOLOD8'. (UID-109)
+Error: Value for list 'object_list' must have 1 elements. (CMD-036)
+Error: Can't find object 'tcbn65gpluswc/LVLHLD1'. (UID-109)
+Error: Value for list 'object_list' must have 1 elements. (CMD-036)
+Error: Can't find object 'tcbn65gpluswc/LVLHLD2'. (UID-109)
+Error: Value for list 'object_list' must have 1 elements. (CMD-036)
+Error: Can't find object 'tcbn65gpluswc/LVLHLD4'. (UID-109)
+Error: Value for list 'object_list' must have 1 elements. (CMD-036)
+Error: Can't find object 'tcbn65gpluswc/LVLHLD8'. (UID-109)
+Error: Value for list 'object_list' must have 1 elements. (CMD-036)
+Error: Can't find object 'tcbn65gpluswc/LVLLHCD1'. (UID-109)
+Error: Value for list 'object_list' must have 1 elements. (CMD-036)
+Error: Can't find object 'tcbn65gpluswc/LVLLHCD2'. (UID-109)
+Error: Value for list 'object_list' must have 1 elements. (CMD-036)
+Error: Can't find object 'tcbn65gpluswc/LVLLHCD4'. (UID-109)
+Error: Value for list 'object_list' must have 1 elements. (CMD-036)
+Error: Can't find object 'tcbn65gpluswc/LVLLHCD8'. (UID-109)
+Error: Value for list 'object_list' must have 1 elements. (CMD-036)
+Error: Can't find object 'tcbn65gpluswc/LVLLHD1'. (UID-109)
+Error: Value for list 'object_list' must have 1 elements. (CMD-036)
+Error: Can't find object 'tcbn65gpluswc/LVLLHD2'. (UID-109)
+Error: Value for list 'object_list' must have 1 elements. (CMD-036)
+Error: Can't find object 'tcbn65gpluswc/LVLLHD4'. (UID-109)
+Error: Value for list 'object_list' must have 1 elements. (CMD-036)
+Error: Can't find object 'tcbn65gpluswc/LVLLHD8'. (UID-109)
+Error: Value for list 'object_list' must have 1 elements. (CMD-036)
+# call a script which compiles the design
+source dc.tcl
+Information: The SAIF name mapping information database is now active. (PWR-602)
+Error: can't read "RTL_SOURCE_FILES": no such variable
+	Use error_info for more info. (CMD-013)
+Loading db file '/cadtools/synopsys/2015/synthesis/libraries/syn/gtech.db'
+Loading db file '/cadtools/synopsys/2015/synthesis/libraries/syn/standard.sldb'
+  Loading link library 'tcbn65gpluswc'
+  Loading link library 'gtech'
+Running PRESTO HDLC
+Presto compilation completed successfully.
+Elaborated 1 design.
+Current design is now 'decomposed_rca'.
+Information: Building the design 'nonlin_part'. (HDL-193)
+Presto compilation completed successfully.
+Information: Building the design 'lin_part'. (HDL-193)
+Presto compilation completed successfully.
+Information: Evaluating DesignWare library utilization. (UISN-27)
+
+============================================================================
+| DesignWare Building Block Library  |         Version         | Available |
+============================================================================
+| Basic DW Building Blocks           | K-2015.06-DWBB_201506.5.1
+                                                               |     *     |
+| Licensed DW Building Blocks        | B-2008.09-DWBB_0902     |           |
+============================================================================
+
+
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'lin_part'
+  Processing 'nonlin_part'
+  Processing 'decomposed_rca'
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+Information: Design 'decomposed_rca' has no optimization constraints set. (OPT-108)
+
+  Beginning Mapping Optimizations  (Medium effort)
+  -------------------------------
+  Structuring 'lin_part'
+  Mapping 'lin_part'
+  Structuring 'nonlin_part'
+  Mapping 'nonlin_part'
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:00:00      86.8      0.00       0.0       0.0                          
+    0:00:00      86.8      0.00       0.0       0.0                          
+    0:00:00      86.8      0.00       0.0       0.0                          
+    0:00:00      86.8      0.00       0.0       0.0                          
+    0:00:00      86.8      0.00       0.0       0.0                          
+    0:00:00      86.8      0.00       0.0       0.0                          
+    0:00:00      86.8      0.00       0.0       0.0                          
+    0:00:00      86.8      0.00       0.0       0.0                          
+    0:00:00      86.8      0.00       0.0       0.0                          
+    0:00:00      86.8      0.00       0.0       0.0                          
+    0:00:00      86.8      0.00       0.0       0.0                          
+    0:00:00      86.8      0.00       0.0       0.0                          
+
+
+
+  Beginning Delay Optimization Phase
+  ----------------------------------
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:00:00      86.8      0.00       0.0       0.0                          
+    0:00:00      86.8      0.00       0.0       0.0                          
+    0:00:00      86.8      0.00       0.0       0.0                          
+
+
+  Beginning Area-Recovery Phase  (cleanup)
+  -----------------------------
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:00:00      86.8      0.00       0.0       0.0                          
+    0:00:00      86.8      0.00       0.0       0.0                          
+    0:00:00      86.8      0.00       0.0       0.0                          
+    0:00:00      86.8      0.00       0.0       0.0                          
+    0:00:00      86.8      0.00       0.0       0.0                          
+    0:00:00      86.8      0.00       0.0       0.0                          
+    0:00:00      86.8      0.00       0.0       0.0                          
+    0:00:00      86.8      0.00       0.0       0.0                          
+    0:00:00      86.8      0.00       0.0       0.0                          
+    0:00:00      86.8      0.00       0.0       0.0                          
+    0:00:00      86.8      0.00       0.0       0.0                          
+Loading db file '/cadtools/tsmc/digital/Front_End/timing_power_noise/NLDM/tcbn65gplus_121b/tcbn65gpluswc.db'
+
+
+Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
+
+
+  Optimization Complete
+  ---------------------
+Writing verilog file '/user/erasmus/danielrb/Dropbox/Tesi/rca_adder/syn/tcbn65gplus_results/decomposed_rca16bit.mapped.v'.
+Information: Writing SAIF name mapping information into the PT-PX name mapping file 'tcbn65gplus_results/decomposed_rca16bit.mapped.SAIF.namemap'. (PWR-636)
+
+Thank you...
