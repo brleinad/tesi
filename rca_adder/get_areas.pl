@@ -7,8 +7,10 @@ my $i = 0;
 my $line;
 my @dec_area;
 my @undec_area;
-my $reports="./undecomposed/reports/area";
-my $adder="cla_adder";
+#my $reports="./undecomposed/normal_reports/area";
+#my $adder="normal_adder";
+my $reports="./undecomposed/adder_reports/area";
+my $adder="adder";
 
 while (open(AREA, "$reports/${bit}bit_${adder}_util.rpt"))
 {

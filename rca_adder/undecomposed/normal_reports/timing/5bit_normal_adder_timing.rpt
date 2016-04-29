@@ -1,0 +1,41 @@
+Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2015.4 (lin64) Build 1412921 Wed Nov 18 09:44:32 MST 2015
+| Date         : Wed Apr 27 11:44:38 2016
+| Host         : localhost.localdomain running 64-bit CentOS Linux release 7.2.1511 (Core)
+| Command      : report_timing -file ./reports/timing/5bit_normal_adder_timing.rpt
+| Design       : normal_adder
+| Device       : 7z010-clg400
+| Speed File   : -1  PRODUCTION 1.11 2014-09-11
+-------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack:                    inf
+  Source:                 a[0]
+                            (input port)
+  Destination:            s[3]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        8.195ns  (logic 4.058ns (49.513%)  route 4.138ns (50.487%))
+  Logic Levels:           4  (IBUF=1 LUT3=1 LUT6=1 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    T19                                               0.000     0.000 r  a[0] (IN)
+                         net (fo=0)                   0.000     0.000    a[0]
+    T19                  IBUF (Prop_ibuf_I_O)         0.950     0.950 r  a_IBUF[0]_inst/O
+                         net (fo=4, routed)           1.606     2.556    a_IBUF[0]
+    SLICE_X43Y7          LUT6 (Prop_lut6_I3_O)        0.124     2.680 r  s_OBUF[4]_inst_i_2/O
+                         net (fo=2, routed)           0.667     3.347    c_2
+    SLICE_X43Y7          LUT3 (Prop_lut3_I0_O)        0.152     3.499 r  s_OBUF[3]_inst_i_1/O
+                         net (fo=1, routed)           1.864     5.363    s_OBUF[3]
+    W16                  OBUF (Prop_obuf_I_O)         2.832     8.195 r  s_OBUF[3]_inst/O
+                         net (fo=0)                   0.000     8.195    s[3]
+    W16                                                               r  s[3] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+
+
+

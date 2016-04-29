@@ -1,0 +1,63 @@
+Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2015.4 (lin64) Build 1412921 Wed Nov 18 09:44:32 MST 2015
+| Date         : Wed Apr 27 11:57:29 2016
+| Host         : localhost.localdomain running 64-bit CentOS Linux release 7.2.1511 (Core)
+| Command      : report_timing -file ./reports/timing/26bit_normal_adder_timing.rpt
+| Design       : normal_adder
+| Device       : 7z010-clg400
+| Speed File   : -1  PRODUCTION 1.11 2014-09-11
+-------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack:                    inf
+  Source:                 b[2]
+                            (input port)
+  Destination:            s[25]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        21.396ns  (logic 7.193ns (33.620%)  route 14.203ns (66.380%))
+  Logic Levels:           15  (IBUF=1 LUT3=1 LUT5=11 LUT6=1 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    K16                                               0.000     0.000 r  b[2] (IN)
+                         net (fo=0)                   0.000     0.000    b[2]
+    K16                  IBUF (Prop_ibuf_I_O)         0.943     0.943 r  b_IBUF[2]_inst/O
+                         net (fo=2, routed)           2.335     3.278    b_IBUF[2]
+    SLICE_X43Y27         LUT6 (Prop_lut6_I4_O)        0.124     3.402 r  s_OBUF[4]_inst_i_2/O
+                         net (fo=3, routed)           0.777     4.180    c_2
+    SLICE_X43Y29         LUT5 (Prop_lut5_I2_O)        0.124     4.304 r  s_OBUF[6]_inst_i_2/O
+                         net (fo=3, routed)           0.412     4.715    c_4
+    SLICE_X43Y31         LUT5 (Prop_lut5_I2_O)        0.118     4.833 r  s_OBUF[8]_inst_i_2/O
+                         net (fo=3, routed)           1.002     5.835    c_6
+    SLICE_X43Y33         LUT5 (Prop_lut5_I2_O)        0.354     6.189 r  s_OBUF[10]_inst_i_2/O
+                         net (fo=3, routed)           1.002     7.191    c_8
+    SLICE_X43Y35         LUT5 (Prop_lut5_I2_O)        0.354     7.545 r  s_OBUF[12]_inst_i_2/O
+                         net (fo=3, routed)           1.002     8.546    c_1010_out
+    SLICE_X43Y37         LUT5 (Prop_lut5_I2_O)        0.354     8.900 r  s_OBUF[14]_inst_i_2/O
+                         net (fo=3, routed)           0.779     9.679    c_12
+    SLICE_X43Y39         LUT5 (Prop_lut5_I2_O)        0.352    10.031 r  s_OBUF[16]_inst_i_2/O
+                         net (fo=3, routed)           0.779    10.809    c_14
+    SLICE_X43Y41         LUT5 (Prop_lut5_I2_O)        0.352    11.161 r  s_OBUF[18]_inst_i_2/O
+                         net (fo=3, routed)           0.779    11.940    c_16
+    SLICE_X43Y43         LUT5 (Prop_lut5_I2_O)        0.352    12.292 r  s_OBUF[20]_inst_i_2/O
+                         net (fo=3, routed)           0.607    12.898    c_18
+    SLICE_X43Y45         LUT5 (Prop_lut5_I2_O)        0.320    13.218 r  s_OBUF[22]_inst_i_2/O
+                         net (fo=3, routed)           1.002    14.220    c_2022_out
+    SLICE_X43Y47         LUT5 (Prop_lut5_I2_O)        0.354    14.574 r  s_OBUF[24]_inst_i_2/O
+                         net (fo=3, routed)           0.962    15.536    c_22
+    SLICE_X43Y50         LUT3 (Prop_lut3_I0_O)        0.326    15.862 r  s_OBUF[25]_inst_i_2/O
+                         net (fo=1, routed)           0.151    16.014    c_23
+    SLICE_X43Y50         LUT5 (Prop_lut5_I0_O)        0.124    16.138 r  s_OBUF[25]_inst_i_1/O
+                         net (fo=1, routed)           2.616    18.754    s_OBUF[25]
+    L17                  OBUF (Prop_obuf_I_O)         2.642    21.396 r  s_OBUF[25]_inst/O
+                         net (fo=0)                   0.000    21.396    s[25]
+    L17                                                               r  s[25] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+
+
+

@@ -1,7 +1,25 @@
 #!/bin/bash
 
-design=cla_adder
+design=normal_adder
 reportsDir=./reports
+
+if [ ! -f "./${design}.v" ]; then
+    echo "Desgin $design Doesn't exit"
+    exit
+fi
+
+if [ ! -d "$VIVADO/bin/" ]; then
+    echo "No Vivado installed"
+    exit
+fi
+
+if [ ! -d "$reportsDir" ]; then
+    echo "report directories don't exit.. creating them..."
+    mkdir $reportsDir
+    mkdir $reportsDir/area
+    mkdir $reportsDir/power
+    mkdir $reportsDir/timing
+fi
 
 for bit in {4..32}
 do
@@ -10,9 +28,9 @@ do
 
     echo "
     read_verilog [glob ./constants.v]
-    read_verilog [glob ./cla_adder.v]
+    read_verilog [glob ./${design}.v]
 
-    synth_design -top $design -part xc7z010clg400-1
+    synth_design -top $design -part xc7z010clg400-1 -no_lc
     opt_design
     place_design
     route_design

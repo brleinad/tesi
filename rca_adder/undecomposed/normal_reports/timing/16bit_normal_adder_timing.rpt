@@ -1,0 +1,53 @@
+Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2015.4 (lin64) Build 1412921 Wed Nov 18 09:44:32 MST 2015
+| Date         : Wed Apr 27 11:51:22 2016
+| Host         : localhost.localdomain running 64-bit CentOS Linux release 7.2.1511 (Core)
+| Command      : report_timing -file ./reports/timing/16bit_normal_adder_timing.rpt
+| Design       : normal_adder
+| Device       : 7z010-clg400
+| Speed File   : -1  PRODUCTION 1.11 2014-09-11
+-------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack:                    inf
+  Source:                 a[0]
+                            (input port)
+  Destination:            s[15]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        14.661ns  (logic 5.559ns (37.918%)  route 9.102ns (62.082%))
+  Logic Levels:           10  (IBUF=1 LUT3=1 LUT5=6 LUT6=1 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    T19                                               0.000     0.000 r  a[0] (IN)
+                         net (fo=0)                   0.000     0.000    a[0]
+    T19                  IBUF (Prop_ibuf_I_O)         0.950     0.950 r  a_IBUF[0]_inst/O
+                         net (fo=4, routed)           2.007     2.957    a_IBUF[0]
+    SLICE_X43Y17         LUT6 (Prop_lut6_I3_O)        0.124     3.081 r  s_OBUF[4]_inst_i_2/O
+                         net (fo=3, routed)           0.835     3.916    c_2
+    SLICE_X43Y19         LUT5 (Prop_lut5_I2_O)        0.124     4.040 r  s_OBUF[6]_inst_i_2/O
+                         net (fo=3, routed)           0.644     4.684    c_4
+    SLICE_X43Y21         LUT5 (Prop_lut5_I2_O)        0.150     4.834 r  s_OBUF[8]_inst_i_2/O
+                         net (fo=3, routed)           0.839     5.672    c_6
+    SLICE_X43Y23         LUT5 (Prop_lut5_I2_O)        0.352     6.024 r  s_OBUF[10]_inst_i_2/O
+                         net (fo=3, routed)           0.869     6.893    c_8
+    SLICE_X43Y25         LUT5 (Prop_lut5_I2_O)        0.352     7.245 r  s_OBUF[12]_inst_i_2/O
+                         net (fo=3, routed)           0.839     8.084    c_1010_out
+    SLICE_X43Y27         LUT5 (Prop_lut5_I2_O)        0.352     8.436 r  s_OBUF[14]_inst_i_2/O
+                         net (fo=3, routed)           0.812     9.248    c_12
+    SLICE_X43Y29         LUT3 (Prop_lut3_I0_O)        0.326     9.574 r  s_OBUF[15]_inst_i_2/O
+                         net (fo=1, routed)           0.151     9.725    c_13
+    SLICE_X43Y29         LUT5 (Prop_lut5_I0_O)        0.124     9.849 r  s_OBUF[15]_inst_i_1/O
+                         net (fo=1, routed)           2.106    11.956    s_OBUF[15]
+    T10                  OBUF (Prop_obuf_I_O)         2.705    14.661 r  s_OBUF[15]_inst/O
+                         net (fo=0)                   0.000    14.661    s[15]
+    T10                                                               r  s[15] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+
+
+

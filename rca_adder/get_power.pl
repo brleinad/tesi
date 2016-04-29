@@ -8,7 +8,9 @@ my $line;
 my @dec_power;
 my @undec_power;
 my $type="power";
-my $reports="./undecomposed/reports/power";
+#my $reports="./undecomposed/normal_reports/power";
+my $reports="./undecomposed/adder_reports/power";
+#my $adder="normal_adder";
 my $adder="adder";
 
 while (open(POWER, "$reports/${bit}bit_${adder}_${type}.rpt"))

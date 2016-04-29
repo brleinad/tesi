@@ -1,0 +1,91 @@
+Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2015.4 (lin64) Build 1412921 Wed Nov 18 09:44:32 MST 2015
+| Date         : Wed Apr 27 15:29:07 2016
+| Host         : localhost.localdomain running 64-bit unknown
+| Command      : report_timing -file ./reports/timing/29bit_decomposed_rca_timing.rpt
+| Design       : decomposed_rca
+| Device       : 7z010-clg400
+| Speed File   : -1  PRODUCTION 1.11 2014-09-11
+--------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack:                    inf
+  Source:                 A[0]
+                            (input port)
+  Destination:            S[27]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        27.420ns  (logic 6.982ns (25.463%)  route 20.438ns (74.537%))
+  Logic Levels:           29  (IBUF=1 LUT3=25 LUT4=1 LUT5=1 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    T19                                               0.000     0.000 r  A[0] (IN)
+                         net (fo=0)                   0.000     0.000    A[0]
+    T19                  IBUF (Prop_ibuf_I_O)         0.950     0.950 r  A_IBUF[0]_inst/O
+                         net (fo=4, routed)           2.391     3.341    A_IBUF[0]
+    SLICE_X42Y31         LUT3 (Prop_lut3_I2_O)        0.124     3.465 r  S_OBUF[2]_inst_i_3/O
+                         net (fo=2, routed)           0.681     4.146    nl[3]
+    SLICE_X42Y31         LUT4 (Prop_lut4_I3_O)        0.124     4.270 r  S_OBUF[3]_inst_i_2/O
+                         net (fo=2, routed)           0.733     5.003    r[0]
+    SLICE_X43Y31         LUT3 (Prop_lut3_I1_O)        0.124     5.127 r  S_OBUF[4]_inst_i_2/O
+                         net (fo=2, routed)           0.809     5.936    r[1]
+    SLICE_X43Y33         LUT3 (Prop_lut3_I1_O)        0.124     6.060 r  S_OBUF[5]_inst_i_2/O
+                         net (fo=2, routed)           0.445     6.504    r[2]
+    SLICE_X43Y33         LUT3 (Prop_lut3_I1_O)        0.124     6.628 r  S_OBUF[6]_inst_i_2/O
+                         net (fo=2, routed)           0.652     7.281    r[3]
+    SLICE_X43Y35         LUT3 (Prop_lut3_I1_O)        0.124     7.405 r  S_OBUF[7]_inst_i_2/O
+                         net (fo=2, routed)           0.445     7.849    r[4]
+    SLICE_X43Y35         LUT3 (Prop_lut3_I1_O)        0.124     7.973 r  S_OBUF[8]_inst_i_2/O
+                         net (fo=2, routed)           0.652     8.626    r[5]
+    SLICE_X43Y37         LUT3 (Prop_lut3_I1_O)        0.124     8.750 r  S_OBUF[9]_inst_i_2/O
+                         net (fo=2, routed)           0.318     9.067    r[6]
+    SLICE_X42Y38         LUT3 (Prop_lut3_I1_O)        0.124     9.191 r  S_OBUF[10]_inst_i_2/O
+                         net (fo=2, routed)           0.818    10.009    r[7]
+    SLICE_X43Y39         LUT3 (Prop_lut3_I1_O)        0.124    10.133 r  S_OBUF[11]_inst_i_2/O
+                         net (fo=2, routed)           0.445    10.578    r[8]
+    SLICE_X43Y39         LUT3 (Prop_lut3_I1_O)        0.124    10.702 r  S_OBUF[12]_inst_i_2/O
+                         net (fo=2, routed)           0.652    11.354    r[9]
+    SLICE_X43Y41         LUT3 (Prop_lut3_I1_O)        0.124    11.478 r  S_OBUF[13]_inst_i_2/O
+                         net (fo=2, routed)           0.445    11.923    r[10]
+    SLICE_X43Y41         LUT3 (Prop_lut3_I1_O)        0.124    12.047 r  S_OBUF[14]_inst_i_2/O
+                         net (fo=2, routed)           0.652    12.699    r[11]
+    SLICE_X43Y43         LUT3 (Prop_lut3_I1_O)        0.124    12.823 r  S_OBUF[15]_inst_i_2/O
+                         net (fo=2, routed)           0.445    13.268    r[12]
+    SLICE_X43Y43         LUT3 (Prop_lut3_I1_O)        0.124    13.392 r  S_OBUF[16]_inst_i_2/O
+                         net (fo=2, routed)           0.652    14.044    r[13]
+    SLICE_X43Y45         LUT3 (Prop_lut3_I1_O)        0.124    14.168 r  S_OBUF[17]_inst_i_2/O
+                         net (fo=2, routed)           0.445    14.613    r[14]
+    SLICE_X43Y45         LUT3 (Prop_lut3_I1_O)        0.124    14.737 r  S_OBUF[18]_inst_i_2/O
+                         net (fo=2, routed)           0.652    15.389    r[15]
+    SLICE_X43Y47         LUT3 (Prop_lut3_I1_O)        0.124    15.513 r  S_OBUF[19]_inst_i_2/O
+                         net (fo=2, routed)           0.445    15.958    r[16]
+    SLICE_X43Y47         LUT3 (Prop_lut3_I1_O)        0.124    16.082 r  S_OBUF[20]_inst_i_2/O
+                         net (fo=2, routed)           0.819    16.901    r[17]
+    SLICE_X43Y49         LUT3 (Prop_lut3_I1_O)        0.124    17.025 r  S_OBUF[21]_inst_i_2/O
+                         net (fo=2, routed)           1.031    18.056    r[18]
+    SLICE_X43Y71         LUT3 (Prop_lut3_I1_O)        0.124    18.180 r  S_OBUF[22]_inst_i_2/O
+                         net (fo=2, routed)           0.445    18.625    r[19]
+    SLICE_X43Y71         LUT3 (Prop_lut3_I1_O)        0.124    18.749 r  S_OBUF[23]_inst_i_2/O
+                         net (fo=2, routed)           0.650    19.399    r[20]
+    SLICE_X43Y72         LUT3 (Prop_lut3_I1_O)        0.124    19.523 r  S_OBUF[24]_inst_i_2/O
+                         net (fo=2, routed)           0.445    19.968    r[21]
+    SLICE_X43Y72         LUT3 (Prop_lut3_I1_O)        0.124    20.092 r  S_OBUF[25]_inst_i_2/O
+                         net (fo=2, routed)           0.806    20.898    r[22]
+    SLICE_X43Y73         LUT3 (Prop_lut3_I1_O)        0.124    21.022 r  S_OBUF[26]_inst_i_2/O
+                         net (fo=2, routed)           0.445    21.466    r[23]
+    SLICE_X43Y73         LUT3 (Prop_lut3_I1_O)        0.124    21.590 r  S_OBUF[27]_inst_i_2/O
+                         net (fo=2, routed)           0.886    22.476    r[24]
+    SLICE_X42Y73         LUT5 (Prop_lut5_I1_O)        0.124    22.600 r  S_OBUF[27]_inst_i_1/O
+                         net (fo=1, routed)           2.136    24.736    S_OBUF[27]
+    M20                  OBUF (Prop_obuf_I_O)         2.684    27.420 r  S_OBUF[27]_inst/O
+                         net (fo=0)                   0.000    27.420    S[27]
+    M20                                                               r  S[27] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+
+
+

@@ -38,6 +38,8 @@ begin
     a = 77;
     #10
     b = 118;
+    #10
+    b = 339;
     $finish;
 end
 

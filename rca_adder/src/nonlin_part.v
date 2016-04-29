@@ -6,7 +6,6 @@
 //author: Daniel Rodas Bautista
 //
 //
-//'include "globals.vh"
 module nonlin_part( a,b,r,nl);
 `include "constants.v"
 
@@ -19,27 +18,23 @@ output [3*NBIT-6:0] nl; //The non-linear output
 wire r1;
 
 // 1
-and ( r1, a[0], b[0]);
+assign r1 = a[0] & b[0];
 assign nl[0] = r1;
 // 2
-and (nl[1], a[1], b[1]);
-and (nl[2], a[1], r1);
-and (nl[3], b[1], r1);
+assign nl[1] = a[1] & b[1];
+assign nl[2] = a[1] & r1;
+assign nl[3] = b[1] & r1;
 // 3
-/*and ( nl[4], a[2], b[2]);
-and ( nl[5], a[2], r[0]); //it is r2
-and ( nl[6], a[2], r[0]);*/
 //can be generalized from now on as follows:
 genvar i;
 generate
 for (i=2 ; i<NBIT-1 ; i=i+1)
 begin : AND_LOOP
-    and (nl[i*3-2], a[i], b[i]);
-    and (nl[i*3-1], a[i], r[i-2]);
-    and (nl[i*3], b[i], r[i-2]);
+    assign nl[i*3-2] = a[i] & b[i];
+    assign nl[i*3-1] = a[i] & r[i-2];
+    assign nl[i*3]   = b[i] & r[i-2];
 end
 endgenerate
-
 
 endmodule
 

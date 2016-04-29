@@ -1,0 +1,65 @@
+Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2015.4 (lin64) Build 1412921 Wed Nov 18 09:44:32 MST 2015
+| Date         : Wed Apr 27 13:11:31 2016
+| Host         : localhost.localdomain running 64-bit unknown
+| Command      : report_timing -file ./reports/timing/29bit_normal_adder_timing.rpt
+| Design       : normal_adder
+| Device       : 7z010-clg400
+| Speed File   : -1  PRODUCTION 1.11 2014-09-11
+------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack:                    inf
+  Source:                 a[1]
+                            (input port)
+  Destination:            s[28]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        18.445ns  (logic 5.368ns (29.104%)  route 13.077ns (70.896%))
+  Logic Levels:           16  (IBUF=1 LUT5=13 LUT6=1 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    P16                                               0.000     0.000 r  a[1] (IN)
+                         net (fo=0)                   0.000     0.000    a[1]
+    P16                  IBUF (Prop_ibuf_I_O)         0.938     0.938 r  a_IBUF[1]_inst/O
+                         net (fo=3, routed)           2.028     2.967    a_IBUF[1]
+    SLICE_X43Y31         LUT6 (Prop_lut6_I0_O)        0.124     3.091 r  s_OBUF[4]_inst_i_2/O
+                         net (fo=3, routed)           0.591     3.682    c_2
+    SLICE_X43Y32         LUT5 (Prop_lut5_I2_O)        0.124     3.806 r  s_OBUF[6]_inst_i_2/O
+                         net (fo=3, routed)           0.592     4.398    c_4
+    SLICE_X43Y34         LUT5 (Prop_lut5_I2_O)        0.124     4.522 r  s_OBUF[8]_inst_i_2/O
+                         net (fo=3, routed)           0.594     5.115    c_6
+    SLICE_X43Y36         LUT5 (Prop_lut5_I2_O)        0.124     5.239 r  s_OBUF[10]_inst_i_2/O
+                         net (fo=3, routed)           0.783     6.022    c_8
+    SLICE_X43Y38         LUT5 (Prop_lut5_I2_O)        0.124     6.146 r  s_OBUF[12]_inst_i_2/O
+                         net (fo=3, routed)           0.592     6.737    c_1010_out
+    SLICE_X43Y40         LUT5 (Prop_lut5_I2_O)        0.124     6.861 r  s_OBUF[14]_inst_i_2/O
+                         net (fo=3, routed)           0.592     7.453    c_12
+    SLICE_X43Y42         LUT5 (Prop_lut5_I2_O)        0.124     7.577 r  s_OBUF[16]_inst_i_2/O
+                         net (fo=3, routed)           0.592     8.169    c_14
+    SLICE_X43Y44         LUT5 (Prop_lut5_I2_O)        0.124     8.293 r  s_OBUF[18]_inst_i_2/O
+                         net (fo=3, routed)           0.592     8.884    c_16
+    SLICE_X43Y46         LUT5 (Prop_lut5_I2_O)        0.124     9.008 r  s_OBUF[20]_inst_i_2/O
+                         net (fo=3, routed)           0.592     9.600    c_18
+    SLICE_X43Y48         LUT5 (Prop_lut5_I2_O)        0.124     9.724 r  s_OBUF[22]_inst_i_2/O
+                         net (fo=3, routed)           1.600    11.324    c_2022_out
+    SLICE_X43Y71         LUT5 (Prop_lut5_I2_O)        0.124    11.448 r  s_OBUF[24]_inst_i_2/O
+                         net (fo=3, routed)           0.592    12.040    c_22
+    SLICE_X43Y73         LUT5 (Prop_lut5_I2_O)        0.124    12.164 r  s_OBUF[26]_inst_i_2/O
+                         net (fo=3, routed)           0.623    12.787    c_24
+    SLICE_X43Y75         LUT5 (Prop_lut5_I2_O)        0.124    12.911 r  s_OBUF[28]_inst_i_2/O
+                         net (fo=2, routed)           0.807    13.718    c_26
+    SLICE_X43Y77         LUT5 (Prop_lut5_I0_O)        0.124    13.842 r  s_OBUF[28]_inst_i_1/O
+                         net (fo=1, routed)           1.909    15.751    s_OBUF[28]
+    M19                  OBUF (Prop_obuf_I_O)         2.694    18.445 r  s_OBUF[28]_inst/O
+                         net (fo=0)                   0.000    18.445    s[28]
+    M19                                                               r  s[28] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+
+
+

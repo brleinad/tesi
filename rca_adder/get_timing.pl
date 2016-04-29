@@ -8,7 +8,9 @@ my $line;
 my @dec_timing;
 my @undec_timing;
 my $type="timing";
-my $reports="./undecomposed/reports/$type";
+#my $reports="./undecomposed/normal_reports/$type";
+#my $adder="normal_adder";
+my $reports="./undecomposed/adder_reports/$type";
 my $adder="adder";
 
 while (open(TIMING, "$reports/${bit}bit_${adder}_${type}.rpt"))

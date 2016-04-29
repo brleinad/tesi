@@ -1,0 +1,45 @@
+Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2015.4 (lin64) Build 1412921 Wed Nov 18 09:44:32 MST 2015
+| Date         : Wed Apr 27 12:58:48 2016
+| Host         : localhost.localdomain running 64-bit unknown
+| Command      : report_timing -file ./reports/timing/8bit_normal_adder_timing.rpt
+| Design       : normal_adder
+| Device       : 7z010-clg400
+| Speed File   : -1  PRODUCTION 1.11 2014-09-11
+------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack:                    inf
+  Source:                 b[0]
+                            (input port)
+  Destination:            s[7]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        9.332ns  (logic 4.099ns (43.921%)  route 5.233ns (56.079%))
+  Logic Levels:           6  (IBUF=1 LUT3=1 LUT5=2 LUT6=1 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    V17                                               0.000     0.000 r  b[0] (IN)
+                         net (fo=0)                   0.000     0.000    b[0]
+    V17                  IBUF (Prop_ibuf_I_O)         0.961     0.961 r  b_IBUF[0]_inst/O
+                         net (fo=4, routed)           1.599     2.560    b_IBUF[0]
+    SLICE_X43Y9          LUT6 (Prop_lut6_I2_O)        0.124     2.684 r  s_OBUF[4]_inst_i_2/O
+                         net (fo=3, routed)           0.592     3.275    c_2
+    SLICE_X43Y11         LUT5 (Prop_lut5_I2_O)        0.124     3.399 r  s_OBUF[6]_inst_i_2/O
+                         net (fo=3, routed)           0.315     3.714    c_4
+    SLICE_X43Y13         LUT3 (Prop_lut3_I0_O)        0.124     3.838 r  s_OBUF[7]_inst_i_2/O
+                         net (fo=1, routed)           0.667     4.505    c_5
+    SLICE_X43Y13         LUT5 (Prop_lut5_I0_O)        0.124     4.629 r  s_OBUF[7]_inst_i_1/O
+                         net (fo=1, routed)           2.061     6.690    s_OBUF[7]
+    P19                  OBUF (Prop_obuf_I_O)         2.642     9.332 r  s_OBUF[7]_inst/O
+                         net (fo=0)                   0.000     9.332    s[7]
+    P19                                                               r  s[7] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+
+
+

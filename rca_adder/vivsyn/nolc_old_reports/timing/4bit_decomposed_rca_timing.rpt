@@ -1,0 +1,41 @@
+Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2015.4 (lin64) Build 1412921 Wed Nov 18 09:44:32 MST 2015
+| Date         : Wed Apr 27 12:36:24 2016
+| Host         : localhost.localdomain running 64-bit unknown
+| Command      : report_timing -file ./reports/timing/4bit_decomposed_rca_timing.rpt
+| Design       : decomposed_rca
+| Device       : 7z010-clg400
+| Speed File   : -1  PRODUCTION 1.11 2014-09-11
+-------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack:                    inf
+  Source:                 A[0]
+                            (input port)
+  Destination:            S[3]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        7.764ns  (logic 3.792ns (48.845%)  route 3.972ns (51.155%))
+  Logic Levels:           4  (IBUF=1 LUT4=1 LUT5=1 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    T19                                               0.000     0.000 r  A[0] (IN)
+                         net (fo=0)                   0.000     0.000    A[0]
+    T19                  IBUF (Prop_ibuf_I_O)         0.950     0.950 r  A_IBUF[0]_inst/O
+                         net (fo=4, routed)           1.584     2.534    A_IBUF[0]
+    SLICE_X43Y5          LUT4 (Prop_lut4_I1_O)        0.124     2.658 r  S_OBUF[3]_inst_i_2/O
+                         net (fo=1, routed)           0.667     3.325    S_OBUF[3]_inst_i_2_n_0
+    SLICE_X43Y5          LUT5 (Prop_lut5_I2_O)        0.124     3.449 r  S_OBUF[3]_inst_i_1/O
+                         net (fo=1, routed)           1.721     5.170    S_OBUF[3]
+    R17                  OBUF (Prop_obuf_I_O)         2.595     7.764 r  S_OBUF[3]_inst/O
+                         net (fo=0)                   0.000     7.764    S[3]
+    R17                                                               r  S[3] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+
+
+

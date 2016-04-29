@@ -1,0 +1,65 @@
+Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2015.4 (lin64) Build 1412921 Wed Nov 18 09:44:32 MST 2015
+| Date         : Wed Apr 27 15:20:30 2016
+| Host         : localhost.localdomain running 64-bit CentOS Linux release 7.2.1511 (Core)
+| Command      : report_timing -file ./reports/timing/15bit_decomposed_rca_timing.rpt
+| Design       : decomposed_rca
+| Device       : 7z010-clg400
+| Speed File   : -1  PRODUCTION 1.11 2014-09-11
+-------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack:                    inf
+  Source:                 A[0]
+                            (input port)
+  Destination:            S[14]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        19.604ns  (logic 5.353ns (27.307%)  route 14.251ns (72.693%))
+  Logic Levels:           16  (IBUF=1 LUT3=1 LUT5=12 LUT6=1 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    T19                                               0.000     0.000 r  A[0] (IN)
+                         net (fo=0)                   0.000     0.000    A[0]
+    T19                  IBUF (Prop_ibuf_I_O)         0.950     0.950 r  A_IBUF[0]_inst/O
+                         net (fo=4, routed)           2.122     3.072    NL_PART/A_IBUF[0]
+    SLICE_X42Y15         LUT3 (Prop_lut3_I2_O)        0.124     3.196 r  NL_PART/S_OBUF[2]_inst_i_3/O
+                         net (fo=3, routed)           0.656     3.852    NL_PART/nl[3]
+    SLICE_X43Y15         LUT5 (Prop_lut5_I3_O)        0.124     3.976 r  NL_PART/S_OBUF[3]_inst_i_3/O
+                         net (fo=3, routed)           0.829     4.806    NL_PART/nl[6]
+    SLICE_X43Y16         LUT5 (Prop_lut5_I3_O)        0.124     4.930 r  NL_PART/S_OBUF[4]_inst_i_3/O
+                         net (fo=3, routed)           0.903     5.833    NL_PART/nl[9]
+    SLICE_X42Y16         LUT5 (Prop_lut5_I3_O)        0.124     5.957 r  NL_PART/S_OBUF[5]_inst_i_2/O
+                         net (fo=3, routed)           0.850     6.806    NL_PART/nl[11]
+    SLICE_X42Y17         LUT5 (Prop_lut5_I2_O)        0.124     6.930 r  NL_PART/S_OBUF[6]_inst_i_3/O
+                         net (fo=3, routed)           0.608     7.539    NL_PART/nl[15]
+    SLICE_X42Y18         LUT5 (Prop_lut5_I3_O)        0.124     7.663 r  NL_PART/S_OBUF[7]_inst_i_2/O
+                         net (fo=3, routed)           0.733     8.396    NL_PART/nl[17]
+    SLICE_X43Y18         LUT5 (Prop_lut5_I2_O)        0.124     8.520 r  NL_PART/S_OBUF[8]_inst_i_3/O
+                         net (fo=3, routed)           0.661     9.181    NL_PART/nl[21]
+    SLICE_X43Y17         LUT5 (Prop_lut5_I3_O)        0.124     9.305 r  NL_PART/S_OBUF[9]_inst_i_2/O
+                         net (fo=3, routed)           0.750    10.055    NL_PART/nl[23]
+    SLICE_X42Y17         LUT5 (Prop_lut5_I2_O)        0.124    10.179 r  NL_PART/S_OBUF[10]_inst_i_3/O
+                         net (fo=3, routed)           0.751    10.930    NL_PART/nl[27]
+    SLICE_X42Y19         LUT5 (Prop_lut5_I3_O)        0.124    11.054 r  NL_PART/S_OBUF[11]_inst_i_2/O
+                         net (fo=3, routed)           1.005    12.059    NL_PART/nl[29]
+    SLICE_X42Y21         LUT5 (Prop_lut5_I2_O)        0.124    12.183 r  NL_PART/S_OBUF[12]_inst_i_3/O
+                         net (fo=3, routed)           0.608    12.791    NL_PART/nl[33]
+    SLICE_X42Y22         LUT5 (Prop_lut5_I3_O)        0.124    12.915 r  NL_PART/S_OBUF[13]_inst_i_3/O
+                         net (fo=3, routed)           0.679    13.594    NL_PART/nl[36]
+    SLICE_X43Y22         LUT5 (Prop_lut5_I3_O)        0.124    13.718 r  NL_PART/S_OBUF[14]_inst_i_3/O
+                         net (fo=1, routed)           0.667    14.385    NL_PART/nl[38]
+    SLICE_X43Y22         LUT6 (Prop_lut6_I4_O)        0.124    14.509 r  NL_PART/S_OBUF[14]_inst_i_1/O
+                         net (fo=1, routed)           2.427    16.936    S_OBUF[14]
+    U13                  OBUF (Prop_obuf_I_O)         2.667    19.604 r  S_OBUF[14]_inst/O
+                         net (fo=0)                   0.000    19.604    S[14]
+    U13                                                               r  S[14] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+
+
+
