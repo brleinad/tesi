@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+
+./net_map.pl 
+net_map.pl tcbn65gplus_results/adder4bit.flattend.v

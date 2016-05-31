@@ -1,0 +1,22 @@
+ 
+****************************************
+Report : cell
+Design : adder_P
+Version: K-2015.06-SP5-1
+Date   : Tue May 24 14:28:21 2016
+****************************************
+
+Attributes:
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+ADD                       adder                           203.040002 h
+PAR                       parity                          172.799995 h
+--------------------------------------------------------------------------------
+Total 2 cells                                             375.839997
+1

@@ -1,0 +1,90 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -nets
+        -max_paths 1
+        -transition_time
+Design : adder
+Version: K-2015.06-SP5-1
+Date   : Thu May 12 15:10:54 2016
+****************************************
+
+Operating Conditions: WCCOM   Library: tcbn65gpluswc
+Wire Load Model Mode: segmented
+
+  Startpoint: b[0] (input port)
+  Endpoint: s[8] (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  adder              ZeroWireload          tcbn65gpluswc
+
+Attributes:
+    d - dont_touch
+    u - dont_use
+   mo - map_only
+   so - size_only
+    i - ideal_net or ideal_network
+  inf - infeasible path
+
+  Point                        Fanout     Trans      Incr       Path      Attributes
+  ------------------------------------------------------------------------------------------
+  input external delay                               0.00       0.00 f
+  b[0] (in)                                0.00      0.00       0.00 f
+  b[0] (net)                     2                   0.00       0.00 f
+  add_8/U36/Z (AN2D0)                      0.04      0.05       0.05 f
+  add_8/n27 (net)                3                   0.00       0.05 f
+  add_8/U34/Z (OR2D0)                      0.03      0.07       0.12 f
+  add_8/n28 (net)                1                   0.00       0.12 f
+  add_8/U33/Z (AN2D0)                      0.02      0.05       0.17 f
+  add_8/n25 (net)                1                   0.00       0.17 f
+  add_8/U31/Z (OR2D0)                      0.04      0.08       0.25 f
+  add_8/n23 (net)                3                   0.00       0.25 f
+  add_8/U29/Z (OR2D0)                      0.03      0.08       0.33 f
+  add_8/n24 (net)                1                   0.00       0.33 f
+  add_8/U28/Z (AN2D0)                      0.02      0.05       0.38 f
+  add_8/n21 (net)                1                   0.00       0.38 f
+  add_8/U26/Z (OR2D0)                      0.04      0.08       0.46 f
+  add_8/n19 (net)                3                   0.00       0.46 f
+  add_8/U24/Z (OR2D0)                      0.03      0.08       0.53 f
+  add_8/n20 (net)                1                   0.00       0.53 f
+  add_8/U23/Z (AN2D0)                      0.02      0.05       0.58 f
+  add_8/n17 (net)                1                   0.00       0.58 f
+  add_8/U21/Z (OR2D0)                      0.04      0.08       0.66 f
+  add_8/n15 (net)                3                   0.00       0.66 f
+  add_8/U19/Z (OR2D0)                      0.03      0.08       0.74 f
+  add_8/n16 (net)                1                   0.00       0.74 f
+  add_8/U18/Z (AN2D0)                      0.02      0.05       0.79 f
+  add_8/n13 (net)                1                   0.00       0.79 f
+  add_8/U16/Z (OR2D0)                      0.04      0.08       0.87 f
+  add_8/n11 (net)                3                   0.00       0.87 f
+  add_8/U14/Z (OR2D0)                      0.03      0.08       0.95 f
+  add_8/n12 (net)                1                   0.00       0.95 f
+  add_8/U13/Z (AN2D0)                      0.02      0.05       1.00 f
+  add_8/n9 (net)                 1                   0.00       1.00 f
+  add_8/U11/Z (OR2D0)                      0.04      0.08       1.08 f
+  add_8/n7 (net)                 3                   0.00       1.08 f
+  add_8/U9/Z (OR2D0)                       0.03      0.08       1.15 f
+  add_8/n8 (net)                 1                   0.00       1.15 f
+  add_8/U8/Z (AN2D0)                       0.02      0.05       1.20 f
+  add_8/n5 (net)                 1                   0.00       1.20 f
+  add_8/U6/Z (OR2D0)                       0.05      0.09       1.29 f
+  add_8/n3 (net)                 3                   0.00       1.29 f
+  add_8/U4/Z (OR2D0)                       0.03      0.08       1.37 f
+  add_8/n4 (net)                 1                   0.00       1.37 f
+  add_8/U3/Z (AN2D0)                       0.02      0.05       1.42 f
+  add_8/n1 (net)                 1                   0.00       1.42 f
+  add_8/U1/Z (OR2D0)                       0.02      0.06       1.47 f
+  s[8] (net)                     1                   0.00       1.47 f
+  s[8] (out)                               0.02      0.00       1.47 f
+  data arrival time                                             1.47
+  ------------------------------------------------------------------------------------------
+  (Path is unconstrained)
+
+
+1

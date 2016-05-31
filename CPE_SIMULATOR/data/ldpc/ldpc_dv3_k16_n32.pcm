@@ -1,0 +1,46 @@
+& --------------------------------------------------
+& bipartite graph with 32 var-nodes and 16 chk-nodes
+& var-node degrees: 32 x 3                          
+& chk-node degrees: 16 x 6                          
+& --------------------------------------------------
+nb_cols       32     & number of var-nodes (columns of the parity-check matrix)
+nb_rows       16     & number of chk-nodes (rows of the parity-check matrix)
+max_col_deg    3     & max var-node (column) degree
+max_row_deg    6     & max chk-node (row) degree
+nb_nzentries 96      & number of edges (non-zero entries in the parity-check matrix)
+
+& ----------------------------------
+& list of all chk-node (row) degrees
+& ----------------------------------
+all_row_deg
+6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+
+& --------------------------------------
+& indexes of source and parity var-nodes
+& --------------------------------------
+bin_src_indx
+16 29 2 3 4 5 6 7 8 9 10 11 12 13 14 15 
+
+bin_par_indx
+1 0 24 20 28 19 30 26 27 18 22 21 25 23 17 31 
+
+& ------------------------------------------------------------------------------------------
+& lists of var-nodes connected to each chk-node (indexes of non-zero entries, listed by row)
+& ------------------------------------------------------------------------------------------
+nzentries_per_row
+9 24 13 19 10 30 
+10 26 0 20 6 21 
+4 29 11 17 13 31 
+7 21 12 22 16 17 
+12 28 15 0 3 24 
+8 20 3 18 11 22 
+0 22 5 29 9 23 
+3 30 4 27 19 26 
+13 16 2 26 7 28 
+6 19 8 28 4 14 
+11 31 9 21 2 27 
+14 18 7 24 1 29 
+5 27 1 16 8 15 
+1 23 6 31 12 25 
+2 25 14 30 5 20 
+15 17 10 23 25 18 

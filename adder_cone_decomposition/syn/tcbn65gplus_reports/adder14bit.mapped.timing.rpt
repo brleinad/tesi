@@ -1,0 +1,127 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -nets
+        -max_paths 1
+        -transition_time
+Design : adder
+Version: K-2015.06-SP5-1
+Date   : Mon May 16 15:01:39 2016
+****************************************
+
+Operating Conditions: WCCOM   Library: tcbn65gpluswc
+Wire Load Model Mode: segmented
+
+  Startpoint: b[0] (input port)
+  Endpoint: s[13] (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  adder              ZeroWireload          tcbn65gpluswc
+  adder_DW01_add_0   ZeroWireload          tcbn65gpluswc
+
+Attributes:
+    d - dont_touch
+    u - dont_use
+   mo - map_only
+   so - size_only
+    i - ideal_net or ideal_network
+  inf - infeasible path
+
+  Point                        Fanout     Trans      Incr       Path      Attributes
+  ------------------------------------------------------------------------------------------
+  input external delay                               0.00       0.00 f
+  b[0] (in)                                0.00      0.00       0.00 f
+  b[0] (net)                     2                   0.00       0.00 f
+  add_7/B[0] (adder_DW01_add_0)                      0.00       0.00 f
+  add_7/B[0] (net)                                   0.00       0.00 f
+  add_7/U75/Z (AN2D0)                      0.04      0.06       0.06 f
+  add_7/n17 (net)                3                   0.00       0.06 f
+  add_7/U74/Z (OR2D0)                      0.03      0.07       0.13 f
+  add_7/n62 (net)                1                   0.00       0.13 f
+  add_7/U73/Z (AN2D0)                      0.02      0.05       0.18 f
+  add_7/n60 (net)                1                   0.00       0.18 f
+  add_7/U71/Z (OR2D0)                      0.04      0.08       0.26 f
+  add_7/n16 (net)                3                   0.00       0.26 f
+  add_7/U70/Z (OR2D0)                      0.03      0.08       0.33 f
+  add_7/n59 (net)                1                   0.00       0.33 f
+  add_7/U69/Z (AN2D0)                      0.02      0.05       0.38 f
+  add_7/n57 (net)                1                   0.00       0.38 f
+  add_7/U67/Z (OR2D0)                      0.05      0.09       0.47 f
+  add_7/n13 (net)                3                   0.00       0.47 f
+  add_7/U66/Z (OR2D0)                      0.03      0.08       0.55 f
+  add_7/n56 (net)                1                   0.00       0.55 f
+  add_7/U65/Z (AN2D0)                      0.02      0.05       0.60 f
+  add_7/n54 (net)                1                   0.00       0.60 f
+  add_7/U63/Z (OR2D0)                      0.05      0.09       0.68 f
+  add_7/n11 (net)                3                   0.00       0.68 f
+  add_7/U62/Z (OR2D0)                      0.03      0.08       0.76 f
+  add_7/n53 (net)                1                   0.00       0.76 f
+  add_7/U61/Z (AN2D0)                      0.02      0.05       0.81 f
+  add_7/n51 (net)                1                   0.00       0.81 f
+  add_7/U59/Z (OR2D0)                      0.05      0.09       0.89 f
+  add_7/n9 (net)                 3                   0.00       0.89 f
+  add_7/U58/Z (OR2D0)                      0.03      0.08       0.97 f
+  add_7/n50 (net)                1                   0.00       0.97 f
+  add_7/U57/Z (AN2D0)                      0.02      0.05       1.02 f
+  add_7/n48 (net)                1                   0.00       1.02 f
+  add_7/U55/Z (OR2D0)                      0.05      0.09       1.11 f
+  add_7/n7 (net)                 3                   0.00       1.11 f
+  add_7/U54/Z (OR2D0)                      0.03      0.08       1.19 f
+  add_7/n47 (net)                1                   0.00       1.19 f
+  add_7/U53/Z (AN2D0)                      0.02      0.05       1.24 f
+  add_7/n45 (net)                1                   0.00       1.24 f
+  add_7/U51/Z (OR2D0)                      0.05      0.09       1.32 f
+  add_7/n5 (net)                 3                   0.00       1.32 f
+  add_7/U50/Z (OR2D0)                      0.03      0.08       1.40 f
+  add_7/n44 (net)                1                   0.00       1.40 f
+  add_7/U49/Z (AN2D0)                      0.02      0.05       1.45 f
+  add_7/n42 (net)                1                   0.00       1.45 f
+  add_7/U47/Z (OR2D0)                      0.05      0.09       1.53 f
+  add_7/n3 (net)                 3                   0.00       1.53 f
+  add_7/U46/Z (OR2D0)                      0.03      0.08       1.61 f
+  add_7/n41 (net)                1                   0.00       1.61 f
+  add_7/U45/Z (AN2D0)                      0.02      0.05       1.66 f
+  add_7/n39 (net)                1                   0.00       1.66 f
+  add_7/U43/Z (OR2D0)                      0.05      0.09       1.75 f
+  add_7/n1 (net)                 3                   0.00       1.75 f
+  add_7/U42/Z (OR2D0)                      0.03      0.08       1.83 f
+  add_7/n38 (net)                1                   0.00       1.83 f
+  add_7/U41/Z (AN2D0)                      0.02      0.05       1.88 f
+  add_7/n36 (net)                1                   0.00       1.88 f
+  add_7/U39/Z (OR2D0)                      0.05      0.09       1.96 f
+  add_7/n33 (net)                3                   0.00       1.96 f
+  add_7/U36/Z (OR2D0)                      0.03      0.08       2.04 f
+  add_7/n34 (net)                1                   0.00       2.04 f
+  add_7/U35/Z (AN2D0)                      0.02      0.05       2.09 f
+  add_7/n31 (net)                1                   0.00       2.09 f
+  add_7/U33/Z (OR2D0)                      0.05      0.09       2.17 f
+  add_7/n28 (net)                3                   0.00       2.17 f
+  add_7/U30/Z (OR2D0)                      0.03      0.08       2.25 f
+  add_7/n29 (net)                1                   0.00       2.25 f
+  add_7/U29/Z (AN2D0)                      0.02      0.05       2.30 f
+  add_7/n26 (net)                1                   0.00       2.30 f
+  add_7/U27/Z (OR2D0)                      0.05      0.09       2.39 f
+  add_7/n23 (net)                3                   0.00       2.39 f
+  add_7/U23/Z (OR2D0)                      0.03      0.08       2.47 f
+  add_7/n24 (net)                1                   0.00       2.47 f
+  add_7/U22/Z (AN2D0)                      0.02      0.05       2.52 f
+  add_7/n21 (net)                1                   0.00       2.52 f
+  add_7/U20/Z (OR2D0)                      0.03      0.07       2.58 f
+  add_7/n20 (net)                1                   0.00       2.58 f
+  add_7/U19/Z (XOR2D0)                     0.02      0.10       2.68 f
+  add_7/SUM[13] (net)            1                   0.00       2.68 f
+  add_7/SUM[13] (adder_DW01_add_0)                   0.00       2.68 f
+  s[13] (net)                                        0.00       2.68 f
+  s[13] (out)                              0.02      0.00       2.68 f
+  data arrival time                                             2.68
+  ------------------------------------------------------------------------------------------
+  (Path is unconstrained)
+
+
+1

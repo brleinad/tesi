@@ -1,0 +1,159 @@
+Readme file for CPE_SIMULATOR 
+Author Valentin Savin, CEA-LETI, November 2014.
+
+    1. Licence
+    2. Simulator structure
+    3. Installation
+    4. Program execution
+    5. Further documentation
+
+###############################################################################################
+###                                       1. Licence                                        ### 
+###############################################################################################
+This code is distributed under the CeCILL-C Free Software Licence Agreement.
+
+The authors of the CeCILL-C license are: 
+    Commissariat à l'Energie Atomique - CEA, 
+    Centre National de la Recherche Scientifique - CNRS, 
+    Institut National de Recherche en Informatique et en Automatique - INRIA, 
+	
+These organisations have jointly released the CeCILL licence family in July 2004, with the goal 
+of having licenses in conformance with French laws and compatible with the GNU GPL/LGPL family. 
+You can find more information on the CeCILL website.  
+    http://www.cecill.info/licences/Licence_CeCILL-C_V1-en.html
+
+###############################################################################################
+###                                 2. Simulator structure                                  ### 
+###############################################################################################
+The CPE_SIMULATOR is organized in several directories and sub-directories as follows:
+
+                                      CPE_SIMULATOR
+                                            |
+            -------------------------------------------------------------------------
+            |        |         |        |          |          |          |          |
+           bin      cmd      data      doc      include      obj      results      src
+                               |           
+                       ------------------    
+                       |       |        |   
+                      ldpc   netlist   fixp  
+
+|---------------------------------------------------------------------------------------------|
+| CPE_SIMULATOR : main directory                                                             |
+|---------------------------------------------------------------------------------------------|
+|    bin      : contains the executable file 'ldpc_chain.x'.  simulator must be run from this |
+|             : directory as follows:                                                         |
+|             :     'bin >> ldpc_chain.x'  or   'bin >> ldpc_chain.x ../data/my_config.dat'   |
+|---------------------------------------------------------------------------------------------|
+|    cmd      : contains the makefile. simulator must be compiled from this directory:        |
+|             :     'cmd >> make'                                                             |
+|---------------------------------------------------------------------------------------------|
+|    data     : contains the default configuration file 'config.dat'. may also contain user's |
+|             : configuration files                                                           |
+|             :-------------------------------------------------------------------------------|
+|  data/ldpc  : contains the LDPC code file (specify the parity-check matrix of the code)     |
+|             :-------------------------------------------------------------------------------|
+|  data/fixp  : contains the fixed-point arithmetic files (for fixed-point decdoing using     |
+|             : inexact or probabilstic arithmetic)                                           |
+|             :-------------------------------------------------------------------------------|
+| data/netlist: contains the netlist files (specify the netlists of F and P circuits)         |
+|---------------------------------------------------------------------------------------------|
+|    doc      : contains documentation files                                                  |
+|---------------------------------------------------------------------------------------------|
+|   include   : contains header ('.h') files                                                  |
+|---------------------------------------------------------------------------------------------|
+|    obj      : contains object ('.o') files                                                  |
+|---------------------------------------------------------------------------------------------|
+|   results   : contains simulation results ('.res') files                                    |
+|---------------------------------------------------------------------------------------------|
+|    obj      : contains source ('.cpp') files                                                |
+|---------------------------------------------------------------------------------------------|
+
+
+###############################################################################################
+###                                    3. Installation                                      ### 
+###############################################################################################
+Use the makefile in the 'CPE_SIMULATOR/cmd' directory to compile the simulator. 
+Compilation must be done from the 'cmd' directory:
+
+    home >> cd CPE_SIMULATOR/cmd
+    cmd  >> make
+
+This builds the executable file 'cpe_sim.x', located in the 'CPE_SIMULATOR/bin' directory.
+The program  will be compiled either on 32 or 64-bit mode, according to your system default 
+settings. 
+    [ To force compilation on 32-bit mode use: cmd >> make cpe_sim32           ]
+    [ To force compilation on 64-bit mode use: cmd >> make cpe_sim64           ]
+    [ Corresponding executable files are named 'cpe_sim32.x' and 'cpe_sim64.x' ]
+See the makefile for more details.
+
+Remark: if either one of the 'obj' or 'bin' directories is missing, it must be created before
+compilation (before the 'make' command).
+
+# ########################################################################################### #
+# Compiler options                                                                            #
+# -D  MAKE_TERM_RESIZE:  defines the  compiler macro  'MAKE_TERM_RESIZE',  which  enables the #
+#     program to verify the size of your  xterm window -- if the window is not wide enough to #
+#     allow proper display, the program  will call the system to resize it -- this works pro- #
+#     perly on Linux/Unix environments, but might produce errors in some others.              #
+#                                                                                             #
+#     *************************************************************************************** #
+#     **  In case of errors, you should remove the "-D  MAKE_TERM_RESIZE" compiler option  ** #
+#     **  (in this case, you shoud take care that the xterm window is wide enough...)      ** #
+#     *************************************************************************************** #
+#                                                                                             #
+#     Remark: on Cygwin environment for Windows systems and on Solaris platforms, the program #
+#     does not be able to resize the xterm window; however, that does not produce compilation #
+#     nor execution errors (but a warning message will be displayed when the program is run). #
+# ########################################################################################### #
+
+|---------------------------------------------------------------------------------------------|
+|  Before runing 'cpe_sim.x', you must fill in the LDPC, netlist and configuration files!     |
+|---------------------------------------------------------------------------------------------|
+| The LDPC file specifies the parity-check matrix of the LDPC code by means of some  specific |
+| keywords.  The meaning of these keywords is mostly obvious, and they are used to define the |
+| number of rows/columns  of the parity check matrix, the number of non-zero entries per row/ |
+| column, the indexes (and values, if needed) of non-zero entries within each row/column, etc.|
+| Hence, if you  already have some file  that specifies some parity-check matrix (in your own |
+| specific format), you should be able to use it just by  inserting some specific keywords in |
+| your file.                                                                                  |
+|   For more details please read the 'ldpc_file.txt' in the /CPE_SIMULATOR/doc/' directory!   |
+|---------------------------------------------------------------------------------------------|
+| two netlist files must be used, which specify the netlists of circuits F and P. Their names |
+| must be of the form '<netlist_file_name>_F.nl' and '<netlist_file_name>_P.nl'               |
+|---------------------------------------------------------------------------------------------|
+| The configuration file  contains some specific keywords, used to  specify frame parameters, |
+| names of the  netlist and LDPC files,  the decoding algorithm,  as well as  parameters that |
+| control  the end of the simulation  and the display of intermediate results on results file |
+| and standard output.                                                                        |
+|  For more details please read the 'config_file.txt' in the /CPE_SIMULATOR/doc/' directory!  |
+|---------------------------------------------------------------------------------------------|
+
+
+###############################################################################################
+###                                  6. Program execution                                   ### 
+###############################################################################################
+The simulator must be run from the 'CPE_SIMULATOR/bin/' directory. The default configuration 
+file is '/CPE_SIMULATOR/data/config.dat'. You can edit this file, then run the simulator:
+
+     'bin >> ldpc_chain.x'
+
+or create a new configuration file '/CPE_SIMULATOR/data/my_config.dat', then run the simulator
+by specifying the name of the new configuration file:
+
+    'bin >> ldpc_chain.x ../data/my_config.dat'
+
+Nothe that the name of the configuration file must contain the relative path with respect to the
+'bin' directory. 
+
+
+###############################################################################################
+###                                7. Further documentation                                 ### 
+###############################################################################################
+Several documentation files are available in the 'CPE_SIMULATOR/doc/' directory:
+
+    ldpc_files.txt       -- help on the LDPC files
+    config_file.txt      -- help on the configuration file
+    fixp_artithmetic.txt -- help on the fixed-point arithmetic file
+    directories.txt      -- simulator structure
+
+

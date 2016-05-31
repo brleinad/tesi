@@ -1,0 +1,1103 @@
+
+// ###################################################################################################
+   template<class T> int read_keyvalue(T *ptkeyval, const int keynum, FILE *File, const char* keyname)
+// ###################################################################################################
+{
+	/* ---------------------------------------------------------------------------------------------------
+	 * read value(s) of the keyword pointed to by the 'keyname' string from the file pointed to by 'File' 
+	 * the maximum number of values that must be read is indicated by the 'keynum' argument
+	 * read values must be of <class T> type and are stored in the 'ptkeyval' argument 
+	 * output : 
+	 * I >= 0 : I (= non-negative integer value) =  the number of values that have been read from the file
+	 *        : and stored in the 'ptkeyval' array. note that 0 <= I <= keynum.
+	 *        : in case that an error has been detected, the strtls_errno() and strtls_errmsg() are set to
+	 *        : corresponding values 
+	 * --------------------------------------------------------------------------------------------------- */
+	
+	char   arg[STR_LEN];       // used to read from the config file 
+	char   Chtmp;              // temporary character
+	int    indx;               // local index
+	int    radix = 10;         // base of the integer conversion (strtol function)
+	int    *intarray    = 0;   // used only to detect the type of the 'ptkeyval' argument
+	double *doublearray = 0;   // used only to detect the type of the 'ptkeyval' argument
+	char   *chararray   = 0;   // used only to detect the type of the 'ptkeyval' argument
+	int    class_flag   = 0;   // indicates the class (typename) of the 'ptkeyval' argument
+	int    read_num     = 0;   // number of values read from file and stored in 'ptkeyval' array
+	
+	// ----------------------------------------
+	// init str tools (strtls) errno and errmsg
+	// ----------------------------------------
+	strtls_error(NO_ERROR, "");
+	
+	// ----------------------------------------------------
+	// detect the class (typeid) of the 'ptkeyval' argument
+	// ----------------------------------------------------
+	if ( typeid(ptkeyval) == typeid(intarray) )
+	{
+		class_flag = 1;
+	}
+	else if ( typeid(ptkeyval) == typeid(doublearray) )
+	{
+		class_flag = 2;
+	}
+	else if ( typeid(ptkeyval) == typeid(chararray) )
+	{
+		class_flag = 3;
+	}
+	else
+	{					
+		strtls_error(_ST_WRONG_ARG_TYPE, "the type of 'ptkeyval' argument must be either (int*), (double*), or (char*)!");
+		goto end;
+	}
+	
+	// --------------------------
+	// rewind then read from file
+	// --------------------------
+			
+	rewind(File);
+	
+	while ( fscanf(File,"%s", arg) != EOF )
+    {
+		if ( (strcmp(arg, "END_CONFIGURATION") == 0) || (strcmp(arg, "end_configuration") == 0) )
+        {
+            break;
+        }
+		
+		else if ( strncmp(arg, "&", 1) == 0 )
+		{
+			//skip the current line
+			while ( fscanf( File,"%c", &Chtmp ) != EOF )
+			{ 
+				if ( (Chtmp == '\n') || (Chtmp == '\r') ) break;
+			}
+			continue;
+		}
+        
+        else if ( strcmp(arg, keyname) == 0 )
+        {
+			if ( class_flag == 3 )
+			{
+				if ( fscanf(File, "%s", arg) == EOF )
+				{
+					sprintf(arg, "missing value(s) for \"%s\" keyword!", keyname);
+					strtls_error(_ST_KEY_LACKS_VALUES, arg);
+					goto end;
+				}
+				for ( read_num = 0 ; read_num < keynum ; read_num++ )
+				{
+					if (read_num == strlen(arg)) break;
+					ptkeyval[read_num] = arg[read_num];
+				}
+				ptkeyval[read_num] = '\0';
+			}
+			else
+			{	
+				while ( read_num < keynum )
+				{
+					if ( fscanf(File, "%s", arg) == EOF )
+					{
+						sprintf(arg, "missing value(s) for \"%s\" keyword!", keyname);
+						strtls_error(_ST_KEY_LACKS_VALUES, arg);
+						goto end;
+					}
+					
+					if ( strcmp(arg, ";") == 0 )
+					{
+						break;
+					}
+					
+					indx = str2numeric(&ptkeyval[read_num], keynum - read_num, arg);
+					read_num += indx;
+					
+					if (strtls_errno() != NO_ERROR) 
+					{
+						sprintf(arg, "error detected when reading keyword \"%s\"!", keyname);
+						strtls_error(strtls_errno(), arg);
+						goto end;
+					}
+				}
+			}
+			
+			goto end;
+        }
+	}
+	
+	sprintf(arg, "keyword \"%s\" not in file!", keyname);
+	strtls_error(_ST_KEY_NOT_IN_FILE, arg);
+
+end:
+	return read_num;
+
+}
+
+// ##############################################################################
+   template<class T> int read_numvalue(T *ptkeyval, const int keynum, FILE *File)
+// ##############################################################################
+{
+	/* ---------------------------------------------------------------------------------------------------
+	 * read numeric value(s) from the file pointed to by 'File' and store the read value(s) in 'ptkeyval'  
+	 * the maximum number of values that must be read is indicated by the 'keynum' argument
+	 * read values must be of <class T> type (they are stored in the 'ptkeyval' argument) 
+	 * output : 
+	 * I >= 0 : I (= non-negative integer value) =  the number of values that have been read from the file
+	 *        : and stored in the 'ptkeyval' array. note that 0 <= I <= keynum.
+	 *        : in case that an error has been detected, the strtls_errno() and strtls_errmsg() are set to
+	 *        : corresponding values 
+	 * --------------------------------------------------------------------------------------------------- */
+	
+	char   arg[STR_LEN];       // used to read from the config file 
+	int    indx;               // local index
+	int    radix = 10;         // base of the integer conversion (strtol function)
+	int    *intarray    = 0;   // used only to detect the type of the 'ptkeyval' argument
+	double *doublearray = 0;   // used only to detect the type of the 'ptkeyval' argument
+	int    class_flag   = 0;   // indicates the class (typename) of the 'ptkeyval' argument
+	int    read_num     = 0;   // number of values read from file and stoted in 'ptkeyval' array
+	
+	// ----------------------------------------
+	// init str tools (strtls) errno and errmsg
+	// ----------------------------------------
+	strtls_error(NO_ERROR, "");
+	
+	// ----------------------------------------------------
+	// detect the class (typeid) of the 'ptkeyval' argument
+	// ----------------------------------------------------
+	if ( typeid(ptkeyval) == typeid(intarray) )
+	{
+		class_flag = 1;
+	}
+	else if ( typeid(ptkeyval) == typeid(doublearray) )
+	{
+		class_flag = 2;
+	}
+	else
+	{					
+		strtls_error(_ST_WRONG_ARG_TYPE, "the type of 'ptkeyval' argument must be either (int*), (double*), or (char*)!");
+		goto end;
+	}
+	
+	// --------------
+	// read from file
+	// --------------			
+	while ( read_num < keynum )
+	{
+		if ( fscanf(File, "%s", arg) == EOF )
+		{
+			strtls_error(_ST_KEY_LACKS_VALUES, "missing numeric value(s)!");
+			goto end;
+		}
+					
+		if ( strcmp(arg, ";") == 0 )
+		{
+			goto end;
+		}
+					
+		indx = str2numeric(&ptkeyval[read_num], keynum - read_num, arg);
+		read_num += indx;
+					
+		if (strtls_errno() != NO_ERROR) 
+		{
+			strtls_error(strtls_errno(), "error detected when reading data from file!");
+			goto end;
+		}
+	}			
+
+end:
+	return read_num;
+
+}
+
+// ###################################################################################################################
+   template<class T> int read_numvalue(T *ptkeyvalL, T *ptkeyvalR, const int keynum, FILE *File, const char *sep = "")
+// ###################################################################################################################
+{
+	/* ---------------------------------------------------------------------------------------------------
+	 * read numeric value(s) from the file pointed to by 'File' and store the read value(s) in 'ptkeyval'  
+	 * the maximum number of values that must be read is indicated by the 'keynum' argument
+	 * read values must be of <class T> type (they are stored in the 'ptkeyval' argument) 
+	 * output : 
+	 * I >= 0 : I (= non-negative integer value) =  the number of values that have been read from the file
+	 *        : and stored in the 'ptkeyval' array. note that 0 <= I <= keynum.
+	 *        : in case that an error has been detected, the strtls_errno() and strtls_errmsg() are set to
+	 *        : corresponding values 
+	 * --------------------------------------------------------------------------------------------------- */
+	
+	char   argL[STR_LEN], argR[STR_LEN]; // used to read from the config file 
+	char  *argsep;             // separator
+	int    seplen;             // length of sep string
+	int    indx;               // local index
+	int    radix = 10;         // base of the integer conversion (strtol function)
+	int    *intarray    = 0;   // used only to detect the type of the 'ptkeyval' argument
+	double *doublearray = 0;   // used only to detect the type of the 'ptkeyval' argument
+	int    class_flag   = 0;   // indicates the class (typename) of the 'ptkeyval' argument
+	int    read_num     = 0;   // number of values read from file and stoted in 'ptkeyval' array
+	
+	// ----------------------------------------
+	// init str tools (strtls) errno and errmsg
+	// ----------------------------------------
+	strtls_error(NO_ERROR, "");
+	
+	// ----------------------------------------------------
+	// detect the class (typeid) of the 'ptkeyval' argument
+	// ----------------------------------------------------
+	if ( typeid(ptkeyvalL) == typeid(intarray) )
+	{
+		class_flag = 1;
+	}
+	else if ( typeid(ptkeyvalL) == typeid(doublearray) )
+	{
+		class_flag = 2;
+	}
+	else
+	{					
+		strtls_error(_ST_WRONG_ARG_TYPE, "the type of 'ptkeyval' argument must be either (int*), (double*), or (char*)!");
+		goto end;
+	}
+	
+	// -------------------------------------------------
+	// set 'seplen' and search for white spaces in 'sep'
+	// -------------------------------------------------
+	seplen = strlen(sep);
+	for ( indx = 0 ; indx < seplen ; indx++ )
+	{
+		if (isspace(sep[indx]))
+		{
+			strtls_error(_ST_WRONG_ARG_FORMAT, "'sep' (separator) argument must not contain spaces!");
+			goto end;
+		}
+	}
+	
+	// --------------
+	// read from file
+	// --------------		
+	while ( read_num < keynum )
+	{
+		if ( fscanf(File, "%s", argL) == EOF )
+		{
+			strtls_error(_ST_KEY_LACKS_VALUES, "missing numeric value(s)!");
+			goto end;
+		}
+					
+		if ( strcmp(argL, ";") == 0 )
+		{
+			goto end;
+		}
+		
+		if ( seplen == 0 )
+		{
+			if ( fscanf(File, "%s", argR) == EOF )
+			{
+				strtls_error(_ST_KEY_LACKS_VALUES, "missing numeric value(s)!");
+				goto end;
+			}
+		}
+		else
+		{
+			if ( (argsep = strstr(argL, sep)) == 0 )
+			{
+				strtls_error(_ST_WRONG_ARG_FORMAT, "missing separator!");
+				goto end;
+			}
+			strcpy(argR, argsep+seplen);
+			argL[strlen(argL)-strlen(argR)-seplen] = '\0';
+		}
+						
+		indx = str2numeric(&ptkeyvalL[read_num], keynum - read_num, argL);
+		if (strtls_errno() != NO_ERROR) 
+		{
+			strtls_error(strtls_errno(), "error detected when reading data from file!");
+			goto end;
+		}
+		
+		if ( indx != str2numeric(&ptkeyvalR[read_num], keynum - read_num, argR) )
+		{
+			strtls_error(_ST_KEY_LACKS_VALUES, "missing numeric value(s)!");
+			goto end;
+		}
+		if ( strtls_errno() != NO_ERROR )
+		{
+			strtls_error(strtls_errno(), "error detected when reading data from file!");
+			goto end;
+		}
+		read_num += indx;
+	}			
+
+end:
+	return read_num;
+
+}
+
+// ##########################################################################################
+   template<class T> int verify_keyvalue(T *ptkeyval, const int keynum, const char *interval)
+// ##########################################################################################
+{
+	/* --------------------------------------------------------------------------------------
+	 * descprition: verifies if the values in 'ptkeyval' are within the specified 'interval'
+	 * ptkeyval: array of integer values
+	 * keynum  : number of values in the 'ptkeyval' array
+	 * interval: string specifying an interval of numeric values; must be of the form:
+	 *         : "[left, right]", or "]left, right]", or "[left, right[", or "]left, right[",
+	 *         : where left, right are either integer values or -Inf, or +Inf
+	 * output  : NO_ERROR - all values in 'ptkeyval' are within the specified interval
+	 *         : IN_ERROR - wrong format of the specified interval, or at least one value
+	 *         :               in 'ptkeyval' is not within the specified interval
+	 *         :               (in this case, the strtls_errno() and strtls_errmsg() are set 
+	 *         :                to appropriate values)
+	 * -------------------------------------------------------------------------------------- */
+	 
+	T leftbound, rightbound;
+	char   *end; 
+	int    indx, midindx, leftdelim, rightdelim;
+	int    intcls    = 0;
+	double doublecls = 0.0;
+	
+	// ----------------------------------------
+	// init str tools (strtls) errno and errmsg
+	// ----------------------------------------
+	strtls_error(NO_ERROR, "");
+	
+	// -----------------------------------------------------------------------
+	// init left and right bound according to the typeid of the input argument
+	// -----------------------------------------------------------------------
+	if ( typeid(ptkeyval[0]) == typeid(intcls) )
+	{
+		leftbound  = (T) INT_MIN;
+		rightbound = (T) INT_MAX;
+		intcls = 1;
+	}
+	else if ( typeid(ptkeyval[0]) == typeid(doublecls) )
+	{
+		leftbound  = (T) -HUGE_VAL;
+		rightbound = (T) HUGE_VAL;
+	}
+	else
+	{
+		strtls_error(_ST_WRONG_ARG_TYPE, "'ptkeyval' arguments must be of type (int*) or (double*)!");
+		return IN_ERROR;
+	}
+	leftdelim  = -1;
+	rightdelim = -1;
+	
+	// -------------------
+	// determine leftdelim
+	// -------------------
+	while ( (strlen(interval) > 0) && (isspace(interval[0])) )
+	{
+		interval++;
+	}
+	if ( strlen(interval) == 0 ) 
+	{
+		strtls_error(_ST_WRONG_ARG_FORMAT,"missing left delimiter ('[' or ']')!");
+		return IN_ERROR;
+	}
+
+	if      ( interval[0] == '[' ) leftdelim =  1;
+	else if ( interval[0] == ']' ) leftdelim = -1;
+	else 
+	{
+		strtls_error(_ST_WRONG_ARG_FORMAT, "missing left delimiter ('[' or ']')!");
+		return IN_ERROR;
+	}
+	
+	// -------------------
+	// determine leftbound
+	// -------------------
+	interval++;
+	while ( (strlen(interval) > 0) && (isspace(interval[0])) )
+	{
+		interval++;
+	}
+	if ( strlen(interval) == 0 ) 
+	{
+		strtls_error(_ST_WRONG_ARG_FORMAT, "missing left bound value!");
+		return IN_ERROR;
+	}
+			
+	if ( (midindx = strcspn(interval, ",")) >= strlen(interval) )
+	{	
+		strtls_error(_ST_WRONG_ARG_FORMAT, "missing middle delimiter (',')!");
+		return IN_ERROR;
+	}	
+	indx = midindx;
+	while ( --indx >= 0 )
+	{
+		if ( !isspace(interval[indx]) ) break;
+		
+	}
+	if ( indx < 0 )
+	{
+		strtls_error(_ST_WRONG_ARG_FORMAT, "missing left bound value!");
+		return IN_ERROR;
+	}
+	indx++;
+	
+	if ( (strncmp(interval,  "INF", indx) == 0) || (strncmp(interval,  "Inf", indx) == 0) || (strncmp(interval,  "inf", indx) == 0) || \
+	     (strncmp(interval, "+INF", indx) == 0) || (strncmp(interval, "+Inf", indx) == 0) || (strncmp(interval, "+inf", indx) == 0)    )
+	{
+		if ( intcls ) leftbound = (T) INT_MAX;
+		else leftbound = (T) HUGE_VAL;
+	}
+	else if ( (strncmp(interval, "-INF", indx) == 0) || (strncmp(interval, "-Inf", indx) == 0) || (strncmp(interval, "-Inf", indx) == 0) )
+	{
+		if ( intcls ) leftbound = (T) INT_MIN;
+		else leftbound = (T) -HUGE_VAL;
+	}
+	else
+	{
+		if ( intcls ) leftbound = (T) strtol(interval, &end, 10);
+		else leftbound = (T) strtod(interval, &end);
+		
+		if ( (!isspace(end[0])) && (end[0] != ',') ) 
+		{
+			strtls_error(_ST_WRONG_ARG_FORMAT, "wrong left bound value format!");
+			return IN_ERROR;
+		}
+	}
+	
+	// -----------------------------------
+	// determine rightbound and rightdelim 
+	// -----------------------------------
+	interval += (midindx+1);
+	while ( (strlen(interval) > 0) && isspace(interval[0]) )
+	{
+		interval++;
+	}
+	if ( strlen(interval) == 0 )
+	{
+		strtls_error(_ST_WRONG_ARG_FORMAT,"missing right bound value!");
+		return IN_ERROR;
+	}
+	
+	if ( (indx = strcspn(interval, " ][")) >= strlen(interval) )
+	{
+		strtls_error(_ST_WRONG_ARG_FORMAT,"missing right delimiter (']' or '[')!");
+		return IN_ERROR;
+	}	
+	
+	if ( indx == 0 )
+	{
+		strtls_error(_ST_WRONG_ARG_FORMAT, "missing right bound value!");
+		return IN_ERROR;
+	}
+	
+	if ( (strncmp(interval,  "INF", indx) == 0) || (strncmp(interval,  "Inf", indx) == 0) || (strncmp(interval,  "inf", indx) == 0) || \
+	     (strncmp(interval, "+INF", indx) == 0) || (strncmp(interval, "+Inf", indx) == 0) || (strncmp(interval, "+inf", indx) == 0)    )
+	{
+		if ( intcls ) rightbound = (T) INT_MAX;
+		else rightbound = (T) HUGE_VAL;
+	}
+	else if ( (strncmp(interval, "-INF", indx) == 0) || (strncmp(interval, "-Inf", indx) == 0) || (strncmp(interval, "-Inf", indx) == 0) )
+	{
+		if ( intcls ) rightbound = (T) INT_MIN;
+		else rightbound = (T) -HUGE_VAL;
+	}
+	else
+	{
+		if ( intcls ) rightbound = (T) strtol(interval, &end, 10);
+		else rightbound = (T) strtod(interval, &end);
+		if ( (!isspace(end[0])) && (end[0] != ']') && (end[0] != '[') ) 
+		{
+			strtls_error(_ST_WRONG_ARG_FORMAT, "wrong right bound value format!");
+			return IN_ERROR;
+		}
+	}
+	
+	interval += indx;
+	while ( (strlen(interval) > 0) && (isspace(interval[0])) )
+	{
+		interval++;
+	}
+	if ( strlen(interval) == 0 ) 
+	{
+		strtls_error(_ST_WRONG_ARG_FORMAT,"missing right delimiter (']' or '[')!");
+		return IN_ERROR;
+	}
+	
+	if      ( interval[0] == ']' ) rightdelim =  1;
+	else if ( interval[0] == '[' ) rightdelim = -1;
+	else 
+	{
+		strtls_error(_ST_WRONG_ARG_FORMAT, "missing right delimiter (']' or '[')!");
+		return IN_ERROR;
+	}
+	interval++;
+	while ( strlen(interval) > 0 )
+	{
+		if ( !isspace(interval[0]) )
+		{
+			strtls_error(_ST_WRONG_ARG_FORMAT, "unexpected character after right delimiter!");
+			return IN_ERROR;
+		}
+		interval++;
+	}
+	
+	// --------------------------------------
+	// verify leftbound and rightbound values
+	// --------------------------------------
+	if ( (leftdelim  == -1) || (rightdelim == -1) )
+	{
+		if ( leftbound >= rightbound )
+		{
+			strtls_error(_ST_WRONG_ARG_FORMAT, "interval is empty!");
+			return IN_ERROR;
+		}
+	}
+	else
+	{
+		if ( leftbound > rightbound )
+		{
+			strtls_error(_ST_WRONG_ARG_FORMAT, "interval is empty!");
+			return IN_ERROR;
+		}
+	}
+	
+	// ------------------------------------------------------------------------
+	// verify if 'keyval' (the key values) is between the left and right bounds
+	// ------------------------------------------------------------------------	
+	if ( leftdelim  == -1 ) 
+	{
+		for ( indx = 0 ; indx < keynum ; indx++ )
+		{
+			if ( ptkeyval[indx] <= leftbound ) 
+			{
+				strtls_error(_ST_KEY_OUT_OF_BNDS, "value outside the interval!");
+				return IN_ERROR;
+			}
+		}
+	}
+	else /* leftdelim  == 1 */
+	{
+		for ( indx = 0 ; indx < keynum ; indx++ )
+		{
+			if ( ptkeyval[indx] <  leftbound ) 
+			{
+				strtls_error(_ST_KEY_OUT_OF_BNDS, "value outside the interval!");
+				return IN_ERROR;
+			}
+		}
+	}
+	
+	if ( rightdelim  == -1 ) 
+	{
+		for ( indx = 0 ; indx < keynum ; indx++ )
+		{
+			if ( ptkeyval[indx] >= rightbound ) 
+			{
+				strtls_error(_ST_KEY_OUT_OF_BNDS, "value outside the interval!");
+				return IN_ERROR;
+			}
+		}
+	}
+	else /* rightdelim  == 1 */
+	{
+		for ( indx = 0 ; indx < keynum ; indx++ )
+		{
+			if ( ptkeyval[indx] >  rightbound ) 
+			{
+				strtls_error(_ST_KEY_OUT_OF_BNDS, "value outside the interval!");
+				return IN_ERROR;
+			}
+		}
+	}
+	
+	return NO_ERROR;
+}
+
+// ###########################################################################################################################
+   template<class T> int verify_keyvalue(T *ptkeyval, const int keynum, const char *intervalformat, T leftbound, T rightbound)
+// ###########################################################################################################################
+{
+	/* --------------------------------------------------------------------------------------
+	 * descprition: verifies if the 'keyval' value is within the specified 'interval'
+	 * ptkeyval  : array of integer values
+	 * keynum    : number of values in the 'ptkeyval' array
+	 * intervalformat: string specifying the interval format; must be of the form:
+	 *               : "[%d, %d]", or "]%d, %d]", or "[%d, %d[", or "]%d, %d["
+	 * leftbound : integer value, left bound of the interval
+	 * rightbound: integer value, right bound of the interval
+	 * output  : NO_ERROR - all values in 'ptkeyval' are within the specified interval
+	 *         : IN_ERROR - wrong format of the specified interval, or at least one value
+	 *         :               in 'ptkeyval' is not within the specified interval
+	 *         :               (in this case, the strtls_errno() and strtls_errmsg() are set 
+	 *         :                to appropriate values)
+	 * -------------------------------------------------------------------------------------- */
+	char   *end; 
+	char   err_message[100];
+	char   boundformat[10];
+	int    indx, midindx, leftdelim, rightdelim;
+	int    intcls    = 0;
+	double doublecls = 0.0;
+	
+	// ----------------------------------------
+	// init str tools (strtls) errno and errmsg
+	// ----------------------------------------
+	strtls_error(NO_ERROR, "");
+	
+	// -----------------------------------------------------------------------
+	// init left and right bound according to the typeid of the input argument
+	// -----------------------------------------------------------------------
+	if ( typeid(ptkeyval[0]) == typeid(intcls) )
+	{
+		intcls = 1;
+		strcpy(boundformat, "%d");
+	}
+	else if ( typeid(ptkeyval[0]) == typeid(doublecls) )
+	{
+		strcpy(boundformat, "%f");
+	}
+	else
+	{
+		strtls_error(_ST_WRONG_ARG_TYPE, "'ptkeyval' must be  argument must be of type (int*) or (double*)!");
+		return IN_ERROR;
+	}
+	leftdelim  = -1;
+	rightdelim = -1;
+	
+	// -------------------
+	// determine leftdelim
+	// -------------------
+	while ( (strlen(intervalformat) > 0) && (isspace(intervalformat[0])) )
+	{
+		intervalformat++;
+	}
+	if ( strlen(intervalformat) == 0 ) 
+	{
+		strtls_error(_ST_WRONG_ARG_FORMAT, "missing left delimiter ('[' or ']')!");
+		return IN_ERROR;
+	}
+
+	if      ( intervalformat[0] == '[' ) leftdelim =  1;
+	else if ( intervalformat[0] == ']' ) leftdelim = -1;
+	else 
+	{
+		strtls_error(_ST_WRONG_ARG_FORMAT, "missing left delimiter ('[' or ']')!");
+		return IN_ERROR;
+	}
+	
+	// -------------------
+	// determine leftbound
+	// -------------------
+	intervalformat++;
+	while ( (strlen(intervalformat) > 0) && (isspace(intervalformat[0])) )
+	{
+		intervalformat++;
+	}
+	if ( strlen(intervalformat) == 0 ) 
+	{
+		strtls_error(_ST_WRONG_ARG_FORMAT, "missing left bound format (\"%s\" was expected)!");
+		return IN_ERROR;
+	}
+			
+	if ( (midindx = strcspn(intervalformat, ",")) >= strlen(intervalformat) )
+	{
+		strtls_error(_ST_WRONG_ARG_FORMAT, "missing middle delimiter (',')!");
+		return IN_ERROR;
+	}	
+	indx = midindx;
+	while ( --indx >= 0 )
+	{
+		if ( !isspace(intervalformat[indx]) ) break;
+		
+	}
+	if ( indx < 0 )
+	{
+		sprintf(err_message, "missing left bound format (\"%s\" was expected)!", boundformat);
+		strtls_error(_ST_WRONG_ARG_FORMAT, err_message);
+		return IN_ERROR;
+	}
+	indx++;
+	
+	if ( strncmp(intervalformat, boundformat, indx) != 0 ) 
+	{
+		sprintf(err_message, "missing left bound format (\"%s\" was expected)!", boundformat);
+		strtls_error(_ST_WRONG_ARG_FORMAT, err_message);
+		return IN_ERROR;
+	}
+	
+	// -----------------------------------
+	// determine rightbound and rightdelim 
+	// -----------------------------------
+	intervalformat += (midindx+1);
+	while ( (strlen(intervalformat) > 0) && isspace(intervalformat[0]) )
+	{
+		intervalformat++;
+	}
+	if ( strlen(intervalformat) == 0 )
+	{
+		sprintf(err_message, "missing right bound format (\"%s\" was expected)!", boundformat);
+		strtls_error(_ST_WRONG_ARG_FORMAT, err_message);
+		return IN_ERROR;
+	}
+	
+	if ( (indx = strcspn(intervalformat, " ][")) >= strlen(intervalformat) )
+	{
+		strtls_error(_ST_WRONG_ARG_FORMAT, "missing right delimiter (']' or '[')!");
+		return IN_ERROR;
+	}	
+	
+	if ( indx == 0 )
+	{
+		sprintf(err_message, "missing right bound format (\"%s\" was expected)!", boundformat);
+		strtls_error(_ST_WRONG_ARG_FORMAT, err_message);
+		return IN_ERROR;
+	}
+	
+	if ( strncmp(intervalformat, boundformat, indx) != 0 )
+	{
+		sprintf(err_message, "missing right bound format (\"%s\" was expected)!", boundformat);
+		strtls_error(_ST_WRONG_ARG_FORMAT, err_message);
+		return IN_ERROR;
+	}
+	
+	intervalformat += indx;
+	while ( (strlen(intervalformat) > 0) && (isspace(intervalformat[0])) )
+	{
+		intervalformat++;
+	}
+	if ( strlen(intervalformat) == 0 ) 
+	{
+		strtls_error(_ST_WRONG_ARG_FORMAT, "missing right delimiter (']' or '[')!");
+		return IN_ERROR;
+	}
+	
+	if      ( intervalformat[0] == ']' ) rightdelim =  1;
+	else if ( intervalformat[0] == '[' ) rightdelim = -1;
+	else 
+	{
+		strtls_error(_ST_WRONG_ARG_FORMAT, "missing right delimiter (']' or '[')!");
+		return IN_ERROR;
+	}
+	intervalformat++;
+	while ( strlen(intervalformat) > 0 )
+	{
+		if ( !isspace(intervalformat[0]) )
+		{
+			strtls_error(_ST_WRONG_ARG_FORMAT, "unexpected character after right delimiter!");
+			return IN_ERROR;
+		}
+		intervalformat++;
+	}
+	
+	// --------------------------------------
+	// verify leftbound and rightbound values
+	// --------------------------------------
+	if ( (leftdelim  == -1) || (rightdelim == -1) )
+	{
+		if ( leftbound >= rightbound )
+		{
+			strtls_error(_ST_WRONG_ARG_FORMAT, "interval is empty!");
+			return IN_ERROR;
+		}
+	}
+	else
+	{
+		if ( leftbound > rightbound )
+		{
+			strtls_error(_ST_WRONG_ARG_FORMAT, "interval is empty!");
+			return IN_ERROR;
+		}
+	}
+	
+	// ------------------------------------------------------------------------
+	// verify if 'keyval' (the key values) is between the left and right bounds
+	// ------------------------------------------------------------------------	
+	if ( leftdelim  == -1 ) 
+	{
+		for ( indx = 0 ; indx < keynum ; indx++ )
+		{
+			if ( ptkeyval[indx] <= leftbound ) 
+			{
+				strtls_error(_ST_KEY_OUT_OF_BNDS, "value outside the interval!");
+				return IN_ERROR;
+			}
+		}
+	}
+	else /* leftdelim  == 1 */
+	{
+		for ( indx = 0 ; indx < keynum ; indx++ )
+		{
+			if ( ptkeyval[indx] <  leftbound ) 
+			{
+				strtls_error(_ST_KEY_OUT_OF_BNDS, "value outside the interval!");
+				return IN_ERROR;
+			}
+		}
+	}
+	
+	if ( rightdelim  == -1 ) 
+	{
+		for ( indx = 0 ; indx < keynum ; indx++ )
+		{
+			if ( ptkeyval[indx] >= rightbound ) 
+			{
+				strtls_error(_ST_KEY_OUT_OF_BNDS, "value outside the interval!");
+				return IN_ERROR;
+			}
+		}
+	}
+	else /* rightdelim  == 1 */
+	{
+		for ( indx = 0 ; indx < keynum ; indx++ )
+		{
+			if ( ptkeyval[indx] >  rightbound ) 
+			{
+				strtls_error(_ST_KEY_OUT_OF_BNDS, "value outside the interval!");
+				return IN_ERROR;
+			}
+		}
+	}
+	
+	return NO_ERROR;
+}
+
+// ###################################################################################################
+   template<class T> int verify_keyvalue(T *ptkeyval, const int keynum, const T *vallist, int numlist)
+// ###################################################################################################
+{
+	/* -----------------------------------------------------------------------------------------------
+	 * descprition: verifies if the values in 'ptkeyval' array are within the specified list of values
+	 * ptkeyval: array of integer value
+	 * keynum  : number of values in 'ptkeyval' array
+	 * vallist : array specifying a list of integer values
+	 * numlist : number of interger values in 'varlist'
+	 * output  : NO_ERROR - all values in 'ptkeyval' are in the specified list of values
+	 *         : IN_ERROR - at least one value in 'ptKeyval' is not in the specified list of values
+	 * ----------------------------------------------------------------------------------------------- */
+	
+	T keyval;
+	int num, indx, inlist;
+	
+	// ----------------------------------------
+	// init str tools (strtls) errno and errmsg
+	// ----------------------------------------
+	strtls_error(NO_ERROR, "");
+	
+	// --------------------------------------------
+	// number of values found in the specified list
+	// --------------------------------------------
+	inlist = 0;
+	
+	for ( num = 0 ; num < keynum ; num++ )
+	{
+		if ( inlist < num ) break;
+		
+		keyval = ptkeyval[num];
+
+		for ( indx = 0 ; indx < numlist ; indx++ )
+		{
+			if ( keyval == vallist[indx] )
+			{
+				inlist++;
+				break;
+			}
+		}
+	}
+	
+	if ( inlist < keynum ) 
+	{
+		strtls_error(_ST_KEY_NOT_IN_LIST, "value not in the list!");
+		return IN_ERROR;
+	}
+	else 
+	{
+		return NO_ERROR;
+	}
+}
+
+// #####################################################################################
+   template<class T> int str2numeric(T *ptnumval, const int numsize, const char *strval)
+// #####################################################################################
+{
+	/* -----------------------------------------------------------------------------------------------------
+	 * the 'strval' argument, which must be a "numeric string", e.g. of the form "1,2,3:0.5:5,7:-0.1:6,3x5",
+	 * is converted into a numeric array pointed to by 'ptnumval'.  for the above example, 'ptnumval' is the
+	 * array {1, 2, 3, 3.5, 4, 4.5, 5, 7, 6.9, 6.8, 6.7, 6.5, 6.4, 6.3, 6.2, 6.1, 6, 3, 3, 3, 3, 3}
+	 * a maximum number of 'numsize' values are read from 'strval' string and stored in the 'ptnumval' array
+	 * the value of the 'numsize' argument is modified by the function and set to the number of values that
+	 * have been actually read from the string.
+	 * output : 
+	 * I >= 0 : I (= non-negative integer value) = the number of values that have been read from the string
+	 *        : 'strval' and stored in the 'ptnumval' array. note that 0 <= I <= numsize.
+	 *        : in case that an error has been detected, the strtls_errno() and strtls_errmsg() are set to
+	 *        : corresponding values 
+	 * ----------------------------------------------------------------------------------------------------- */
+	
+	char   *arg, *KV, *argend; // used to tokenize the 'strval' string
+	char   KeyValue[STR_LEN];  // copy of the 'strval' string
+	char   errmsg[STR_LEN];    // error message (displayed by the function)
+	T      FirstVal, StepVal, LastVal;  // first, step and last values (read from 'strval')
+	int    TimesVal;	       // number of times a value is repeated (read from 'strval')
+	int    radix = 10;         // base for integer conversion ('strtol' function)
+	int    *intarray    = 0;   // used only to detect the typeid of 'ptnumval'
+	double *doublearray = 0;   // used only to detect the typeid of 'ptnumval'
+	int    class_flag   = 0;   // indicates the class (typeid) of  'ptnumval' 
+	int    numindx      = 0;   // number of read values (returned by the function)
+	
+	// ----------------------------------------
+	// init str tools (strtls) errno and errmsg
+	// ----------------------------------------
+	strtls_error(NO_ERROR, "");
+	
+	// ----------------------------------------------------
+	// detect the class (typeid) of the 'ptnumval' argument
+	// ----------------------------------------------------
+	if ( typeid(ptnumval) == typeid(intarray) )
+	{
+		class_flag = 1;
+	}
+	else if ( typeid(ptnumval) == typeid(doublearray) )
+	{
+		class_flag = 2;
+	}
+	else
+	{
+		strtls_error(_ST_WRONG_ARG_TYPE, "the type of 'ptnumval' argument must be either (int*) or (double*)!");
+		goto end;
+	}
+	
+	// -----------
+	// init values
+	// -----------
+	strcpy(KeyValue, strval);
+	numindx = 0;
+	
+	// -------------------
+	// tokenize the strval
+	// -------------------
+	KV = (char *) KeyValue;
+	while ( (arg = strtok(KV, ", ")) != 0 )
+	{
+		if ( class_flag == 1 ) FirstVal = (T) strtol(arg, &argend, radix);
+		if ( class_flag == 2 ) FirstVal = (T) strtod(arg, &argend);
+		
+		if ( strlen(argend) == strlen(arg) )
+		{
+			strtls_error(_ST_WRONG_ARG_FORMAT, "missing first (beginning) numeric value!");
+			goto end;
+		}
+		
+		else if ( strlen(argend) == 0 ) 
+		{	
+			if ( numindx >= numsize ) 
+			{  
+				// memory overflow
+				strtls_error(_ST_KEYNUM_EXCEEDED, "too many numeric values in input 'strval' argument!"); 
+				goto end;
+			}
+			ptnumval[numindx++] = FirstVal;
+				
+		}
+		
+		else if ( argend[0] == ':' )
+		{			
+			strcpy(arg, &argend[1]);
+			if ( strlen(arg) == 0 ) 
+			{  	
+				strtls_error(_ST_WRONG_ARG_FORMAT, "missing second (step) numeric value!"); 
+				goto end;
+			}
+
+			if ( class_flag == 1 ) StepVal = (T) strtol(arg, &argend, radix);
+			if ( class_flag == 2 ) StepVal = (T) strtod(arg, &argend);
+			
+			if ( (strlen(argend) == 0) || (argend[0] != ':') ) 
+			{ 
+				strtls_error(_ST_WRONG_ARG_FORMAT, "numeric value was expected (step value)!"); 
+				goto end;
+			}
+			
+			strcpy(arg, &argend[1]);
+			if ( strlen(arg) == 0 ) 
+			{ 
+				strtls_error(_ST_WRONG_ARG_FORMAT, "missing last (ending) numeric  value!"); 
+				goto end;
+			}
+			
+			if ( class_flag == 1 ) LastVal = (T) strtol(arg, &argend, radix);
+			if ( class_flag == 2 ) LastVal = (T) strtod(arg, &argend);
+			
+			if ( strlen(argend) != 0 ) 
+			{ 
+				strtls_error(_ST_WRONG_ARG_FORMAT, "numeric value was expected (ending value)!"); 
+				goto end; 
+			}	
+			
+			if ( StepVal == 0 ) 
+			{ 
+				strtls_error(_ST_WRONG_ARG_FORMAT, "step value must be non-zero!"); 
+				goto end;
+			}	
+			if ( ((StepVal > 0) && (FirstVal > LastVal)) || ((StepVal < 0) && (FirstVal < LastVal)) ) 
+			{ 
+				strtls_error(_ST_WRONG_ARG_FORMAT, "inconsistency between beginning, step, and ending values!"); 
+				goto end;
+			}
+		
+			while ( ((StepVal < 0) && (FirstVal >= LastVal - 1e-6)) || ((StepVal > 0) && (FirstVal <= LastVal + 1e-6)) )
+			{
+				if ( numindx >= numsize ) 
+				{ 
+					// memory overflow
+					strtls_error(_ST_KEYNUM_EXCEEDED, "too many numeric values in input 'strval' argument!"); 
+					goto end;
+				}
+				ptnumval[numindx++] = FirstVal;
+				FirstVal += StepVal;
+			}
+		}
+		
+		else if ( (argend[0] == 'x') || (argend[0] == 'X') )
+		{
+			strcpy(arg, &argend[1]);
+			if ( strlen(arg) == 0 ) 
+			{ 
+				strtls_error(_ST_WRONG_ARG_FORMAT,"missing second (times) value!"); 
+				goto end;
+			}
+
+			TimesVal = (int) strtol(arg, &argend, radix);
+			
+			if ( strlen(argend) != 0 ) 
+			{ 
+				strtls_error(_ST_WRONG_ARG_FORMAT, "integer (times) value was expected!"); 
+				goto end;
+			}
+			if ( TimesVal <= 0 )    
+			{ 
+				strtls_error(_ST_WRONG_ARG_FORMAT, "\"times\" value must be positive!"); 
+				goto end;
+			}
+			
+			while ( TimesVal > 0 )
+			{
+				if ( numindx >= numsize ) 
+				{ 
+					// memory overflow
+					strtls_error(_ST_KEYNUM_EXCEEDED,"too many numeric values in input 'strval' argument!"); 
+					goto end;
+				}
+				ptnumval[numindx++] = FirstVal;
+				TimesVal--;
+			}
+			
+		}
+		else
+		{
+			strtls_error(_ST_WRONG_ARG_FORMAT, "wrong numeric format!"); 
+			goto end;
+		}
+		
+		// set KV = 0, for the next calls of strtok function
+		KV = 0;
+	}
+	
+end:
+	
+	return numindx;
+	
+}
+
+
+
+
+
+

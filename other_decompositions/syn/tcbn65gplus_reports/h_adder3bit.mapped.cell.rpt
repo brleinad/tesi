@@ -1,0 +1,53 @@
+ 
+****************************************
+Report : cell
+Design : h_adder
+Version: K-2015.06-SP5-1
+Date   : Fri May 13 10:50:10 2016
+****************************************
+
+Attributes:
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+U35                       OAI222D0        tcbn65gpluswc   3.240000  
+U36                       CKND2D0         tcbn65gpluswc   1.440000  
+U37                       AOI21D0         tcbn65gpluswc   2.160000  
+U38                       CKND0           tcbn65gpluswc   1.080000  
+U39                       CKND0           tcbn65gpluswc   1.080000  
+U40                       OAI221D0        tcbn65gpluswc   2.880000  
+U41                       MUX2ND0         tcbn65gpluswc   2.880000  
+U42                       OAI22D0         tcbn65gpluswc   2.520000  
+U43                       OA21D0          tcbn65gpluswc   2.520000  
+U44                       AOI21D0         tcbn65gpluswc   2.160000  
+U45                       OAI221D0        tcbn65gpluswc   2.880000  
+U46                       MUX2ND0         tcbn65gpluswc   2.880000  
+U47                       NR2D0           tcbn65gpluswc   1.440000  
+U48                       AOI31D0         tcbn65gpluswc   2.520000  
+U49                       CKND0           tcbn65gpluswc   1.080000  
+U50                       AO21D0          tcbn65gpluswc   2.520000  
+U51                       CKND2D0         tcbn65gpluswc   1.440000  
+U52                       OAI211D0        tcbn65gpluswc   2.520000  
+U53                       CKND0           tcbn65gpluswc   1.080000  
+U54                       NR2D0           tcbn65gpluswc   1.440000  
+U55                       IND2D0          tcbn65gpluswc   2.160000  
+U56                       CKND2D0         tcbn65gpluswc   1.440000  
+U57                       OAI211D0        tcbn65gpluswc   2.520000  
+U58                       CKND0           tcbn65gpluswc   1.080000  
+U59                       OAI21D0         tcbn65gpluswc   2.160000  
+U60                       CKND0           tcbn65gpluswc   1.080000  
+U61                       CKND2D0         tcbn65gpluswc   1.440000  
+U62                       NR2D0           tcbn65gpluswc   1.440000  
+U63                       CKND2D0         tcbn65gpluswc   1.440000  
+U64                       CKND2D0         tcbn65gpluswc   1.440000  
+U65                       XNR2D0          tcbn65gpluswc   3.600000  
+U66                       OAI21D0         tcbn65gpluswc   2.160000  
+U67                       CKND2D0         tcbn65gpluswc   1.440000  
+--------------------------------------------------------------------------------
+Total 33 cells                                            65.160002
+1

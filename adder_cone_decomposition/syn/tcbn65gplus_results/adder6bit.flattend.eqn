@@ -1,0 +1,31 @@
+.design_name adder
+.inputnames  a[5] a[4] a[3] a[2] a[1] a[0] b[5] b[4] b[3] b[2] b[1] b[0]
+.outputnames s[5] s[4] s[3] s[2] s[1] s[0]
+s[5] = (add_7_n2 ^ add_7_n1) ;
+s[4] = (add_7_n7 ^ add_7_n5) ;
+s[3] = (add_7_n12 ^ add_7_n10) ;
+s[2] = (add_7_n15 ^ add_7_n17) ;
+s[1] = (add_7_n22 ^ add_7_n20) ;
+s[0] = (a[0] ^ b[0]) ;
+add_7_n22 = (a[1] ^ b[1]) ;
+add_7_n21 = (add_7_n20 + a[1]) ;
+add_7_n20 = (a[0] * b[0]) ;
+add_7_n19 = (a[1] * add_7_n20) ;
+add_7_n18 = (b[1] * add_7_n21) ;
+add_7_n17 = (a[2] ^ b[2]) ;
+add_7_n16 = (a[2] + add_7_n15) ;
+add_7_n15 = (add_7_n18 + add_7_n19) ;
+add_7_n14 = (a[2] * add_7_n15) ;
+add_7_n13 = (b[2] * add_7_n16) ;
+add_7_n12 = (a[3] ^ b[3]) ;
+add_7_n11 = (a[3] + add_7_n10) ;
+add_7_n10 = (add_7_n13 + add_7_n14) ;
+add_7_n9 = (a[3] * add_7_n10) ;
+add_7_n8 = (b[3] * add_7_n11) ;
+add_7_n7 = (a[4] ^ b[4]) ;
+add_7_n6 = (a[4] + add_7_n5) ;
+add_7_n5 = (add_7_n8 + add_7_n9) ;
+add_7_n4 = (a[4] * add_7_n5) ;
+add_7_n3 = (b[4] * add_7_n6) ;
+add_7_n2 = (add_7_n3 + add_7_n4) ;
+add_7_n1 = (a[5] ^ b[5]) ;

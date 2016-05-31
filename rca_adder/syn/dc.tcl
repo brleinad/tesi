@@ -123,8 +123,8 @@ report_power -nosplit > ${REPORTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.mapped.powe
 change_names -rules verilog -hierarchy  -log_changes dumy.log
 #change_name -rules collpse -hier -vebose
 
-#set_flatten true
+set_flatten true
 write -f equation -output ${RESULTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.flattend.eqn
-#write -f verilog -hierarchy -output ${RESULTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.flattend.v
+write -f verilog -hierarchy -output ${RESULTS_DIR}/${DESIGN_NAME}${VARIANT_NAME}.flattend.v
 
 exit

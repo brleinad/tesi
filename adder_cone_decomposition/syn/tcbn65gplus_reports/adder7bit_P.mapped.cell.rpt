@@ -1,0 +1,68 @@
+ 
+****************************************
+Report : cell
+Design : adder7bit_P
+Version: K-2015.06-SP5-1
+Date   : Sun May 22 19:53:47 2016
+****************************************
+
+Attributes:
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+U49                       XOR2D0          tcbn65gpluswc   3.600000  
+U50                       XOR2D0          tcbn65gpluswc   3.600000  
+U51                       XOR2D0          tcbn65gpluswc   3.600000  
+U52                       XOR2D0          tcbn65gpluswc   3.600000  
+U53                       XOR2D0          tcbn65gpluswc   3.600000  
+U54                       XOR2D0          tcbn65gpluswc   3.600000  
+U55                       XOR2D0          tcbn65gpluswc   3.600000  
+U56                       XOR2D0          tcbn65gpluswc   3.600000  
+U57                       XOR2D0          tcbn65gpluswc   3.600000  
+U58                       XOR2D0          tcbn65gpluswc   3.600000  
+U59                       XOR2D0          tcbn65gpluswc   3.600000  
+U60                       XOR2D0          tcbn65gpluswc   3.600000  
+U61                       XOR2D0          tcbn65gpluswc   3.600000  
+U62                       XOR2D0          tcbn65gpluswc   3.600000  
+U63                       XOR2D0          tcbn65gpluswc   3.600000  
+U64                       XOR2D0          tcbn65gpluswc   3.600000  
+U65                       XOR2D0          tcbn65gpluswc   3.600000  
+U66                       XOR2D0          tcbn65gpluswc   3.600000  
+U67                       XOR2D0          tcbn65gpluswc   3.600000  
+U68                       XOR2D0          tcbn65gpluswc   3.600000  
+U69                       XOR2D0          tcbn65gpluswc   3.600000  
+U70                       XOR2D0          tcbn65gpluswc   3.600000  
+U71                       XOR2D0          tcbn65gpluswc   3.600000  
+U72                       XOR2D0          tcbn65gpluswc   3.600000  
+U73                       XOR2D0          tcbn65gpluswc   3.600000  
+U74                       XOR2D0          tcbn65gpluswc   3.600000  
+U75                       XOR2D0          tcbn65gpluswc   3.600000  
+U76                       XOR2D0          tcbn65gpluswc   3.600000  
+U77                       XOR2D0          tcbn65gpluswc   3.600000  
+U78                       XOR2D0          tcbn65gpluswc   3.600000  
+U79                       XOR2D0          tcbn65gpluswc   3.600000  
+U80                       XOR2D0          tcbn65gpluswc   3.600000  
+U81                       XOR2D0          tcbn65gpluswc   3.600000  
+U82                       XOR2D0          tcbn65gpluswc   3.600000  
+U83                       XOR2D0          tcbn65gpluswc   3.600000  
+U84                       XOR2D0          tcbn65gpluswc   3.600000  
+U85                       XOR2D0          tcbn65gpluswc   3.600000  
+U86                       XOR2D0          tcbn65gpluswc   3.600000  
+U87                       XOR2D0          tcbn65gpluswc   3.600000  
+U88                       XOR2D0          tcbn65gpluswc   3.600000  
+U89                       XOR2D0          tcbn65gpluswc   3.600000  
+U90                       XOR2D0          tcbn65gpluswc   3.600000  
+U91                       XOR2D0          tcbn65gpluswc   3.600000  
+U92                       XOR2D0          tcbn65gpluswc   3.600000  
+U93                       XOR2D0          tcbn65gpluswc   3.600000  
+U94                       XOR2D0          tcbn65gpluswc   3.600000  
+U95                       XOR2D0          tcbn65gpluswc   3.600000  
+U96                       XOR2D0          tcbn65gpluswc   3.600000  
+--------------------------------------------------------------------------------
+Total 48 cells                                            172.799995
+1

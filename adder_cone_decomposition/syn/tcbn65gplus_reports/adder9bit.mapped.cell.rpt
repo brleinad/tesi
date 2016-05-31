@@ -1,0 +1,22 @@
+ 
+****************************************
+Report : cell
+Design : adder
+Version: K-2015.06-SP5-1
+Date   : Mon May 16 15:01:07 2016
+****************************************
+
+Attributes:
+   BO - reference allows boundary optimization
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+add_7                     adder_DW01_add_0                123.840001 BO, h
+--------------------------------------------------------------------------------
+Total 1 cells                                             123.840001
+1

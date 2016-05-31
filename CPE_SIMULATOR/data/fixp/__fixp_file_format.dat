@@ -1,0 +1,53 @@
+& ---------------------------------------------------------------------------------
+& fixp_arithmetic  <'exact' | 'inexact' | 'probabilistic'>
+&     : defines the fixed point arithmetic type (exact, inexact, or probabilistic)
+&
+& fixp_add_lut  size looup_table
+&     : defines the size and lookup table of the inexact adder
+&     : (the size above is the size of the lookup table) 
+& 
+& fixp_lth_lut  <'lth_exact' | 'lth_from_add' | size lth_lut>
+&     : defines the type (exact or from adder) or the size and lookup table of the 
+&     : inexact comparator (less than)
+&
+& fixp_add_perr  depth   perr 
+&     : defines the depth and the probability of error of the probabilistic adder
+&
+& fixp_lth_perr  <'lth_exact'  | 'lth_from_add' | perr>
+&     : defines the type (exact or from adder) or the probability of error of the
+&     : probabilistic comparator (less than)     
+&
+& fixp_xor_perr  <'xor_exact'  | perr>  
+&     : defines the type (exact) or the probability of error of the probabilistic
+&     : xor-gate    
+& ---------------------------------------------------------------------------------
+& see also 'fixp_arithmetic.txt' file in the 'doc/' directory
+
+
+& -----------------------------------
+& exemple file-1 (inexact arithmetic)
+& -----------------------------------
+fixp_arithmetic  inexact
+
+fixp_add_lut   7
+ -3  -3  -3  -3  -2  -1   0
+ -3  -3  -3  -2  -1   0   1
+ -3  -3  -2  -1   0   1   2
+ -3  -2  -1   0   1   2   3
+ -2  -1   0   1   2   3   3
+ -1   0   1   2   3   3   3
+  0   1   2   3   3   3   3
+  
+fixp_lth_lut  lth_exact
+
+
+& -----------------------------------------
+& exemple file-2 (probabilistic arithmetic)
+& -----------------------------------------
+fixp_arithmetic  probabilistic
+
+fixp_add_perr   6  0.1 
+
+fixp_lth_perr   0.01
+
+fixp_xor_perr   xor_exact

@@ -1,0 +1,89 @@
+\begin{thebibliography}{10}
+
+\bibitem{BDS_NDM_MCD_EDAC_1991}
+Dieter Bochmann, Frank Dresig, and Bernd Steinbach.
+\newblock A new decomposition method for multilevel circuit design.
+\newblock In {\em Proceedings of the Conference on European Design Automation},
+  EDAC '91, pages 374--377. IEEE Computer Society, 1991.
+
+\bibitem{ICC}
+E.~Dupraz, V.~Savin, S.~K. Grandhi, E.~Popovici, and D.~Declerq.
+\newblock Practical ldpc encoders robust to hardware errors.
+\newblock {\em accepted IEEE ICC}, 2016.
+
+\bibitem{ETS}
+S.~Grandhi, E.~Dupraz, C.~Spagnol, V.~Savin, and E.~Popovici.
+\newblock Cpe: Codeword prediction encoder.
+\newblock {\em accepted IEEE European Test Symposium}, May 2016.
+
+\bibitem{Grandhi15}
+S.~K. Grandhi, D.~McCarthy, C.~Spagnol, E.~Popovici, and S.~Cotofana.
+\newblock Rost-c: Reliability driven optimisation and synthesis techniques for
+  combinational circuits.
+\newblock {\em Computer Design (ICCD), 2015 33rd IEEE International Conference
+  on}, pages 431--434, 2015.
+
+\bibitem{Knysh11}
+D.~Knysh and E.~Dubrova.
+\newblock Rule-based optimisation of and-xor expressions.
+\newblock {\em Facta Universitatis}, 24(3):437--449, 2011.
+
+\bibitem{L_TQ_TKS_1989}
+Trung~Quoc Le.
+\newblock {\em Testbarkeit kombinatorischer Schaltungen - Theorie und Entwurf}.
+\newblock PhD thesis, Technical University of Karl-Marx-Stadt, Germany, 1989.
+\newblock written in German, English title: Testability of Combinational
+  Circuits - Theory and Design.
+
+\bibitem{MSP_ABD_LF_DAC_2001}
+Alan Mishchenko, Bernd Steinbach, and Marek Perkowski.
+\newblock An algorithm for bi-decomposition of logic functions.
+\newblock In {\em Proceedings of the 38th Annual Design Automation Conference},
+  DAC '01, pages 103--108, New York, NY, USA, 2001. ACM.
+
+\bibitem{D5.2}
+Emanuel Popovici, Satish Grandhi, Christian Spagnol, Valentin Savin, and Sorin
+  Cotofana.
+\newblock Fault tolerant synthesis through error correcting codes driven graph
+  augmentationg.
+\newblock {\em FP7-ICT/FET-OPEN/ i-RISC project, Deliverable 5.2}, February
+  2015.
+
+\bibitem{PS_LFE_2004}
+Christian Posthoff and Bernd Steinbach.
+\newblock {\em Logic Functions and Equations - Binary Models for Computer
+  Science}.
+\newblock Springer, Dordrecht, The Netherlands, 2004.
+
+\bibitem{S_VBD_LF_RM_2015}
+Bernd Steinbach.
+\newblock Vectorial bi-decompositions of logic functions.
+\newblock In {\em Proceedings of the Reed-Muller Workshop 2015}, number~4 in RM
+  '15, pages 1--10, 2015.
+
+\bibitem{SP_BDC_2010}
+Bernd Steinbach and Christian Posthoff.
+\newblock Boolean differential calculus.
+\newblock In Tsutomu Sasao and Jon~T. Butler, editors, {\em Progress in
+  Applications of Boolean Functions}, pages 55--78. Morgan \& Claypool
+  Publishers, San Rafael, CA, USA, 2010.
+
+\bibitem{Taylor68b}
+Michael Taylor.
+\newblock Reliable computation in computing systems designed from unreliable
+  components.
+\newblock {\em Bell Syst. Tech. J.}, 47:2339--2266, December 1968.
+
+\bibitem{Taylor68a}
+Michael Taylor.
+\newblock Reliable information storage in memories designed from unreliable
+  components.
+\newblock {\em Bell Syst. Tech. J.}, 47:2299--2337, 1968.
+
+\bibitem{Neumann56}
+John Von~Neumann.
+\newblock Probabilistic logics and the synthesis of reliable organisms from
+  unreliable components.
+\newblock {\em Automata Studies}, 34:43--98, 1956.
+
+\end{thebibliography}

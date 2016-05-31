@@ -1,0 +1,30 @@
+& gate_perr_list: list of gate error probability values 
+gate_perr_list  0.00001, 0.0001, 0.001, 0.01, 0.1, 0.5 ;
+
+& NETLIST parameters
+nb_inputs         28
+nb_outputs_f      14
+nb_outputs_p      14
+netlist_file   adder14bit 
+criticality_thres   -1 ;
+
+& LDPC parameters
+ldpc_file      ldpc_dv3_k14_n28      
+ldpc_decoding       MS		   
+max_iter_nb         100
+scheduling       flooding    
+
+fixp_quantization        3  5 
+fixp_input_scale         2
+&fixp_arithm_file     proba::add[4,0.001]
+
+& end-of-simulation parameters
+max_nb_simul_frames   5000000   	
+min_nb_error_frames   1000 
+
+& display parameters
+results_file     adder14bit
+resfile_refresh   1000
+stdout_refresh    1000
+
+END_CONFIGURATION

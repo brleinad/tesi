@@ -1,0 +1,110 @@
+& ################################################################################
+& 'config.dat': default configuration file for the 'ldpc_netlist' simulation chain 
+& ################################################################################
+
+& ------------------------------------------------------------------
+& gate_perr_list: list of gate error probability values 
+& all standard logic gates are assumed to fail with same probability 
+& ------------------------------------------------------------------
+gate_perr_list   0.001,0.0005,0.0002,0.0001,0.00005,0.00002,0.00001 ;    
+
+& ----------------------------------------------------------------------------------------------------
+& NETLIST parameters
+& nb_inputs   : number of inputs (the same for both F and P)
+& nb_outputs_f: number of outputs of the original circuit F
+& nb_outputs_p: number of outputs of the "parity" circuit P
+& netlist_file: name of the netlist file, without path nor extention. netlist files must be located in 
+&             : the  'data/netlist/'  directory. there must be two files: one for the original circuit 
+&             : <netlist_file>_F.nl, and the second for the parituy circuit <netlist_file>_P.nl 
+% criticality_thres: criticality threshold - gates with criticality degree greater than this value are
+&             : considered to be reliable. may define one single or two separate values (for F and P)
+&             : not used if 'criticality_thres' value is set to -1!
+& ----------------------------------------------------------------------------------------------------
+nb_inputs         1296
+nb_outputs_f      974
+nb_outputs_p      322
+netlist_file   linear/linear_ni1296_IRISC_dv3_K974_N1296
+criticality_thres   10 ;
+
+& ------------------------------------------------------------------------------------------------------
+& LDPC parameters
+& ldpc_file    : name of the LDPC files, without path nor extention.  LDPC files must be located in the 
+&              : 'data/ldpc/' directory.  the file extension can be either '.pcm' (parity check matrix)
+&              : or '.bmat' (base matrix - for quasi-cyclic codes, only). the code must be of dimension 
+&              : equal to 'nb_outputs_f', and codelength equal to 'nb_outputs_f' + 'nb_outputs_p'.
+& ldpc_decoding: 'MS' (or 'MS:sf=x', or 'MS:of=x') for Min-Sum (with scale factor x, or offset factor x)
+&              : 'SCMS' for Self Corrected Min-Sum decoding
+&              : 'Gal-B:<t>' for Gallager-B with qualified majority threshold <t> 
+& max_iter_nb  : maximum number of decoding iterations
+&              : if a '*' character is appended to the max number of iterations (ex. 100*), the decoding
+&              : stops only when the max number of iterations if reached.  otherwise,  decoding stops if 
+&              : either a codeword has been found (syndrome = 0), or 'max_iter_nb' has been reached
+& scheduling   : decoding scheduling; may be 'flooding', 'serial', or 'layered:<int>', where <int> is an
+&              : integer value indicating the number of (horizontal) layers of the parity-check matrix
+& ------------------------------------------------------------------------------------------------------
+ldpc_file      iRISC_dv3_K974_N1296
+ldpc_decoding       MS		   
+max_iter_nb         20
+scheduling       flooding    
+
+& -------------------------------------------------------------------------------------------
+& fixp_quantization: optional parameter specifying that the LDPC decoding must be implemented 
+&       in fixed-point arithmetic. must be submitted as  "fixp_quantization <size1> <size2>", 
+&       where <size1> is the number of  quantization  bits for  input LLRs  and the exchanged 
+&       messages and <size2> is the number of quantization bits for the output (a posteriori) 
+&       LLRs (both <size1>  and <size2> must include one bit for the sign!)
+&       note that all fixed-point adders used by the decoder are implemented in <size2> bits!
+&       however,exchanged messages are saturated if they fall out of range [-X,..., X], where
+&       X = 2^(<size1>-1)-1
+& fixp_input_scale: optional parameter specifying a scaling value for the decoder's input
+&       the scaling value must be between 0 and 2^(<size1>-1) (see fixp_quantization before)
+& fixp_arithm_file: optional parameter specifying the short name (without path nor extension)
+&       of the fixed-point arithmetic file. it must be located in the 'data/fixp/'  directory
+&       and the file extension must be '.dat'! a fixed-point arithmetic  file  can be used in 
+&       order to  define inexact or probabilistic fixed-point arithmetic.  by default, fixed-
+&       point arithmetic is exact!
+&       for probabilistic fixed-point arithmetic, fixp_arithm_file keyword may also be set to
+&       a string indicating the parameters of the probabilistic adder, comparator, xor-gate
+&       example:    fixp_arithm_file     proba::add[3,0.001]:comp[0.001]:xor[0]
+& -------------------------------------------------------------------------------------------
+fixp_quantization        3  5 
+fixp_input_scale         2
+&fixp_arithm_file     proba::add[4,0.001]
+
+& -------------------------------------------------------------------------------
+& end-of-simulation parameters
+& max_nb_simul_frames: maximum number of simulated frames (transmitted codewords)
+& min_nb_error_frames: minimum number of erroneous frames (undecoded codewords)
+& -------------------------------------------------------------------------------
+max_nb_simul_frames   1000000
+min_nb_error_frames   100 
+
+& -----------------------------------------------------------------------------------------------
+& display parameters
+& results_file   : name of the results file, without path nor extension. the file will be located
+&                : in the 'REF_LDPC_CHAIN/results/' directory, and file extension will be '.res'! 
+&                :  - if the 'results_file' keyword is set to 'config_file', the results file has
+&                :    the same short name as the config file 
+&                :  - if the 'results_file' keyword is set to  'ldpc_file',  the results file has
+&                :    the same short name as the LDPC file 
+&                :  - if the 'results_file' is missing (eg.commented) the default results file is
+&                :    used, whose short name is 'config_file'.'ldpc_file' 
+& resfile_refresh: intermediate  simulation  results are  written to the results file  once every
+&                : 'resfile_refresh' (if >0) simulated frames. note that new intermediate results
+&                : will overwritte the previos ones. if 'resfile_refresh = 0', only final results
+&                : are written to the results file (at the end of the simulation).
+& stdout_refresh : intermediate output is produced on stdout once every 'stdout_refresh' (if > 0)
+&                : simulated frames. if 0, no intermediate output is produced, only final results
+&                : are displayed (at the end of the simulation).
+& ----------------------------------------------------------------------------------------------- 
+results_file     config_file  
+resfile_refresh   1000
+stdout_refresh    1000
+
+
+END_CONFIGURATION
+
+(see also 'Readme' file from ./doc/ directory)
+
+
+

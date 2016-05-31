@@ -1,0 +1,183 @@
+# ############################################################################################# #
+# The configuration file of the 'ldpc_chain.x' simulator must contain some specific keywords,   #
+# used to specify:                                                                              #
+#                                                                                               #
+#    1. frame parameters: e.g., number of source and coded bits                                 #
+#    2. channel model and corresponding channel parameter(s)                                    #
+#    3. LDPC code parameters: e.g. name of the LDPC file and decoding type                      #
+#    4. end-of-simulation parameters (control the end-of-simulation)                            #
+#    5. display parameters (control display to stdout and results file)                         #
+#                                                                                               #
+# The simulator must be run from the 'REF_LDPC_CHAIN/bin/' directory. The default configuration #
+# file is '/REF_LDPC_CHAIN/data/config.dat'. You can edit this file, then run the simulator:    #
+#                                                                                               #
+#      'bin >> ldpc_chain.x'                                                                    #
+#                                                                                               #
+# or create a new configuration file '/REF_LDPC_CHAIN/data/my_config.dat', then run the program #
+# by specifying the name of the new configuration file:                                         #
+#                                                                                               #
+#     'bin >> al_fec_ldpc.x ../data/my_config.dat'                                              #
+#                                                                                               #
+# Nothe that the name of the configuration file must contain  the relative path with respect to #
+# the 'bin' directory.                                                                          #
+# ############################################################################################# #
+ An example of configuration file, together with explanations of the configuration keywords are
+ presented below. The '&' character may be used to introduce comments in the configuration file
+
+& -----------------------------------------------------------------------------------
+& bin_source_mode: 'ALL_ZERO' or 'RAND'
+& 'ALL_ZERO': all zero codeword is simulated (generator matrix is not needed)
+& 'RAND'    : random binary source with Pr(0) = Pr(1) = 1/2 (generator matrix needed)
+& -----------------------------------------------------------------------------------
+
+& example
+bin_source_mode   all_zero 	  	       
+
+& --------------------------------------------------------------------
+& channel_type: 'BI-AWGN' (Binary Input Additive White gaussian Noise) 
+&             : 'BSC' (Binary Symmetric Channel) 
+& --------------------------------------------------------------------
+
+& example-1
+channel_type      BI-AWGN  
+
+& example-2
+channel_type      BSC  
+
+& -----------------------------------------------------------------------------
+& list of channel parameters that have to be simulated: can be defined by using 
+& one (and only one!) of the following keywords, according to the channey type: 
+& ebn0_list: list of Eb/N0 values in dB  -- BI-AWGN channel
+& snr_list : list of  SNR  values in dB  -- BI-AWGN channel
+& per_list : list of "probability of error" values -- BSC channel 
+& fer_list : list of "fraction of errors"   values -- BSC channel 
+& ner_list : list of "number of errors"     values -- BSC channel 
+& -----------------------------------------------------------------------------
+
+& example-1: BI-AWGN channel 
+snr_list   0.5:0.25:2,2.1:0.1:3 ; 
+
+& example-2: BSC channel 
+per_list   0.5:-0.05:0.2 ;
+
+& remark: "Matlab-like" notation can be used for the list of values!
+&       : the list of values must ends by semicolon (separated by an white space)
+
+& --------------------------------------
+& info_size : number of information bits
+& coded_size: number of coded bits 
+& --------------------------------------
+
+& example
+info_size           504      	
+coded_size         1008     	
+
+& ------------------------------------------------------------------------------------------------------
+& LDPC parameters
+& ldpc_file    : name of the LDPC files, without path nor extention.  LDPC files must be located in the 
+&              : 'data/ldpc/' directory.  the file extension must either '.gm' for the generator matrix 
+&              : or '.pcm' for the parity-check matrix. 
+&              : remark: one may also set the 'ldpc_file' keyword to 'std:wimax' or 'std:wpan',  if the
+&              : submitted values of 'info_size' and 'coded_size' fit any of the coding rates specified 
+&              : by the WIMAX or WPAN standard, respectively.
+& ldpc_decoding: 'SP' for Sum-Product decoding; 
+&              : 'MS' (or 'MS:sf=x', or 'MS:of=x') for Min-Sum (with scale factor x, or offset factor x)
+&              : 'SCMS' for Self Corrected Min-Sum decoding
+& max_iter_nb  : maximum number of decoding iterations
+& scheduling   : decoding scheduling; may be 'flooding', 'serial', or 'layered:<int>', where <int> is an
+&              : integer value indicating the number of (horizontal) layers of the parity-check matrix
+& ------------------------------------------------------------------------------------------------------
+
+& example-1
+ldpc_file       mackay_peg_reg_504x1008
+ldpc_decoding      SCMS		   
+max_iter_nb        100
+scheduling      flooding
+
+& example-2
+ldpc_file       std:wimax
+ldpc_decoding      SCMS		   
+max_iter_nb        100
+scheduling      layered:12
+
+& in the second example, the program will automatically detect that the LDPC code to be used
+& is that defined in the 'data/ldpc/wimax/wimax.rate_1_2.bmat' file.  this is a quasi-cyclic
+& LDPC code, and the expansion factor is computed acc. to submitted info_size and coded_size
+& values (in this case, expansion factor is Z=42).  note that the decoding scheduling is set
+& to layered scheduling with 12 layers,  which corresponds to the number of rows of the base
+& (quasi-cyclic) matrix;  hence, each layer corresponds to exactly Z=42 rows in the expanded
+& parity check matrix.
+
+& -------------------------------------------------------------------------------------------
+& fixp_quantization: optional parameter specifying that the LDPC decoding must be implemented 
+&       in fixed-point arithmetic. must be submitted as  "fixp_quantization <size1> <size2>", 
+&       where <size1> is the number of  quantization  bits for  input LLRs  and the exchanged 
+&       messages and <size2> is the number of quantization bits for the output (a posteriori) 
+&       LLRs (both <size1>  and <size2> must include one bit for the sign!)
+&       note that all fixed-point adders used by the decoder are implemented in <size2> bits!
+&       however,exchanged messages are saturated if they fall out of range [-X,..., X], where
+&       X = 2^(<size1>-1)-1
+& fixp_arithm_file: optional parameter specifying the short name (without path nor extension)
+&       of the fixed-point arithmetic file. it must be located in the 'data/fixp/'  directory
+&       and the file extension must be '.dat'! a fixed-point arithmetic  file  can be used in 
+&       order to  define inexact or probabilistic fixed-point arithmetic.  by default, fixed-
+&       point arithmetic is exact!
+& -------------------------------------------------------------------------------------------
+
+& example-1
+fixp_quantization   6  7
+
+& example-2
+fixp_quantization   6  7
+fixp_arithm_file  fixp_proba_6_7
+
+& -----------------------------------------------------------------------------------
+& end-of-simulation parameters
+& max_nb_simul_frames: maximum number of simulated frames (transmitted codewords)
+& min_nb_error_frames: minimum number of erroneous frames (undecoded codewords)
+&
+& for the current  channel parameter,  if the number  of simulated frames reaches the
+& 'max_nb_simul_frames' value, or if the number of erroneous frames  (i.e. the number
+& of decoding failures) reaches the 'min_nb_error_frames' value,  simulation  for the 
+& current channel parameter stops and the next channel parameter is simulated.  
+& However, if the 'max_nb_simul_frames' value has been reached and the current number
+& of erroneous frames  is less than  'min_nb_error_frames'/10, simulation  completely
+& stops (next channel parameters,  corresponding to improved channel conditions,  are
+& no longer simulated). 
+& -----------------------------------------------------------------------------------
+
+& example
+max_nb_simul_frames    100000000   	
+min_nb_error_frames      200    
+
+& -----------------------------------------------------------------------------------------------
+& display parameters
+& results_file   : name of the results file, without path nor extension. the file will be located
+&                : in the 'REF_LDPC_CHAIN/results/' directory, and file extension will be '.res'! 
+&                :  - if the 'results_file' keyword is set to 'config_file', the results file has
+&                :    the same short name as the config file 
+&                :  - if the 'results_file' keyword is set to  'ldpc_file',  the results file has
+&                :    the same short name as the LDPC file 
+&                :  - if the 'results_file' is missing (eg.commented) the default results file is
+&                :    used, whose short name is 'config_file'.'ldpc_file' 
+& resfile_refresh: intermediate  simulation  results are  written to the results file  once every
+&                : 'resfile_refresh' (if >0) simulated frames. note that new intermediate results
+&                : will overwritte the previos ones. if 'resfile_refresh = 0', only final results
+&                : are written to the results file (at the end of the simulation).
+& stdout_refresh : intermediate output is produced on stdout once every 'stdout_refresh' (if > 0)
+&                : simulated frames. if 0, no intermediate output is produced, only final results
+&                : are displayed (at the end of the simulation).
+& ----------------------------------------------------------------------------------------------- 
+
+& example
+results_file    config_file                                                  
+resfile_refresh   10000
+stdout_refresh     0
+
+
+END_CONFIGURATION
+
+(see also 'Readme' file from ./doc/ directory)
+
+
+

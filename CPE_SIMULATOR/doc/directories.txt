@@ -1,0 +1,42 @@
+The REF_LDPC_CHAIN simulator is organized in several directories and sub-directories as follows:
+
+                                      REF_LDPC_CHAIN
+                                            |
+            -------------------------------------------------------------------------
+            |        |         |        |          |          |          |          |
+           bin      cmd      data      doc      include      obj      results      src
+                               |                                         |
+                           ---------                                     |
+                           |       |                                   __eps
+                          ldpc   fixp
+
+|---------------------------------------------------------------------------------------------|
+| REF_LDPC_CHAIN : main directory                                                             |
+|---------------------------------------------------------------------------------------------|
+|    bin      : contains the executable file 'ldpc_chain.x'.  simulator must be run from this |
+|             : directory as follows:                                                         |
+|             :     'bin >> ldpc_chain.x'  or   'bin >> ldpc_chain.x ../data/my_config.dat'   |
+|---------------------------------------------------------------------------------------------|
+|    cmd      : contains the makefile. simulator must be compiled from this directory:        |
+|             :     'cmd >> make'                                                             |
+|---------------------------------------------------------------------------------------------|
+|    data     : contains the default configuration file 'config.dat'. may also contain user's |
+|             : configuration files                                                           |
+|             :-------------------------------------------------------------------------------|
+|  data/ldpc  : contains the LDPC code file (specify the parity-check matrix of the code)     |
+|             :-------------------------------------------------------------------------------|
+|  data/fixp  : contains the fixed-point arithmetic files (for fixed-point decdoing using     |
+|             : inexact or probabilstic arithmetic)                                           |
+|---------------------------------------------------------------------------------------------|
+|    doc      : contains documentation files                                                  |
+|---------------------------------------------------------------------------------------------|
+|   include   : contains header ('.h') files                                                  |
+|---------------------------------------------------------------------------------------------|
+|    obj      : contains object ('.o') files                                                  |
+|---------------------------------------------------------------------------------------------|
+|   results   : contains simulation results ('.res') files                                    |
+|---------------------------------------------------------------------------------------------|
+|    obj      : contains source ('.cpp') files                                                |
+|---------------------------------------------------------------------------------------------|
+
+

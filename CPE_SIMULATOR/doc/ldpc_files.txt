@@ -1,0 +1,273 @@
+Several LDPC files are or may be used by the simulator. They must be located in the 'REF_LDPC_CHAIN/data/ldpc/'
+directory and share the same short name (referred to as 'file_shortname' here below), but have different file 
+extensions. The following files may be used by the simulator:
+
+   1) 'file_shortname.pcm' -- file containing the "parity check matrix" of the LDPC code!
+      This file is used by the decoding module (and possibly by the encoding module), and contains a description 
+	  of the parity-check matrix of the LDPC code by means of some specific keywords (see below).
+	  
+   2) 'file_shortname.gm' -- file containing the "generator matrix" of the LDPC code!
+      This file is used by the encoding module and contains a description of the generator matrix of the LDPC code
+	  by means of some specific keywords (see below).
+	   
+   3) 'file_shortname.bmat' -- file containing the "base matrix" of a Quasi-Cyclic (QC)-LDPC code; 
+      This file may be used by both the encoding and the decoding modules, and contains a description of the base 
+	  matrix of the QC-LDPC by means of some specific keywords (see below). 
+	  
+   Remark: 
+	  At the decoder side: If neither 'file_shortname.pcm' nor 'file_shortname.bmat' file exists, an error message 
+	         will be displayed by the decoding module.  In the contrary case, if both files exist, the '.pcm' file 
+			 will be used by the decoding module!
+	  At the encoder side: If neither 'file_shortname.gm', nor 'file_shortname.pcm' nor 'file_shortname.bmat' file 
+	         exists, an error message will be displayed by the encoding module. Otherwise,the encoding module will
+			 use one of these files as follows:
+                '.gm'   file if it exists; 
+				'.pcm'  file if the '.gm' file doesn't exist (but the '.pcm' file exists); 
+				'.bmat' file if neither '.gm'  nor '.pcm' file exists (but the '.bmat' file exists).
+	  
+
+# ######################################################################################################### #
+#                                  1) The Parity Check Matrix (PCM) File                                    #
+# ######################################################################################################### #
+If you already have some file containing the description of the parity-check matrix in the 'alist' format, 
+you should be able to use it, just by inserting some specific keywords in your file!
+
+|-----------------------------------------------------------------------------------------------------------|
+|     Optional keywords                                                                                     |
+|-----------------------------------------------------------------------------------------------------------|
+|'qc_ldpc': indicates whether the code is quasi-cyclic (QC) or not.                                         |
+|         : must be either 1 (for QC codes) or 0. default value is 0 (not QC)                               |
+|         : Remark: it is also possible to use a 'bmat' (base matrix) file in order to specify a QC-code    |
+|-----------------------------------------------------------------------------------------------------------|
+|     Mandatory keywords                                                                                    |
+|-----------------------------------------------------------------------------------------------------------|
+|'nb_rows'          : number of rows of the parity-check matrix (= number of check-nodes)                   |
+|'nb_cols'          : number of columns of the parity-check matrix (= number of variable-nodes)             |
+|                   : [for QC-codes, they must be equal to the number of rows/columns of the base matrix]   |
+|-------------------:---------------------------------------------------------------------------------------|
+|'bin_src_indx'     : indicate the indexes of the source-bits or source-columns, respectively.              |
+| or 'src_indx'     : - for binary codes, these keywords are equivalent, as each column of the              |
+|                   :   parity check matrix corresponds to one coded bit                                    |
+|                   : - for QC-codes,  each column corresponds to a group of 'Z' bits, where                |
+|                   :   'Z' is the expansion factor of the QC-code.                                         |
+|-------------------:---------------------------------------------------------------------------------------|
+|'all_row_deg'      : vector of all the 'nb_rows' row degrees (one degree for each row)                     |
+|-------------------:---------------------------------------------------------------------------------------|
+|'nzentries_per_row': "non-zero entries" of the parity check matrix (PCM), listed per row.                  |
+|                   : - for binary codes, there must be one line per row of the PCM, specifying the         |
+|                   :   indexes of the columns with a non-zero entry (1) on that row.                       |
+|                   :                                                                                       |
+|                   : - for QC-codes,  there must be one line per row of the PCM, containing 'column:coef'  |
+|                   :   terms,  where 'column' is a column index corresponding to a  non-zero entry of the  |
+|                   :   row, and 'coef' is the value of that entry (e.g. a non-negative shift value).       |
+|                   :                                                                                       |
+|                   : Remark: more in general, for QC codes, one can use one of the following keywords:     |                                                                  |
+|                   :     'nzentries_per_row[col:coef]',     'nzentries_per_row[coef:col]',                 |
+|                   :     'nzentries_per_row[col_coef]', or  'nzentries_per_row[coef_col]'                  |
+|                   : (specifying whether the non-zero entries are given by (column, coefficient) or        |
+|                   : (coefficient, column) pair, and how these values are separated (either a colon        |
+|                   : or a white space)                                                                     |
+|-----------------------------------------------------------------------------------------------------------|
+
+# ######################################################################################################### #
+#                                    2) The Generator Matrix (GM) File                                      #
+# ######################################################################################################### #
+Only systematic encoding is possible (i.e. the source bits are part of the encoded bits). 
+The generator matrix can be given either in the form of a "full matrix" or in the form of a "sparse matrix"!
+In the latter case, the file format is very close to the format of the PCM file.  
+
+|-----------------------------------------------------------------------------------------------------------|
+|     Optional keywords                                                                                     |
+|-----------------------------------------------------------------------------------------------------------|
+|'qc_ldpc': indicates whether the code is quasi-cyclic (QC) or not.                                         |
+|         : must be either 1 (for QC codes) or 0. default value is 0 (no QC)                                |
+|-----------------------------------------------------------------------------------------------------------|
+|     Mandatory keywords                                                                                    |
+|-----------------------------------------------------------------------------------------------------------|
+|'encoding_type'    : must be either 'lower_triang' (encoding using a lower triangular matrix) or           |
+|                   : 'upper_ddiag' (encoding using an upper double-diagonal matrix)                        |
+|-------------------:---------------------------------------------------------------------------------------|
+|'nb_rows'          : number of rows of the generator matrix (= number of parity-symbols)                   |
+|'nb_cols'          : number of columns of the generator matrix (= number of source-symbols)                |
+|-------------------:---------------------------------------------------------------------------------------|
+|'src_indx'         : indicates the indexes of the source-"columns"                                         |
+|'par_indx'         : indicates the indexes of the parity-"columns"                                         |
+|                   : - for binary codes, each column corresponds to one coded bit                          |
+|                   : - for QC-codes,  each column corresponds to a group of 'Z' bits, where                |
+|                   :   'Z' is the expansion factor of the QC-code.                                         |
+|-----------------------------------------------------------------------------------------------------------|
+|     Mandatory keywords in case that the generator matrix is gived in the form of a "sparse matrix"        |
+|-----------------------------------------------------------------------------------------------------------|
+|'all_row_deg'      : see the description from the PCM file keywords                                        |
+|'nzentries_per_row': see the description from the PCM file keywords                                        |
+|-----------------------------------------------------------------------------------------------------------|
+|     Mandatory keywords in case that the generator matrix is gived in the form of a "full matrix"          |
+|-----------------------------------------------------------------------------------------------------------|
+|'syst_gen_matrix'  : systematic part of the generator matrix                                               |
+|                   : one line for each parity-bit, containing the corresponding row of the GM              |
+|-----------------------------------------------------------------------------------------------------------|
+
+Remark: Let H = [Hi | Hp] denote the parity-check-matrix of the code, where Hp is a square matrix of size 
+        'nb_rows' x 'nb_rows'.  If Hp is a lower-triangular matrix, then encoding can be performed on the
+		parity-check matrix, and there is no need to specify a generator matrix. 
+		To do so, simply include keyword 'encoding_type' (with value 'lower_triang') in the PCM file.
+		[for more details on 'lower_triang' and 'upper_ddiag' formats see Examples 3 and 4 below]
+		
+# ######################################################################################################### #
+#                                      3) The Base Matrix (BMAT) File                                       #
+# ######################################################################################################### #
+'.bmat' files are used only for Quasi-Cyclic LDPC codes!
+
+|-----------------------------------------------------------------------------------------------------------|
+|     Mandatory keywords                                                                                    |
+|-----------------------------------------------------------------------------------------------------------|
+|'encoding_type'    : must be either 'lower_triang' (encoding using a lower triangular matrix) or           |
+|                   : 'upper_ddiag' (encoding using an upper double-diagonal matrix)                        |
+|-------------------:---------------------------------------------------------------------------------------|
+|'nb_rows'          : number of rows of the base matrix                                                     |
+|'nb_cols'          : number of columns of the base matrix                                                  |
+|-------------------:---------------------------------------------------------------------------------------|
+|'src_indx'         : indicates the indexes of the source-columns                                           |
+|'par_indx'         : indicates the indexes of the parity-columns                                           |
+|                   : - each column of the base matrix corresponds to a group of 'Z' bits, where 'Z' is     |
+|                   :   the expansion factor of the QC-code.                                                |
+|-------------------:---------------------------------------------------------------------------------------|
+|'qc_base_matrix'   : Quasi-Cyclic Base Matrix, of size 'nb_rows' x 'nb_cols'                               |
+|-----------------------------------------------------------------------------------------------------------|
+|     Optional keywords                                                                                     |
+|-----------------------------------------------------------------------------------------------------------|
+|'qcshift*=coef/'   : example 'qcshift*=coef/<int>': indicates that each coefficient of the base matrix     |
+|                   : must be multiplyed by the qc-expansion factor and divided by the integer <int>.       | 
+|-----------------------------------------------------------------------------------------------------------|
+
+# ######################################################################################################### #
+#                                                EXAMPLES                                                   #
+# ######################################################################################################### #
+
+==========
+EXAMPLE 1. The following parity-check matrix
+==========
+           1  0  1  0  1  1
+           0  1  1  1  0  1
+           1  1  0  1  1  0
+
+can be submitted using the following file:
+|--------------------------|
+|                          |
+| nb_rows  3               | 
+| nb_cols  6               |
+| all_row_deg   4  4  4    |
+|                          | 
+| nzentries_per_row        |
+| 0  2  4  5               | 
+| 1  2  3  5               | 
+| 0  1  3  4               | 
+|                          | 
+|--------------------------|
+
+
+==========
+EXAMPLE 2. The following quasi-cyclic parity-check matrix
+==========
+            0  -1   3  -1   5   7
+           -1   1   2   4  -1   8
+            1   9  -1   0   2  -1
+			
+can be submitted using one of the following '.pcm' files:
+  'file1.pcm'                  'file2.pcm'
+|--------------------------|------------------------------|
+|                          |                              |
+| qc_ldpc  1               | qc_ldpc  1                   |
+| nb_rows  3               | nb_rows  3                   |
+| nb_cols  6               | nb_cols  6                   |
+| all_row_deg   4  4  4    | all_row_deg   4  4  4        |
+|                          |                              |
+| nzentries_per_row        | nzentries_per_row[col_coef]  |
+| 0:0  2:3  4:5  5:7       | 0 0  2 3  4 5  5 7           |
+| 1:1  2:2  3:4  5:8       | 1 1  2 2  3 4  5 8           |
+| 0:1  1:9  3:0  4:2       | 0 1  1 9  3 0  4 2           |
+|                          |                              |
+|--------------------------|------------------------------|
+
+or the following '.bmat' file:
+|----------------------------|
+|                            |
+| nb_rows  3                 |
+| nb_cols  6                 |
+|                            |
+| qc_base_matrix             |
+|   0  -1   3  -1   5   7    |
+|  -1   1   2   4  -1   8    |
+|   1   9  -1   0   2  -1    |
+|                            |
+|----------------------------|
+
+==========
+EXAMPLE 3. The following parity-check matrix 
+==========
+            1   1   0   1   1   0   0   0
+            0   1   1   0   1   1   0   0
+            1   0   1   1   0   1   1   0
+			0   1   0   1   0   0   1   1
+			
+can be submitted using one of the following '.pcm' files:
+  'file1.pcm'                  'file2.pcm'
+|-----------------------------|-----------------------------|
+|                             |                             |
+| nb_rows  4                  | nb_rows  4                  |
+| nb_cols  8                  | nb_cols  8                  |
+| all_row_deg   4  4  5  4    | all_row_deg   4  4  5  4    |
+|                             |                             |
+| src_indx  0  1  2  3        | src_indx  0:1:3             |
+|                             | encoding_type lower_triang  |
+|                             |                             |
+| nzentries_per_row           | nzentries_per_row           |
+| 0  1  3  4                  | 0  1  3  4                  |
+| 1  2  4  5                  | 1  2  4  5                  |
+| 0  2  3  5  6               | 0  2  3  5  6               |
+| 1  3  6  7                  | 1  3  6  7                  |
+|                             |                             |
+|-----------------------------|-----------------------------|
+
+remarks: 
+    1) one can use Matlab-like notation for the vectors of integer  
+       values (as used for the 'src_indx' keyword in 'file2.pcm')
+	2) if the keyword 'encoding_type' is included in the PCM file,  
+	   there is no need to provide a generator matrix (GEN) file
+
+==========
+EXAMPLE 4. The following parity-check matrix 
+==========
+            1   1   0   1   1   1   0   0
+            0   1   1   0   0   1   1   0
+            1   0   1   1   1   0   1   1
+			0   1   0   1   1   0   0   1
+			
+can be submitted using the following '.pcm' file:
+
+|-----------------------------|
+|                             |
+| nb_rows  4                  |
+| nb_cols  8                  |
+| all_row_deg   5  4  6  4    |
+|                             |
+| src_indx  0:1:3             |
+| encoding_type upper_ddiag   |
+|                             |
+| nzentries_per_row           |
+| 0  1  3  4  5               |
+| 1  2  5  6                  | 
+| 0  2  3  4  6  7            |
+| 1  3  4  7                  |
+|                             |
+|-----------------------------|
+
+remark: upper double-diagonal (upper-ddiag) format:
+        H = [Hi, Hp], where Hp is a square matrix of size 'nb_rows' x 'nb_rows',
+		with non-zero entries as follows:
+		 - on the main diagonal         :       Hp(r,r) = 1, forall r = 0, ..., nb_rows
+		 - just above the main diagonal :     Hp(r,r+1) = 1, forall r = 0, ..., nb_rows-1
+		 - on the left-bottom corner    : Hp(nb_rows,0) = 1
+		 - one extra non-zero entry in  :       Hp(x,0) = 1, for some x in [1,..., nb_rows-1]
+		              the first column  :      
+

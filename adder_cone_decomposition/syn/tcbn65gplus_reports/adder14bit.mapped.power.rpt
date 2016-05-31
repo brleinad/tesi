@@ -1,0 +1,58 @@
+Loading db file '/cadtools/tsmc/digital/Front_End/timing_power_noise/NLDM/tcbn65gplus_121b/tcbn65gpluswc.db'
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+Warning: There is no defined clock in the design. (PWR-80)
+Warning: Design has unannotated primary inputs. (PWR-414)
+ 
+****************************************
+Report : power
+        -analysis_effort low
+Design : adder
+Version: K-2015.06-SP5-1
+Date   : Mon May 16 15:01:40 2016
+****************************************
+
+
+Library(s) Used:
+
+    tcbn65gpluswc (File: /cadtools/tsmc/digital/Front_End/timing_power_noise/NLDM/tcbn65gplus_121b/tcbn65gpluswc.db)
+
+
+Operating Conditions: WCCOM   Library: tcbn65gpluswc
+Wire Load Model Mode: segmented
+
+Design        Wire Load Model            Library
+------------------------------------------------
+adder                  ZeroWireload      tcbn65gpluswc
+
+
+Global Operating Voltage = 0.9  
+Power-specific unit information :
+    Voltage Units = 1V
+    Capacitance Units = 1.000000pf
+    Time Units = 1ns
+    Dynamic Power Units = 1mW    (derived from V,C,T units)
+    Leakage Power Units = 1nW
+
+
+  Cell Internal Power  =  23.4904 uW   (82%)
+  Net Switching Power  =   5.1056 uW   (18%)
+                         ---------
+Total Dynamic Power    =  28.5960 uW  (100%)
+
+Cell Leakage Power     =   1.2204 uW
+
+Information: report_power power group summary does not include estimated clock tree power. (PWR-789)
+
+                 Internal         Switching           Leakage            Total
+Power Group      Power            Power               Power              Power   (   %    )  Attrs
+--------------------------------------------------------------------------------------------------
+io_pad             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+black_box          0.0000            0.0000            0.0000            0.0000  (   0.00%)
+clock_network      0.0000            0.0000            0.0000            0.0000  (   0.00%)
+register           0.0000            0.0000            0.0000            0.0000  (   0.00%)
+sequential         0.0000            0.0000            0.0000            0.0000  (   0.00%)
+combinational  2.3490e-02        5.1056e-03        1.2204e+03        2.9816e-02  ( 100.00%)
+--------------------------------------------------------------------------------------------------
+Total          2.3490e-02 mW     5.1056e-03 mW     1.2204e+03 nW     2.9816e-02 mW
+1

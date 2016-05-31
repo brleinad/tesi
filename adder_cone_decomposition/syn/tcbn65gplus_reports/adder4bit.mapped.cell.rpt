@@ -1,0 +1,37 @@
+ 
+****************************************
+Report : cell
+Design : adder
+Version: K-2015.06-SP5-1
+Date   : Mon May 16 15:00:34 2016
+****************************************
+
+Attributes:
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+U18                       XOR2D0          tcbn65gpluswc   3.600000  
+U19                       OR2D0           tcbn65gpluswc   2.160000  
+U20                       AN2D0           tcbn65gpluswc   2.160000  
+U21                       AN2D0           tcbn65gpluswc   2.160000  
+U22                       OR2D0           tcbn65gpluswc   2.160000  
+U23                       XOR2D0          tcbn65gpluswc   3.600000  
+U24                       XOR2D0          tcbn65gpluswc   3.600000  
+U25                       OR2D0           tcbn65gpluswc   2.160000  
+U26                       AN2D0           tcbn65gpluswc   2.160000  
+U27                       AN2D0           tcbn65gpluswc   2.160000  
+U28                       AN2D0           tcbn65gpluswc   2.160000  
+U29                       OR2D0           tcbn65gpluswc   2.160000  
+U30                       XOR2D0          tcbn65gpluswc   3.600000  
+U31                       XOR2D0          tcbn65gpluswc   3.600000  
+U32                       XOR2D0          tcbn65gpluswc   3.600000  
+U33                       AN2D0           tcbn65gpluswc   2.160000  
+U34                       XOR2D0          tcbn65gpluswc   3.600000  
+--------------------------------------------------------------------------------
+Total 17 cells                                            46.800000
+1

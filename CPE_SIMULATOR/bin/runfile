@@ -1,0 +1,11 @@
+./cpe_sim.x ../data/my_config.dat
+
+
+#./cpe_sim.x ../data/C5315MCNC_config.dat
+#./cpe_sim.x ../data/C6288MCNC_config.dat
+#./cpe_sim.x ../data/daluMCNC_config.dat
+#./cpe_sim.x ../data/desMCNC_config.dat
+#./cpe_sim.x ../data/i10MCNC_config.dat
+#./cpe_sim.x ../data/misex3MCNC_config.dat
+#./cpe_sim.x ../data/pairMCNC_config.dat
+#./cpe_sim.x ../data/pdcMCNC_config.dat

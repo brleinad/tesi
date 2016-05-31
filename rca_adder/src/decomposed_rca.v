@@ -6,30 +6,28 @@
 //part
 //
 //author: Daniel Rodas Bautista
-//
-//include "globals.vh"
-module decomposed_rca (A, B, S);
+module decomposed_rca (a, b, s);
 `include "constants.v"
 
-input [NBIT-1:0] A,B;
-output [NBIT-1:0] S;
+input [NBIT-1:0] a,b;
+output [NBIT-1:0] s;
 
 wire [NBIT-4:0] r;
 wire [NBIT*3-6:0] nl;
 
 //connecting the non-linear part
 nonlin_part NL_PART ( 
-   .a (A[NBIT-2:0]),
-   .b (B[NBIT-2:0]),
+   .a (a[NBIT-2:0]),
+   .b (b[NBIT-2:0]),
    .r (r),
    .nl (nl)
 );
 //connecting the linear part
 lin_part L_PART ( 
-   .a (A),
-   .b (B),
+   .a (a),
+   .b (b),
    .nl (nl),
-   .s (S),
+   .s (s),
    .r (r)
 ); 
 

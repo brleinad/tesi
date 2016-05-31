@@ -1,0 +1,15 @@
+\select@language {italian}
+\select@language {italian}
+\select@language {italian}
+\select@language {english}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Preferred architecture for circuits with a high reliability.}}{4}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Separation of a variable using EXOR gates: (a) with regard to $x_i$, (b) consecutively with regard to $x_i$ and $c_{i-1}$ }}{6}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Strong bi-decompositions on the left in comparison to the vectorial bi-decomposition on the right using: (a) an OR-gate; (b) an AND-gate; (c) an XOR-gate. }}{8}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Carry function $f_{c_i}(x_i,y_i,c_{i-1})$ decomposed by a vectorial EXOR-bi-decomposition followed by strong EXOR-bi-decomposition. }}{9}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

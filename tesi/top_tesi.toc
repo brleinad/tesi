@@ -1,0 +1,23 @@
+\select@language {italian}
+\select@language {italian}
+\select@language {italian}
+\select@language {english}
+\contentsline {chapter}{List of Figures}{iii}
+\contentsline {chapter}{List of Tables}{iv}
+\contentsline {chapter}{\numberline {1}Introduction}{1}
+\contentsline {chapter}{\numberline {2}Motivations}{2}
+\contentsline {section}{\numberline {2.1}AND-XOR network synthesis}{2}
+\contentsline {section}{\numberline {2.2}CPE}{3}
+\contentsline {chapter}{\numberline {3}Synthesis for Reliability by Bi-Decomposition}{4}
+\contentsline {section}{\numberline {3.1}Synthesis for Reliability}{4}
+\contentsline {subsection}{\numberline {3.1.1}Linearity with Regard to a Variable}{4}
+\contentsline {subsection}{\numberline {3.1.2}Degree of Linearity}{6}
+\contentsline {subsection}{\numberline {3.1.3}Bi-Decompositions}{7}
+\contentsline {section}{\numberline {3.2}Experimental Results - ASIC and FPGA Synthesis}{10}
+\contentsline {subsection}{\numberline {3.2.1}ASIC Synthesis}{11}
+\contentsline {subsection}{\numberline {3.2.2}FPGA Synthesis}{11}
+\contentsline {chapter}{\numberline {4}CPE}{13}
+\contentsline {chapter}{\numberline {5}Integration}{14}
+\contentsline {chapter}{\numberline {6}Results}{15}
+\contentsline {chapter}{\numberline {7}Conclusions}{16}
+\contentsline {chapter}{Bibliography}{17}

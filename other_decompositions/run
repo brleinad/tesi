@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+
+matlab -nojvm -nodisplay -nosplash -r "run('get_addereval')"
+./gen_enc.pl results.dat > enc_lut.v

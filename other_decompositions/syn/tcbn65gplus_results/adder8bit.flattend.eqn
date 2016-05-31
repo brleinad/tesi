@@ -1,0 +1,41 @@
+.design_name adder
+.inputnames  a[7] a[6] a[5] a[4] a[3] a[2] a[1] a[0] b[7] b[6] b[5] b[4] b[3]
+.inputnames  b[2] b[1] b[0]
+.outputnames s[8] s[7] s[6] s[5] s[4] s[3] s[2] s[1] s[0]
+s[8] = (add_8_n1 + add_8_n2) ;
+s[7] = (add_8_n3 ^ b[7] ^ a[7]) ;
+s[6] = (a[6] ^ b[6] ^ add_8_n7) ;
+s[5] = (a[5] ^ b[5] ^ add_8_n11) ;
+s[4] = (a[4] ^ b[4] ^ add_8_n15) ;
+s[3] = (a[3] ^ b[3] ^ add_8_n19) ;
+s[2] = (a[2] ^ b[2] ^ add_8_n23) ;
+s[1] = (a[1] ^ b[1] ^ add_8_n27) ;
+s[0] = (a[0] ^ b[0]) ;
+add_8_n28 = (add_8_n27 + a[1]) ;
+add_8_n27 = (a[0] * b[0]) ;
+add_8_n26 = (a[1] * add_8_n27) ;
+add_8_n25 = (b[1] * add_8_n28) ;
+add_8_n24 = (a[2] + add_8_n23) ;
+add_8_n23 = (add_8_n25 + add_8_n26) ;
+add_8_n22 = (a[2] * add_8_n23) ;
+add_8_n21 = (b[2] * add_8_n24) ;
+add_8_n20 = (a[3] + add_8_n19) ;
+add_8_n19 = (add_8_n21 + add_8_n22) ;
+add_8_n18 = (a[3] * add_8_n19) ;
+add_8_n17 = (b[3] * add_8_n20) ;
+add_8_n16 = (a[4] + add_8_n15) ;
+add_8_n15 = (add_8_n17 + add_8_n18) ;
+add_8_n14 = (a[4] * add_8_n15) ;
+add_8_n13 = (b[4] * add_8_n16) ;
+add_8_n12 = (a[5] + add_8_n11) ;
+add_8_n11 = (add_8_n13 + add_8_n14) ;
+add_8_n10 = (a[5] * add_8_n11) ;
+add_8_n9 = (b[5] * add_8_n12) ;
+add_8_n8 = (a[6] + add_8_n7) ;
+add_8_n7 = (add_8_n9 + add_8_n10) ;
+add_8_n6 = (a[6] * add_8_n7) ;
+add_8_n5 = (b[6] * add_8_n8) ;
+add_8_n4 = (a[7] + add_8_n3) ;
+add_8_n3 = (add_8_n5 + add_8_n6) ;
+add_8_n2 = (a[7] * add_8_n3) ;
+add_8_n1 = (b[7] * add_8_n4) ;

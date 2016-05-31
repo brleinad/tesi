@@ -1,0 +1,27 @@
+ 
+****************************************
+Report : reference
+Design : adder_P
+Version: K-2015.06-SP5-1
+Date   : Tue May 24 14:28:21 2016
+****************************************
+
+Attributes:
+    b - black box (unknown)
+   bo - allows boundary optimization
+    d - dont_touch
+   mo - map_only
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    s - synthetic operator
+    u - contains unmapped logic
+
+Reference          Library       Unit Area   Count    Total Area   Attributes
+-----------------------------------------------------------------------------
+AN2D0              tcbn65gpluswc     2.160000      25    54.000002
+OR2D0              tcbn65gpluswc     2.160000      24    51.840002
+XOR2D0             tcbn65gpluswc     3.600000      75   269.999993
+-----------------------------------------------------------------------------
+Total 3 references                                    375.839997
+1

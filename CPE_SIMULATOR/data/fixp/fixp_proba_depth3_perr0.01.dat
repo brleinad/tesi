@@ -1,0 +1,18 @@
+fixp_arithmetic  probabilistic
+
+
+fixp_add_perr  3  0.01 
+fixp_lth_perr   0.01
+fixp_xor_perr  xor_exact
+
+
+& - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+& fixp_arithmetic  <'exact' | 'inexact' | 'probabilistic'>
+&
+& fixp_add_lut  size  looup_table
+& fixp_lth_lut  <'lth_exact' | 'lth_from_add' | size lth_lut>
+&
+& fixp_add_perr  depth  perr 
+& fixp_lth_perr  <'lth_exact'  | 'lth_from_add' | perr>
+& fixp_xor_perr  <'xor_exact'  | perr>
+& - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

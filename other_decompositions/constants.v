@@ -1,0 +1,1 @@
+parameter NBIT = 3;

@@ -1,0 +1,12 @@
+./cpe_sim.x ../data/configm1.dat
+./cpe_sim.x ../data/configm2.dat
+./cpe_sim.x ../data/configm3.dat
+./cpe_sim.x ../data/configm4.dat
+./cpe_sim.x ../data/configm5.dat
+./cpe_sim.x ../data/configm6.dat
+./cpe_sim.x ../data/configm7.dat
+./cpe_sim.x ../data/configm8.dat
+./cpe_sim.x ../data/configm9.dat
+./cpe_sim.x ../data/configm10.dat
+./cpe_sim.x ../data/configm11.dat
+./cpe_sim.x ../data/configm12.dat

@@ -1,0 +1,18 @@
+\select@language {italian}
+\select@language {italian}
+\select@language {italian}
+\select@language {english}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Degree of linearity of adder functions $s_0,\dots , s_7 $}}{7}
+\contentsline {table}{\numberline {3.2}{\ignorespaces Gate equivalents for the decomposed adder}}{9}
+\contentsline {table}{\numberline {3.3}{\ignorespaces Power for the decomposed adder}}{10}
+\contentsline {table}{\numberline {3.4}{\ignorespaces Areas and maximal time delay for the two implementations of the decomposed adders}}{10}
+\contentsline {table}{\numberline {3.5}{\ignorespaces Number of LUTs used}}{11}
+\contentsline {table}{\numberline {3.6}{\ignorespaces Power}}{12}
+\contentsline {table}{\numberline {3.7}{\ignorespaces Timing (max delay path in ns)}}{12}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
